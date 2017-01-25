@@ -46,12 +46,26 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="package.json" pinned="false" current-in-tab="true">
+      <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="30">
-              <caret line="2" column="21" lean-forward="true" selection-start-line="2" selection-start-column="21" selection-end-line="2" selection-end-column="21" />
-              <folding />
+              <caret line="2" column="21" lean-forward="false" selection-start-line="2" selection-start-column="21" selection-end-line="2" selection-end-column="21" />
+              <folding>
+                <marker date="1485361076000" expanded="true" signature="149:325" ph="{&quot;axios&quot;: &quot;^0.15.3&quot;...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="server.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/server.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="13" column="37" lean-forward="true" selection-start-line="13" selection-start-column="37" selection-end-line="13" selection-end-column="37" />
+              <folding>
+                <element signature="e#0#44#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -95,8 +109,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaScript File" />
         <option value="React Component" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -110,6 +124,7 @@
         <option value="$PROJECT_DIR$/src/App.js" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/src/Content.app.js" />
+        <option value="$PROJECT_DIR$/server.js" />
       </list>
     </option>
   </component>
@@ -279,12 +294,12 @@
       <workItem from="1485344416900" duration="597000" />
       <workItem from="1485345275967" duration="262000" />
       <workItem from="1485346138688" duration="4041000" />
-      <workItem from="1485359783795" duration="273000" />
+      <workItem from="1485359783795" duration="1024000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9765000" />
+    <option name="totallyTimeSpent" value="10516000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1898" y="-307" width="2113" height="1388" extended-state="0" />
@@ -345,7 +360,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="2" column="1" lean-forward="false" selection-start-line="2" selection-start-column="1" selection-end-line="2" selection-end-column="1" />
-          <folding />
+          <folding>
+            <marker date="1485361076000" expanded="true" signature="149:325" ph="{&quot;axios&quot;: &quot;^0.15.3&quot;...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -402,7 +419,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <marker date="1485361076000" expanded="true" signature="149:325" ph="{&quot;axios&quot;: &quot;^0.15.3&quot;...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -459,7 +478,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <marker date="1485361076000" expanded="true" signature="149:325" ph="{&quot;axios&quot;: &quot;^0.15.3&quot;...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -516,7 +537,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <marker date="1485361076000" expanded="true" signature="149:325" ph="{&quot;axios&quot;: &quot;^0.15.3&quot;...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -607,8 +630,20 @@
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
-          <caret line="2" column="21" lean-forward="true" selection-start-line="2" selection-start-column="21" selection-end-line="2" selection-end-column="21" />
-          <folding />
+          <caret line="2" column="21" lean-forward="false" selection-start-line="2" selection-start-column="21" selection-end-line="2" selection-end-column="21" />
+          <folding>
+            <marker date="1485361076000" expanded="true" signature="149:325" ph="{&quot;axios&quot;: &quot;^0.15.3&quot;...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="13" column="37" lean-forward="true" selection-start-line="13" selection-start-column="37" selection-end-line="13" selection-end-column="37" />
+          <folding>
+            <element signature="e#0#44#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
