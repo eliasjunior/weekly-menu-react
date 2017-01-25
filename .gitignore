@@ -1,15 +1,33 @@
-# See http://help.github.com/ignore-files/ for more about ignoring files.
+# Specifies files to intentionally ignore when using Git
+# http://git-scm.com/docs/gitignore
 
-# dependencies
-node_modules
-
-# testing
-coverage
-
-# production
-build
-
-# misc
+*.csv
+*.dat
+*.iml
+*.log
+*.out
+*.pid
+*.seed
+*.sublime-*
+*.swo
+*.swp
+*.tgz
 .DS_Store
-.env
+.idea
+.idea/
+.project
+.strong-pm
+coverage
+node_modules
 npm-debug.log
+
+*.iws
+
+.tmp/
+#bower
+
+node_modules/
+www/build/
+platforms/
+plugins/
+Thumbs.db
