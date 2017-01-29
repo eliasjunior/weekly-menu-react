@@ -3,14 +3,29 @@
  */
 import React from 'react';
 import AppBar from 'material-ui/AppBar';
+import MenuApp from '../AppIconMenu'
 
 class AppWeekBar extends React.Component {
+
+    constructor(props) {
+        super(props)
+        console.log("NO PRPS")
+    }
+
+    onRightIconButtonTouchTap = (event) => {
+        console.log("I Click here!!")
+    }
+
+    onTitleTouchTap = ()=> {
+        console.log("I TEXT here!!")
+    }
 
     render() {
         let titleName = this.props.title;
         return (
             <AppBar
-                title={titleName}>
+                title={titleName}
+                iconElementLeft={<MenuApp></MenuApp>}>
             </AppBar>
         )
     }

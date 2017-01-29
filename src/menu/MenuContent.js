@@ -1,11 +1,10 @@
 import React from 'react';
 import List from 'material-ui/List';
 import ListItem from 'material-ui/List/ListItem';
-import AppWeekBar from './AppWeekBap';
-import axios from 'axios';
+import AppWeekBar from '../commons/AppWeekBar';
+import ApiService from '../service/ApiService';
 
-
-class ContentApp extends React.Component {
+class MenuList extends React.Component {
 
     constructor(props) {
         super(props);
@@ -16,20 +15,16 @@ class ContentApp extends React.Component {
     }
 
     componentDidMount() {
+        //console.log("What;s it ?", ApiService.get())
 
-        const url = 'https://week-menu-api.herokuapp.com/recipe';
-        //const url = 'http://localhost:3002/recipe';
-
-        axios.get(url)
+        ApiService.get('recipe')
             .then(docs => {
-
 
                 let data = docs.data.filter(recipe => recipe.isInMenuWeek === true);
 
-                console.log("Filtered ", data)
                 data = this.sortList(data);
 
-                console.log("Sorted ", data)
+                //console.log("Sorted ", data)
 
                 let elements = data.map((recipe, index) => {
                     return <ListItem key={index} secondaryText={recipe.weekDay}>{recipe.name}</ListItem>
@@ -37,18 +32,6 @@ class ContentApp extends React.Component {
 
                 this.setState({recipeItemList: elements});
             });
-    }
-
-    render() {
-
-        return(
-            <div>
-                <AppWeekBar></AppWeekBar>
-                <List>
-                    {this.state.recipeItemList}
-                </List>
-            </div>
-        )
     }
 
     sortList(recipes) {
@@ -82,6 +65,19 @@ class ContentApp extends React.Component {
             return dayValue[weekDay];
         }
     }
+
+    render() {
+
+        return(
+            <div>
+                <AppWeekBar></AppWeekBar>
+                <List>
+                    {this.state.recipeItemList}
+                </List>
+            </div>
+        )
+    }
+
 }
 
-export default ContentApp;
+export default MenuList;
