@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e38a559b-8bfe-49f6-93f6-a7def30e38fe" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/commons/AppWeekBar.js" afterPath="$PROJECT_DIR$/src/commons/AppWeekBar.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/recipe/RecipeList.js" afterPath="$PROJECT_DIR$/src/recipe/RecipeList.js" />
-    </list>
+    <list default="true" id="e38a559b-8bfe-49f6-93f6-a7def30e38fe" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -24,7 +21,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="RecipeList.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="RecipeList.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/recipe/RecipeList.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="270">
@@ -58,7 +55,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AppWeekBar.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="AppWeekBar.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/commons/AppWeekBar.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="135">
@@ -384,12 +381,12 @@
       <workItem from="1485637697891" duration="4877000" />
       <workItem from="1485695496395" duration="1624000" />
       <workItem from="1485710838863" duration="1352000" />
-      <workItem from="1485723690372" duration="3655000" />
+      <workItem from="1485723690372" duration="3925000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="29752000" />
+    <option name="totallyTimeSpent" value="30022000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1676" height="1027" extended-state="6" />
@@ -425,16 +422,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/menu/MenuContent.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/AppIconMenu.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
@@ -794,16 +781,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="23" lean-forward="false" selection-start-line="5" selection-start-column="23" selection-end-line="5" selection-end-column="23" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/menu/MenuWeekly.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
@@ -842,16 +819,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/recipe/RecipeList.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="15" column="5" lean-forward="false" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/WeeklyRouter.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -870,12 +837,63 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="0">
+            <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <folding>
+              <marker date="1485730156000" expanded="true" signature="8272:8335" ph="{...}" />
+              <marker date="1485730156000" expanded="true" signature="8301:8333" ph="{...}" />
+              <marker date="1485730156000" expanded="true" signature="9535:9566" ph="{...}" />
+              <marker date="1485730156000" expanded="true" signature="9548:9564" ph="{...}" />
+              <marker date="1485730156000" expanded="true" signature="9672:9737" ph="..." />
+              <marker date="1485730156000" expanded="true" signature="9816:9871" ph="{...}" />
+              <marker date="1485730156000" expanded="true" signature="9829:9869" ph="{...}" />
+              <marker date="1485730156000" expanded="true" signature="11299:11356" ph="..." />
+              <marker date="1485730156000" expanded="true" signature="11438:11543" ph="{...}" />
+              <marker date="1485730156000" expanded="true" signature="11451:11541" ph="{...}" />
+              <marker date="1485730156000" expanded="true" signature="12622:12688" ph="{...}" />
+              <marker date="1485730156000" expanded="true" signature="13522:13572" ph="..." />
+              <marker date="1485730156000" expanded="true" signature="13679:13766" ph="{...}" />
+              <marker date="1485730156000" expanded="true" signature="16352:16617" ph="{...}" />
+              <marker date="1485730156000" expanded="true" signature="16356:16550" ph="//..." />
+              <marker date="1485730156000" expanded="true" signature="19536:19822" ph="{...}" />
+              <marker date="1485730156000" expanded="true" signature="34456:34525" ph="..." />
+              <marker date="1485730156000" expanded="true" signature="34576:34599" ph="{...}" />
+              <marker date="1485730156000" expanded="true" signature="40016:40077" ph="{...}" />
+            </folding>
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/commons/AppWeekBar.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
           <folding>
             <element signature="e#45#71#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="23" lean-forward="false" selection-start-line="5" selection-start-column="23" selection-end-line="5" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/recipe/RecipeList.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="15" column="5" lean-forward="false" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>
