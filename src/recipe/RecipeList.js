@@ -19,7 +19,7 @@ class RecipeList extends React.Component {
         ApiService.get('recipe')
             .then(response => {
                 let data = response.data.map((recipe, id) => {
-                    
+
                     return <ListItem key={id} >{recipe.name}</ListItem>
                 });
 

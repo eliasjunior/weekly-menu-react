@@ -9,7 +9,6 @@ class AppWeekBar extends React.Component {
 
     constructor(props) {
         super(props)
-        console.log("NO PRPS")
     }
 
     onRightIconButtonTouchTap = (event) => {
