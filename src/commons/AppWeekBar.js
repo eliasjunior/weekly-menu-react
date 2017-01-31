@@ -5,30 +5,15 @@ import React from 'react';
 import AppBar from 'material-ui/AppBar';
 import MenuApp from '../AppIconMenu'
 
-class AppWeekBar extends React.Component {
+export const AppWeekBar = (props) => (
 
-    constructor(props) {
-        super(props)
-    }
+    <AppBar
+        title={props.title}
+        iconElementLeft={<MenuApp></MenuApp>}>
+    </AppBar>
+)
 
-    onRightIconButtonTouchTap = (event) => {
-        console.log("I Click here!!")
-    }
 
-    onTitleTouchTap = ()=> {
-        console.log("I TEXT here!!")
-    }
-
-    render() {
-        let titleName = this.props.title;
-        return (
-            <AppBar
-                title={titleName}
-                iconElementLeft={<MenuApp></MenuApp>}>
-            </AppBar>
-        )
-    }
-}
 
 AppWeekBar.propTypes = {
     title: React.PropTypes.string
@@ -38,5 +23,5 @@ AppWeekBar.defaultProps = {
     title: 'Weekly Menu'
 }
 
-export default AppWeekBar;
+//export default AppWeekBar;
 

@@ -1,54 +1,16 @@
-import React from "react";
-import AppWeekBar from "../commons/AppWeekBar";
+/**
+ * Created by eliasmj on 31/01/2017.
+ */
+import React from 'react';
+import {RecipeItem} from './RecipeItem'
+
 import List from "material-ui/List";
-import ApiService from "../service/ApiService";
-import ListItem from 'material-ui/List/ListItem';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-class RecipeList extends React.Component {
-
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            recipeList: []
-        }
-    }
-
-    componentDidMount = ()=> {
-        ApiService.get('recipe')
-            .then(response => {
-                let data = response.data.map((recipe, id) => {
-
-                    return <ListItem key={id} >{recipe.name}</ListItem>
-                });
-
-                this.setState({
-                    recipeList: data
-                });
-            })
-            .catch(reason => {console.error(reason)});
-    }
-
-    render() {
-        return (
-            <div>
-                <AppWeekBar title='Recipe List'></AppWeekBar>
-                <List>
-                    {this.state.recipeList}
-                </List>
-            </div>
-        );
-    }
+export const RecipeList = (props) => {
+    return  (
+        <List>
+            {props.recipeList.map((recipe, id) => <RecipeItem key={id} {...recipe} type={props.type} /> )}
+        </List>
+    )
 }
 
-const RecipeListComponent = ()=> {
-
-    return (
-        <MuiThemeProvider>
-            <RecipeList/>
-        </MuiThemeProvider>
-    );
-}
-
-export default RecipeListComponent;
