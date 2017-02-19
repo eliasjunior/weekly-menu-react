@@ -2,7 +2,8 @@ import React from 'react';
 import ListItem from 'material-ui/List/ListItem';
 import CatIcon from 'material-ui/svg-icons/image/view-comfy';
 import ProdIcon from 'material-ui/svg-icons/action/stars'
-import {indigo200, purple500} from 'material-ui/styles/colors'
+import {indigo200, purple500} from 'material-ui/styles/colors';
+import Checkbox from 'material-ui/Checkbox'
 
 export const CategoryItem = (props) => {
 
@@ -11,7 +12,7 @@ export const CategoryItem = (props) => {
         console.log(">>>", ingredients)
         return ingredients.map((ingredient) => {
             return <ListItem key={ingredient._id} primaryText={ingredient.name}
-                             leftIcon={<ProdIcon color={purple500}/>} />
+                             leftIcon={<Checkbox  />} />
         })
 
     }
