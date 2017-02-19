@@ -1,8 +1,7 @@
 import React from 'react';
 import ListItem from 'material-ui/List/ListItem';
 import CatIcon from 'material-ui/svg-icons/image/view-comfy';
-import ProdIcon from 'material-ui/svg-icons/action/stars'
-import {indigo200, purple500} from 'material-ui/styles/colors';
+import {indigo600} from 'material-ui/styles/colors';
 import Checkbox from 'material-ui/Checkbox'
 
 export const CategoryItem = (props) => {
@@ -21,7 +20,7 @@ export const CategoryItem = (props) => {
                 key={props.id}
                 initiallyOpen={true}
                 primaryText={props.name}
-                leftIcon={<CatIcon color={indigo200}></CatIcon>}
+                leftIcon={<CatIcon color={indigo600}></CatIcon>}
                 primaryTogglesNestedList={true} nestedItems={listItem(props.ingredients)}>
 
             </ListItem>
