@@ -9,7 +9,7 @@ export const CategoryItem = (props) => {
     const listItem = (ingredients) => {
 
         console.log(">>>", ingredients)
-        
+
         return ingredients.map((ingredient) => {
             return <ListItem key={ingredient._id} primaryText={ingredient.name}
                              leftCheckbox={<Checkbox />} />
