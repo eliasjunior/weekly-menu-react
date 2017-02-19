@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import WeeklyRouter from '../WeeklyRouter';
-import injectTapEventPlugin from 'react-tap-event-plugin';
-injectTapEventPlugin();
 
-
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<WeeklyRouter />, div);
+describe("Main App Test", ()=> {
+  it('renders without crashing', () => {
+    const div = document.createElement('div');
+    ReactDOM.render(<WeeklyRouter />, div);
+  });
 });
+

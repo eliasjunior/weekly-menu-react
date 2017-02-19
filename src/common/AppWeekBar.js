@@ -3,17 +3,15 @@
  */
 import React from 'react';
 import AppBar from 'material-ui/AppBar';
-import MenuApp from '../AppIconMenu'
+import MenuIconComponent from './MenuIconComponent';
 
 export const AppWeekBar = (props) => (
 
     <AppBar
         title={props.title}
-        iconElementLeft={<MenuApp></MenuApp>}>
+        iconElementLeft={<MenuIconComponent></MenuIconComponent>}>
     </AppBar>
 )
-
-
 
 AppWeekBar.propTypes = {
     title: React.PropTypes.string

@@ -1,5 +1,5 @@
 import React from "react";
-import {AppWeekBar} from "../commons/AppWeekBar";
+import {AppWeekBar} from "../common/AppWeekBar";
 import ApiService from "../service/ApiService";
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {RecipeList} from './RecipeList'

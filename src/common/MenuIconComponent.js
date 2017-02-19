@@ -6,7 +6,7 @@ import MoreVertIcon from  'material-ui/svg-icons/navigation/more-vert';
 import {browserHistory} from 'react-router';
 
 
-class AppIconMenu extends React.Component {
+class MenuIconComponent extends React.Component {
 
     constructor(props) {
         super(props);
@@ -17,13 +17,21 @@ class AppIconMenu extends React.Component {
     }
 
     onItemTouchTap = (event, menuItem) => {
-        console.log("On Item unique!", menuItem)
+        console.log("On Item unique!", menuItem.props.primaryText)
 
-        if(menuItem.props.primaryText === 'Recipes List')
-            browserHistory.push('/recipe');
-        else {
-            browserHistory.push('/');
+        switch (menuItem.props.primaryText) {
+            case 'Recipes List':
+                browserHistory.push('/recipe');
+                break;
+            case 'Shopping' :
+                browserHistory.push('/shopping');
+                break;
+            default:
+                browserHistory.push('/');
+                break;
         }
+
+
     }
 
     render() {
@@ -36,9 +44,10 @@ class AppIconMenu extends React.Component {
 
                 <MenuItem primaryText="Home" > </MenuItem>
                 <MenuItem primaryText="Recipes List"></MenuItem>
+                <MenuItem primaryText="Shopping"></MenuItem>
             </IconMenu>
         );
     }
 }
 
-export default AppIconMenu
+export default MenuIconComponent
