@@ -12,8 +12,8 @@ class CategoryItem extends React.Component {
         super(props);
 
         this.state = {
-            formatted: '',
-            nested: []
+            nested: [],
+            checked: []
         }
     }
 
@@ -21,21 +21,31 @@ class CategoryItem extends React.Component {
 
         if(isInputChecked) {
 
-            let temp = this.state.nested;
+            let tempNested = this.state.nested;
+            let checks = this.state.checked;
 
-            temp[ingredient._id] = Util.getCurrentDate()
+            tempNested[ingredient._id] = Util.getCurrentDate();
+            checks[ingredient._id] = isInputChecked;
+
+            //console.log('setLastCheck',this.state.checked)
 
             this.setState({
-                formatted: Util.getCurrentDate(),
-                nested: temp
+                nested: tempNested,
+                checked: checks
             });
 
         }
     }
 
-    test =(ingredient, event)=>{
-        console.log("event", event)
-        console.log("ggg", ingredient)
+    getGranChildren = (attributes) => {
+
+        //return [<ListItem primaryText="Children" />]
+
+        return attributes.map( attribute => {
+            return <ListItem key={attribute._id}
+                             secondaryText={attribute.name}
+            />
+        });
     }
 
     getChildren = (ingredients) => {
@@ -44,17 +54,28 @@ class CategoryItem extends React.Component {
             return <ListItem key={ingredient._id}
                              primaryText={ingredient.name}
                              secondaryText={this.state.nested[ingredient._id]}
-                             leftCheckbox={<Checkbox   onCheck={this.setLastCheck.bind(this, ingredient)} />}
+                             initiallyOpen={true}
+                             nestedItems={this.getGranChildren(ingredient.attributes)}
+                             leftCheckbox={<Checkbox onCheck={this.setLastCheck.bind(this, ingredient)} />}
             />
         })
 
+    }
+
+    getOpen = (total, checked)=> {
+
+        let totalChecked = Object.keys(checked).length;
+
+        console.log("checked", total , totalChecked )
+
+        return total > totalChecked;
     }
 
     render() {
         return  (
                 <ListItem
                     key={this.props.id}
-                    initiallyOpen={true}
+                    open={this.getOpen(this.props.ingredients.length, this.state.checked)}
                     primaryText={this.props.name}
                     leftIcon={<CatIcon color={indigo600}></CatIcon>}
                     primaryTogglesNestedList={true}
