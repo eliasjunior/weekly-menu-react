@@ -5,7 +5,7 @@ const baseUrl = 'https://week-menu-api.herokuapp.com/';
 
 const ApiService = {
 
-    get: (resourceName)=> {
+    get: (resourceName) => {
         return axios.get(baseUrl + resourceName);
     }
 
