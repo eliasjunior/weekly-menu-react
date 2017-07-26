@@ -7,6 +7,10 @@ const ApiService = {
 
     get: (resourceName) => {
         return axios.get(baseUrl + resourceName);
+    },
+
+    post: (resourceName, object) => {
+    	return axios.post(baseUrl + resourceName, object);
     }
 
 }

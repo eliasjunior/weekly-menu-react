@@ -21,6 +21,8 @@ coverage
 node_modules
 npm-debug.log
 
+.idea/misc.xml
+
 *.iws
 
 .tmp/

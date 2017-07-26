@@ -26,12 +26,16 @@ class MenuIconComponent extends React.Component {
             case 'Shopping' :
                 browserHistory.push('/shopping');
                 break;
+            case 'New recipe' :
+                browserHistory.push('/recipe/form');
+                break;
+            case 'Products' :
+                browserHistory.push('/product/form');
+                break;
             default:
                 browserHistory.push('/');
                 break;
         }
-
-
     }
 
     render() {
@@ -45,6 +49,8 @@ class MenuIconComponent extends React.Component {
                 <MenuItem primaryText="Home" > </MenuItem>
                 <MenuItem primaryText="Recipes List"></MenuItem>
                 <MenuItem primaryText="Shopping"></MenuItem>
+                <MenuItem primaryText="New recipe"></MenuItem>
+                <MenuItem primaryText="Products"></MenuItem>
             </IconMenu>
         );
     }

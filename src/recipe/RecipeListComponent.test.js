@@ -4,13 +4,13 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import RecipeListCompnent from './RecipeListComponent';
+import RecipeListComponent from './RecipeListComponent';
 
 describe("Recipe Component", ()=> {
 
     it("should load menu component", ()=> {
         const div = document.createElement('div');
-        ReactDOM.render(<RecipeListCompnent />, div);
+        ReactDOM.render(<RecipeListComponent />, div);
     });
 
 });

@@ -1,10 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import {CategoryList, CategoryItem} from "./index";
-import ShoppingListComponent from './ShoppingListComponent';
+import ShoppingListComponent from "./ShoppingListComponent";
+import sinon from 'sinon';
+import { mount } from 'enzyme';
 
-import {shallow, mount} from "enzyme";
-import {List} from "material-ui";
 
 describe("ShoppingListComponent", () => {
 
@@ -13,14 +12,14 @@ describe("ShoppingListComponent", () => {
         ReactDOM.render(<ShoppingListComponent/>, div);
     });
 
-    it("should contain category item", ()=> {
+    it("should call componentDidMount", ()=> {
 
+        sinon.spy(ShoppingListComponent.prototype, 'componentDidMount');
+        //TODO more test here
         const wrapper = mount(<ShoppingListComponent/>);
-
-        console.log("test >> ", wrapper.find(CategoryList).find('div').children().length)
-
-        expect( wrapper.find(CategoryList).length > 0 ).toBe(true);
+        expect(ShoppingListComponent.prototype.componentDidMount.calledOnce).toBe(true);
 
     });
+
 
 });

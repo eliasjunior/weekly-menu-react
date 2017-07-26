@@ -1,5 +1,5 @@
 import React from 'react';
-import {CategoryList} from './CategoryList'
+import {CategoryList} from './CategoryList';
 
 class InventoryComponent extends React.Component {
 

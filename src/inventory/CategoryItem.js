@@ -4,6 +4,7 @@ import CatIcon from 'material-ui/svg-icons/image/view-comfy';
 import {indigo600} from 'material-ui/styles/colors';
 import Checkbox from 'material-ui/Checkbox';
 import Util from '../common/Util';
+import '../styles/CategoryItem.css';
 
 
 class CategoryItem extends React.Component {
@@ -39,22 +40,33 @@ class CategoryItem extends React.Component {
 
     getGranChildren = (attributes) => {
 
-        //return [<ListItem primaryText="Children" />]
+        //{this.state.nested[ingredient._id]}
+
+        let style = {
+            'color' : '#069cb0',
+            'fontSize': '12px',
+            'padding': '0'
+        }
 
         return attributes.map( attribute => {
-            return <ListItem key={attribute._id}
-                             secondaryText={attribute.name}
+            return <ListItem style={style} key={attribute._id}
+                             primaryText={attribute.name}
             />
         });
     }
 
     getChildren = (ingredients) => {
 
+        let style = {
+            'padding': '0 16px 0 38px'
+        }
+
         return ingredients.map((ingredient) => {
-            return <ListItem key={ingredient._id}
+            return <ListItem  key={ingredient._id}
                              primaryText={ingredient.name}
                              secondaryText={this.state.nested[ingredient._id]}
                              initiallyOpen={true}
+                             nestedListStyle={style}
                              nestedItems={this.getGranChildren(ingredient.attributes)}
                              leftCheckbox={<Checkbox onCheck={this.setLastCheck.bind(this, ingredient)} />}
             />
@@ -65,9 +77,6 @@ class CategoryItem extends React.Component {
     getOpen = (total, checked)=> {
 
         let totalChecked = Object.keys(checked).length;
-
-        console.log("checked", total , totalChecked )
-
         return total > totalChecked;
     }
 
@@ -76,6 +85,7 @@ class CategoryItem extends React.Component {
                 <ListItem
                     key={this.props.id}
                     open={this.getOpen(this.props.ingredients.length, this.state.checked)}
+                    initiallyOpen={true}
                     primaryText={this.props.name}
                     leftIcon={<CatIcon color={indigo600}></CatIcon>}
                     primaryTogglesNestedList={true}

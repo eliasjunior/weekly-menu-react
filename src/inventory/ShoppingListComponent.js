@@ -19,8 +19,6 @@ class ShoppingListComponent extends React.Component {
         ApiService.get('category/week/shopping')
             .then((response)=> {
 
-                console.log("****", response.data)
-
                 this.setState({
                     listCategories: response.data
                 });
