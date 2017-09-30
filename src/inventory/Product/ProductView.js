@@ -1,7 +1,7 @@
 import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { AppWeekBar } from "../../common/AppWeekBar";
-import ProductFormComponent from './ProductFormComponent';
+import ProductForm from './ProductForm';
 
 class ProductView extends React.Component {
 
@@ -10,7 +10,7 @@ class ProductView extends React.Component {
             <MuiThemeProvider>
                 <div>
                     <AppWeekBar title='ProductView'></AppWeekBar>
-                    <ProductFormComponent></ProductFormComponent>
+                    <ProductForm></ProductForm>
                 </div>
             </MuiThemeProvider>
         );

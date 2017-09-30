@@ -3,14 +3,15 @@
  */
 import React from 'react';
 
-class ProductListComponent extends React.Component {
+class ProductListView extends React.Component {
 
     render() {
         return (
-            <div></div>
+            <div>
+            </div>
         );
     }
 
 }
 
-export default ProductListComponent
+export default ProductListView
