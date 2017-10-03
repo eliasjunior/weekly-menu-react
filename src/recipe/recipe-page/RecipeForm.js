@@ -16,7 +16,7 @@ class RecipeForm extends React.Component {
         let recipe = {
                 name: '',
                 description: '',
-                meal: '',
+                meal: ''
             };
 
         if(props && props.name) {
@@ -25,20 +25,31 @@ class RecipeForm extends React.Component {
 
         this.state = recipe;
 
+        this.state.callDad = props.actionReaction;
+
         this.mealList = Util.getMainMealList();
 
         //this.updateRadio = this.updateRadio.bind(this);
         //this.updateName = this.updateName.bind(this);
     }
 
-    saveRecipe(e) {
-        
-        ApiService.post('recipe', this.state.recipe)
-            .then(() => {
-                 console.log("Saved!!")   
-            }).catch((reason) => {console.error(reason)});
-    }
+    saveRecipe() {
 
+        if(!this.state) {
+            console.error('state is null')
+            return
+        }
+
+        this.state.callDad('Luke Im your Father!!');
+        
+        //ApiService.post('recipe', this.state)
+        //    .then(() => {
+        //         console.log("Saved!!")
+        //
+        //        this.state.callDad('Luke Im your Father!!');
+        //
+        //    }).catch((reason) => {console.error(reason)});
+    }
 
     updateRadio(e) {
         this.setState({meal: e.currentTarget.value})
@@ -52,7 +63,7 @@ class RecipeForm extends React.Component {
         //this.setState({'name': e.currentTarget.value})
         console.log('**>', this.state)
     }
-    updateDesc(e) {
+    updateDescription(e) {
         console.log(e.currentTarget.value)
 
         this.setState({description: e.currentTarget.value})
@@ -67,7 +78,7 @@ class RecipeForm extends React.Component {
                 <TextField style={{display: 'block'}}
                     onChange={this.updateName.bind(this)}
                     hintText='Name' defaultValue={this.state.name} />
-                <TextField hintText={'Description'} onChange={this.updateDesc.bind(this)}
+                <TextField hintText={'Description'} onChange={this.updateDescription.bind(this)}
                 defaultValue={this.state.description} />    
                 <RadioButtonGroup 
                     valueSelected={this.state.meal} style={{border: 'pink solid 2px'}}  
@@ -83,7 +94,6 @@ class RecipeForm extends React.Component {
             </div>
         );
     }
-
 }
 
 export default RecipeForm;

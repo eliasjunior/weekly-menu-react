@@ -15,8 +15,7 @@ const QuantityType = {
     KG : "Kilograms",
     L: "Liter",
     UNIT: "Unit"
-}
-
+};
 
 class ProductForm extends React.Component {
 
@@ -57,12 +56,9 @@ class ProductForm extends React.Component {
                         style={styles.radioButton}
                         />
                 </RadioButtonGroup>
-
             </div>
-
         );
     }
-
 }
 
 export default ProductForm

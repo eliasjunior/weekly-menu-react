@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const baseUrl = 'https://week-menu-api.herokuapp.com/';
-//const baseUrl = 'http://localhost:3002/'
+//const baseUrl = 'https://week-menu-api.herokuapp.com/';
+const baseUrl = 'http://localhost:3002/'
 
 const ApiService = {
 
@@ -15,4 +15,4 @@ const ApiService = {
 
 }
 
-export default ApiService 
+export default ApiService
