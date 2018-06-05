@@ -55,7 +55,6 @@ const Util = {
     },
 
     getMainMealList: () => {
-
         return [
             meal("fish", mealDetail('Fish','fish.png')),
             meal("meat",  mealDetail('Meat','meat-1.png')),

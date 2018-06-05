@@ -6,7 +6,6 @@ import AppBar from 'material-ui/AppBar';
 import MenuIconComponent from './MenuIconComponent';
 
 export const AppWeekBar = (props) => (
-
     <AppBar
         title={props.title}
         iconElementLeft={<MenuIconComponent></MenuIconComponent>}>

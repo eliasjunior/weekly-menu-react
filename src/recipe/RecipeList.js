@@ -9,7 +9,10 @@ import List from "material-ui/List";
 export const RecipeList = (props) => {
     return  (
         <List>
-            {props.recipeList.map((recipe, id) => <RecipeItem key={id} {...recipe} type={props.type} /> )}
+            {props
+                .recipeList
+                .map((recipe, id) => <RecipeItem key={id} {...recipe} type={props.type} /> )
+            }
         </List>
     )
 }

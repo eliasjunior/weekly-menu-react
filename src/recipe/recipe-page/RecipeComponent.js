@@ -6,7 +6,6 @@ import ApiService from '../../service/ApiService';
 import MessageComponent from '../../common/MessageComponent';
 
 class RecipeComponent extends React.Component {
-
     //React's constructor is called before DOM is mounted.
     constructor(props) {
         super(props);
@@ -15,7 +14,7 @@ class RecipeComponent extends React.Component {
             recipe: {
                 recipeId: props.recipeId
             },
-            message: 'Initial state'
+            message: null
         }
     }
     componentDidMount() {
@@ -27,22 +26,28 @@ class RecipeComponent extends React.Component {
                         recipe: response.data
                     });
                 })
-                .catch(reason => {console.error(reason)});    
-        } 
+                .catch(reason => console.error(reason));
+        }
     }
 
-    calledFromMyChild(params) {
-        this.setState({message: params})
+    callBackFromChild(value) {
+        this.setState({message: value});
+
+        setTimeout( () => {
+           this.setState({message: null})
+        }, 5000);
     }
 
     render() {
         return (
             <MuiThemeProvider>
                 <div>
-                    <div>{this.state.message}</div>
-                    <AppWeekBar title='Recipe'></AppWeekBar>
+                    <AppWeekBar  title='Recipe'></AppWeekBar>
                     <MessageComponent message={this.state.message}></MessageComponent>
-                    <RecipeForm {...this.state.recipe} actionReaction={this.calledFromMyChild.bind(this)} ></RecipeForm>
+                    <RecipeForm 
+                        {...this.state.recipe} 
+                        formSaveCallback={this.callBackFromChild.bind(this)} >
+                    </RecipeForm>
                 </div>
             </MuiThemeProvider>
         );

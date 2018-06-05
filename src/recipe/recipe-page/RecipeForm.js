@@ -5,27 +5,42 @@ import React from 'react';
 import TextField from "material-ui/TextField";
 import {RadioButton, RadioButtonGroup} from 'material-ui';
 import Util from '../../common/Util';
-import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
 import ApiService from '../../service/ApiService';
-        
-class RecipeForm extends React.Component {
 
+const styleForm = {
+    paddingLeft: 20,
+    paddingRight: 20
+};
+
+const getRecipe = (prevRecipe, options) => {
+    return {
+        recipe : {
+            name: options.name || prevRecipe.name,
+            description: options.description || prevRecipe.description,
+            meal: options.meal || prevRecipe.meal
+        }
+    }
+}
+
+class RecipeForm extends React.Component {
     constructor(props) {
         super(props);
 
-        let recipe = {
-                name: '',
-                description: '',
-                meal: ''
-            };
+        let data = {
+            recipe: {
+                name: null,
+                description: null,
+                meal: null
+            },
+            formSaveCallback: props.formSaveCallback
+        };
 
         if(props && props.name) {
-            recipe = props;
+            data = props;
         } 
 
-        this.state = recipe;
-
-        this.state.callDad = props.actionReaction;
+        this.state = data;
 
         this.mealList = Util.getMainMealList();
 
@@ -34,54 +49,49 @@ class RecipeForm extends React.Component {
     }
 
     saveRecipe() {
-
-        if(!this.state) {
-            console.error('state is null')
+        if(!this.state.recipe.name) {
+            this.state.formSaveCallback('Name cannot be empty');
             return
         }
 
-        this.state.callDad('Luke Im your Father!!');
-        
-        //ApiService.post('recipe', this.state)
-        //    .then(() => {
-        //         console.log("Saved!!")
-        //
-        //        this.state.callDad('Luke Im your Father!!');
-        //
-        //    }).catch((reason) => {console.error(reason)});
+        ApiService.post('recipe', this.state.recipe)
+            .then(() => {
+                this.state.formSaveCallback({message: 'Successfully saved!', type: 'S'});
+
+            }).catch(reason => {
+                this.state.formSaveCallback(reason.message)
+            });
     }
 
     updateRadio(e) {
         this.setState({meal: e.currentTarget.value})
     }
-
     updateName(e) {
-        console.log(e.currentTarget.value)
-
-        this.setState({name: e.currentTarget.value})
-
-        //this.setState({'name': e.currentTarget.value})
-        console.log('**>', this.state)
+        //console.log('desc', this.state.recipe)
+        const options =  {name: e.currentTarget.value};
+        this.setState((prevState, props) => {
+            return getRecipe(prevState.recipe, options);
+        });
     }
     updateDescription(e) {
-        console.log(e.currentTarget.value)
-
-        this.setState({description: e.currentTarget.value})
-
-        //this.setState({'name': e.currentTarget.value})
-        console.log('**>', this.state)
+        //console.log('desc', this.state.recipe)
+        const options =  {description: e.currentTarget.value};
+        this.setState((prevState, props) => {
+            return getRecipe(prevState.recipe, options);
+        });
     }
 
     render () {
         return (
-            <div>
+            <div style={styleForm}>
+                <h1>{this.state.recipe.name}</h1>
                 <TextField style={{display: 'block'}}
                     onChange={this.updateName.bind(this)}
-                    hintText='Name' defaultValue={this.state.name} />
+                    hintText='Name' defaultValue={this.state.recipe.name} />
                 <TextField hintText={'Description'} onChange={this.updateDescription.bind(this)}
-                defaultValue={this.state.description} />    
+                    defaultValue={this.state.recipe.description} />
                 <RadioButtonGroup 
-                    valueSelected={this.state.meal} style={{border: 'pink solid 2px'}}  
+                    valueSelected={this.state.meal}
                     name='Recipe Type' onChange={this.updateRadio.bind(this)} >
                     {this.mealList.map( (meal, index) => {
                         return <RadioButton key={index} 
@@ -89,8 +99,7 @@ class RecipeForm extends React.Component {
                         }) 
                     }
                 </RadioButtonGroup>
-                <FlatButton label="Save" secondary={true} onClick={this.saveRecipe.bind(this)} />
-                <h1>{this.state.meal}</h1>    
+                <RaisedButton label="Save" secondary={true} onClick={this.saveRecipe.bind(this)} />
             </div>
         );
     }
