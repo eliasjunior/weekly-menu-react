@@ -1,15 +1,10 @@
 import React from 'react';
-import TextField from "material-ui/TextField";
-import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
-
-const styles = {
-    block: {
-        maxWidth: 250,
-    },
-    radioButton: {
-        marginBottom: 16,
-    },
-};
+import TextField from "@material-ui/core/TextField";
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControl from '@material-ui/core/FormControl';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormLabel from '@material-ui/core/FormLabel';
 
 const QuantityType = {
     KG : "Kilograms",
@@ -18,45 +13,39 @@ const QuantityType = {
 };
 
 class ProductForm extends React.Component {
-
-    state = {
-        firstSlider: 0.5,
-        secondSlider: 50,
-    };
-
-    handleFirstSlider = (event, value) => {
-        this.setState({firstSlider: value});
-    };
-
-    handleSecondSlider = (event, value) => {
-
-        console.log('>> loco react', value)
-        this.setState({secondSlider: value});
-    };
-
-
+    constructor(props) {
+        super(props);
+        this.state = {
+            type: null
+        };
+        
+        this.handleType.bind(this);
+    }
+    handleType(event) {
+        console.log(event.target.value)
+        this.setState({type: event.target.value});
+    }
     render() {
         return (
-            <div style={{padding: '10px'}}>
-                <TextField hintText="Product name" />
-                <RadioButtonGroup name="shipSpeed" defaultSelected="not_light">
-                    <RadioButton 
-                        value={QuantityType.KG}
-                        label={QuantityType.KG}
-                        style={styles.radioButton}
-                        />
-                    <RadioButton
-                        value={QuantityType.UNIT}
-                        label={QuantityType.UNIT}
-                        style={styles.radioButton}
-                        />
-                    <RadioButton
-                        value={QuantityType.L}
-                        label={QuantityType.L}
-                        style={styles.radioButton}
-                        />
-                </RadioButtonGroup>
-            </div>
+            <FormControl style={{marginLeft: '20px'}}>
+                <TextField style={{marginTop: '20px'}} name="Product name" />
+                <FormLabel style={{marginTop: '20px'}} component="legend">Type</FormLabel>
+                <RadioGroup name="shipSpeed"  
+                    onChange={this.handleType} value={this.state.type}>
+                    <FormControlLabel 
+                        value={QuantityType.KG} 
+                        control={<Radio />} 
+                        label={QuantityType.KG} />
+                    <FormControlLabel 
+                        value={QuantityType.UNIT} 
+                        control={<Radio />} 
+                        label={QuantityType.UNIT} />  
+                    <FormControlLabel 
+                        value={QuantityType.L} 
+                        control={<Radio />} 
+                        label={QuantityType.L} />    
+                </RadioGroup>
+            </FormControl>
         );
     }
 }

@@ -2,6 +2,7 @@
  * Created by eliasmj on 24/01/2017.
  */
 import React from 'react';
+import PropTypes from 'prop-types';
 import AppBar from 'material-ui/AppBar';
 import MenuIconComponent from './MenuIconComponent';
 
@@ -13,7 +14,7 @@ export const AppWeekBar = (props) => (
 )
 
 AppWeekBar.propTypes = {
-    title: React.PropTypes.string
+    title: PropTypes.string
 }
 
 AppWeekBar.defaultProps = {

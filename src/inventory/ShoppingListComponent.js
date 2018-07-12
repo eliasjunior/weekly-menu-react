@@ -1,9 +1,8 @@
 import React from 'react';
 import {CategoryList} from './CategoryList';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import {AppWeekBar} from '../common/AppWeekBar';
 import ApiService from '../service/ApiService';
-
 
 class ShoppingListComponent extends React.Component {
 

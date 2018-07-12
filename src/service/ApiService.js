@@ -22,6 +22,9 @@ const ApiService = {
                 });
         };
     	return new Promise(callBack);
+    },
+    put(resourceName, object) {
+        return axios.put(baseUrl + resourceName, object);
     }
 
 }

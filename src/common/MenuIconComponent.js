@@ -4,7 +4,7 @@ import IconMenu from 'material-ui/IconMenu'
 import IconButton from 'material-ui/IconButton'
 import MoreVertIcon from  'material-ui/svg-icons/navigation/more-vert';
 import {browserHistory} from 'react-router';
-
+import {AppConstant} from './AppConstant';
 
 class MenuIconComponent extends React.Component {
 
@@ -21,19 +21,19 @@ class MenuIconComponent extends React.Component {
 
         switch (menuItem.props.primaryText) {
             case 'Recipes List':
-                browserHistory.push('/recipe');
+                browserHistory.push(AppConstant.RECIPE_LIST);
                 break;
             case 'Shopping' :
-                browserHistory.push('/shopping');
+                browserHistory.push(AppConstant.SHOPPING);
                 break;
             case 'New recipe' :
-                browserHistory.push('/recipe/form');
+                browserHistory.push(AppConstant.NEW_RECIPE);
                 break;
             case 'Products' :
-                browserHistory.push('/product/form');
+                browserHistory.push(AppConstant.PRODUCTS);
                 break;
             default:
-                browserHistory.push('/');
+                browserHistory.push(AppConstant.DEFAULT_ROUTE);
                 break;
         }
     }

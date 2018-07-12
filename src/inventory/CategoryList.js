@@ -1,6 +1,6 @@
 import React from 'react';
 import CategoryItem from './CategoryItem';
-import List from "material-ui/List";
+import List from "@material-ui/core/List";
 
 export const CategoryList = (props) => {
     return (

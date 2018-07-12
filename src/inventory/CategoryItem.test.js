@@ -1,7 +1,7 @@
 import React from 'react';
 import CategoryItem from './CategoryItem';
 import {shallow} from 'enzyme';
-import ListItem from 'material-ui/List/ListItem';
+import ListItem from '@material-ui/core/List/ListItem';
 
 const fakeIngredients = [{name: 'ingred name 2', _id: '123', attributes: [{name: 'attr', _id: '2'}]}];
 

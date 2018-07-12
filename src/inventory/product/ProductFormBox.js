@@ -3,8 +3,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { AppWeekBar } from "../../common/AppWeekBar";
 import ProductForm from './ProductForm';
 
-class ProductView extends React.Component {
-
+class ProductViewBox extends React.Component {
     render() {
         return (
             <MuiThemeProvider>
@@ -15,7 +14,5 @@ class ProductView extends React.Component {
             </MuiThemeProvider>
         );
     }
-
 }
-
-export default ProductView
+export default ProductViewBox

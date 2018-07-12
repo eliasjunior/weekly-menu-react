@@ -5,7 +5,6 @@ import {RecipeList} from '../RecipeList';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 class MenuComponent extends React.Component {
-
     constructor(props) {
         super(props);
 
@@ -15,17 +14,13 @@ class MenuComponent extends React.Component {
     }
 
     componentDidMount() {
-
         ApiService.get('recipe/week')
             .then(docs => {
-
                 this.setState({recipeItemList:  docs.data});
-
             }).catch(reason => {console.error(reason)});
     }
 
     render() {
-
         return(
             <MuiThemeProvider>
                 <div>
