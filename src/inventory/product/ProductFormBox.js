@@ -3,16 +3,22 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { AppWeekBar } from "../../common/AppWeekBar";
 import ProductForm from './ProductForm';
 
-class ProductViewBox extends React.Component {
+class ProductFormBox extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            catId: props.location.query.catId
+        };
+    }
     render() {
         return (
             <MuiThemeProvider>
                 <div>
                     <AppWeekBar title='ProductView'></AppWeekBar>
-                    <ProductForm></ProductForm>
+                    <ProductForm catId={this.state.catId}></ProductForm>
                 </div>
             </MuiThemeProvider>
         );
     }
 }
-export default ProductViewBox
+export default ProductFormBox

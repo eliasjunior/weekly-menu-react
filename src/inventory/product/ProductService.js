@@ -2,15 +2,12 @@ import ApiService from '../../service/ApiService';
 
 const ProductService = {
     update(product) {
-        const productRequest = {
-            ingredient: product
-        }
-        return ApiService.put('ingredient', productRequest)
+        return ApiService.put('product', product);
+    },
+    save(product) {
+        return ApiService.post('product', product);
     },
     delete() {
-
-    },
-    save() {
 
     }
 }

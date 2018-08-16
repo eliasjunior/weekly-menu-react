@@ -4,11 +4,14 @@ import List from "@material-ui/core/List";
 
 export const CategoryList = (props) => {
     return (
-        <List>
-            {props.list.map((category, index) => {
-                return <CategoryItem key={index} {...category}></CategoryItem>
-            })}
-        </List>
+        <div>
+            <List>
+                {props.list.map((category, index) => {
+                    return <CategoryItem key={index} {...category}></CategoryItem>
+                })}
+            </List>
+        </div>
+       
     );
 }
 

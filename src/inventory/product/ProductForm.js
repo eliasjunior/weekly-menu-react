@@ -1,51 +1,72 @@
 import React from 'react';
 import TextField from "@material-ui/core/TextField";
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormLabel from '@material-ui/core/FormLabel';
+import Button from '@material-ui/core/Button';
+import ProductService from './ProductService';
+import MessageComponent from '../../common/MessageComponent';
+import {browserHistory} from 'react-router';
 
-const QuantityType = {
-    KG : "Kilograms",
-    L: "Liter",
-    UNIT: "Unit"
-};
+const SUCCESS_TYPE = 'S';
+const styles = {
+    button: {
+        margin: '2px'
+    },
+    form: {
+        marginLeft: '20px'
+    },
+    nameField: {
+        marginTop: '20px'
+    },
+    buttonBox: {
+        marginTop: '20px'
+    }
+}
 
 class ProductForm extends React.Component {
     constructor(props) {
         super(props);
+
         this.state = {
-            type: null
+            name: '',
+            _creator: props.catId
         };
-        
-        this.handleType.bind(this);
     }
-    handleType(event) {
-        console.log(event.target.value)
-        this.setState({type: event.target.value});
+    saveProduct() {
+        ProductService.save(this.state)
+            .then(response => {
+                this.setState({
+                    message: {
+                        message: 'Product saved', 
+                        type: SUCCESS_TYPE
+                    }
+                });
+            })
+            .catch(reason => {
+                this.setState({message: reason.message})
+            });
+    }
+    changeProduct(ev) {
+        this.setState({name: ev.target.value});
     }
     render() {
         return (
-            <FormControl style={{marginLeft: '20px'}}>
-                <TextField style={{marginTop: '20px'}} name="Product name" />
-                <FormLabel style={{marginTop: '20px'}} component="legend">Type</FormLabel>
-                <RadioGroup name="shipSpeed"  
-                    onChange={this.handleType} value={this.state.type}>
-                    <FormControlLabel 
-                        value={QuantityType.KG} 
-                        control={<Radio />} 
-                        label={QuantityType.KG} />
-                    <FormControlLabel 
-                        value={QuantityType.UNIT} 
-                        control={<Radio />} 
-                        label={QuantityType.UNIT} />  
-                    <FormControlLabel 
-                        value={QuantityType.L} 
-                        control={<Radio />} 
-                        label={QuantityType.L} />    
-                </RadioGroup>
-            </FormControl>
+            <div>
+                <MessageComponent message={this.state.message}></MessageComponent>
+                <form style={styles.form}>
+                    <TextField style={styles.nameField} 
+                        label="Product name"  
+                        onChange={this.changeProduct.bind(this)} />
+                    <div style={styles.buttonBox}>
+                        <Button style={styles.button} variant="contained" color="primary" 
+                            onClick={this.saveProduct.bind(this)}>
+                            Save
+                        </Button> 
+                        <Button style={styles.button} variant="contained" color="secondary" 
+                            onClick={browserHistory.goBack}>
+                            Back
+                        </Button>  
+                    </div>    
+                </form>
+            </div>
         );
     }
 }

@@ -6,21 +6,18 @@ import {AppWeekBar} from '../common/AppWeekBar';
 
 class InventoryComponent extends React.Component {
     constructor(props) {
-        super(props)
-
+        super(props);
         this.state = {
-            list : []
+            list : [],
+            message: ''
         }
     }
 
     componentDidMount() {
-        ApiService.get('category')
-            .then( list => {
-                console.log('cats', list.data);
-
-                this.setState({list: list.data});
-
-            }).catch( reason => console.log('Oops failed', reason));
+        ApiService
+            .get('category')
+            .then( categories => this.setState({list: categories}))
+            .catch( reason => this.setState({message: reason}));
     }
 
     render() {
@@ -31,9 +28,7 @@ class InventoryComponent extends React.Component {
                     <CategoryList list={this.state.list} />
                 </div>
             </MuiThemeProvider>
-           
         );
     }
 }
-
 export default InventoryComponent 

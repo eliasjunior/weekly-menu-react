@@ -27,18 +27,22 @@ class CategoryItem extends React.Component {
         return ingredients.map(productListView);
     }
 
-    goProductView() {
-        browserHistory.push(AppConstant.PRODUCTS_VIEW);
+    goProductView(id) {
+        browserHistory.push({
+            pathname: AppConstant.PRODUCTS_VIEW,
+            search: "?catId="+id,
+        });
     }
 
     render() {
         return  (
             <div>
                 <ListItem
-                    key={this.props.id}>
+                    key={this.props._id}>
                     <ListItemText primary={this.props.name}  />
                     <ListItemSecondaryAction>
-                        <IconButton aria-label="Comments" onClick={this.goProductView}>
+                        <IconButton aria-label="Comments" 
+                            onClick={this.goProductView.bind(this, this.props._id)}>
                             <AddIcon/>
                         </IconButton>
                     </ListItemSecondaryAction>
