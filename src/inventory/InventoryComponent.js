@@ -8,24 +8,29 @@ class InventoryComponent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            list : [],
-            message: ''
+            listCategories : [],
+            message: '',
+            location: props.location.pathname
         }
     }
-
     componentDidMount() {
         ApiService
             .get('category')
-            .then( categories => this.setState({list: categories}))
+            .then( categories => {
+                // TODO add callback, better practice, certain update
+                this.setState({listCategories: categories})
+            })
             .catch( reason => this.setState({message: reason}));
     }
-
     render() {
         return (
             <MuiThemeProvider>
                 <div>
                     <AppWeekBar title="Product List"></AppWeekBar>
-                    <CategoryList list={this.state.list} />
+                    <CategoryList 
+                        list={this.state.listCategories} 
+                        location={this.state.location}>
+                    </CategoryList>
                 </div>
             </MuiThemeProvider>
         );

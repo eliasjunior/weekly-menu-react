@@ -4,7 +4,7 @@ import { RecipeListComponent, RecipeComponent } from './recipe';
 import MenuComponent from './recipe/menu/MenuComponent';
 import ShoppingListComponent from './inventory/ShoppingListComponent';
 import InventoryComponent from './inventory/InventoryComponent';
-import ProductFormBox from './inventory/product/ProductFormBox';
+import ProductFormBox from './inventory/product/ProductFormBox.js';
 import {AppConstant} from './common/AppConstant';
 
 class WeeklyRouter extends React.Component {

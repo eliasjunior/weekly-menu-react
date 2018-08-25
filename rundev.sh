@@ -1,6 +1,6 @@
 #!/bin/bash
 mongod &
-cd ~/WebstormProjects/projects/week-menu-api
+cd ~/Documents/GitHub/week-menu-api
 npm run dev &
-cd ~/WebstormProjects/projects/weekly-menu-react
+cd ~/Documents/GitHub/weekly-menu-react
 npm run dev

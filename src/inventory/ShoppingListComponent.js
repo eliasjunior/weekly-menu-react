@@ -1,25 +1,23 @@
 import React from 'react';
 import {CategoryList} from './CategoryList';
-import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {AppWeekBar} from '../common/AppWeekBar';
 import ApiService from '../service/ApiService';
 
 class ShoppingListComponent extends React.Component {
-
     constructor(props) {
         super(props);
-
         this.state = {
-            listCategories : []
+            listCategories : [],
+            location: props.location.pathname
         }
     }
-
     componentDidMount() {
-        ApiService.get('category/week/shopping')
-            .then((response)=> {
-
+        //category/week/shopping before 
+        ApiService.get('category')
+            .then((categories)=> {
                 this.setState({
-                    listCategories: response.data
+                    listCategories: categories
                 });
 
             }).catch(reason => {console.error(reason)});
@@ -30,7 +28,10 @@ class ShoppingListComponent extends React.Component {
             <MuiThemeProvider>
                 <div>
                     <AppWeekBar title="Shopping List"></AppWeekBar>
-                    <CategoryList list={this.state.listCategories} ></CategoryList>
+                    <CategoryList 
+                        list={this.state.listCategories} 
+                        location={this.state.location}>
+                    </CategoryList>
                 </div>
             </MuiThemeProvider>
         )

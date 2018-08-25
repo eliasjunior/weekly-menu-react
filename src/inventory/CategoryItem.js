@@ -1,7 +1,7 @@
 import React from 'react';
 import ListItem from '@material-ui/core/ListItem';
 import '../styles/CategoryItem.css';
-import {ProductViewLabel} from './product/ProductViewLabel';
+import {ProductComponent} from './product/ProductComponent';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import AddIcon from '@material-ui/icons/Add';
 import IconButton from '@material-ui/core/IconButton';
@@ -14,15 +14,20 @@ import { AppConstant } from '../common/AppConstant';
 class CategoryItem extends React.Component {
     constructor(props) {
         super(props);
-
         this.state = {
             nested: [],
-            checked: []
+            checked: [],
+            location: props.location
         }
+        this.listProducts = this.listProducts.bind(this);
     }
     listProducts (ingredients) {
         const productListView = (ingredient) => {
-            return <ProductViewLabel key={ingredient._id} product={ingredient}></ProductViewLabel>;
+            return <ProductComponent 
+                        key={ingredient._id} 
+                        product={ingredient}
+                        location={this.state.location}>
+                    </ProductComponent>;
         };     
         return ingredients.map(productListView);
     }
@@ -52,8 +57,8 @@ class CategoryItem extends React.Component {
                         {this.listProducts(this.props.ingredients)}
                     </List>
                 </Collapse>
-             </div>   
-            )
+            </div>   
+        )
     }
 }
 export default CategoryItem;

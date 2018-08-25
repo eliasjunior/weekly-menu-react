@@ -32,7 +32,7 @@ class ProductForm extends React.Component {
     }
     saveProduct() {
         ProductService.save(this.state)
-            .then(response => {
+            .then( () => {
                 this.setState({
                     message: {
                         message: 'Product saved', 
@@ -70,5 +70,4 @@ class ProductForm extends React.Component {
         );
     }
 }
-
 export default ProductForm

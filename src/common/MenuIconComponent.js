@@ -6,8 +6,12 @@ import MoreVertIcon from  'material-ui/svg-icons/navigation/more-vert';
 import {browserHistory} from 'react-router';
 import {AppConstant} from './AppConstant';
 
-class MenuIconComponent extends React.Component {
+const LABELS = ({
+    shopping: 'New Shopping List',
+    products: 'Products'
 
+})
+class MenuIconComponent extends React.Component {
     constructor(props) {
         super(props);
 
@@ -16,20 +20,22 @@ class MenuIconComponent extends React.Component {
         }
     }
 
+    
+
     onItemTouchTap = (event, menuItem) => {
         console.log("On Item unique!", menuItem.props.primaryText)
 
         switch (menuItem.props.primaryText) {
-            case 'Recipes List':
+            case 'Recipe':
                 browserHistory.push(AppConstant.RECIPE_LIST);
                 break;
-            case 'Shopping' :
+            case LABELS.shopping :
                 browserHistory.push(AppConstant.SHOPPING);
                 break;
             case 'New recipe' :
                 browserHistory.push(AppConstant.NEW_RECIPE);
                 break;
-            case 'Products' :
+            case LABELS.products :
                 browserHistory.push(AppConstant.PRODUCTS);
                 break;
             default:
@@ -48,9 +54,9 @@ class MenuIconComponent extends React.Component {
 
                 <MenuItem primaryText="Home" > </MenuItem>
                 <MenuItem primaryText="Recipes List"></MenuItem>
-                <MenuItem primaryText="Shopping"></MenuItem>
+                <MenuItem primaryText={LABELS.shopping}></MenuItem>
                 <MenuItem primaryText="New recipe"></MenuItem>
-                <MenuItem primaryText="Products"></MenuItem>
+                <MenuItem primaryText={LABELS.products}></MenuItem>
             </IconMenu>
         );
     }
