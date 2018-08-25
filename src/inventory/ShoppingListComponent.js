@@ -13,7 +13,7 @@ class ShoppingListComponent extends React.Component {
         }
     }
     componentDidMount() {
-        //category/week/shopping before 
+        //this is the created list -> category/week/shopping 
         ApiService.get('category')
             .then((categories)=> {
                 this.setState({
@@ -27,7 +27,7 @@ class ShoppingListComponent extends React.Component {
         return(
             <MuiThemeProvider>
                 <div>
-                    <AppWeekBar title="Shopping List"></AppWeekBar>
+                    <AppWeekBar title="New Shopping List"></AppWeekBar>
                     <CategoryList 
                         list={this.state.listCategories} 
                         location={this.state.location}>
