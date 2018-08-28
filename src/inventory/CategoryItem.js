@@ -9,35 +9,40 @@ import List from '@material-ui/core/List';
 import { browserHistory } from 'react-router';
 import { AppConstant } from '../common/AppConstant';
 import { CategoryActions } from './CategoryActions';
+import { grey100 } from 'material-ui/styles/colors';
+import CategoryDisplayService from '../CategoryDisplayService';
 
 class CategoryItem extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            nested: [],
-            checked: [],
             location: props.location
         }
         this.listProducts = this.listProducts.bind(this);
         this.goProductView = this.goProductView.bind(this);
+        this.selectionProd = this.selectionProd.bind(this);
     }
     listProducts(ingredients) {
         const productListView = (ingredient) => {
             return <ProductComponent
                 key={ingredient._id}
                 product={ingredient}
-                location={this.state.location}>
+                location={this.state.location}
+                onSelectionProd={this.selectionProd}>
             </ProductComponent>;
         };
         return ingredients.map(productListView);
     }
+    selectionProd(selected) {
+        this.props.onSelectedProd(selected);
+    }
+
     displayCatButtons() {
-        return this.state.location === '/products' ?
+        return CategoryDisplayService
+            .categoryBtns(this.state.location).display ?
             <ListItemSecondaryAction>
                 <CategoryActions
-                    isProdAction={true}
-                    goProductView={this.goProductView}
-                    goSelectRecipe={this.goSelectRecipe}>
+                    goProductView={this.goProductView}>
                 </CategoryActions>
             </ListItemSecondaryAction> : ''
     }
@@ -50,9 +55,9 @@ class CategoryItem extends React.Component {
     render() {
         return (
             <div>
-                <ListItem
+                <ListItem primary style={{backgroundColor: grey100}}
                     key={this.props._id}>
-                    <ListItemText primary={this.props.name} />
+                    <ListItemText primary={this.props.name}  />
                     {this.displayCatButtons()}
                 </ListItem>
                 <Collapse in={true} timeout="auto" unmountOnExit>

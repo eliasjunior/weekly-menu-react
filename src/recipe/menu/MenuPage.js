@@ -16,7 +16,7 @@ class MenuComponent extends React.Component {
     componentDidMount() {
         ApiService.get('recipe/week')
             .then(docs => {
-                this.setState({recipeItemList:  docs.data});
+                this.setState({recipeItemList:  docs});
             }).catch(reason => {console.error(reason)});
     }
 

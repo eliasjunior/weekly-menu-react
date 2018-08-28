@@ -4,7 +4,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import AppBar from 'material-ui/AppBar';
-import MenuIconComponent from './MenuIconComponent';
+import MenuIconComponent from '../MenuIconComponent';
 
 export const AppWeekBar = (props) => (
     <AppBar

@@ -1,5 +1,5 @@
 import React from 'react';
-import {CategoryList} from './CategoryList';
+import CategoryList from './CategoryList';
 import ApiService from '../service/ApiService';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {AppWeekBar} from '../common/AppWeekBar';
@@ -8,7 +8,7 @@ class InventoryComponent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            listCategories : [],
+            categories : [],
             message: '',
             location: props.location.pathname
         }
@@ -16,10 +16,7 @@ class InventoryComponent extends React.Component {
     componentDidMount() {
         ApiService
             .get('category')
-            .then( categories => {
-                // TODO add callback, better practice, certain update
-                this.setState({listCategories: categories})
-            })
+            .then( categories => this.setState(() => ({categories})))
             .catch( reason => this.setState({message: reason}));
     }
     render() {
@@ -28,7 +25,7 @@ class InventoryComponent extends React.Component {
                 <div>
                     <AppWeekBar title="Product List"></AppWeekBar>
                     <CategoryList 
-                        list={this.state.listCategories} 
+                        list={this.state.categories} 
                         location={this.state.location}>
                     </CategoryList>
                 </div>

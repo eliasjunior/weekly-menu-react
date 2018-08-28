@@ -16,7 +16,7 @@ const styles = {
         color: red400
     }
 }
-export const ProductActions = (props) => {
+export const CrudActions = (props) => {
     const displaySaveOrEditIcon = () => {
         return props.editFieldMode ? 
             <SaveIcon style={styles.saveIcon} 

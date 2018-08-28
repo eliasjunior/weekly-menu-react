@@ -5,6 +5,21 @@
 
 
 ## Tasks, for priority sequence
+- New Shopping list
+    simple task first,
+    1 - just select and create list based on the products
+    2 - add recipe, ignore repeated
+
+   description what need to work 
+   * Type list ? cannot be a category type
+      repeated products after add recipes
+   * create action
+      - get category and products ids to send
+      - add recipe to the list
+         - highlight recipe products
+         * When the product is repeat ? 
+         - remove products that does not need it
+
 
 - Product list
      - update

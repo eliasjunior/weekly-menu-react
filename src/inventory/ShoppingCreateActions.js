@@ -1,6 +1,6 @@
 import Button from '@material-ui/core/Button';
 import React from 'react';
-
+// 14: 40
 export const ShoppingCreateActions = (props) => {
     return (
         <div>
@@ -9,7 +9,7 @@ export const ShoppingCreateActions = (props) => {
                 Include Recipe
             </Button> 
             <Button variant="contained" 
-                onClick={() => console.log('go recipe selection page')} >
+                onClick={() => props.createShoppingList()} >
                 Create List
             </Button>
         </div>

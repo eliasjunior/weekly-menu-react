@@ -4,9 +4,7 @@ import ApiService from "../service/ApiService";
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {RecipeList} from './RecipeList'
 
-
-class RecipeListComponent extends React.Component {
-
+class RecipeListPage extends React.Component {
     constructor(props) {
         super(props);
 
@@ -14,17 +12,16 @@ class RecipeListComponent extends React.Component {
             recipeList: []
         }
     }
-
     componentDidMount = ()=> {
         ApiService.get('recipe')
             .then(response => {
+                console.log(response)
                 this.setState({
-                    recipeList: response.data
+                    recipeList: response
                 });
             })
             .catch(reason => {console.error(reason)});
     }
-
     render() {
         return (
             <MuiThemeProvider>
@@ -37,4 +34,4 @@ class RecipeListComponent extends React.Component {
     }
 }
 
-export default RecipeListComponent;
+export default RecipeListPage;

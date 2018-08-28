@@ -16,13 +16,12 @@ const styles = {
 }
 export const CategoryActions = (props) => {
     const manageDisplay = () => {
-        return props.isProdAction ? 
-                <AddProdBtn 
-                    style={styles.editIcon} 
-                    onClick={() => props.goProductView()} >
-                </AddProdBtn> : ''
+        return <AddProdBtn
+            style={styles.editIcon}
+            onClick={() => props.goProductView()} >
+        </AddProdBtn>
     }
-    const buttons =  (
+    const buttons = (
         <div>
             <IconButton aria-label="Comments">
                 {manageDisplay()}
