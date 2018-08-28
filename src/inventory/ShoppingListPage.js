@@ -5,13 +5,21 @@ import { AppWeekBar } from '../common/AppWeekBar';
 import ApiService from '../service/ApiService';
 import { ShoppingCreateActions } from './ShoppingCreateActions';
 
+const factoryMode = (prevState, newState) => {
+    let {
+        categories = prevState.categories,
+        selectedProd = prevState.selectedProd,
+        message = prevState
+    } = newState;
+    return { selectedProd, categories, message };
+};
 class ShoppingListComponent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             categories: [],
-            location: props.location.pathname,
-            selectedProd: []
+            selectedProd: [],
+            message: ''
         }
         this.selectedProd = this.selectedProd.bind(this);
         this.createShoppingList = this.createShoppingList.bind(this);
@@ -19,27 +27,24 @@ class ShoppingListComponent extends React.Component {
     componentDidMount() {
         //this is the created list -> category/week/shopping 
         ApiService
-            .get('category')
-            .then( categories => this.setState(() => ({categories})))
-            .catch( reason => this.setState({message: reason}));
+            .get('v2/category')
+            .then(categories => this.setState(() => ({ categories })))
+            .catch(reason => this.setState({ message: reason }));
     }
     createShoppingList() {
         console.log('creating...', this.state.selectedProd)
     }
     selectedProd(selected) {
-        let selectedProds = [...this.state.selectedProd];
+        let selectedProd = [...this.state.selectedProd];
         const productName = selected.prodName;
-        const isProdIn = selectedProds.find(name => name === productName);
+        const isProdIn = selectedProd.find(name => name === productName);
 
-        if (selected.checked) {
-            if (!isProdIn) {
-                selectedProds.push(selected.prodName);
-                this.setState({ selectedProd: selectedProds })
-            }
+        if (selected.checked && !isProdIn) {
+            selectedProd.push(selected.prodName);
         } else if (isProdIn) {
-            selectedProds = selectedProds.filter(name => name !== productName);
-            this.setState({ selectedProd: selectedProds })
+            selectedProd = selectedProd.filter(name => name !== productName);
         }
+        this.setState(prevState => factoryMode(prevState, { selectedProd }));
     }
     render() {
         return (
@@ -51,7 +56,7 @@ class ShoppingListComponent extends React.Component {
                     </ShoppingCreateActions>
                     <CategoryList
                         list={this.state.categories}
-                        location={this.state.location}
+                        location={this.props.location.pathname}
                         onSelectedProd={this.selectedProd}>
                     </CategoryList>
                 </div>

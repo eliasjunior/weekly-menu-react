@@ -15,7 +15,7 @@ class InventoryComponent extends React.Component {
     }
     componentDidMount() {
         ApiService
-            .get('category')
+            .get('v2/category')
             .then( categories => this.setState(() => ({categories})))
             .catch( reason => this.setState({message: reason}));
     }

@@ -1,7 +1,7 @@
 import React from 'react';
 import Checkbox from '@material-ui/core/Checkbox'
 
-export const ProductSelection = (props) => {
+export const ItemSelection = (props) => {
     const onChangeSelection = (e) => {
         props.onChangeSelection(e.target.checked, props.name)
     }

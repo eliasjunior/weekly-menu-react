@@ -10,7 +10,7 @@ import { browserHistory } from 'react-router';
 import { AppConstant } from '../common/AppConstant';
 import { CategoryActions } from './CategoryActions';
 import { grey100 } from 'material-ui/styles/colors';
-import CategoryDisplayService from '../CategoryDisplayService';
+import DisplayService from '../DisplayService';
 
 class CategoryItem extends React.Component {
     constructor(props) {
@@ -38,7 +38,7 @@ class CategoryItem extends React.Component {
     }
 
     displayCatButtons() {
-        return CategoryDisplayService
+        return DisplayService
             .categoryBtns(this.state.location).display ?
             <ListItemSecondaryAction>
                 <CategoryActions
@@ -55,7 +55,7 @@ class CategoryItem extends React.Component {
     render() {
         return (
             <div>
-                <ListItem primary style={{backgroundColor: grey100}}
+                <ListItem style={{backgroundColor: grey100}}
                     key={this.props._id}>
                     <ListItemText primary={this.props.name}  />
                     {this.displayCatButtons()}

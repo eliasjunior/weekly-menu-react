@@ -4,7 +4,8 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ProductService from './ProductService';
 import { EditableLabel } from '../../common/EditableLabel';
 import { CrudActions } from '../../common/CrudActions';
-import { ProductSelection } from './ProductSelection';
+import { ItemSelection } from '../../common/ItemSelection'; 
+import DisplayService  from '../../DisplayService';
 
 // TODO add new states here
 const factoryMode = (prevState, newState) => {
@@ -15,18 +16,12 @@ const factoryMode = (prevState, newState) => {
         editFieldMode: newState.editFieldMode === false ? false : true
     }
 }
-const isASelecionPage = ({
-    '/products': false,
-    '/shopping': true
-})
 export class ProductComponent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             product: props.product,
-            editFieldMode: false,
-            isCheckBoxDisplay: isASelecionPage[props.location],
-            isActionBtnDisplay: !isASelecionPage[props.location],
+            editFieldMode: false
         }
         this.onChangeName = this.onChangeName.bind(this);
         this.deleteItem = this.deleteItem.bind(this);
@@ -58,17 +53,17 @@ export class ProductComponent extends React.Component {
     selectedProd(checked, prodName) {
         this.props.onSelectionProd({checked, prodName});
     }
-    isProductSelection() {
-        return this.state.isCheckBoxDisplay ?
-            <ProductSelection
+    displayCheckBtn() {
+        return DisplayService.productCheckBtn(this.props.location).display ?
+            <ItemSelection
                 onChangeSelection={this.selectedProd}
                 selected={this.state.product.selected}
                 name={this.state.product.name}>
-            </ProductSelection>
+            </ItemSelection>
             : ''
     }
     isActionButtonDisplay() {
-        return this.state.isActionBtnDisplay ?
+        return DisplayService.crudActions(this.props.location).display ?
             <CrudActions
                 deleteItem={this.deleteItem}
                 editFieldMode={this.state.editFieldMode}
@@ -83,7 +78,7 @@ export class ProductComponent extends React.Component {
     render() {
         return (
             <ListItem key={this.state.product._id} >
-                {this.isProductSelection()} 
+                {this.displayCheckBtn()} 
                 <EditableLabel
                     inset={true}
                     editFieldMode={this.state.editFieldMode}
