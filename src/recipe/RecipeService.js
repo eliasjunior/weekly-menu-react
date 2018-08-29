@@ -1,11 +1,14 @@
-import ApiService from '../../service/ApiService';
+import ApiService from '../service/ApiService';
 
 const RecipeService = {
     update(product) {
-        return ApiService.put('recipe', product);
+        return ApiService.put('v2/recipe', product);
     },
     save(product) {
-        return ApiService.post('recipe', product);
+        return ApiService.post('v2/recipe', product);
+    },
+    get(){
+        return ApiService.get('v2/recipe');
     },
     delete() {
 

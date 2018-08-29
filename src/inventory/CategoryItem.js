@@ -27,6 +27,7 @@ class CategoryItem extends React.Component {
             return <ProductComponent
                 key={ingredient._id}
                 product={ingredient}
+                categoryName={this.props.name} 
                 location={this.state.location}
                 onSelectionProd={this.selectionProd}>
             </ProductComponent>;
@@ -36,12 +37,12 @@ class CategoryItem extends React.Component {
     selectionProd(selected) {
         this.props.onSelectedProd(selected);
     }
-
-    displayCatButtons() {
+    categoryButtons() {
         return DisplayService
             .categoryBtns(this.state.location).display ?
             <ListItemSecondaryAction>
                 <CategoryActions
+                    catId={this.props._id}
                     goProductView={this.goProductView}>
                 </CategoryActions>
             </ListItemSecondaryAction> : ''
@@ -55,10 +56,11 @@ class CategoryItem extends React.Component {
     render() {
         return (
             <div>
-                <ListItem style={{backgroundColor: grey100}}
+                <ListItem 
+                    style={{backgroundColor: grey100}}
                     key={this.props._id}>
-                    <ListItemText primary={this.props.name}  />
-                    {this.displayCatButtons()}
+                    <ListItemText primary={this.props.name} ></ListItemText>
+                    {this.categoryButtons()}
                 </ListItem>
                 <Collapse in={true} timeout="auto" unmountOnExit>
                     <List component="div" disablePadding>

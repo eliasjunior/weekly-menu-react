@@ -6,15 +6,17 @@ import { CategoryList } from '../../inventory/CategoryList';
 import { Button } from '@material-ui/core';
 import { EditableLabel } from '../../common/EditableLabel';
 import { CrudActions } from '../../common/CrudActions';
+import MessageComponent from '../../common/MessageComponent';
+import RecipeService from '../RecipeService';
 
 const factoryMode = (prevState, newState) => {
     let {
         name = prevState.name,
         categories = prevState.categories,
-        selectedProd = prevState.selectedProd,
-        message = prevState
+        selectedProducts = prevState.selectedProducts,
+        message = prevState.message
     } = newState;
-    return { name, categories, selectedProd, message };
+    return { name, categories, selectedProducts, message };
 };
 class RecipePage extends React.Component {
     //React's constructor is called before DOM is mounted.
@@ -23,11 +25,10 @@ class RecipePage extends React.Component {
         this.state = {
             message: '',
             categories: [],
-            selectedProd: [],
+            selectedProducts: [],
             name: ''
-        }
+        };
         this.updateName = this.updateName.bind(this);
-        this.swapIcon = this.swapIcon.bind(this);
         this.selectedProd = this.selectedProd.bind(this);
         this.createRecipe = this.createRecipe.bind(this);
     }
@@ -39,46 +40,49 @@ class RecipePage extends React.Component {
     }
     updateName(name) {
         this.setState(prevState => factoryMode(prevState, { name }))
-        // ProductService
-        //     .update(this.state.product)
-        //     .then(() => this.setState(prevState => factoryMode(prevState, newState)))
-        //     .catch(reason => console.error(reason));
-    }
-    swapIcon() {
-        const newState = {
-            editFieldMode: !this.state.editFieldMode
-        };
-        this.setState(prevState => factoryMode(prevState, newState));
     }
     selectedProd(selected) {
-        let selectedProd = [...this.state.selectedProd];
-        const productName = selected.prodName;
-        const isProdIn = selectedProd.find(name => name === productName);
+        let selectedProducts = [...this.state.selectedProducts];
+        const productSelected = {
+            name: selected.name,
+            _creator: selected.parentId,
+            categoryName: selected.parentName
+        };
+        const isProdIn = selectedProducts.find(prod => prod.name === productSelected.name);
 
         if (selected.checked && !isProdIn) {
-            selectedProd.push(selected.prodName);
+            selectedProducts.push(productSelected);
         } else if (isProdIn) {
-            selectedProd = selectedProd.filter(name => name !== productName);
+            selectedProducts = selectedProducts.filter(prod => prod.name !== productSelected.name);
         }
-        this.setState(prevState => factoryMode(prevState, { selectedProd }));
+        this.setState(prevState => factoryMode(prevState, { selectedProducts }));
     }
-    createRecipe() {
-        console.log('create -> ', this.state.selectedProd)
-
-
-
-
+    createRecipe(event) {
+        event.preventDefault();
+        const recipe = {
+            name: this.state.name,
+            products: this.state.selectedProducts
+        };
+        RecipeService
+            .save(recipe)
+            .then(response => {
+                const newState = { message: { message: 'Hooray, recipe created!', type: 'S' } };
+                this.setState(prevState => factoryMode(prevState, newState))
+            })
+            .catch(reason => this.setState({ message: reason.message }));
     }
     render() {
         return (
             <MuiThemeProvider>
                 <div>
                     <AppWeekBar title='New Recipe'></AppWeekBar>
+                    <MessageComponent
+                        message={this.state.message}>
+                    </MessageComponent>
                     <Button variant="contained"
-                        onClick={this.createRecipe} >
+                        onClick={this.createRecipe}>
                         Create Recipe
                     </Button>
-                    <div>{this.state.name}</div>
                     <div style={{ margin: '20px' }}>
                         <EditableLabel
                             inset={false}
@@ -87,8 +91,7 @@ class RecipePage extends React.Component {
                         </EditableLabel>
                         <CrudActions
                             editFieldMode={true}
-                            updateName={this.updateName}
-                            swapIcon={this.swapIcon}>
+                            updateName={this.updateName}>
                         </CrudActions>
                     </div>
                     <CategoryList
@@ -101,4 +104,8 @@ class RecipePage extends React.Component {
         );
     }
 }
+RecipePage.propTypes = {
+    name: React.PropTypes.string.isRequired
+}
 export default RecipePage
+

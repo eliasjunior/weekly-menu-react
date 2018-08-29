@@ -50,15 +50,17 @@ export class ProductComponent extends React.Component {
         };
         this.setState((prevState, props) => factoryMode(prevState, newState));
     }
-    selectedProd(checked, prodName) {
-        this.props.onSelectionProd({checked, prodName});
+    selectedProd(itemProps) {
+        this.props.onSelectionProd(itemProps);
     }
     displayCheckBtn() {
         return DisplayService.productCheckBtn(this.props.location).display ?
             <ItemSelection
                 onChangeSelection={this.selectedProd}
                 selected={this.state.product.selected}
-                name={this.state.product.name}>
+                name={this.state.product.name}
+                parentName={this.props.categoryName}
+                parentId={this.props.product._creator}>
             </ItemSelection>
             : ''
     }
