@@ -1,35 +1,23 @@
 import { AppConstant } from "./common/AppConstant";
-
-const checkBoxSelectionPage = ({
-    '/products': false,
-    '/shopping': true,
-    '/recipe/create': true
-});
-const crudActions = ({
-    '/products': true,
-    '/shopping': false,
-    '/recipe/create': true
-});
-
 const CategoryDisplayService = {
     recipeSelectionBtn(page) {
         return {
-            display: page === AppConstant.SHOPPING
+            display: page === AppConstant.PATH.SHOPPING
         }
     },
     categoryBtns(page) {
         return {
-            display: page === AppConstant.PRODUCTS || page === AppConstant.NEW_RECIPE
+            display: page === AppConstant.PATH.PRODUCTS || page === AppConstant.PATH.NEW_RECIPE
         }
     },
     productCheckBtn(page) {
         return {
-            display: checkBoxSelectionPage[page] 
+            display: page === AppConstant.PATH.SHOPPING || page === AppConstant.PATH.NEW_RECIPE
         }
     },
     crudActions(page) {
         return {
-            display: crudActions[page] 
+            display: page === AppConstant.PATH.PRODUCTS || page === AppConstant.PATH.PRODUCTS_CREATE
         }
     },
     

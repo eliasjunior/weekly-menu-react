@@ -70,7 +70,8 @@ export class ProductComponent extends React.Component {
                 deleteItem={this.deleteItem}
                 editFieldMode={this.state.editFieldMode}
                 updateName={this.updateName}
-                swapIcon={this.swapIcon}>
+                swapIcon={this.swapIcon}
+                id={this.props.product._id}>
             </CrudActions>
             : ''
     }

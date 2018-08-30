@@ -1,19 +1,19 @@
 import React from 'react';
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
-import { green500, red400 } from 'material-ui/styles/colors';
+import { green, red } from '@material-ui/core/colors';
 import CreateIcon from '@material-ui/icons/Create';
 import SaveIcon from '@material-ui/icons/Save';
 
 const styles = {
     saveIcon: {
-        color: green500
+        color: green[400]
     },
     editIcon: {
-        color: green500
+        color: green[400]
     },
     deleteIcon: {
-        color: red400
+        color: red[500]
     }
 }
 export const CrudActions = (props) => {
@@ -32,7 +32,7 @@ export const CrudActions = (props) => {
             </IconButton>
             <IconButton aria-label="Comments">
                 <DeleteIcon  style={styles.deleteIcon} 
-                    onClick={() => props.deleteItem(props.product._id)}>
+                    onClick={() => props.deleteItem(props.id)}>
                 </DeleteIcon>    
             </IconButton>
         </div>

@@ -4,7 +4,7 @@
 import React from 'react';
 import {RecipeItem} from './RecipeItem'
 
-import List from "material-ui/List";
+import List from "@material-ui/core/List";
 
 export const RecipeList = (props) => {
     return  (

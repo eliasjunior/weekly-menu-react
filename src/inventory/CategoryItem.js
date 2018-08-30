@@ -6,10 +6,8 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import Collapse from '@material-ui/core/Collapse';
 import List from '@material-ui/core/List';
-import { browserHistory } from 'react-router';
-import { AppConstant } from '../common/AppConstant';
 import { CategoryActions } from './CategoryActions';
-import { grey100 } from 'material-ui/styles/colors';
+import { grey } from '@material-ui/core/colors';
 import DisplayService from '../DisplayService';
 
 class CategoryItem extends React.Component {
@@ -19,7 +17,6 @@ class CategoryItem extends React.Component {
             location: props.location
         }
         this.listProducts = this.listProducts.bind(this);
-        this.goProductView = this.goProductView.bind(this);
         this.selectionProd = this.selectionProd.bind(this);
     }
     listProducts(ingredients) {
@@ -42,22 +39,15 @@ class CategoryItem extends React.Component {
             .categoryBtns(this.state.location).display ?
             <ListItemSecondaryAction>
                 <CategoryActions
-                    catId={this.props._id}
-                    goProductView={this.goProductView}>
+                    catId={this.props._id}>
                 </CategoryActions>
             </ListItemSecondaryAction> : ''
-    }
-    goProductView(id) {
-        browserHistory.push({
-            pathname: AppConstant.PRODUCTS_VIEW,
-            search: "?catId=" + id,
-        });
     }
     render() {
         return (
             <div>
                 <ListItem 
-                    style={{backgroundColor: grey100}}
+                    style={{backgroundColor: grey[100]}}
                     key={this.props._id}>
                     <ListItemText primary={this.props.name} ></ListItemText>
                     {this.categoryButtons()}

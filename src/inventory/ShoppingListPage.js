@@ -1,6 +1,5 @@
 import React from 'react';
 import CategoryList from './CategoryList';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { AppWeekBar } from '../common/AppWeekBar';
 import ApiService from '../service/ApiService';
 import { ShoppingCreateActions } from './ShoppingCreateActions';
@@ -48,19 +47,17 @@ class ShoppingListComponent extends React.Component {
     }
     render() {
         return (
-            <MuiThemeProvider>
-                <div>
-                    <AppWeekBar title="New Shopping List"></AppWeekBar>
-                    <ShoppingCreateActions
-                        createShoppingList={this.createShoppingList}>
-                    </ShoppingCreateActions>
-                    <CategoryList
-                        list={this.state.categories}
-                        location={this.props.location.pathname}
-                        onSelectedProd={this.selectedProd}>
-                    </CategoryList>
-                </div>
-            </MuiThemeProvider>
+            <div>
+                <AppWeekBar title="New Shopping List"></AppWeekBar>
+                <ShoppingCreateActions
+                    createShoppingList={this.createShoppingList}>
+                </ShoppingCreateActions>
+                <CategoryList
+                    list={this.state.categories}
+                    location={this.props.location.pathname}
+                    onSelectedProd={this.selectedProd}>
+                </CategoryList>
+            </div>
         )
     }
 }

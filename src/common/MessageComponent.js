@@ -1,23 +1,19 @@
 import React from 'react';
 
 const styles = {
-    msgStyle: {
+    msg: {
         paddingLeft: 20,
         margin: '5px',
         color: 'white',
         border: '1px solid pink',
-        backgroundColor: '#f591b3',
         fontWeight: 400,
         fontSize: 24
     },
-    msgStyleSuccess: {
-        paddingLeft: 20,
-        margin: '5px',
-        color: 'white',
-        border: '1px solid pink',
-        fontWeight: 400,
+    error: {
+        backgroundColor: '#f591b3',
+    },
+    success: {
         backgroundColor: 'rgba(0, 150, 136, 0.57)',
-        fontSize: 24
     },
     // TO CONTINUE
     fade: {
@@ -28,50 +24,28 @@ const styles = {
     }
 };
 
-const messageToDisplay = (message) => {
-    return {
-        basicErrorMessage: <div style={styles.msgStyle}>{message}</div>,
-        successMessage: <div style={styles.msgStyleSuccess}>{message}</div>
-    }
+const MESSAGE_TYPE = {
+    SUCCESS_TYPE: 'S'
 }
+// TODO need remove the message
+function MessageComponent(props) {
+    const manageMessage = () => {
+        let alert = props.message;
+        if (!alert) {
+            return null;
+        }
 
-class MessageComponent extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            message: props.message,
-            type: props.type
-        }
-    }
-    manageMessage(alert) {
-        if(!alert) {
-            return null
-        } else if(typeof alert === 'string') {
-            return this.getMessage(alert);
-        } else {
-            return this.getMessageObj(alert);
-        }
-    }
-    getMessage(alert) {
-        return messageToDisplay(alert).basicErrorMessage;
-    }
+        if (typeof alert === 'string') {
+            const msgError = Object.assign({}, styles.msg, styles.error);
+            return <div style={msgError}>{alert}</div>
 
-    getMessageObj(alert) {
-        if(alert.type === 'S') {
-            return messageToDisplay(alert.message).successMessage
         } else {
-            return messageToDisplay(alert).basicErrorMessage;
+            const msgStyle = alert.type === MESSAGE_TYPE.SUCCESS_TYPE ? styles.success : styles.error;
+            const msg = Object.assign({}, styles.msg, msgStyle);
+
+            return <div style={msg}>{alert.message}</div>
         }
     }
-    componentWillReceiveProps(nextProps) {
-        this.setState({message: nextProps.message})
-    }
-    render() {
-        return(
-            <div>{this.manageMessage(this.state.message)}</div>
-        )
-    }
+    return (<div>{manageMessage()}</div>)
 }
-
-
 export default MessageComponent

@@ -1,57 +1,71 @@
 import React from 'react';
-import MenuItem from 'material-ui/MenuItem'
-import IconMenu from 'material-ui/IconMenu'
-import IconButton from 'material-ui/IconButton'
-import MoreVertIcon from  'material-ui/svg-icons/navigation/more-vert';
-import {browserHistory} from 'react-router';
-import {AppConstant} from './common/AppConstant';
+import MenuItem from '@material-ui/core/MenuItem'
+import IconButton from '@material-ui/core/IconButton'
+import { AppConstant } from './common/AppConstant';
+import { Menu } from '@material-ui/core';
+import MenuIcon from '@material-ui/icons/Menu';
+import { Link } from "react-router-dom";
 
-const LABELS = ({
-    shopping: 'New Shopping List',
-    products: 'Products',
-    newRecipe: 'New Recipe'
-});
+
 class MenuIconComponent extends React.Component {
     constructor(props) {
         super(props);
-
         this.state = {
-            open: false
+            open: false,
+            anchorEl: null
         }
+        this.onDisplayMenuOption = this.onDisplayMenuOption.bind(this);
+        this.onDisplayClose = this.onDisplayClose.bind(this);
     }
-    onItemTouchTap = (event, menuItem) => {
-        console.log("Page=>", menuItem.props.primaryText)
-        switch (menuItem.props.primaryText) {
-            case 'Recipe':
-                browserHistory.push(AppConstant.RECIPE_LIST);
-                break;
-            case LABELS.shopping :
-                browserHistory.push(AppConstant.SHOPPING);
-                break;
-            case LABELS.newRecipe :
-                browserHistory.push(AppConstant.NEW_RECIPE);
-                break;
-            case LABELS.products :
-                browserHistory.push(AppConstant.PRODUCTS);
-                break;
-            default:
-                browserHistory.push(AppConstant.DEFAULT_ROUTE);
-                break;
-        }
+    onDisplayMenuOption = (event) => {
+        this.setState({ anchorEl: event.currentTarget });
+    }
+    onDisplayClose(event) {
+        const pageSelected = [event.currentTarget.innerText]
+            .map(item => item.trim())
+            .pop();
+
+        console.log('Page => ', pageSelected)    
+        this.setState({ anchorEl: null, open: false });
     }
     render() {
         return (
-            <IconMenu
-                iconButtonElement={<IconButton><MoreVertIcon/></IconButton>}
-                anchorOrigin={{horizontal: 'left', vertical: 'top'}}
-                targetOrigin={{horizontal: 'left', vertical: 'top'}}
-                onItemTouchTap={this.onItemTouchTap}>
-                {/* <MenuItem primaryText="Recipe"></MenuItem> */}
-                <MenuItem primaryText="Home"> </MenuItem>
-                <MenuItem primaryText={LABELS.newRecipe}></MenuItem>
-                <MenuItem primaryText={LABELS.shopping}></MenuItem>
-                <MenuItem primaryText={LABELS.products}></MenuItem>
-            </IconMenu>
+            <div>
+                <IconButton
+                    aria-owns={this.state.open ? 'menu-appbar' : null}
+                    onClick={this.onDisplayMenuOption}
+                    aria-label="Menu"
+                    aria-haspopup="true"
+                    color="inherit">
+                    <MenuIcon />
+                </IconButton>
+                <Menu
+                    id="menu-appbar"
+                    anchorEl={this.state.anchorEl}
+                    anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'left',
+                    }}
+                    transformOrigin={{
+                        vertical: 'top',
+                        horizontal: 'left',
+                    }}
+                    open={Boolean(this.state.anchorEl)}
+                    onClose={this.handleClose}>
+                    <MenuItem onClick={this.onDisplayClose}>
+                        <Link to={AppConstant.PATH.DEFAULT_ROUTE}>{AppConstant.LABEL.HOME}</Link>
+                    </MenuItem>
+                    <MenuItem onClick={this.onDisplayClose}>
+                        <Link to={AppConstant.PATH.NEW_RECIPE}>{AppConstant.LABEL.NEW_RECIPE}</Link>
+                    </MenuItem>
+                    <MenuItem onClick={this.onDisplayClose}>
+                        <Link to={AppConstant.PATH.SHOPPING}>{AppConstant.LABEL.SHOPPING}</Link>
+                    </MenuItem>
+                    <MenuItem onClick={this.onDisplayClose}>
+                        <Link to={AppConstant.PATH.PRODUCTS}>{AppConstant.LABEL.PRODUCTS}</Link>
+                    </MenuItem>
+                </Menu>
+            </div>
         );
     }
 }

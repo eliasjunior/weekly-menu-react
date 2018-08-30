@@ -1,11 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './styles/index.css';
+import './index.css';
+import registerServiceWorker from './registerServiceWorker';
 import WeeklyRouter from './WeeklyRouter';
-import injectTapEventPlugin from 'react-tap-event-plugin';
-injectTapEventPlugin();
+import {BrowserRouter} from 'react-router-dom';
 
-ReactDOM.render(
-  <WeeklyRouter />,
-  document.getElementById('root')
-);
+ReactDOM.render(<BrowserRouter><WeeklyRouter/></BrowserRouter> , document.getElementById('root'));
+registerServiceWorker();

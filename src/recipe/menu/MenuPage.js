@@ -2,9 +2,8 @@ import React from 'react';
 import {AppWeekBar} from '../../common/AppWeekBar';
 import ApiService from '../../service/ApiService';
 import {RecipeList} from '../RecipeList';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-class MenuComponent extends React.Component {
+class MenuPage extends React.Component {
     constructor(props) {
         super(props);
 
@@ -12,24 +11,19 @@ class MenuComponent extends React.Component {
             recipeItemList : []
         }
     }
-
     componentDidMount() {
         ApiService.get('recipe/week')
             .then(docs => {
                 this.setState({recipeItemList:  docs});
             }).catch(reason => {console.error(reason)});
     }
-
     render() {
         return(
-            <MuiThemeProvider>
                 <div>
-                    <AppWeekBar></AppWeekBar>
+                    <AppWeekBar title="Menu"></AppWeekBar>
                     <RecipeList recipeList={this.state.recipeItemList} type="recipe_menu" />
                 </div>
-            </MuiThemeProvider>
         )
     }
 }
-
-export default MenuComponent;
+export default MenuPage;

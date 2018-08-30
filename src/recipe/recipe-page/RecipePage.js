@@ -1,5 +1,4 @@
 import React from 'react';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { AppWeekBar } from "../../common/AppWeekBar";
 import ApiService from '../../service/ApiService';
 import { CategoryList } from '../../inventory/CategoryList';
@@ -18,6 +17,7 @@ const factoryMode = (prevState, newState) => {
     } = newState;
     return { name, categories, selectedProducts, message };
 };
+
 class RecipePage extends React.Component {
     //React's constructor is called before DOM is mounted.
     constructor(props) {
@@ -73,7 +73,6 @@ class RecipePage extends React.Component {
     }
     render() {
         return (
-            <MuiThemeProvider>
                 <div>
                     <AppWeekBar title='New Recipe'></AppWeekBar>
                     <MessageComponent
@@ -100,12 +99,11 @@ class RecipePage extends React.Component {
                         onSelectedProd={this.selectedProd}>
                     </CategoryList>
                 </div>
-            </MuiThemeProvider>
         );
     }
 }
-RecipePage.propTypes = {
-    name: React.PropTypes.string.isRequired
-}
+// RecipePage.propTypes = {
+//     name: React.PropTypes.string.isRequired
+// }
 export default RecipePage
 

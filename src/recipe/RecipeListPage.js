@@ -1,7 +1,7 @@
 import React from "react";
 import {AppWeekBar} from "../common/AppWeekBar";
 import ApiService from "../service/ApiService";
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
 import {RecipeList} from './RecipeList'
 
 class RecipeListPage extends React.Component {
@@ -15,7 +15,6 @@ class RecipeListPage extends React.Component {
     componentDidMount = ()=> {
         ApiService.get('recipe')
             .then(response => {
-                console.log(response)
                 this.setState({
                     recipeList: response
                 });
@@ -24,12 +23,10 @@ class RecipeListPage extends React.Component {
     }
     render() {
         return (
-            <MuiThemeProvider>
                 <div>
                     <AppWeekBar title='Recipe List'></AppWeekBar>
                     <RecipeList recipeList={this.state.recipeList} type="recipe_list"/>
                 </div>
-            </MuiThemeProvider>
         );
     }
 }
