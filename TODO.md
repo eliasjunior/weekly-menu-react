@@ -5,6 +5,8 @@
 
 
 ## Tasks, for priority sequence
+- Category Crud
+- Recipe List
 - New Shopping list
     simple task first,
     1 - just select and create list based on the products

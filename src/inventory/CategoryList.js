@@ -1,6 +1,9 @@
 import React from 'react';
 import CategoryItem from './CategoryItem';
 import List from "@material-ui/core/List";
+import { Button } from '@material-ui/core';
+import { Link } from "react-router-dom";
+import { AppConstant } from '../common/AppConstant';
 
 export const CategoryList = (props) => {
     const buildList = (list) => {
@@ -18,6 +21,9 @@ export const CategoryList = (props) => {
     }
     return (
         <div>
+            <Button color="primary" variant="outlined">
+                <Link to={AppConstant.PATH.CATEGORY_CREATE}>New Category</Link>
+            </Button>
             <List>
                 {buildList(props.list)}
             </List>

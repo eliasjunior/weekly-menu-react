@@ -11,6 +11,7 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import blue from '@material-ui/core/colors/blue';
 import cyan from '@material-ui/core/colors/cyan';
 import { MuiThemeProvider } from '@material-ui/core';
+import CategoryFormPage from './inventory/CategoryFormPage';
 
 const theme = createMuiTheme({
     palette: {
@@ -28,6 +29,7 @@ function WeeklyRouter() {
                 <Route path={AppConstant.PATH.NEW_RECIPE} component={RecipePage}></Route>
                 <Route path={AppConstant.PATH.PRODUCTS} component={InventoryPage}></Route>
                 <Route path={AppConstant.PATH.PRODUCTS_CREATE} component={ProductFormBox}></Route>
+                <Route path={AppConstant.PATH.CATEGORY_CREATE} component={CategoryFormPage}></Route>
             </div>
         </MuiThemeProvider>
     );

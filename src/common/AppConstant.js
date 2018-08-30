@@ -5,6 +5,7 @@ export const AppConstant =  {
         SHOPPING: '/shopping',
         PRODUCTS: '/product',
         PRODUCTS_CREATE: '/productCreate',
+        CATEGORY_CREATE: '/categoryCreate',
         DEFAULT_ROUTE: '/'
     },
     LABEL: {
