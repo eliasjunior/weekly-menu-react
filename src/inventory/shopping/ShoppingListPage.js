@@ -1,7 +1,7 @@
 import React from 'react';
-import CategoryList from './CategoryList';
-import { AppWeekBar } from '../common/AppWeekBar';
-import ApiService from '../service/ApiService';
+import CategoryList from '../category/CategoryList';
+import { AppWeekBar } from '../../common/AppWeekBar';
+import ApiService from '../../service/ApiService';
 import { ShoppingCreateActions } from './ShoppingCreateActions';
 
 const factoryMode = (prevState, newState) => {

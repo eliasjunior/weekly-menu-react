@@ -2,7 +2,7 @@ import React from 'react';
 import { AppWeekBar } from "../../common/AppWeekBar";
 import ProductForm from './ProductForm';
 
-function ProductFormBox(props) {
+function ProductFormPage(props) {
     const search = props.location.search;
     const catId = search.slice(search.indexOf('=') + 1);
     return (
@@ -14,4 +14,4 @@ function ProductFormBox(props) {
         </div>
     );
 }
-export default ProductFormBox
+export default ProductFormPage

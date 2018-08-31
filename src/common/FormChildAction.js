@@ -20,13 +20,18 @@ function FormChildAction(props) {
                 </Button>
         }
     }
-    return (
-        <div style={props.box}>
-            {isUpdateOrSave(props.isToUpdate)}
+    const backButton = () => {
+        return props.returnBack ?
             <Button variant="contained" color="secondary"
                 onClick={() => props.returnBack()}>
                 Back
             </Button>
+            : '';
+    }
+    return (
+        <div style={props.box}>
+            {isUpdateOrSave(props.isToUpdate)}
+            {backButton()}
         </div>
     )
 }

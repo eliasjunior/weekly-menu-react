@@ -1,4 +1,4 @@
-import { AppConstant } from "./common/AppConstant";
+import { AppConstant } from "../../common/AppConstant";
 const CategoryDisplayService = {
     recipeSelectionBtn(page) {
         return {
@@ -7,7 +7,7 @@ const CategoryDisplayService = {
     },
     categoryBtns(page) {
         return {
-            display: page === AppConstant.PATH.PRODUCTS || page === AppConstant.PATH.NEW_RECIPE
+            display: page === AppConstant.PATH.DEFAULT_ROUTE || page === AppConstant.PATH.NEW_RECIPE
         }
     },
     productCheckBtn(page) {
@@ -17,9 +17,14 @@ const CategoryDisplayService = {
     },
     crudActions(page) {
         return {
-            display: page === AppConstant.PATH.PRODUCTS || page === AppConstant.PATH.PRODUCTS_CREATE
+            display: page === AppConstant.PATH.DEFAULT_ROUTE 
         }
     },
+    categoryNewBtn(page) {
+        return {
+            display: page === AppConstant.PATH.DEFAULT_ROUTE
+        }
+    }
     
 }
 export default CategoryDisplayService;

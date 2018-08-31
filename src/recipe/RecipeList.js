@@ -3,15 +3,15 @@
  */
 import React from 'react';
 import {RecipeItem} from './RecipeItem'
-
 import List from "@material-ui/core/List";
 
+// DELETE if not using,
 export const RecipeList = (props) => {
     return  (
         <List>
             {props
-                .recipeList
-                .map((recipe, id) => <RecipeItem key={id} {...recipe} type={props.type} /> )
+                .recipes
+                .map((recipe, index) => <RecipeItem key={index} {...recipe} type={props.type} /> )
             }
         </List>
     )

@@ -6,6 +6,12 @@ import { Menu } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import { Link } from "react-router-dom";
 
+// TODO, later, generate the MenuItem dynamic, need to finish in AppConstants too
+// const getItemsForSideMenu = () => {
+//     return Object
+//         .entries(AppConstant.LABEL)
+//         .map(item => item[1])
+// };
 
 class MenuIconComponent extends React.Component {
     constructor(props) {
@@ -59,10 +65,10 @@ class MenuIconComponent extends React.Component {
                         <Link to={AppConstant.PATH.NEW_RECIPE}>{AppConstant.LABEL.NEW_RECIPE}</Link>
                     </MenuItem>
                     <MenuItem onClick={this.onDisplayClose}>
-                        <Link to={AppConstant.PATH.SHOPPING}>{AppConstant.LABEL.SHOPPING}</Link>
+                        <Link to={AppConstant.PATH.RECIPE_LIST}>{AppConstant.LABEL.RECIPE_LIST}</Link>
                     </MenuItem>
                     <MenuItem onClick={this.onDisplayClose}>
-                        <Link to={AppConstant.PATH.PRODUCTS}>{AppConstant.LABEL.PRODUCTS}</Link>
+                        <Link to={AppConstant.PATH.SHOPPING}>{AppConstant.LABEL.SHOPPING}</Link>
                     </MenuItem>
                 </Menu>
             </div>

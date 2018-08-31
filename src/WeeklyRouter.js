@@ -2,35 +2,37 @@ import React from 'react';
 import {Route } from 'react-router-dom'
 import MenuPage from './recipe/menu/MenuPage';
 import RecipePage from './recipe/recipe-page/RecipePage';
-import RecipeListPage from './recipe/RecipeListPage'
-import ShoppingListPage from './inventory/ShoppingListPage';
+import RecipeListPage from './recipe/RecipeListPage';
+import RecipeListOLDPage from './recipe/RecipeListOLDPage';
+import ShoppingListPage from './inventory/shopping/ShoppingListPage';
 import InventoryPage from './inventory/InventoryPage';
-import ProductFormBox from './inventory/product/ProductFormBox';
+import ProductFormPage from './inventory/product/ProductFormPage';
 import { AppConstant } from './common/AppConstant';
 import { createMuiTheme } from '@material-ui/core/styles';
 import blue from '@material-ui/core/colors/blue';
 import cyan from '@material-ui/core/colors/cyan';
 import { MuiThemeProvider } from '@material-ui/core';
-import CategoryFormPage from './inventory/CategoryFormPage';
+import CategoryFormPage from './inventory/category/CategoryFormPage';
 
 const theme = createMuiTheme({
     palette: {
         primary: blue,
         secondary: cyan,
-    },
+    }
 });
 function WeeklyRouter() {
     return (
         <MuiThemeProvider theme={theme}>
             <div>
-                <Route exact path={AppConstant.PATH.DEFAULT_ROUTE} component={MenuPage}></Route>
+                <Route exact path="/Menu" component={MenuPage}></Route>
+                <Route path="/recipeOld" component={RecipeListOLDPage}></Route>
+                <Route exact path={AppConstant.PATH.DEFAULT_ROUTE} component={InventoryPage}></Route>
                 <Route path={AppConstant.PATH.RECIPE_LIST} component={RecipeListPage}></Route>
                 <Route path={AppConstant.PATH.SHOPPING} component={ShoppingListPage}></Route>
                 <Route path={AppConstant.PATH.NEW_RECIPE} component={RecipePage}></Route>
-                <Route path={AppConstant.PATH.PRODUCTS} component={InventoryPage}></Route>
-                <Route path={AppConstant.PATH.PRODUCTS_CREATE} component={ProductFormBox}></Route>
+                <Route path={AppConstant.PATH.PRODUCTS} component={ProductFormPage}></Route>
                 <Route 
-                    path={`${AppConstant.PATH.CATEGORY_CREATE}/:id`} 
+                    path={`${AppConstant.PATH.CATEGORY}/:id`} 
                     component={CategoryFormPage}>
                 </Route>
             </div>

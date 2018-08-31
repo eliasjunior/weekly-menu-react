@@ -1,10 +1,10 @@
 import React from 'react';
-import AppWeekBar from '../common/AppWeekBar';
+import AppWeekBar from '../../common/AppWeekBar';
 import CategoryForm from './CategoryForm';
 
 function CategoryFormPage(props) {
     // destrucring with default values, only for practice
-    const {match: {params: {id} = ''} = {}} = {} = props;
+    const {match: {params: {id} = ''} = {}} = props;
     const {location: {search}} = props;
     const name = search.slice(search.indexOf('=') + 1);
 

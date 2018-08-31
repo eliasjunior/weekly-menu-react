@@ -7,11 +7,14 @@ export const EditableLabel = (props) => {
         props.onChangeName(e.target.value)
     }
     const displayNameOrInput = () => {
+        const {name, secondaryLabel} = props;
         return props.editFieldMode ? 
             <TextField onChange={getEventChange} 
                 defaultValue={props.inputValue}>
             </TextField> :
-            <ListItemText inset={props.inset} primary={props.inputValue} >
+            <ListItemText 
+                primary={name}
+                secondary={secondaryLabel}>
             </ListItemText>
     }
     return (<div style={props.style}>{displayNameOrInput()}</div>)

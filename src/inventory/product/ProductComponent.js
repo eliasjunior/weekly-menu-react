@@ -5,7 +5,7 @@ import ProductService from './ProductService';
 import { EditableLabel } from '../../common/EditableLabel';
 import { CrudActions } from '../../common/CrudActions';
 import { ItemSelection } from '../../common/ItemSelection'; 
-import DisplayService  from '../../DisplayService';
+import DisplayService  from '../category/CategoryDisplayService';
 
 // TODO add new states here
 const factoryMode = (prevState, newState) => {
@@ -80,12 +80,14 @@ export class ProductComponent extends React.Component {
     }
     render() {
         return (
-            <ListItem key={this.state.product._id} >
+            <ListItem key={this.state.product._id}   >
                 {this.displayCheckBtn()} 
                 <EditableLabel
+                    product={this.props.product}
+                    name={this.props.product.name}
+                    secondaryLabel={this.props.product.categoryName}
                     inset={true}
                     editFieldMode={this.state.editFieldMode}
-                    inputValue={this.state.product.name}
                     onChangeName={this.onChangeName}>
                 </EditableLabel>
                 <ListItemSecondaryAction>

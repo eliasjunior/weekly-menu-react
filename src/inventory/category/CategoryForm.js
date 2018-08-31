@@ -1,6 +1,6 @@
 import React from 'react';
 import { TextField } from '@material-ui/core';
-import FormChildAction from '../common/FormChildAction';
+import FormChildAction from '../../common/FormChildAction';
 import CategoryService from './CategoryService';
 
 const styles = {

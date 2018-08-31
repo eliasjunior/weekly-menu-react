@@ -1,32 +1,33 @@
 import React from "react";
-import {AppWeekBar} from "../common/AppWeekBar";
-import ApiService from "../service/ApiService";
-
-import {RecipeList} from './RecipeList'
+import { AppWeekBar } from "../common/AppWeekBar";
+import RecipeService from './RecipeService';
+import { CategoryList } from "../inventory/category/CategoryList";
 
 class RecipeListPage extends React.Component {
     constructor(props) {
         super(props);
-
         this.state = {
-            recipeList: []
+            recipes: []
         }
     }
-    componentDidMount = ()=> {
-        ApiService.get('recipe')
+    componentDidMount = () => {
+        RecipeService.get('recipe')
             .then(response => {
                 this.setState({
-                    recipeList: response
+                    recipes: response
                 });
             })
-            .catch(reason => {console.error(reason)});
+            .catch(reason => { console.error(reason) });
     }
     render() {
         return (
-                <div>
-                    <AppWeekBar title='Recipe List'></AppWeekBar>
-                    <RecipeList recipeList={this.state.recipeList} type="recipe_list"/>
-                </div>
+            <div>
+                <AppWeekBar title='Recipe List'></AppWeekBar>
+                <CategoryList
+                    list={this.state.recipes}
+                    location={this.state.location}>
+                </CategoryList>
+            </div>
         );
     }
 }

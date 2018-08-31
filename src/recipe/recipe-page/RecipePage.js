@@ -1,12 +1,20 @@
 import React from 'react';
 import { AppWeekBar } from "../../common/AppWeekBar";
 import ApiService from '../../service/ApiService';
-import { CategoryList } from '../../inventory/CategoryList';
-import { Button } from '@material-ui/core';
-import { EditableLabel } from '../../common/EditableLabel';
-import { CrudActions } from '../../common/CrudActions';
+import { CategoryList } from '../../inventory/category/CategoryList';
+import { Button, TextField } from '@material-ui/core';
 import MessageComponent from '../../common/MessageComponent';
+import FormChildAction from '../../common/FormChildAction';
 import RecipeService from '../RecipeService';
+
+const styles = {
+    box: {
+        margin: '10px'
+    },
+    input: {
+        margin: '10px'
+    }
+};
 
 const factoryMode = (prevState, newState) => {
     let {
@@ -28,18 +36,15 @@ class RecipePage extends React.Component {
             selectedProducts: [],
             name: ''
         };
-        this.updateName = this.updateName.bind(this);
         this.selectedProd = this.selectedProd.bind(this);
-        this.createRecipe = this.createRecipe.bind(this);
+        this.saveRecipe = this.saveRecipe.bind(this);
+        this.onChangeName = this.onChangeName.bind(this);
     }
     componentDidMount() {
         ApiService
             .get('v2/category')
             .then(categories => this.setState(() => ({ categories })))
             .catch(reason => this.setState({ message: reason }));
-    }
-    updateName(name) {
-        this.setState(prevState => factoryMode(prevState, { name }))
     }
     selectedProd(selected) {
         let selectedProducts = [...this.state.selectedProducts];
@@ -57,8 +62,10 @@ class RecipePage extends React.Component {
         }
         this.setState(prevState => factoryMode(prevState, { selectedProducts }));
     }
-    createRecipe(event) {
-        event.preventDefault();
+    onChangeName(e) {
+        this.setState({name: e.target.value});
+    }
+    saveRecipe() {
         const recipe = {
             name: this.state.name,
             products: this.state.selectedProducts
@@ -78,21 +85,17 @@ class RecipePage extends React.Component {
                     <MessageComponent
                         message={this.state.message}>
                     </MessageComponent>
-                    <Button variant="contained"
-                        onClick={this.createRecipe}>
-                        Create Recipe
-                    </Button>
-                    <div style={{ margin: '20px' }}>
-                        <EditableLabel
-                            inset={false}
-                            editFieldMode={true}
-                            onChangeName={this.updateName}>
-                        </EditableLabel>
-                        <CrudActions
-                            editFieldMode={true}
-                            updateName={this.updateName}>
-                        </CrudActions>
-                    </div>
+                    <TextField
+                        style={styles.input}
+                        defaultValue={this.state.name}
+                        label="Recipe name"
+                        onChange={this.onChangeName}>
+                    </TextField>
+                    <FormChildAction
+                        box={styles.input}
+                        updateAction={this.updateRecipe}
+                        saveAction={this.saveRecipe}>
+                    </FormChildAction>
                     <CategoryList
                         list={this.state.categories}
                         location={this.props.location.pathname}
@@ -102,8 +105,5 @@ class RecipePage extends React.Component {
         );
     }
 }
-// RecipePage.propTypes = {
-//     name: React.PropTypes.string.isRequired
-// }
 export default RecipePage
 

@@ -5,10 +5,12 @@
 
 
 ## Tasks, for priority sequence
-- Category Crud
-- Recipe List
+
+- Recipe
+ * List
+ * update
+
 - New Shopping list
-    simple task first,
     1 - just select and create list based on the products
     2 - add recipe, ignore repeated
 
@@ -35,6 +37,10 @@
     - Service 
         > filter only the data, service and component does not need to know the headers   
 
+- DONE Cru not delete
+- Category Crud
+- New Shopping list
+- Product Crud
 
 ### Backlog
   - Message Service

@@ -1,5 +1,5 @@
 import React from 'react';
-import CategoryList from './CategoryList';
+import CategoryList from './category/CategoryList';
 import ApiService from '../service/ApiService';
 import { AppWeekBar } from '../common/AppWeekBar';
 
