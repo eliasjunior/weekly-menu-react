@@ -29,7 +29,10 @@ function WeeklyRouter() {
                 <Route path={AppConstant.PATH.NEW_RECIPE} component={RecipePage}></Route>
                 <Route path={AppConstant.PATH.PRODUCTS} component={InventoryPage}></Route>
                 <Route path={AppConstant.PATH.PRODUCTS_CREATE} component={ProductFormBox}></Route>
-                <Route path={AppConstant.PATH.CATEGORY_CREATE} component={CategoryFormPage}></Route>
+                <Route 
+                    path={`${AppConstant.PATH.CATEGORY_CREATE}/:id`} 
+                    component={CategoryFormPage}>
+                </Route>
             </div>
         </MuiThemeProvider>
     );

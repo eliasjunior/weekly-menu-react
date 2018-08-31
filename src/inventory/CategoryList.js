@@ -22,7 +22,7 @@ export const CategoryList = (props) => {
     return (
         <div>
             <Button color="primary" variant="outlined">
-                <Link to={AppConstant.PATH.CATEGORY_CREATE}>New Category</Link>
+                <Link to={AppConstant.PATH.CATEGORY_CREATE+'/new_category_create'}>New Category</Link>
             </Button>
             <List>
                 {buildList(props.list)}

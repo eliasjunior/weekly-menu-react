@@ -39,7 +39,8 @@ class CategoryItem extends React.Component {
             .categoryBtns(this.state.location).display ?
             <ListItemSecondaryAction>
                 <CategoryActions
-                    catId={this.props._id}>
+                    name={this.props.name}
+                    id={this.props._id}>
                 </CategoryActions>
             </ListItemSecondaryAction> : ''
     }

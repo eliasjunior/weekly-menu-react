@@ -1,22 +1,22 @@
 import React from 'react';
 import TextField from "@material-ui/core/TextField";
-import Button from '@material-ui/core/Button';
+import FormChildAction from '../../common/FormChildAction';
 import ProductService from './ProductService';
 import MessageComponent from '../../common/MessageComponent';
 
 const SUCCESS_TYPE = 'S';
 const styles = {
-    button: {
-        margin: '2px'
-    },
     form: {
         marginLeft: '20px'
     },
     nameField: {
         marginTop: '20px'
     },
-    buttonBox: {
-        marginTop: '20px'
+    box: {
+        margin: '10px'
+    },
+    actionBtn: {
+        marginTop: '10px'
     }
 }
 class ProductForm extends React.Component {
@@ -62,16 +62,11 @@ class ProductForm extends React.Component {
                         label="Product name"
                         onChange={this.changeProduct}>
                     </TextField>
-                    <div style={styles.buttonBox}>
-                        <Button style={styles.button} variant="contained" color="primary"
-                            onClick={this.saveProduct}>
-                            Save
-                        </Button>
-                        <Button style={styles.button} variant="contained" color="secondary"
-                            onClick={ () => this.props.returnProdList()}>
-                            Back
-                        </Button>
-                    </div>
+                    <FormChildAction 
+                        box={styles.actionBtn} 
+                        saveAction={this.saveProduct}
+                        returnBack={this.props.returnProdList}>
+                    </FormChildAction>
                 </form>
             </div>
         );

@@ -1,15 +1,22 @@
 import React from 'react';
+import AppWeekBar from '../common/AppWeekBar';
+import CategoryForm from './CategoryForm';
 
+function CategoryFormPage(props) {
+    // destrucring with default values, only for practice
+    const {match: {params: {id} = ''} = {}} = {} = props;
+    const {location: {search}} = props;
+    const name = search.slice(search.indexOf('=') + 1);
 
-export default class CategoryFormPage extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
+    return (
         <div>
             <AppWeekBar title="New Category"></AppWeekBar>
-            <CategoryForm></CategoryForm>
+            <CategoryForm 
+                returnProdList={props.history.goBack} 
+                id={id} 
+                name={name}>
+            </CategoryForm>
         </div>
-    }
+    )
 }
+export default CategoryFormPage

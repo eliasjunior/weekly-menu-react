@@ -7,7 +7,11 @@ export const CategoryActions = (props) => {
     const buttons = (
         <div>
             <Button color="primary">
-                <Link to={AppConstant.PATH.PRODUCTS_CREATE+'?id='+props.catId}>New Product</Link>
+                <Link to={AppConstant.PATH.CATEGORY_CREATE +'/'+ props.id + '?name=' + props.name}>Edit</Link>
+            </Button>
+            
+            <Button color="primary">
+                <Link to={AppConstant.PATH.PRODUCTS_CREATE + '?id=' + props.id}>New Product</Link>
             </Button>
         </div>
     )
