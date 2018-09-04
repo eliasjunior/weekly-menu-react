@@ -24,14 +24,20 @@ class ProductForm extends React.Component {
         super(props);
         this.state = {
             name: '',
-            message: null,
-            _creator: props.catId
+            message: null
         };
         this.saveProduct = this.saveProduct.bind(this);
         this.changeProduct = this.changeProduct.bind(this);
     }
     saveProduct() {
-        ProductService.save(this.state)
+        const productPayLoad = {
+            product: {
+                name: this.state.name,
+                insertDate: new Date()
+            },
+            category: this.props.category
+        }
+        ProductService.save(productPayLoad)
             .then(doc => {
                 console.log('Product created', doc)
                 this.setState({

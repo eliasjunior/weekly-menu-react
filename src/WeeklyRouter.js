@@ -1,9 +1,7 @@
 import React from 'react';
 import {Route } from 'react-router-dom'
-import MenuPage from './recipe/menu/MenuPage';
 import RecipePage from './recipe/recipe-page/RecipePage';
 import RecipeListPage from './recipe/RecipeListPage';
-import RecipeListOLDPage from './recipe/RecipeListOLDPage';
 import ShoppingListPage from './inventory/shopping/ShoppingListPage';
 import InventoryPage from './inventory/InventoryPage';
 import ProductFormPage from './inventory/product/ProductFormPage';
@@ -24,8 +22,6 @@ function WeeklyRouter() {
     return (
         <MuiThemeProvider theme={theme}>
             <div>
-                <Route exact path="/Menu" component={MenuPage}></Route>
-                <Route path="/recipeOld" component={RecipeListOLDPage}></Route>
                 <Route exact path={AppConstant.PATH.DEFAULT_ROUTE} component={InventoryPage}></Route>
                 <Route path={AppConstant.PATH.RECIPE_LIST} component={RecipeListPage}></Route>
                 <Route path={AppConstant.PATH.SHOPPING} component={ShoppingListPage}></Route>

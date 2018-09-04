@@ -1,7 +1,6 @@
 import React from 'react';
 import {AppWeekBar} from '../../common/AppWeekBar';
 import ApiService from '../../service/ApiService';
-import {RecipeList} from '../RecipeList';
 
 class MenuPage extends React.Component {
     constructor(props) {
@@ -21,7 +20,6 @@ class MenuPage extends React.Component {
         return(
                 <div>
                     <AppWeekBar title="Menu"></AppWeekBar>
-                    <RecipeList recipeList={this.state.recipeItemList} type="recipe_menu" />
                 </div>
         )
     }

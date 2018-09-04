@@ -3,11 +3,14 @@
  */
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import injectTapEventPlugin from 'react-tap-event-plugin';
-injectTapEventPlugin();
 
 const baseUrl = 'https://week-menu-api.herokuapp.com/';
 const mock = new MockAdapter(axios);
+
+
+import { configure } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+configure({ adapter: new Adapter() });
 
 const fakeIngredients = [{name: 'ingred name 2', _id: '123', attributes: [{name: 'attr', _id: '2'}]}];
 

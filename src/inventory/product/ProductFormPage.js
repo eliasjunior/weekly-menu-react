@@ -4,11 +4,20 @@ import ProductForm from './ProductForm';
 
 function ProductFormPage(props) {
     const search = props.location.search;
-    const catId = search.slice(search.indexOf('=') + 1);
+    const params = search
+        .slice(search.indexOf('?') + 1)
+        .split('&')
+        .reduce( (acc, item) => {
+            const key = item.slice(0, item.indexOf('='));
+            const value = item.slice(item.indexOf('=') + 1);
+            acc[key] = value
+            return acc;
+        }, {} )
     return (
         <div>
             <AppWeekBar title='New Product'></AppWeekBar>
-            <ProductForm catId={catId} 
+            <ProductForm 
+                category={params} 
                 returnProdList={props.history.goBack}>
             </ProductForm>
         </div>

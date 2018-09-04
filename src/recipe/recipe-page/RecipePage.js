@@ -2,10 +2,12 @@ import React from 'react';
 import { AppWeekBar } from "../../common/AppWeekBar";
 import ApiService from '../../service/ApiService';
 import { CategoryList } from '../../inventory/category/CategoryList';
-import { Button, TextField } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
 import MessageComponent from '../../common/MessageComponent';
 import FormChildAction from '../../common/FormChildAction';
 import RecipeService from '../RecipeService';
+import RecipeCollectionService from '../RecipeCollectionService';
+import CategoryService from '../../inventory/category/CategoryService';
 
 const styles = {
     box: {
@@ -41,25 +43,26 @@ class RecipePage extends React.Component {
         this.onChangeName = this.onChangeName.bind(this);
     }
     componentDidMount() {
-        ApiService
-            .get('v2/category')
+        CategoryService
+            .get()
             .then(categories => this.setState(() => ({ categories })))
             .catch(reason => this.setState({ message: reason }));
     }
     selectedProd(selected) {
+        // need to receice a category selected
+        console.log('SELE >>>>>', selected)
         let selectedProducts = [...this.state.selectedProducts];
-        const productSelected = {
-            name: selected.name,
-            _creator: selected.parentId,
-            categoryName: selected.parentName
-        };
-        const isProdIn = selectedProducts.find(prod => prod.name === productSelected.name);
+        const category = selected.category;
+        const product = selected.product;
 
-        if (selected.checked && !isProdIn) {
-            selectedProducts.push(productSelected);
-        } else if (isProdIn) {
-            selectedProducts = selectedProducts.filter(prod => prod.name !== productSelected.name);
+        if(selected.checked) {
+            selectedProducts = RecipeCollectionService.addItem({category, product}, selectedProducts)
+        } else {
+            selectedProducts = RecipeCollectionService.removeItem({category, product}, selectedProducts)
         }
+
+        console.log('selectedProducts *****', selectedProducts)
+        
         this.setState(prevState => factoryMode(prevState, { selectedProducts }));
     }
     onChangeName(e) {
@@ -68,7 +71,9 @@ class RecipePage extends React.Component {
     saveRecipe() {
         const recipe = {
             name: this.state.name,
-            products: this.state.selectedProducts
+            insertDate: new Date(),
+            updateDate: new Date(),
+            categories: this.state.selectedProducts
         };
         RecipeService
             .save(recipe)

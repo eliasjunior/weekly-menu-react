@@ -9,9 +9,8 @@ export const AppConstant =  {
     },
     LABEL: {
         SHOPPING: 'New Shopping List',
-        PRODUCTS: 'Products',
         NEW_RECIPE: 'New Recipe',
-        HOME: 'Home',
+        HOME: 'Products',
         RECIPE_LIST: 'Recipe List'
     },
     // TODO

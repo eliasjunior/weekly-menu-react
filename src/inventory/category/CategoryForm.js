@@ -76,7 +76,7 @@ export default class CategoryForm extends React.Component {
                     </TextField>
                     <FormChildAction
                         box={styles.actionBtn}
-                        isToUpdate={!isNewCategory(this.props.name)}
+                        isToUpdate={!isNewCategory(this.props.id)}
                         updateAction={this.updateCategory}
                         saveAction={this.saveCategory}
                         returnBack={this.props.returnProdList}>

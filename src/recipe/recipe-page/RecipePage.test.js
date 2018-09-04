@@ -1,23 +1,9 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import RecipeComponent from './RecipeComponent';
+import RecipeComponent from './RecipePage';
 import { shallow } from 'enzyme';
-import RecipeForm from './RecipeForm';
 
-describe("RecipeComponent", () => {
-
+describe("RecipePage", () => {
     it("should load component", () => {
-        const div = document.createElement('div');
-        ReactDOM.render(<RecipeComponent recipeId='1' />, div);
+        shallow(<RecipeComponent location={{pathname: ''}} recipeId='1' />);
     });
-
-    it('should component has an recipe id', () => {
-
-		const wrapper = shallow(<RecipeComponent recipeId='1' />);
-
-		const props = wrapper.instance().props;
-
-		expect(props.recipeId).toEqual('1')
-    });
-
 });

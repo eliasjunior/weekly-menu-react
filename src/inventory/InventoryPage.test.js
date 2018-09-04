@@ -1,12 +1,15 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import InventoryPage from './InventoryPage'
+import InventoryPage from './InventoryPage';
+import { shallow } from 'enzyme';
 
-describe("", () => {
+describe("Inventory Page", () => {
 
     it("should load component", () => {
-        const div = document.createElement('div');
-        ReactDOM.render(<InventoryPage/>, div);
+        // const div = document.createElement('div');
+        // ReactDOM.render(<InventoryPage/>, div);
+        const pathname = {}
+        shallow(<InventoryPage location={pathname} />);
+
     });
 
 });

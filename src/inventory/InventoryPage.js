@@ -1,7 +1,7 @@
 import React from 'react';
 import CategoryList from './category/CategoryList';
-import ApiService from '../service/ApiService';
 import { AppWeekBar } from '../common/AppWeekBar';
+import CategoryService from './category/CategoryService';
 
 class InventoryComponent extends React.Component {
     constructor(props) {
@@ -13,8 +13,8 @@ class InventoryComponent extends React.Component {
         }
     }
     componentDidMount() {
-        ApiService
-            .get('v2/category')
+        CategoryService
+            .get()
             .then(categories => this.setState(() => ({ categories })))
             .catch(reason => this.setState({ message: reason }));
     }

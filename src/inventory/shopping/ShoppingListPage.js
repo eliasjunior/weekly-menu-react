@@ -1,8 +1,8 @@
 import React from 'react';
 import CategoryList from '../category/CategoryList';
 import { AppWeekBar } from '../../common/AppWeekBar';
-import ApiService from '../../service/ApiService';
 import { ShoppingCreateActions } from './ShoppingCreateActions';
+import CategoryService from '../category/CategoryService';
 
 const factoryMode = (prevState, newState) => {
     let {
@@ -25,8 +25,8 @@ class ShoppingListComponent extends React.Component {
     }
     componentDidMount() {
         //this is the created list -> category/week/shopping 
-        ApiService
-            .get('v2/category')
+        CategoryService
+            .get()
             .then(categories => this.setState(() => ({ categories })))
             .catch(reason => this.setState({ message: reason }));
     }

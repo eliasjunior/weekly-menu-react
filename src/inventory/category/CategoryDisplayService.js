@@ -12,19 +12,25 @@ const CategoryDisplayService = {
     },
     productCheckBtn(page) {
         return {
-            display: page === AppConstant.PATH.SHOPPING || page === AppConstant.PATH.NEW_RECIPE
+            display: page === AppConstant.PATH.SHOPPING ||
+                page === AppConstant.PATH.NEW_RECIPE
         }
     },
     crudActions(page) {
         return {
-            display: page === AppConstant.PATH.DEFAULT_ROUTE 
+            display: page === AppConstant.PATH.DEFAULT_ROUTE
         }
     },
     categoryNewBtn(page) {
         return {
             display: page === AppConstant.PATH.DEFAULT_ROUTE
         }
+    },
+    productSecondaryLabel(page) {
+        return {
+            display: page === AppConstant.PATH.RECIPE_LIST
+        }
     }
-    
+
 }
 export default CategoryDisplayService;

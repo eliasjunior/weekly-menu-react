@@ -16,12 +16,18 @@ const factoryMode = (prevState, newState) => {
         editFieldMode: newState.editFieldMode === false ? false : true
     }
 }
+const getSecondaryLabel = (page, categoryName) => {
+    return DisplayService.productSecondaryLabel(page).display ? 
+        categoryName
+        : ''
+}
 export class ProductComponent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             product: props.product,
-            editFieldMode: false
+            editFieldMode: false,
+            newProductName: props.product.name
         }
         this.onChangeName = this.onChangeName.bind(this);
         this.deleteItem = this.deleteItem.bind(this);
@@ -36,13 +42,18 @@ export class ProductComponent extends React.Component {
         this.setState(prevState => factoryMode(prevState, newState));
     };
     updateName() {
-        const newState = {
-            editFieldMode: !this.state.editFieldMode,
-        };
+        const productPayLoad = {
+            product: this.state.product,
+            category: this.props.category
+        }
         ProductService
-            .update(this.state.product)
-            .then(() => this.setState(prevState => factoryMode(prevState, newState)))
-            .catch(reason => console.error(reason));
+            .update(productPayLoad)
+            .then(() => {
+                const newState = {
+                    editFieldMode: !this.state.editFieldMode,
+                };
+                this.setState(prevState => factoryMode(prevState, newState));
+            }).catch(reason => console.error(reason));
     }
     onChangeName(name) {
         const newState = {
@@ -54,13 +65,13 @@ export class ProductComponent extends React.Component {
         this.props.onSelectionProd(itemProps);
     }
     displayCheckBtn() {
+        // TODO check names, it will be generic or cat/prod
         return DisplayService.productCheckBtn(this.props.location).display ?
             <ItemSelection
                 onChangeSelection={this.selectedProd}
                 selected={this.state.product.selected}
-                name={this.state.product.name}
-                parentName={this.props.categoryName}
-                parentId={this.props.product._creator}>
+                product={this.state.product}
+                parent={this.props.category}>
             </ItemSelection>
             : ''
     }
@@ -85,7 +96,7 @@ export class ProductComponent extends React.Component {
                 <EditableLabel
                     product={this.props.product}
                     name={this.props.product.name}
-                    secondaryLabel={this.props.product.categoryName}
+                    secondaryLabel={getSecondaryLabel(this.props.location, this.props.category.name)}
                     inset={true}
                     editFieldMode={this.state.editFieldMode}
                     onChangeName={this.onChangeName}>

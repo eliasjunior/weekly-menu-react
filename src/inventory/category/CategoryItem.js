@@ -20,18 +20,26 @@ class CategoryItem extends React.Component {
         this.selectionProd = this.selectionProd.bind(this);
     }
     listProducts() {
-        const products = this.props.ingredients ? this.props.ingredients : this.props.products;
-
-        const productListView = (ingredient) => {
-            return <ProductComponent
-                key={ingredient._id}
-                product={ingredient}
-                categoryName={this.props.name}
-                location={this.state.location}
-                onSelectionProd={this.selectionProd}>
-            </ProductComponent>;
+        const category = {
+            name: this.props.category.name,
+            _id: this.props.category._id
         };
-        return products.map(productListView);
+        const products = this.props.category.products;
+
+        if(products.length) {
+            const productListView = (product) => {
+                return <ProductComponent
+                    key={product._id}
+                    category={category}
+                    product={product}
+                    location={this.props.location}
+                    onSelectionProd={this.selectionProd}>
+                </ProductComponent>;
+            };
+            return products.map(productListView);
+        } else {
+            return ''
+        }
     }
     selectionProd(selected) {
         this.props.onSelectedProd(selected);
@@ -41,8 +49,8 @@ class CategoryItem extends React.Component {
             .categoryBtns(this.state.location).display ?
             <ListItemSecondaryAction>
                 <CategoryActions
-                    name={this.props.name}
-                    id={this.props._id}>
+                    name={this.props.category.name}
+                    id={this.props.category._id}>
                 </CategoryActions>
             </ListItemSecondaryAction> : ''
     }
@@ -51,8 +59,8 @@ class CategoryItem extends React.Component {
             <div>
                 <ListItem 
                     style={{ backgroundColor: grey[300] }}
-                    key={this.props._id}>
-                    <ListItemText primary={this.props.name} ></ListItemText>
+                    key={this.props.category._id}>
+                    <ListItemText primary={this.props.category.name} ></ListItemText>
                     {this.categoryButtons()}
                 </ListItem>
                 <Collapse in={true} timeout="auto" unmountOnExit>

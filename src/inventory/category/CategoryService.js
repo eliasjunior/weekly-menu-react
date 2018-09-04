@@ -7,6 +7,12 @@ const CategoryService = {
     save(category) {
         return ApiService.post('v2/category', category);
     },
+    get() {
+        return ApiService.get('v2/category');
+    },
+    getOne(id) {
+        return ApiService.get(`v2/category${id}`);
+    },
     delete() {
 
     }

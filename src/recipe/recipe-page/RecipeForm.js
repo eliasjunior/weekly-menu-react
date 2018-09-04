@@ -1,5 +1,5 @@
 import React from 'react';
-import TextField from "material-ui/TextField";
+import { TextField } from '@material-ui/core';
 import FormChildAction from '../../common/FormChildAction';
 
 const styles = {
@@ -10,6 +10,9 @@ const styles = {
         marginTop: '10px'
     }
 }
+const isNewCategory = () => {
+    
+}
 class RecipeForm extends React.Component {
     constructor(props) {
         super(props);
@@ -18,16 +21,21 @@ class RecipeForm extends React.Component {
         this.updateRecipe = this.updateRecipe.bind(this);
         this.saveRecipe = this.saveRecipe.bind(this);
     }
+    onChangeName() {
 
+    }
+    updateRecipe() {
+
+    }
     saveRecipe() {
-    
+
     }
     render () {
         return (
             <div>
                 <form style={styles.box}>
                     <TextField
-                        defaultValue={this.state.name}
+                        defaultValue={this.props.name}
                         label="Recipe name"
                         onChange={this.onChangeName}>
                     </TextField>

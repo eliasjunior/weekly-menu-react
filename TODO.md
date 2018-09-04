@@ -6,9 +6,10 @@
 
 ## Tasks, for priority sequence
 
+- Product List
+  Update category name, need to update props(child) 
 - Recipe
- * List
- * update
+ * update, name and prods
 
 - New Shopping list
     1 - just select and create list based on the products
@@ -41,6 +42,8 @@
 - Category Crud
 - New Shopping list
 - Product Crud
+- Recipe
+ * List
 
 ### Backlog
   - Message Service

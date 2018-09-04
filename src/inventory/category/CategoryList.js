@@ -14,7 +14,7 @@ export const CategoryList = (props) => {
         }
         return list.map((category, index) => {
             return <CategoryItem
-                key={index} {...category}
+                key={index} category={{...category}}
                 location={props.location}
                 onSelectedProd={props.onSelectedProd}>
             </CategoryItem>;
