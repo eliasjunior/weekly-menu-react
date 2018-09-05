@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import RecipePage from './recipe/recipe-page/RecipePage';
 import RecipeListPage from './recipe/RecipeListPage';
 import ShoppingListPage from './inventory/shopping/ShoppingListPage';
@@ -25,12 +25,19 @@ function WeeklyRouter() {
                 <Route exact path={AppConstant.PATH.DEFAULT_ROUTE} component={InventoryPage}></Route>
                 <Route path={AppConstant.PATH.RECIPE_LIST} component={RecipeListPage}></Route>
                 <Route path={AppConstant.PATH.SHOPPING} component={ShoppingListPage}></Route>
-                <Route path={AppConstant.PATH.NEW_RECIPE} component={RecipePage}></Route>
                 <Route path={AppConstant.PATH.PRODUCTS} component={ProductFormPage}></Route>
                 <Route 
                     path={`${AppConstant.PATH.CATEGORY}/:id`} 
                     component={CategoryFormPage}>
                 </Route>
+                <Switch>
+                    <Route 
+                        path={`${AppConstant.PATH.NEW_RECIPE}/:id`} component={RecipePage}>
+                    </Route>
+                    <Route 
+                        path={AppConstant.PATH.NEW_RECIPE} component={RecipePage}>
+                    </Route>
+                </Switch>
             </div>
         </MuiThemeProvider>
     );

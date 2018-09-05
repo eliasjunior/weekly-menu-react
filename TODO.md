@@ -6,10 +6,9 @@
 
 ## Tasks, for priority sequence
 
-- Product List
-  Update category name, need to update props(child) 
-- Recipe
- * update, name and prods
+- Sub Documents Cat/Product List
+  Update, trigger
+
 
 - New Shopping list
     1 - just select and create list based on the products
@@ -38,12 +37,13 @@
     - Service 
         > filter only the data, service and component does not need to know the headers   
 
-- DONE Cru not delete
+## DONE Cru not delete
 - Category Crud
 - New Shopping list
 - Product Crud
 - Recipe
  * List
+ * update, name and prods
 
 ### Backlog
   - Message Service

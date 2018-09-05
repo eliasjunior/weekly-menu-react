@@ -36,7 +36,7 @@ class RecipeListPage extends React.Component {
                     <div style={{padding: '10px'}}>
                         <CategoryList
                             list={recipe.categories}
-                            location={this.props.location.pathname}
+                            parentComponent="RecipeListPage"
                             onSelectedProd={this.selectedProd}>
                         </CategoryList>
                     </div>

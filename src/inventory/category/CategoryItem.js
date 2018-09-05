@@ -13,11 +13,9 @@ import DisplayService from './CategoryDisplayService';
 class CategoryItem extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            location: props.location
-        }
         this.listProducts = this.listProducts.bind(this);
         this.selectionProd = this.selectionProd.bind(this);
+        
     }
     listProducts() {
         const category = {
@@ -32,7 +30,7 @@ class CategoryItem extends React.Component {
                     key={product._id}
                     category={category}
                     product={product}
-                    location={this.props.location}
+                    parentComponent={this.props.parentComponent}
                     onSelectionProd={this.selectionProd}>
                 </ProductComponent>;
             };
@@ -46,7 +44,7 @@ class CategoryItem extends React.Component {
     }
     categoryButtons() {
         return DisplayService
-            .categoryBtns(this.state.location).display ?
+            .categoryBtns(this.props.parentComponent).display ?
             <ListItemSecondaryAction>
                 <CategoryActions
                     name={this.props.category.name}

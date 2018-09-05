@@ -1,8 +1,8 @@
 export const AppConstant =  {
     PATH: {
         RECIPE_LIST : '/recipe',
-        NEW_RECIPE: '/recipeCreate',
-        SHOPPING: '/shopping',
+        NEW_RECIPE: '/recipeCreate/new',
+        SHOPPING: '/shopping', 
         CATEGORY: '/category',
         PRODUCTS: '/product',
         DEFAULT_ROUTE: '/'
@@ -14,8 +14,14 @@ export const AppConstant =  {
         RECIPE_LIST: 'Recipe List'
     },
     // TODO
-    ROUTE : {
+    ROUTE: {
         RECIPE_LIST: {PATH: '/recipe', LABEL: 'Recipe List'},
         RECIPE: {PATH: '/recipeCreate', LABEL: 'New Recipe'}
+    },
+    PARENT_COMPONENT: {
+        RECIPE_PAGE: 'RecipePage',
+        RECIPE_LIST_PAGE: 'RecipeListPage',
+        SHOPPING_LIST_PAGE: 'ShoppingListPage',
+        INVENTORY_PAGE: 'InventoryPage'
     }
 }

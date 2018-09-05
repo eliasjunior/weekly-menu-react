@@ -3,8 +3,9 @@ import Checkbox from '@material-ui/core/Checkbox'
 
 export const ItemSelection = (props) => {
     const onChangeSelection = (e) => {
+        props.product.checked = e.target.checked;
         const itemProps = {
-            checked: e.target.checked,
+            checked: props.product.checked,
             product: props.product,
             category: props.parent
         }
@@ -12,9 +13,9 @@ export const ItemSelection = (props) => {
     }
     return (
         <div>
-            <Checkbox checked={props.selected}
+            <Checkbox checked={props.product.checked ? true : false}
                 onChange={onChangeSelection}
-                value={props.name}>
+                value={props.product.name}>
             </Checkbox>
         </div>
     )

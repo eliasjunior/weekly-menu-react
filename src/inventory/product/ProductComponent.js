@@ -16,11 +16,6 @@ const factoryMode = (prevState, newState) => {
         editFieldMode: newState.editFieldMode === false ? false : true
     }
 }
-const getSecondaryLabel = (page, categoryName) => {
-    return DisplayService.productSecondaryLabel(page).display ? 
-        categoryName
-        : ''
-}
 export class ProductComponent extends React.Component {
     constructor(props) {
         super(props);
@@ -66,17 +61,16 @@ export class ProductComponent extends React.Component {
     }
     displayCheckBtn() {
         // TODO check names, it will be generic or cat/prod
-        return DisplayService.productCheckBtn(this.props.location).display ?
+        return DisplayService.productCheckboxBtn(this.props.parentComponent).display ?
             <ItemSelection
                 onChangeSelection={this.selectedProd}
-                selected={this.state.product.selected}
                 product={this.state.product}
                 parent={this.props.category}>
             </ItemSelection>
             : ''
     }
     isActionButtonDisplay() {
-        return DisplayService.crudActions(this.props.location).display ?
+        return DisplayService.crudActions(this.props.parentComponent).display ?
             <CrudActions
                 deleteItem={this.deleteItem}
                 editFieldMode={this.state.editFieldMode}
@@ -96,7 +90,6 @@ export class ProductComponent extends React.Component {
                 <EditableLabel
                     product={this.props.product}
                     name={this.props.product.name}
-                    secondaryLabel={getSecondaryLabel(this.props.location, this.props.category.name)}
                     inset={true}
                     editFieldMode={this.state.editFieldMode}
                     onChangeName={this.onChangeName}>

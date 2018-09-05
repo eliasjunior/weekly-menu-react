@@ -29,7 +29,7 @@ const RecipeCollectionService = {
         // TODO deep copy here too  
         const cat = list
             .filter(cat => cat._id === item.category._id)
-            .pop();
+            [0];
 
         if (cat.products.length > 1) {
             cat.products =

@@ -10,6 +10,9 @@ const RecipeService = {
     get(){
         return ApiService.get('v2/recipe');
     },
+    getOne(id) {
+        return ApiService.get(`v2/recipe/${id}`);
+    },
     delete() {
 
     }

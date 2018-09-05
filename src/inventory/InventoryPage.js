@@ -8,8 +8,7 @@ class InventoryComponent extends React.Component {
         super(props);
         this.state = {
             categories: [],
-            message: '',
-            location: props.location.pathname
+            message: ''
         }
     }
     componentDidMount() {
@@ -24,7 +23,7 @@ class InventoryComponent extends React.Component {
                 <AppWeekBar title="Product List"></AppWeekBar>
                 <CategoryList
                     list={this.state.categories}
-                    location={this.state.location}>
+                    parentComponent="InventoryPage">
                 </CategoryList>
             </div>
         );

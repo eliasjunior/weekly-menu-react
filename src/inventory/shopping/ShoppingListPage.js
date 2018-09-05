@@ -54,7 +54,7 @@ class ShoppingListComponent extends React.Component {
                 </ShoppingCreateActions>
                 <CategoryList
                     list={this.state.categories}
-                    location={this.props.location.pathname}
+                    parentComponent="ShoppingListPage"
                     onSelectedProd={this.selectedProd}>
                 </CategoryList>
             </div>

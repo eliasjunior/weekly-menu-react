@@ -1,36 +1,32 @@
 import { AppConstant } from "../../common/AppConstant";
+
 const CategoryDisplayService = {
-    recipeSelectionBtn(page) {
+    recipeSelectionBtn(parentComponent) {
         return {
-            display: page === AppConstant.PATH.SHOPPING
+            display: parentComponent === AppConstant.PARENT_COMPONENT.SHOPPING_LIST_PAGE
         }
     },
-    categoryBtns(page) {
+    categoryBtns(parentComponent) {
         return {
-            display: page === AppConstant.PATH.DEFAULT_ROUTE || page === AppConstant.PATH.NEW_RECIPE
+            display: parentComponent === AppConstant.PARENT_COMPONENT.INVENTORY_PAGE 
+                || parentComponent === AppConstant.PARENT_COMPONENT.RECIPE_PAGE
         }
     },
-    productCheckBtn(page) {
+    productCheckboxBtn(parentComponent) {
         return {
-            display: page === AppConstant.PATH.SHOPPING ||
-                page === AppConstant.PATH.NEW_RECIPE
+            display: parentComponent === AppConstant.PARENT_COMPONENT.SHOPPING_LIST_PAGE ||
+            parentComponent === AppConstant.PARENT_COMPONENT.RECIPE_PAGE
         }
     },
-    crudActions(page) {
+    crudActions(parentComponent) {
         return {
-            display: page === AppConstant.PATH.DEFAULT_ROUTE
+            display: parentComponent === AppConstant.PARENT_COMPONENT.INVENTORY_PAGE
         }
     },
-    categoryNewBtn(page) {
+    categoryNewBtn(parentComponent) {
         return {
-            display: page === AppConstant.PATH.DEFAULT_ROUTE
-        }
-    },
-    productSecondaryLabel(page) {
-        return {
-            display: page === AppConstant.PATH.RECIPE_LIST
+            display: parentComponent === AppConstant.PARENT_COMPONENT.INVENTORY_PAGE
         }
     }
-
 }
 export default CategoryDisplayService;

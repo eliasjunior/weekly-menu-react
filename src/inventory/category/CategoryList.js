@@ -15,15 +15,18 @@ export const CategoryList = (props) => {
         return list.map((category, index) => {
             return <CategoryItem
                 key={index} category={{...category}}
-                location={props.location}
+                parentComponent={props.parentComponent}
                 onSelectedProd={props.onSelectedProd}>
             </CategoryItem>;
         });
     }
     const isDisplayCatNewBtn = () => {
-        return CategoryDisplayService.categoryNewBtn(props.location).display ?
+        return CategoryDisplayService.categoryNewBtn(props.parentComponent).display ?
             <Button color="primary" variant="outlined">
-                <Link to={AppConstant.PATH.CATEGORY + '/new_category_create'}>New Category</Link>
+                <Link 
+                    to={AppConstant.PATH.CATEGORY + '/new_category_create'}>
+                    New Category
+                </Link>
             </Button>
             : ''
     }
