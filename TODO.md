@@ -6,10 +6,6 @@
 
 ## Tasks, for priority sequence
 
-- Sub Documents Cat/Product List
-  Update, trigger
-
-
 - New Shopping list
     1 - just select and create list based on the products
     2 - add recipe, ignore repeated
@@ -44,6 +40,9 @@
 - Recipe
  * List
  * update, name and prods
+
+- Sub Documents Cat/Product List
+  Update, trigger
 
 ### Backlog
   - Message Service

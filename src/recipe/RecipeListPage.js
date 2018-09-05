@@ -27,13 +27,16 @@ class RecipeListPage extends React.Component {
         console.log(selected)
     }
     buildRecipeList() {
+        // TODO style here
         return this.state.recipes.map((recipe, index) => {
             return (
-                <div key={index}>
-                    <Button variant="outlined" >
-                        <Link to={`${AppConstant.PATH.NEW_RECIPE}/${recipe._id}`}>{recipe.name}</Link>
-                    </Button>
-                    <div style={{padding: '10px'}}>
+                <div key={index} style={{ marginLeft: '5px' }}>
+                    <div style={{ background: '#70ed416b' }}>
+                        <Button variant="outlined" >
+                            <Link to={`${AppConstant.PATH.NEW_RECIPE}/${recipe._id}`}>{recipe.name}</Link>
+                        </Button>
+                    </div>
+                    <div style={{ padding: '10px' }}>
                         <CategoryList
                             list={recipe.categories}
                             parentComponent="RecipeListPage"
