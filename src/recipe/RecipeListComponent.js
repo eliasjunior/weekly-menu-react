@@ -4,7 +4,6 @@ import { RecipeHeaderItem } from './RecipeHeaderItem';
 import { CategoryList } from '../inventory/category/CategoryList';
 import PropTypes from 'prop-types';
 
-
 export const RecipeListComponent = (props) => {
     const buildRecipeList = () => {
         if (props.recipes.length) {
@@ -16,12 +15,13 @@ export const RecipeListComponent = (props) => {
                                 recipe={recipe}
                                 isNotEditable={props.isNotEditable}
                                 isRecipeNotSelectable={props.isRecipeNotSelectable}
-                                onSelectAction={props.onSelectAction}>
+                                onSelectRecipe={props.onSelectRecipe}>
                             </RecipeHeaderItem>
                         </List>
                         <CategoryList
                             list={recipe.categories}
-                            parentComponent="RecipeListPage">
+                            onSelectedProd={props.onSelectedProd}
+                            parentComponent={props.parentComponent}>
                         </CategoryList>
                         <Divider></Divider>
                     </div>)
@@ -29,7 +29,9 @@ export const RecipeListComponent = (props) => {
         } else {
             return ''
         }
+
     }
+    // TODO do like in category, add to a service
     const isTitleDisplay = () => {
         if(props.title && props.recipes.length) {
             return  <h4>{props.title}</h4> 
@@ -48,5 +50,6 @@ export const RecipeListComponent = (props) => {
 RecipeListComponent.propTypes = {
     title: PropTypes.string,
     recipes: PropTypes.array,
-    onSelectAction: PropTypes.func
+    onSelectRecipe: PropTypes.func,
+    onSelectedProd: PropTypes.func
 }

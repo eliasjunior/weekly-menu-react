@@ -11,6 +11,9 @@ export const ItemSelection = (props) => {
         }
         props.onChangeSelection(itemProps);
     }
+    // function print() {
+    //     console.log('updated ' + props.product.name, props.product.checked)
+    // }
     return (
         <div>
             <Checkbox checked={props.product.checked ? true : false}

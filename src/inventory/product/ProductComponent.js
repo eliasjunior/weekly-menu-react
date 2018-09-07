@@ -62,7 +62,7 @@ export class ProductComponent extends React.Component {
     displayCheckBtn() {
         // TODO check names, it will be generic or cat/prod
         return DisplayService.productCheckboxBtn(this.props.parentComponent).display ?
-            <ItemSelection
+            <ItemSelection key={(new Date().getTime())}
                 onChangeSelection={this.selectedProd}
                 product={this.state.product}
                 parent={this.props.category}>

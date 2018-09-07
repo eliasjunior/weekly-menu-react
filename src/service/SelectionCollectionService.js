@@ -52,7 +52,6 @@ const SelectionCollectionService = {
         return result;
     },
     removeRecipe(recipeToBeRemoved, recipes) {
-        const result = [...recipes];
         return recipes.filter(rec => rec.name !== recipeToBeRemoved.name);
     }
 }

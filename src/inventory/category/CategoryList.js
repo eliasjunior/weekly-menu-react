@@ -15,7 +15,7 @@ export const CategoryList = (props) => {
         }
         return list.map((category, index) => {
             return <CategoryItem
-                key={index} category={{...category}}
+                key={index +'-'+(new Date().getTime())} category={{...category}}
                 parentComponent={props.parentComponent}
                 onSelectedProd={props.onSelectedProd}>
             </CategoryItem>;

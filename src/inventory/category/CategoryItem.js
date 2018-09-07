@@ -27,7 +27,7 @@ class CategoryItem extends React.Component {
         if(products.length) {
             const productListView = (product) => {
                 return <ProductComponent
-                    key={product._id}
+                    key={product._id+'-'+(new Date().getTime())}
                     category={category}
                     product={product}
                     parentComponent={this.props.parentComponent}

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import { AppConstant } from '../common/AppConstant';
 import { Button, ListItem, Checkbox, ListItemText, ListItemSecondaryAction } from "@material-ui/core";
+import PropTypes from 'prop-types';
 
 export const RecipeHeaderItem = (props) => {
     const onCheckAction = (e) => {
@@ -10,8 +11,7 @@ export const RecipeHeaderItem = (props) => {
             checked: props.recipe.checked,
             recipe: props.recipe
         };
-        console.log('houston', props.onSelectAction)
-        props.onSelectAction(itemProps);
+        props.onSelectRecipe(itemProps);
     }
 
     // TODO do like in category, add to a service
@@ -46,4 +46,11 @@ export const RecipeHeaderItem = (props) => {
             {isEditBtnDisplay()}
         </ListItem>
     )
+}
+
+RecipeHeaderItem.propTypes = {
+    recipe: PropTypes.object,
+    isNotEditable: PropTypes.bool,
+    isRecipeNotSelectable: PropTypes.bool,
+    onSelectRecipe: PropTypes.func
 }

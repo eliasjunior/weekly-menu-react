@@ -6,22 +6,18 @@
 
 ## Tasks, for priority sequence
 
+- Polish
+- add test
+- Review deep copy components
+
+## DONE Cru not delete
+- Category Crud
 - New Shopping list
-    1 - just select and create list based on the products
-    2 - add recipe, ignore repeated
-
-   description what need to work 
-   * Type list ? cannot be a category type
-      repeated products after add recipes
-   * create action
-      - get category and products ids to send
-      - add recipe to the list
-         - highlight recipe products
-         * When the product is repeat ? 
-         - remove products that does not need it
-
-
-- Product list
+- Product Crud
+- Recipe
+ * List
+ * update, name and prods
+ - Product list
      - update
        > call Rest api(NEED to fix and refactor it the API)
        > change update icon to save when the input is updatable
@@ -32,19 +28,16 @@
         > message fail 
     - Service 
         > filter only the data, service and component does not need to know the headers   
-
-## DONE Cru not delete
-- Category Crud
 - New Shopping list
-- Product Crud
-- Recipe
- * List
- * update, name and prods
+    1 - just select and create list based on the products
+    2 - add recipe, ignore repeated        
+
 
 - Sub Documents Cat/Product List
   Update, trigger
 
 ### Backlog
+  - Edit/update shopping list, leave for later
   - Define Props component Very important 
   - Message Service
         * fade message , add transition  

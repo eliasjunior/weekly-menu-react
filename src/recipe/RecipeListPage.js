@@ -12,7 +12,7 @@ class RecipeListPage extends React.Component {
         this.state = {
             recipes: []
         }
-        this.onSelectAction = this.onSelectAction.bind(this);
+        this.onSelectRecipe = this.onSelectRecipe.bind(this);
     }
     componentDidMount = () => {
         RecipeService.get('recipe')
@@ -23,7 +23,7 @@ class RecipeListPage extends React.Component {
             })
             .catch(reason => { console.error(reason) });
     }
-    onSelectAction(selected) {
+    onSelectRecipe(selected) {
         console.log('***', selected);
         const item = {
             recipe: SelectionCollectionService.recipeToAdd(selected.recipe),
@@ -41,7 +41,7 @@ class RecipeListPage extends React.Component {
                 </Button>
                 <RecipeListComponent
                     recipes={this.state.recipes}
-                    onSelectAction={this.onSelectAction}
+                    onSelectRecipe={this.onSelectRecipe}
                     parentComponent="RecipeListPage">
                 </RecipeListComponent>
             </div>

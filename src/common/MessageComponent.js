@@ -1,4 +1,5 @@
 import React from 'react';
+import { SnackbarContent } from '@material-ui/core';
 
 const styles = {
     msg: {
@@ -31,6 +32,7 @@ const MESSAGE_TYPE = {
 function MessageComponent(props) {
     const manageMessage = () => {
         let alert = props.message;
+        console.log('alert', alert)
         if (!alert) {
             return null;
         }
@@ -38,12 +40,12 @@ function MessageComponent(props) {
         if (typeof alert === 'string') {
             const msgError = Object.assign({}, styles.msg, styles.error);
             return <div style={msgError}>{alert}</div>
-
         } else {
             const msgStyle = alert.type === MESSAGE_TYPE.SUCCESS_TYPE ? styles.success : styles.error;
             const msg = Object.assign({}, styles.msg, msgStyle);
-
-            return <div style={msg}>{alert.message}</div>
+            return <SnackbarContent
+                message={alert.message} >
+            </SnackbarContent>
         }
     }
     return (<div>{manageMessage()}</div>)
