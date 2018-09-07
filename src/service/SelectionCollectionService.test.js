@@ -1,4 +1,4 @@
-import RecipeCollectionService from "./RecipeCollectionService";
+import SelectionCollectionService from "./SelectionCollectionService";
 
 describe('Recipe collection test', () => {
     it('should add product', () => {
@@ -34,7 +34,7 @@ describe('Recipe collection test', () => {
             }
         ];
 
-        expect(RecipeCollectionService
+        expect(SelectionCollectionService
             .addItem(selectedItem, categories)).toEqual(expected);
     });
 
@@ -59,7 +59,7 @@ describe('Recipe collection test', () => {
                 ]
             }
         ];
-        expect(RecipeCollectionService
+        expect(SelectionCollectionService
             .addItem(selectedItem, [])).toEqual(expected);
     });
 
@@ -93,7 +93,7 @@ describe('Recipe collection test', () => {
         ];
 
 
-        expect(RecipeCollectionService
+        expect(SelectionCollectionService
             .removeItem(selectedItem, list)).toEqual(expected);
     });
     it('should remove cagegory from the list ', () => {
@@ -114,7 +114,7 @@ describe('Recipe collection test', () => {
                 ]
             }
         ];
-        expect(RecipeCollectionService
+        expect(SelectionCollectionService
             .removeItem(selectedItem, list)).toEqual([]);
     });
 });

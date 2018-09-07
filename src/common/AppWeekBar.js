@@ -5,7 +5,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import MenuIconComponent from '../MenuIconComponent';
-import { Toolbar, Typography } from '@material-ui/core';
+import { Toolbar, Typography, IconButton } from '@material-ui/core';
+import ArrowBack from '@material-ui/icons/ArrowBack';
+
 
 export const AppWeekBar = (props) => {
     return (
@@ -16,6 +18,9 @@ export const AppWeekBar = (props) => {
                     <Typography variant="title" color="inherit">
                         {props.title}
                     </Typography>
+                    {/* <IconButton color="inherit" aria-label="Menu">
+                        <ArrowBack />
+                    </IconButton> */}
                 </Toolbar>
             </AppBar>
         </div>

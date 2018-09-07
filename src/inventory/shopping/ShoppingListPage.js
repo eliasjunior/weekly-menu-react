@@ -3,24 +3,22 @@ import CategoryList from '../category/CategoryList';
 import { AppWeekBar } from '../../common/AppWeekBar';
 import { ShoppingCreateActions } from './ShoppingCreateActions';
 import CategoryService from '../category/CategoryService';
+import SelectionCollectionService from '../../service/SelectionCollectionService';
+import ErrorBoundary from '../../ErrorBoundaryComponent';
+import { RecipeListComponent } from '../../recipe/RecipeListComponent';
+import { Divider } from '@material-ui/core';
 
-const factoryMode = (prevState, newState) => {
-    let {
-        categories = prevState.categories,
-        selectedProd = prevState.selectedProd,
-        message = prevState
-    } = newState;
-    return { selectedProd, categories, message };
-};
 class ShoppingListComponent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             categories: [],
-            selectedProd: [],
-            message: ''
+            selectedProducts: [],
+            message: '',
+            recipesToInclude: props.recipesToInclude
         }
         this.selectedProd = this.selectedProd.bind(this);
+        this.selectedProdRecipe = this.selectedProdRecipe.bind(this);
         this.createShoppingList = this.createShoppingList.bind(this);
     }
     componentDidMount() {
@@ -31,35 +29,65 @@ class ShoppingListComponent extends React.Component {
             .catch(reason => this.setState({ message: reason }));
     }
     createShoppingList() {
-        console.log('creating...', this.state.selectedProd)
+        console.log('creating...', this.state.selectedProducts)
     }
     selectedProd(selected) {
-        let selectedProd = [...this.state.selectedProd];
-        const productName = selected.prodName;
-        const isProdIn = selectedProd.find(name => name === productName);
+        // need to receice a category selected
+        console.log('SELE >>>>>', selected)
+        let selectedProducts = [...this.state.selectedProducts];
+        const category = selected.category;
+        const product = selected.product;
 
-        if (selected.checked && !isProdIn) {
-            selectedProd.push(selected.prodName);
-        } else if (isProdIn) {
-            selectedProd = selectedProd.filter(name => name !== productName);
+        if (selected.checked) {
+            selectedProducts = SelectionCollectionService.addItem({ category, product }, selectedProducts)
+        } else {
+            selectedProducts = SelectionCollectionService.removeItem({ category, product }, selectedProducts)
         }
-        this.setState(prevState => factoryMode(prevState, { selectedProd }));
+        console.log('selectedProducts *****', selectedProducts)
+        this.setState(prevState => factoryMode(prevState, { selectedProducts }));
+    }
+    selectedProdRecipe(selected) {
+        console.log('>>>', selected)
+
+        //selected.checked
+       
+        console.log('add to state', SelectionCollectionService.recipeToAdd(selected.recipe))
     }
     render() {
         return (
             <div>
-                <AppWeekBar title="New Shopping List"></AppWeekBar>
-                <ShoppingCreateActions
-                    createShoppingList={this.createShoppingList}>
-                </ShoppingCreateActions>
-                <CategoryList
-                    list={this.state.categories}
-                    parentComponent="ShoppingListPage"
-                    onSelectedProd={this.selectedProd}>
-                </CategoryList>
+                <ErrorBoundary>
+                    <AppWeekBar title="New Shopping List"></AppWeekBar>
+                    <ShoppingCreateActions
+                        createShoppingList={this.createShoppingList}>
+                    </ShoppingCreateActions>
+                    <RecipeListComponent 
+                        title="Recipe included"
+                        isNotEditable={true}
+                        isRecipeNotSelectable={true}
+                        recipes={this.state.recipesToInclude}
+                        onSelectAction={this.selectedProdRecipe}
+                        parentComponent="ShoppingListPage">
+                    </RecipeListComponent>
+                    <CategoryList
+                        list={this.state.categories}
+                        parentComponent="ShoppingListPage"
+                        onSelectedProd={this.onSelectedProd}>
+                    </CategoryList>
+                    <Divider />
+                </ErrorBoundary>
             </div>
         )
     }
+}
+
+function factoryMode(prevState, newState){
+    let {
+        categories = prevState.categories,
+        selectedProducts = prevState.selectedProducts,
+        message = prevState
+    } = newState;
+    return { selectedProducts, categories, message };
 }
 
 export default ShoppingListComponent 

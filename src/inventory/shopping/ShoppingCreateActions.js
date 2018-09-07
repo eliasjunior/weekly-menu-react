@@ -1,14 +1,18 @@
 import Button from '@material-ui/core/Button';
 import React from 'react';
-// 14: 40
+import { AppConstant } from '../../common/AppConstant';
+import { Link } from "react-router-dom";
+
 export const ShoppingCreateActions = (props) => {
     return (
         <div>
-            <Button variant="contained" 
-                onClick={() => console.log('go recipe selection page')} >
-                Include Recipe
+            <Button variant="outlined">
+                <Link 
+                    to={AppConstant.PATH.RECIPE_LIST}>
+                    Include Recipe
+                </Link>
             </Button> 
-            <Button variant="contained" 
+            <Button variant="outlined" 
                 onClick={() => props.createShoppingList()} >
                 Create List
             </Button>

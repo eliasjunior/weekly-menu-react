@@ -1,0 +1,49 @@
+import React from 'react';
+import { Link } from "react-router-dom";
+import { AppConstant } from '../common/AppConstant';
+import { Button, ListItem, Checkbox, ListItemText, ListItemSecondaryAction } from "@material-ui/core";
+
+export const RecipeHeaderItem = (props) => {
+    const onCheckAction = (e) => {
+        props.recipe.checked = e.target.checked;
+        const itemProps = {
+            checked: props.recipe.checked,
+            recipe: props.recipe
+        };
+        console.log('houston', props.onSelectAction)
+        props.onSelectAction(itemProps);
+    }
+
+    // TODO do like in category, add to a service
+    const isCheckboxDisplay = () => {
+        if (props.isRecipeNotSelectable) {
+            return ''
+        } else {
+            return <Checkbox checked={props.recipe.checked}
+                onClick={onCheckAction}
+                value={props.recipe._id}>
+            </Checkbox>
+        }
+    }
+
+    // TODO do like in category, add to a service
+    const isEditBtnDisplay = () => {
+        if (props.isNotEditable) {
+            return ''
+        } else {
+            return <ListItemSecondaryAction >
+                <Button variant="outlined">
+                    <Link to={`${AppConstant.PATH.NEW_RECIPE}/${props.recipe._id}`}>EDIT</Link>
+                </Button>
+            </ListItemSecondaryAction>
+        }
+    }
+
+    return (
+        <ListItem>
+            {isCheckboxDisplay()}
+            <ListItemText primary={props.recipe.name} />
+            {isEditBtnDisplay()}
+        </ListItem>
+    )
+}

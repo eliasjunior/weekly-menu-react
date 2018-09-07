@@ -1,10 +1,10 @@
 import React from "react";
 import { AppWeekBar } from "../common/AppWeekBar";
 import RecipeService from './RecipeService';
-import { CategoryList } from "../inventory/category/CategoryList";
 import { Button } from "@material-ui/core";
-import { Link } from "react-router-dom";
-import { AppConstant } from '../common/AppConstant';
+import PropTypes from "prop-types";
+import SelectionCollectionService from "../service/SelectionCollectionService";
+import { RecipeListComponent } from "./RecipeListComponent";
 
 class RecipeListPage extends React.Component {
     constructor(props) {
@@ -12,7 +12,7 @@ class RecipeListPage extends React.Component {
         this.state = {
             recipes: []
         }
-        this.selectedProd = this.selectedProd.bind(this);
+        this.onSelectAction = this.onSelectAction.bind(this);
     }
     componentDidMount = () => {
         RecipeService.get('recipe')
@@ -23,37 +23,34 @@ class RecipeListPage extends React.Component {
             })
             .catch(reason => { console.error(reason) });
     }
-    selectedProd(selected) {
-        console.log(selected)
-    }
-    buildRecipeList() {
-        // TODO style here
-        return this.state.recipes.map((recipe, index) => {
-            return (
-                <div key={index} style={{ marginLeft: '5px' }}>
-                    <div style={{ background: '#70ed416b' }}>
-                        <Button variant="outlined" >
-                            <Link to={`${AppConstant.PATH.NEW_RECIPE}/${recipe._id}`}>{recipe.name}</Link>
-                        </Button>
-                    </div>
-                    <div style={{ padding: '10px' }}>
-                        <CategoryList
-                            list={recipe.categories}
-                            parentComponent="RecipeListPage"
-                            onSelectedProd={this.selectedProd}>
-                        </CategoryList>
-                    </div>
-                </div>)
-        });
+    onSelectAction(selected) {
+        console.log('***', selected);
+        const item = {
+            recipe: SelectionCollectionService.recipeToAdd(selected.recipe),
+            checked: selected.checked
+        };
+        this.props
+            .callbackIncludeRecipe(item);
     }
     render() {
         return (
             <div>
                 <AppWeekBar title='Recipe List'></AppWeekBar>
-                {this.buildRecipeList()}
+                <Button variant="outlined" onClick={() => this.props.history.goBack()}>
+                    Add
+                </Button>
+                <RecipeListComponent
+                    recipes={this.state.recipes}
+                    onSelectAction={this.onSelectAction}
+                    parentComponent="RecipeListPage">
+                </RecipeListComponent>
             </div>
         );
     }
+}
+
+RecipeListPage.propTypes = {
+    callbackIncludeRecipe: PropTypes.func
 }
 
 export default RecipeListPage;

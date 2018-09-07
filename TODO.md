@@ -45,6 +45,7 @@
   Update, trigger
 
 ### Backlog
+  - Define Props component Very important 
   - Message Service
         * fade message , add transition  
   - Need to add test to it, but after a few more complexity

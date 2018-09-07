@@ -29,7 +29,7 @@ class MenuIconComponent extends React.Component {
     onDisplayClose(event) {
         const pageSelected = [event.currentTarget.innerText]
             .map(item => item.trim())
-            .pop();
+            .shift();
 
         console.log('Page => ', pageSelected)    
         this.setState({ anchorEl: null, open: false });
