@@ -25,7 +25,7 @@ export const CategoryList = (props) => {
         return CategoryDisplayService.categoryNewBtn(props.parentComponent).display ?
             <Button color="primary" variant="outlined">
                 <Link 
-                    to={AppConstant.PATH.CATEGORY + '/new_category_create'}>
+                    to={AppConstant.LOCATION.category.path + '/new_category_create'}>
                     New Category
                 </Link>
             </Button>

@@ -1,4 +1,4 @@
-const SelectionCollectionService = {
+const UtilCollectionService = {
     addItem(itemToBeAdded, list) {
         const categories = reducerNewList(itemToBeAdded.category, list);
         const categorySelected = categories.find(cat => cat._id === itemToBeAdded.category._id);
@@ -53,6 +53,41 @@ const SelectionCollectionService = {
     },
     removeRecipe(recipeToBeRemoved, recipes) {
         return recipes.filter(rec => rec.name !== recipeToBeRemoved.name);
+    },
+    
+    findItemBinarySearch(targetName, list) {
+        let floor = 0;
+        let ceil = list.length;
+        let half = Math.floor(list.length/2);
+    
+        // ii avoid infinity if there is some thing wrong in the algorithm below
+        let ii = 0;
+        while(floor < ceil && ii < 10000) {
+            if(list[half].name === targetName) {
+                list[half].checked = true;
+                return list[half];
+            } else if(targetName < list[half].name ){
+                ceil = half;
+            } else {
+                floor = half;
+            }
+            half = Math.floor((ceil + floor)/2) ;
+    
+            ii++
+        }
+        return false;
+    },
+    getAllCategoriesRecipe(recipes) {
+        return recipes
+        .reduce(reducerAllCategories, [])
+        .sort((catA, catB) => catA.name > catB.name ? 1 : -1);
+
+   
+    },
+    getAllProducts(categories) {
+        return categories
+        .reduce(reducerAllProducts, [])
+        .sort((prodA, prodB) => prodA.name > prodB.name ? 1 : -1);
     }
 }
 
@@ -76,4 +111,33 @@ function reducerNewList(item, list) {
     return newList;
 }
 
-export default SelectionCollectionService;
+function reducerAllCategories(acc, recipe) {
+    const newCategories = recipe.categories.map(category => {
+        return {
+            name: category.name,
+            _id: category._id,
+            products: category.products,
+            recId: recipe._id,
+            recName: recipe.name
+        }
+    });
+    acc = acc.concat(newCategories);
+    return acc;
+}
+
+function reducerAllProducts(acc, category) {
+    const newProducts = category.products.map(product => {
+        return {
+            name: product.name,
+            _id: product._id,
+            catName: category.name,
+            catId: category._id,
+            recId: category.recId,
+            recName: category.recName
+        }
+    });
+    acc = acc.concat(newProducts);
+    return acc;
+}
+
+export default UtilCollectionService;

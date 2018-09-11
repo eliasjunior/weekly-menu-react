@@ -11,7 +11,7 @@ const ShoppingListService = {
         return ApiService.get('v2/shoppingList');
     },
     getOne(id) {
-        return ApiService.get(`v2/shoppingList${id}`);
+        return ApiService.get(`v2/shoppingList/${id}`);
     },
     delete() {
 

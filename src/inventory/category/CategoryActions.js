@@ -10,10 +10,10 @@ export const CategoryActions = (props) => {
         <div>
             <Button color="primary">
                 <Link 
-                    to={AppConstant.PATH.CATEGORY + '/' + props.id + '?name=' + props.name}>Edit</Link>
+                    to={AppConstant.LOCATION.category.path + '/' + props.id + '?name=' + props.name}>Edit</Link>
             </Button>
             <Button color="primary">
-                <Link to={AppConstant.PATH.PRODUCTS + queryParam}>New Product</Link>
+                <Link to={AppConstant.LOCATION.product.path + queryParam}>New Product</Link>
             </Button>
         </div>
     )

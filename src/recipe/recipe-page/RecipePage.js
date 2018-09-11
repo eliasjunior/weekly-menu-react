@@ -5,7 +5,7 @@ import { TextField } from '@material-ui/core';
 import MessageComponent from '../../common/MessageComponent';
 import FormChildAction from '../../common/FormChildAction';
 import RecipeService from '../RecipeService';
-import SelectionCollectionService from '../../service/SelectionCollectionService';
+import UtilCollectionService from '../../service/UtilCollectionService';
 import CategoryService from '../../inventory/category/CategoryService';
 import RecipePageUtilService from '../../service/RecipePageUtilService';
 
@@ -50,9 +50,9 @@ class RecipePage extends React.Component {
         const product = selected.product;
 
         if (selected.checked) {
-            selectedProducts = SelectionCollectionService.addItem({ category, product }, selectedProducts)
+            selectedProducts = UtilCollectionService.addItem({ category, product }, selectedProducts)
         } else {
-            selectedProducts = SelectionCollectionService.removeItem({ category, product }, selectedProducts)
+            selectedProducts = UtilCollectionService.removeItem({ category, product }, selectedProducts)
         }
         this.setState(prevState => factoryMode(prevState, { selectedProducts }));
     }

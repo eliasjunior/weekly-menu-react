@@ -1,22 +1,14 @@
-export const AppConstant =  {
-    PATH: {
-        RECIPE_LIST : '/recipe',
-        NEW_RECIPE: '/recipeCreate/new',
-        SHOPPING: '/shopping', 
-        CATEGORY: '/category',
-        PRODUCTS: '/product',
-        DEFAULT_ROUTE: '/'
-    },
-    LABEL: {
-        SHOPPING: 'New Shopping List',
-        NEW_RECIPE: 'New Recipe',
-        HOME: 'Products',
-        RECIPE_LIST: 'Recipe List'
-    },
-    // TODO
-    ROUTE: {
-        RECIPE_LIST: {PATH: '/recipe', LABEL: 'Recipe List'},
-        RECIPE: {PATH: '/recipeCreate', LABEL: 'New Recipe'}
+export const AppConstant = {
+    LOCATION: {
+        home: { path: '/', label: 'Products', menu: true  },
+        newShoppingList: { path:'/newshopping', label: 'New Shopping List', menu: true },
+        editShoppingList: { path:'/editshopping', label: '', menu: false },
+        shoppingHistory: { path: '/shoppinghistory', label: 'Shopping history', menu: true  },
+        recipeList: { path: '/recipe', label: 'Recipe List' , menu: true },
+        newRecipe: { path: '/recipeCreate/new', label:  'New Recipe' , menu: true },
+        category: { path: '/category', label: '', menu: false  },
+        product: { path: '/product', label: '', menu: false  },
+        shopping: { path: '/shopping', label: 'Shopping List', menu: true  },
     },
     PARENT_COMPONENT: {
         RECIPE_PAGE: 'RecipePage',

@@ -1,15 +1,12 @@
 import React from 'react';
-import CategoryList from '../category/CategoryList';
 import { AppWeekBar } from '../../common/AppWeekBar';
 import { ShoppingCreateActions } from './ShoppingCreateActions';
 import CategoryService from '../category/CategoryService';
-import SelectionCollectionService from '../../service/SelectionCollectionService';
+import UtilCollectionService from '../../service/UtilCollectionService';
 import ErrorBoundary from '../../ErrorBoundaryComponent';
-import { CardContent, Card } from '@material-ui/core';
 import { ShoppingListUtilService } from './ShoppingListUtilService';
 import CloneDeep from 'lodash.clonedeep';
 import ShoppingListService from './ShoppingListService';
-import MessageComponent from '../../common/MessageComponent';
 import { RecipeBox } from './RecipesBox';
 import { ProductBox } from './ProductBox';
 
@@ -19,40 +16,50 @@ class ShoppingListComponent extends React.Component {
         this.state = {
             categories: [],
             selectedProducts: [],
-            message: '',
-            recipesToInclude: CloneDeep(props.recipesToInclude)
+            recipesToInclude: CloneDeep(props.recipesToInclude),
+            title: props.shoppingList ? 'Update Shopping list' : 'New Shopping list'
         }
-
         this.selectedProd = this.selectedProd.bind(this);
         this.selectedProdRecipe = this.selectedProdRecipe.bind(this);
         this.createShoppingList = this.createShoppingList.bind(this);
+        this.updateShoppingList = this.updateShoppingList.bind(this);
     }
     componentDidMount() {
         //this is the created list -> category/week/shopping 
         CategoryService
             .get()
-            .then(categories => this.setState(() => ({ categories })))
-            .catch(reason => this.setState({ message: reason }));
+            .then(categories => {
+                if (this.props.shoppingList) {
+                    updateShoppingList.call(this, CloneDeep(this.props.shoppingList), categories)
+                } else {
+                    this.setState(() => ({ categories }))
+                }
+            })
+            .catch(reason => this.props.onHandleMessage({ message: reason.message }));
     }
     createShoppingList() {
-        const recipes = ShoppingListUtilService
-            .filterSelectedProductInRecipes(this.state.recipesToInclude)
-
-        console.log('creating...', recipes)
-        console.log('creating...', this.state.selectedProducts)
-
-        const shoppintList = {
-            categories: this.state.selectedProducts,
-            recipes
-        }
+        const shoppintList =
+            buildObjectToSend(this.state.selectedProducts, this.state.recipesToInclude);
 
         ShoppingListService
             .save(shoppintList)
             .then(() => {
-                this.setState({ message: { message: 'Uhhuu Shopping list saved', type: 'S' } })
+                this.props.onHandleMessage({ message: 'Uhhuu Shopping list saved', type: 'success' })
             })
-            .catch(reason => this.setState({ message: reason.message }));
+            .catch(reason => this.props.onHandleMessage({ message: reason.message }));
 
+    }
+    updateShoppingList() {
+        const shoppintList =
+            buildObjectToSend(this.state.selectedProducts,
+                this.state.recipesToInclude, this.props.match.params.id);
+
+        ShoppingListService
+            .update(shoppintList)
+            .then(() => {
+                this.props.onHandleMessage({ message: 'Uhhuu Shopping list updated', type: 'success' })
+            })
+            .catch(reason => this.props.onHandleMessage({ message: reason.message }));
     }
     selectedProd(selected) {
         // need to receice a category selected
@@ -62,9 +69,9 @@ class ShoppingListComponent extends React.Component {
         const product = selected.product;
 
         if (selected.checked) {
-            selectedProducts = SelectionCollectionService.addItem({ category, product }, selectedProducts)
+            selectedProducts = UtilCollectionService.addItem({ category, product }, selectedProducts);
         } else {
-            selectedProducts = SelectionCollectionService.removeItem({ category, product }, selectedProducts)
+            selectedProducts = UtilCollectionService.removeItem({ category, product }, selectedProducts);
         }
         console.log('selectedProducts *****', selectedProducts)
         this.setState(prevState => factoryMode(prevState, { selectedProducts }));
@@ -77,16 +84,16 @@ class ShoppingListComponent extends React.Component {
 
         this.setState({ recipesToInclude })
     }
+
     render() {
         return (
             <div>
                 <ErrorBoundary>
-                    <AppWeekBar title="New Shopping List"></AppWeekBar>
-                    <MessageComponent
-                        message={this.state.message}>
-                    </MessageComponent>
-                    <ShoppingCreateActions
-                        createShoppingList={this.createShoppingList}>
+                    <AppWeekBar title={this.state.title}></AppWeekBar>
+                    <ShoppingCreateActions isCreate={this.state.isCreate}
+                        createShoppingList={this.createShoppingList}
+                        updateShoppingList={this.updateShoppingList}
+                        isUpdate={this.props.shoppingList ? true : false}>
                     </ShoppingCreateActions>
                     <RecipeBox recipesToInclude={this.state.recipesToInclude}
                         selectedProdRecipe={this.selectedProdRecipe}>
@@ -99,6 +106,45 @@ class ShoppingListComponent extends React.Component {
             </div>
         )
     }
+}
+
+
+function buildObjectToSend(selectedProducts, recipesToInclude, id) {
+    const recipes = ShoppingListUtilService
+        .filterSelectedProductInRecipes(recipesToInclude);
+
+    console.log('recipes...', recipes)
+    console.log('selectedProducts...', selectedProducts)
+    if (id) {
+        return {
+            categories: selectedProducts,
+            recipes,
+            _id: id
+        }
+    } else {
+        return {
+            categories: selectedProducts,
+            recipes
+        }
+    }
+}
+
+function updateShoppingList(shoppingList, categories) {
+    const categoriesFromRec = shoppingList.categories;
+
+    const allProducts = UtilCollectionService.getAllProducts(categoriesFromRec)
+
+    let selectedProducts = [...this.state.selectedProducts];
+    categories.forEach(category => {
+        category.products.forEach(product => {
+            if (UtilCollectionService.findItemBinarySearch(product.name, allProducts)) {
+                product.checked = true;
+                selectedProducts = UtilCollectionService.addItem({ category, product }, selectedProducts);
+            }
+        });
+    });
+
+    this.setState({ recipesToInclude: shoppingList.recipes, categories, selectedProducts });
 }
 
 function factoryMode(prevState, newState) {

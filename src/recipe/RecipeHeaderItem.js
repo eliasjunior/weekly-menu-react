@@ -33,7 +33,9 @@ export const RecipeHeaderItem = (props) => {
         } else {
             return <ListItemSecondaryAction >
                 <Button variant="outlined">
-                    <Link to={`${AppConstant.PATH.NEW_RECIPE}/${props.recipe._id}`}>EDIT</Link>
+                    <Link to={`${AppConstant.LOCATION.newRecipe.path}/${props.recipe._id}`}>
+                        EDIT
+                    </Link>
                 </Button>
             </ListItemSecondaryAction>
         }

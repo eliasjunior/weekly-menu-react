@@ -6,13 +6,6 @@ import { Menu } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import { Link } from "react-router-dom";
 
-// TODO, later, generate the MenuItem dynamic, need to finish in AppConstants too
-// const getItemsForSideMenu = () => {
-//     return Object
-//         .entries(AppConstant.LABEL)
-//         .map(item => item[1])
-// };
-
 class MenuIconComponent extends React.Component {
     constructor(props) {
         super(props);
@@ -27,11 +20,6 @@ class MenuIconComponent extends React.Component {
         this.setState({ anchorEl: event.currentTarget });
     }
     onDisplayClose(event) {
-        const pageSelected = [event.currentTarget.innerText]
-            .map(item => item.trim())
-            .shift();
-
-        console.log('Page => ', pageSelected)    
         this.setState({ anchorEl: null, open: false });
     }
     render() {
@@ -58,22 +46,23 @@ class MenuIconComponent extends React.Component {
                     }}
                     open={Boolean(this.state.anchorEl)}
                     onClose={this.handleClose}>
-                    <MenuItem onClick={this.onDisplayClose}>
-                        <Link to={AppConstant.PATH.DEFAULT_ROUTE}>{AppConstant.LABEL.HOME}</Link>
-                    </MenuItem>
-                    <MenuItem onClick={this.onDisplayClose}>
-                        <Link to={AppConstant.PATH.NEW_RECIPE}>{AppConstant.LABEL.NEW_RECIPE}</Link>
-                    </MenuItem>
-                    <MenuItem onClick={this.onDisplayClose}>
-                        <Link to={AppConstant.PATH.RECIPE_LIST}>{AppConstant.LABEL.RECIPE_LIST}</Link>
-                    </MenuItem>
-                    <MenuItem onClick={this.onDisplayClose}>
-                        <Link to={AppConstant.PATH.SHOPPING}>{AppConstant.LABEL.SHOPPING}</Link>
-                    </MenuItem>
+                    {getItemsForSideMenu.call(this)}
                 </Menu>
             </div>
         );
     }
 }
+
+function getItemsForSideMenu() {
+    return Object
+        .entries(AppConstant.LOCATION)
+        .filter(([key, location]) => location.menu)
+        .map(([key, location]) =>  {
+            return <MenuItem key={key} onClick={this.onDisplayClose}>
+                <Link to={location.path}>{location.label}</Link>
+            </MenuItem>
+        });
+};
+
 
 export default MenuIconComponent

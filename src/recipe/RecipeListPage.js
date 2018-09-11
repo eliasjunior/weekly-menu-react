@@ -3,7 +3,7 @@ import { AppWeekBar } from "../common/AppWeekBar";
 import RecipeService from './RecipeService';
 import { Button } from "@material-ui/core";
 import PropTypes from "prop-types";
-import SelectionCollectionService from "../service/SelectionCollectionService";
+import UtilCollectionService from "../service/UtilCollectionService";
 import { RecipeListComponent } from "./RecipeListComponent";
 
 class RecipeListPage extends React.Component {
@@ -26,7 +26,7 @@ class RecipeListPage extends React.Component {
     onSelectRecipe(selected) {
         console.log('***', selected);
         const item = {
-            recipe: SelectionCollectionService.recipeToAdd(selected.recipe),
+            recipe: UtilCollectionService.recipeToAdd(selected.recipe),
             checked: selected.checked
         };
         this.props

@@ -31,12 +31,14 @@
 - New Shopping list
     1 - just select and create list based on the products
     2 - add recipe, ignore repeated        
-
+- shopping list view and shopping list history
 
 - Sub Documents Cat/Product List
   Update, trigger
 
 ### Backlog
+  - Update Shopping list
+  
   - Edit/update shopping list, leave for later
   - Define Props component Very important 
   - Message Service
