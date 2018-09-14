@@ -17,6 +17,7 @@ function ProductFormPage(props) {
         <div>
             <AppWeekBar title='New Product'></AppWeekBar>
             <ProductForm 
+                onHandleMessage={props.onHandleMessage}
                 category={params} 
                 returnProdList={props.history.goBack}>
             </ProductForm>

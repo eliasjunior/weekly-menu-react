@@ -24,7 +24,6 @@ class RecipeListPage extends React.Component {
             .catch(reason => { console.error(reason) });
     }
     onSelectRecipe(selected) {
-        console.log('***', selected);
         const item = {
             recipe: UtilCollectionService.recipeToAdd(selected.recipe),
             checked: selected.checked
@@ -34,9 +33,12 @@ class RecipeListPage extends React.Component {
     }
     render() {
         return (
-            <div>
+            <div >
                 <AppWeekBar title='Recipe List'></AppWeekBar>
-                <Button variant="outlined" onClick={() => this.props.history.goBack()}>
+                <Button style={styles.buttons}
+                    color="secondary" 
+                    variant="outlined" 
+                    onClick={() => this.props.history.goBack()}>
                     Add
                 </Button>
                 <RecipeListComponent
@@ -46,6 +48,11 @@ class RecipeListPage extends React.Component {
                 </RecipeListComponent>
             </div>
         );
+    }
+}
+const styles = {
+    buttons : {
+        margin: '10px'
     }
 }
 

@@ -1,5 +1,5 @@
 import CloneDeep from 'lodash.clonedeep';
-import UtilCollectionService from '../../service/UtilCollectionService';
+import Util from '../../service/UtilCollectionService';
 
 export const ShoppingListUtilService = {
     filterSelectedProductInRecipes(recipes) {
@@ -34,39 +34,54 @@ export const ShoppingListUtilService = {
         return oldRecipeList
     },
     mergeCategories(recipes, categories) {
-        const allCategoriesRecipe = UtilCollectionService
-            .getAllCategoriesRecipe(recipes);
+        const allCategoriesRecipe = Util
+            .getAllSortCategoriesRecipe(recipes);
 
-        const allProductsRecipe = UtilCollectionService
-            .getAllProducts(allCategoriesRecipe);
+        const mergeProductOfCategory = category => {
+            const categoryInrecipe = Util
+                .findItemBinarySearch(category.name, allCategoriesRecipe);
 
-        const categoriesMerge = CloneDeep(categories);
+            if (categoryInrecipe) {
+                category.products = category.products.concat(categoryInrecipe.products)
+            }
+            return category;
+        }    
 
-        categoriesMerge.forEach(category => {
-            const newProducts = category.products
-                .reduce(reducerAddProdRecipeToCategory.bind(null, allProductsRecipe), []);
-            category.products = newProducts;
-        });
+        let categoriesMerge =
+            CloneDeep(categories)
+                .map(mergeProductOfCategory)
+                .sort((catA, catB) => catA.name > catB.name ? 1 : -1);
 
         return addMissingCategories(allCategoriesRecipe, categoriesMerge);
+    },
+    mapRecAndCatToProducts(recipes) {
+        const mapProducts = (recipe, category) => {
+            const newProds = category.products.map(product => {
+                return {
+                    ...product,
+                    recName: recipe.name,
+                    recId: recipe._id
+                };
+            })
+            category.products = newProds;
+            return category;
+        }
+        return recipes.map(recipe => {
+            const newCategories = 
+                recipe.categories
+                    .map(mapProducts.bind(null, recipe));
+            recipe.categories = newCategories;
+            return recipe;
+        });
     }
-}
-
-function reducerAddProdRecipeToCategory(allProds, acc, product) {
-    const prodInRecipe = UtilCollectionService
-        .findItemBinarySearch(product.name, allProds);
-    if (prodInRecipe) {
-        acc.push(prodInRecipe);
-    }
-    acc.push(product);
-    return acc;
 }
 
 function addMissingCategories(allCatsRecipe, categoriesMerge) {
     const catsMissing = allCatsRecipe.filter(cat => {
-        return !UtilCollectionService.findItemBinarySearch(cat.name, categoriesMerge);
+        const foundInCat = Util.findItemBinarySearch(cat.name, categoriesMerge)
+        return foundInCat === false;
     })
-    if(catsMissing.length) {
+    if (catsMissing.length) {
         categoriesMerge = categoriesMerge.concat(catsMissing);
         return categoriesMerge;
     } else {

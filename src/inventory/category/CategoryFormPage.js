@@ -7,11 +7,11 @@ function CategoryFormPage(props) {
     const {match: {params: {id} = ''} = {}} = props;
     const {location: {search}} = props;
     const name = search.slice(search.indexOf('=') + 1);
-
     return (
         <div>
             <AppWeekBar title="New Category"></AppWeekBar>
             <CategoryForm 
+                onHandleMessage={props.onHandleMessage}
                 returnProdList={props.history.goBack} 
                 id={id} 
                 name={name}>

@@ -10,6 +10,7 @@ import ShoppingListService from './ShoppingListService';
 import { RecipeBox } from './RecipesBox';
 import { ProductBox } from './ProductBox';
 
+
 class ShoppingListComponent extends React.Component {
     constructor(props) {
         super(props);
@@ -62,8 +63,6 @@ class ShoppingListComponent extends React.Component {
             .catch(reason => this.props.onHandleMessage({ message: reason.message }));
     }
     selectedProd(selected) {
-        // need to receice a category selected
-        console.log('SELE >>>>>', selected)
         let selectedProducts = [...this.state.selectedProducts];
         const category = selected.category;
         const product = selected.product;
@@ -73,12 +72,9 @@ class ShoppingListComponent extends React.Component {
         } else {
             selectedProducts = UtilCollectionService.removeItem({ category, product }, selectedProducts);
         }
-        console.log('selectedProducts *****', selectedProducts)
         this.setState(prevState => factoryMode(prevState, { selectedProducts }));
     }
     selectedProdRecipe(selected) {
-        console.log('>>>', selected)
-
         const recipesToInclude = ShoppingListUtilService
             .updateRecipesSelection(this.state.recipesToInclude, selected)
 
@@ -108,13 +104,9 @@ class ShoppingListComponent extends React.Component {
     }
 }
 
-
 function buildObjectToSend(selectedProducts, recipesToInclude, id) {
     const recipes = ShoppingListUtilService
         .filterSelectedProductInRecipes(recipesToInclude);
-
-    console.log('recipes...', recipes)
-    console.log('selectedProducts...', selectedProducts)
     if (id) {
         return {
             categories: selectedProducts,

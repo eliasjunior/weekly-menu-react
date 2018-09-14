@@ -4,23 +4,24 @@ import { AppConstant } from '../../common/AppConstant';
 import { Link } from "react-router-dom";
 
 export const ShoppingCreateActions = (props) => {
-
     const actionButton = () => {
         return props.isUpdate ?
-            <Button variant="outlined"
+            <Button color="secondary" variant="outlined"
                 onClick={() => props.updateShoppingList()} >
                 Update List
             </Button>
             :
-            <Button variant="outlined"
+            <Button color="secondary" variant="outlined"
                 onClick={() => props.createShoppingList()} >
                 Create List
             </Button>
     }
 
     return (
-        <div>
-            <Button variant="outlined">
+        <div style={styles.buttons}>
+            <Button color="primary" 
+                variant="outlined" 
+                style={styles.firstButton}>
                 <Link
                     to={AppConstant.LOCATION.recipeList.path}>
                     Include Recipe
@@ -29,4 +30,13 @@ export const ShoppingCreateActions = (props) => {
             {actionButton()}
         </div>
     )
+}
+
+const styles = {
+    buttons: {
+        margin: '10px'
+    },
+    firstButton: {
+        marginRight: '5px'
+    }
 }

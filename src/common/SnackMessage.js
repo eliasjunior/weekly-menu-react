@@ -13,7 +13,7 @@ function SnackMessage(props) {
                 horizontal: 'center',
             }}
             open={props.open}
-            autoHideDuration={6000}
+            autoHideDuration={3000}
             onClose={props.onClose}>
             <SnackbarContent
                 aria-describedby="client-snackbar"

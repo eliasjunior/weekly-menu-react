@@ -56,7 +56,7 @@ class CategoryItem extends React.Component {
         return (
             <div>
                 <ListItem 
-                    style={{ backgroundColor: grey[300] }}
+                    style={{ backgroundColor: grey[200] }}
                     key={this.props.category._id}>
                     <ListItemText primary={this.props.category.name} ></ListItemText>
                     {this.categoryButtons()}

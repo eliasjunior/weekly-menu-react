@@ -2,7 +2,6 @@ import React from 'react';
 import { AppWeekBar } from "../../common/AppWeekBar";
 import { CategoryList } from '../../inventory/category/CategoryList';
 import { TextField } from '@material-ui/core';
-import MessageComponent from '../../common/MessageComponent';
 import FormChildAction from '../../common/FormChildAction';
 import RecipeService from '../RecipeService';
 import UtilCollectionService from '../../service/UtilCollectionService';
@@ -14,7 +13,6 @@ class RecipePage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            message: '',
             categories: [],
             selectedProducts: [],
             name: '',
@@ -41,7 +39,7 @@ class RecipePage extends React.Component {
                     }));
                 }
             })
-            .catch(reason => this.setState({ message: reason }));
+            .catch(reason => this.props.onHandleMessage({ message: reason.message }));
     }
     selectedProd(selected) {
         // need to receice a category selected
@@ -66,11 +64,10 @@ class RecipePage extends React.Component {
         };
         RecipeService
             .save(recipe)
-            .then(() => {
-                const newState = { message: { message: 'Hooray, recipe created!', type: 'S' } };
-                this.setState(prevState => factoryMode(prevState, newState))
-            })
-            .catch(reason => this.setState({ message: reason.message }));
+            .then(() => this.props
+                .onHandleMessage({ message: 'Hooray, recipe created!', type: 'success' }))
+            .catch(reason => this.props.onHandleMessage({ message: reason.message }));
+
     }
     updateRecipe() {
         const recipe = {
@@ -81,18 +78,14 @@ class RecipePage extends React.Component {
         RecipeService
             .update(recipe)
             .then(() => {
-                const newState = { message: { message: 'Hooray, recipe Update!', type: 'S' } };
-                this.setState(prevState => factoryMode(prevState, newState))
+                this.props.onHandleMessage({ message: 'Hooray, recipe Update!', type: 'success' })
             })
-            .catch(reason => this.setState({ message: reason.message }));
+            .catch(reason => this.props.onHandleMessage({ message: reason.message }));
     }
     render() {
         return (
             <div>
                 <AppWeekBar title={this.state.title}></AppWeekBar>
-                <MessageComponent
-                    message={this.state.message}>
-                </MessageComponent>
                 <TextField
                     style={styles.input}
                     label="Recipe name"

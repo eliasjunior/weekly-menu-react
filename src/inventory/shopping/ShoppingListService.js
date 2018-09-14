@@ -4,6 +4,9 @@ const ShoppingListService = {
     update(shoppingList) {
         return ApiService.put('v2/shoppingList', shoppingList);
     },
+    updateItem(product) {
+        return ApiService.put('v2/shoppingList/item', product);
+    },
     save(shoppingList) {
         return ApiService.post('v2/shoppingList', shoppingList);
     },

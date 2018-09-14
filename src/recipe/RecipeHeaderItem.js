@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { AppConstant } from '../common/AppConstant';
 import { Button, ListItem, Checkbox, ListItemText, ListItemSecondaryAction } from "@material-ui/core";
 import PropTypes from 'prop-types';
+import {blue} from '@material-ui/core/colors';
 
 export const RecipeHeaderItem = (props) => {
     const onCheckAction = (e) => {
@@ -32,7 +33,7 @@ export const RecipeHeaderItem = (props) => {
             return ''
         } else {
             return <ListItemSecondaryAction >
-                <Button variant="outlined">
+                <Button variant="outlined" color="primary">
                     <Link to={`${AppConstant.LOCATION.newRecipe.path}/${props.recipe._id}`}>
                         EDIT
                     </Link>
@@ -41,8 +42,10 @@ export const RecipeHeaderItem = (props) => {
         }
     }
 
-    return (
-        <ListItem>
+    return ( 
+        <ListItem 
+            style={{backgroundColor:blue[100]}}
+            >
             {isCheckboxDisplay()}
             <ListItemText primary={props.recipe.name} />
             {isEditBtnDisplay()}

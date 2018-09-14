@@ -15,7 +15,7 @@ export const CategoryList = (props) => {
         }
         return list.map((category, index) => {
             return <CategoryItem
-                key={index +'-'+(new Date().getTime())} category={{...category}}
+                key={index + '-' + (new Date().getTime())} category={{ ...category }}
                 parentComponent={props.parentComponent}
                 onSelectedProd={props.onSelectedProd}>
             </CategoryItem>;
@@ -23,12 +23,15 @@ export const CategoryList = (props) => {
     }
     const isDisplayCatNewBtn = () => {
         return CategoryDisplayService.categoryNewBtn(props.parentComponent).display ?
-            <Button color="primary" variant="outlined">
-                <Link 
-                    to={AppConstant.LOCATION.category.path + '/new_category_create'}>
-                    New Category
+            <div style={styles.buttons}>
+                <Button color="primary" variant="outlined">
+                    <Link
+                        to={AppConstant.LOCATION.category.path + '/new_category_create'}>
+                        New Category
                 </Link>
-            </Button>
+                </Button>
+            </div>
+
             : ''
     }
     return (
@@ -39,6 +42,11 @@ export const CategoryList = (props) => {
             </List>
         </div>
     )
+}
+const styles = {
+    buttons : {
+        margin: '10px'
+    }
 }
 
 CategoryList.propTypes = {

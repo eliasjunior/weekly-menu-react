@@ -5,9 +5,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import MenuIconComponent from '../MenuIconComponent';
-import { Toolbar, Typography, IconButton } from '@material-ui/core';
-import ArrowBack from '@material-ui/icons/ArrowBack';
-
+import { Toolbar, Typography } from '@material-ui/core';
 
 export const AppWeekBar = (props) => {
     return (

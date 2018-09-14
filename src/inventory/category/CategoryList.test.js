@@ -5,8 +5,6 @@ import {shallow} from 'enzyme';
 
 
 describe("CategoryList", () => {
-
-
     it("should contain at least one category in the list", () => {
 
         const fakeList = [{name: 'test'}, {name: 'test 2'}];

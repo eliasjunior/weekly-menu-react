@@ -1,5 +1,5 @@
 import React from 'react';
-import { List, ListItem, ListItemText, Button, ListItemSecondaryAction } from '@material-ui/core';
+import { List, ListItem, Button, ListItemSecondaryAction } from '@material-ui/core';
 import ShoppingListService from './ShoppingListService';
 import MessageComponent from '../../common/MessageComponent';
 import { AppWeekBar } from '../../common/AppWeekBar';
@@ -30,14 +30,14 @@ class ShoppingListHistoryPage extends React.Component {
                 <List>
                     {this.state.list.map(item => {
                         return <ListItem key={item._id}>
-                            <Button color="primary">
+                            <Button color="primary" variant="outlined">
                                 <Link to={`${AppConstant.LOCATION.shopping.path}`}
                                     onClick={() => this.props.selectedShopList(item)}>
                                     {item.name}
                                 </Link>
                             </Button>
                             <ListItemSecondaryAction>
-                                <Button color="primary">
+                                <Button color="secondary" variant="outlined">
                                     <Link to={`${AppConstant.LOCATION.editShoppingList.path}/${item._id}`}
                                         onClick={() => this.props.editShoppingList(item)}>
                                         EDIT

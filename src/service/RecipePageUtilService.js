@@ -15,7 +15,9 @@ const RecipePageUtilService = {
             .sort((prodA, prodB) => prodA.name > prodB.name ? 1 : -1);
         
         recProds.forEach(product => {
-            UtilCollection.findItemBinarySearch(product.name, products);
+            if(UtilCollection.findItemBinarySearch(product.name, products)) {
+                product.checked = true;
+            };
         });
         return categories;
     },

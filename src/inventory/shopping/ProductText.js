@@ -1,6 +1,7 @@
 import React from 'react';
-import { ListItemText, ListItem } from '@material-ui/core';
-import { cyan } from '@material-ui/core/colors';
+import { ListItemText, ListItem, Divider } from '@material-ui/core';
+import { blue } from '@material-ui/core/colors';
+import ShoppingListService from './ShoppingListService'
 
 class ProductText extends React.Component {
     constructor(props) {
@@ -11,17 +12,29 @@ class ProductText extends React.Component {
         this.onItemCompleted = this.onItemCompleted.bind(this);
     }
     onItemCompleted() {
-        this.setState({ completed: !this.state.completed })
+        const updateData = {...this.state};
+        updateData.completed = !this.state.completed;
+        this.setState({ completed: !this.state.completed });
+
+        console.log('to send', updateData)
+        
+        ShoppingListService
+            .updateItem(updateData)
+            .then( doc => {
+                console.log('updated stuffs', doc)
+            }).catch(reason => this.props.onHandleMessage({ message: reason.message }));
     }
     render() {
         const displayText = () => {
             return this.state.recName ?
-                <ListItemText style={this.state.completed ? styles.completed : styles.notCompleted}
+                <ListItemText 
+                    style={this.state.completed ? styles.completed : styles.notCompleted}
                     primary={this.state.name}
                     secondary={`Recipe: ${this.state.recName}`}>
                 </ListItemText>
                 :
-                <ListItemText style={this.state.completed ? styles.completed : styles.notCompleted}
+                <ListItemText 
+                    style={this.state.completed ? styles.completed : styles.notCompleted}
                     primary={this.state.name}>
                 </ListItemText>
         }
@@ -33,6 +46,7 @@ class ProductText extends React.Component {
                     style={!this.state.completed ? styles.rowNotCompleted : styles.rowCompleted}>
                     {displayText()}
                 </ListItem>
+                <Divider></Divider>
             </div>
         )
     }
@@ -48,7 +62,7 @@ const styles = {
         textDecorationColor: '#E18728'
     },
     rowNotCompleted: {
-        backgroundColor: cyan[200]
+        backgroundColor: blue[200]
     },
     rowCompleted: {
         backgroundColor: 'white'

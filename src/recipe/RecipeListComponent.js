@@ -1,8 +1,9 @@
 import React from 'react';
-import { List, Divider } from '@material-ui/core';
+import { List, ListItem, ListItemText, ListItemIcon } from '@material-ui/core';
 import { RecipeHeaderItem } from './RecipeHeaderItem';
 import { CategoryList } from '../inventory/category/CategoryList';
 import PropTypes from 'prop-types';
+import IconRecipe from '@material-ui/icons/Receipt'
 
 export const RecipeListComponent = (props) => {
     const buildRecipeList = () => {
@@ -23,7 +24,6 @@ export const RecipeListComponent = (props) => {
                             onSelectedProd={props.onSelectedProd}
                             parentComponent={props.parentComponent}>
                         </CategoryList>
-                        <Divider></Divider>
                     </div>)
             });
         } else {
@@ -34,7 +34,14 @@ export const RecipeListComponent = (props) => {
     // TODO do like in category, add to a service
     const isTitleDisplay = () => {
         if(props.title && props.recipes.length) {
-            return  <h4>{props.title}</h4> 
+            return <List>
+                        <ListItem>
+                            <ListItemIcon>
+                                <IconRecipe/>
+                            </ListItemIcon>
+                            <ListItemText primary={props.title}></ListItemText>
+                        </ListItem>
+                    </List>
         } else return '';
     }
     return (
