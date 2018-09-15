@@ -12,9 +12,10 @@ app.use(express.static('./build'));
 // });
 
 app.get('/*', (req, res) => {
-
+    console.log('*************************** herroku works')
+    console.log(path.join(__dirname))
+    console.log('*************************** herroku works')
     res.sendFile(path.join(__dirname, './build', 'index.html'));
-
 });
 
 app.listen(process.env.PORT || 9000);

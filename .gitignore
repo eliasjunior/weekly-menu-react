@@ -29,7 +29,6 @@ npm-debug.log
 #bower
 
 node_modules/
-build/
 www/build/
 platforms/
 plugins/
