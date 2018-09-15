@@ -10,7 +10,7 @@ class ShoppingPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            shoppingList: this.props.shoppingList,
+            shoppingList: props.shoppingList,
             completed: false
         }
         this.buildShoppingList = this.buildShoppingList.bind(this);
@@ -27,8 +27,6 @@ class ShoppingPage extends React.Component {
             .mapRecAndCatToProducts(shoppingList.recipes);
 
         const mergedCategories = ShoppingListUtilService.mergeCategories(recipes, categories);
-
-        console.log('mergedCategories', mergedCategories)
 
         return mergedCategories.map((category, index) => {
             return <div key={`div-${index}`}>

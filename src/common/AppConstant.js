@@ -1,6 +1,7 @@
 export const AppConstant = {
     LOCATION: {
-        home: { path: '/', label: 'Products', menu: true  },
+        dashboard: { path: '/', label: 'Dashboard', menu: false  },
+        products: { path: '/products', label: 'Products', menu: true  },
         newShoppingList: { path:'/newshopping', label: 'New Shopping List', menu: true },
         editShoppingList: { path:'/editshopping', label: '', menu: false },
         shoppingHistory: { path: '/shoppinghistory', label: 'Shopping history', menu: true  },
@@ -8,7 +9,7 @@ export const AppConstant = {
         newRecipe: { path: '/recipeCreate/new', label:  'New Recipe' , menu: true },
         category: { path: '/category', label: '', menu: false  },
         product: { path: '/product', label: '', menu: false  },
-        shopping: { path: '/shopping', label: 'Shopping List', menu: false  },
+        shopping: { path: '/shopping', label: 'Shopping List', menu: false  }
     },
     PARENT_COMPONENT: {
         RECIPE_PAGE: 'RecipePage',

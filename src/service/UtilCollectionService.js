@@ -58,17 +58,20 @@ const UtilCollectionService = {
     findItemBinarySearch(targetName, list) {
         let floor = 0;
         let ceil = list.length;
-        let half = Math.floor(list.length / 2);
 
         while (floor < ceil) {
+            const distance = ceil - floor;
+            let half = Math.floor(distance / 2) + floor;
+
             if (list[half].name === targetName) {
                 return list[half];
             } else if (targetName < list[half].name) {
-                ceil = half;
+                //the ? is to avoid same index  to get into infinity loop
+                ceil = ceil !== half ? half : half - 1;
             } else {
-                floor = half;
+                //the ? is to avoid same index  to get into infinity loop
+                floor = floor !== half ? half : half + 1;
             }
-            half = Math.floor((ceil + floor) / 2);
         }
         return false;
     },
@@ -83,7 +86,6 @@ const UtilCollectionService = {
             .sort((prodA, prodB) => prodA.name > prodB.name ? 1 : -1);
     }
 }
-
 function reducerNewList(item, list) {
     const createANewList = (newList, currentItem) => {
         const isItemIn = newList
@@ -103,7 +105,6 @@ function reducerNewList(item, list) {
     const newList = list.reduce(createANewList, [list[0]]);
     return newList;
 }
-
 function reducerAllCategories(acc, recipe) {
     acc = acc.concat(recipe.categories);
     return acc;

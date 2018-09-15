@@ -15,6 +15,7 @@ import SelectionCollectionService from './service/UtilCollectionService';
 import ShoppingListHistoryPage from './inventory/shopping/ShoppingListHistoryPage';
 import ShoppingPage from './inventory/shopping/ShoppingPage';
 import MessageComponent from './common/MessageComponent';
+import Dashboard from './Dashboard';
 
 class App extends React.Component {
     constructor(props) {
@@ -47,11 +48,11 @@ class App extends React.Component {
                     .removeRecipe(param.recipe, this.state.recipesToInclude);
             this.setState({ recipesToInclude });
 
-            console.log('>', recipesToInclude)
+            console.log('*', recipesToInclude)
         }
     }
     selectedShopList(shoppingList) {
-        console.log('child set', shoppingList)
+        console.log('* child set', shoppingList)
         this.setState({ shoppingList });
     }
     editShoppingList(shoppingList) {
@@ -101,9 +102,13 @@ class App extends React.Component {
             <MuiThemeProvider theme={theme}>
                 <div>
                     {this.messageComponent.call(this)}
-                    <Route exact path={AppConstant.LOCATION.home.path}
+                    <Route exact path={AppConstant.LOCATION.products.path}
                         render={(props) => <InventoryPage {...props}
                             onHandleMessage={this.handleMessage}></InventoryPage>}>
+                    </Route>
+                    <Route exact path={AppConstant.LOCATION.dashboard.path}
+                        render={(props) => <Dashboard {...props}
+                            onHandleMessage={this.handleMessage}></Dashboard>}>
                     </Route>
                     <Route path={AppConstant.LOCATION.product.path}
                         render={(props) => <ProductFormPage {...props}
@@ -112,6 +117,7 @@ class App extends React.Component {
                     <Route path={AppConstant.LOCATION.shoppingHistory.path}
                         render={(props) => <ShoppingListHistoryPage  {...props}
                             selectedShopList={this.selectedShopList}
+                            onHandleMessage={this.handleMessage}
                             editShoppingList={this.editShoppingList} />}>
                     </Route>
                     <Route path={AppConstant.LOCATION.shopping.path}
@@ -122,7 +128,8 @@ class App extends React.Component {
                     <Route
                         path={`${AppConstant.LOCATION.category.path}/:id`}
                         render={(props) => <CategoryFormPage {...props}
-                            onHandleMessage={this.handleMessage}></CategoryFormPage>}>
+                            onHandleMessage={this.handleMessage}>
+                            </CategoryFormPage>}>
                     </Route>
                     <Route
                         path={AppConstant.LOCATION.recipeList.path}

@@ -36,7 +36,9 @@ class ShoppingListComponent extends React.Component {
                     this.setState(() => ({ categories }))
                 }
             })
-            .catch(reason => this.props.onHandleMessage({ message: reason.message }));
+            .catch(reason => {
+                this.props.onHandleMessage({ message: reason.message })
+            });
     }
     createShoppingList() {
         const shoppintList =
@@ -124,7 +126,7 @@ function buildObjectToSend(selectedProducts, recipesToInclude, id) {
 function updateShoppingList(shoppingList, categories) {
     const categoriesFromRec = shoppingList.categories;
 
-    const allProducts = UtilCollectionService.getAllProducts(categoriesFromRec)
+    const allProducts = UtilCollectionService.getAllSortProducts(categoriesFromRec)
 
     let selectedProducts = [...this.state.selectedProducts];
     categories.forEach(category => {
