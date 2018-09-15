@@ -48,7 +48,7 @@ export class ProductComponent extends React.Component {
                     editFieldMode: !this.state.editFieldMode,
                 };
                 this.setState(prevState => factoryMode(prevState, newState));
-            }).catch(reason => console.error(reason));
+            }).catch(reason => this.props.onHandleMessage({ message: reason.message }));
     }
     onChangeName(name) {
         const newState = {
@@ -80,8 +80,8 @@ export class ProductComponent extends React.Component {
             </CrudActions>
             : ''
     }
-    deleteItem(productId) {
-        console.log('not implemented  yet', productId)
+    deleteItem() {
+        this.props.onHandleMessage({ message: 'not implemented  yet' })
     }
     render() {
         return (

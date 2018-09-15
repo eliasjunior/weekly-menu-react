@@ -60,9 +60,7 @@ const UtilCollectionService = {
         let ceil = list.length;
         let half = Math.floor(list.length / 2);
 
-        // ii avoid infinity if there is some thing wrong in the algorithm below
-        let ii = 0;
-        while (floor < ceil && ii < 10000) {
+        while (floor < ceil) {
             if (list[half].name === targetName) {
                 return list[half];
             } else if (targetName < list[half].name) {
@@ -71,8 +69,6 @@ const UtilCollectionService = {
                 floor = half;
             }
             half = Math.floor((ceil + floor) / 2);
-
-            ii++
         }
         return false;
     },

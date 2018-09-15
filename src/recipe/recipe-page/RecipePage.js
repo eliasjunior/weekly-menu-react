@@ -30,7 +30,8 @@ class RecipePage extends React.Component {
             .then(loadRecipe.bind(this, this.props.match.params.id))
             .then(recipe => {
                 if (recipe) {
-                    const categoriesOfRecipe = RecipePageUtilService.matchProductRecipe(recipe.categories, this.state.categories);
+                    const categoriesOfRecipe = RecipePageUtilService
+                        .matchProductRecipeAndAddCheck(recipe.categories, this.state.categories);
                     let selectedProducts = RecipePageUtilService.filterProdSelected(categoriesOfRecipe);
                     this.setState(prevState => factoryMode(prevState, {
                         name: recipe.name,

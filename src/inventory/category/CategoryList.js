@@ -17,6 +17,7 @@ export const CategoryList = (props) => {
             return <CategoryItem
                 key={index + '-' + (new Date().getTime())} category={{ ...category }}
                 parentComponent={props.parentComponent}
+                onHandleMessage={props.onHandleMessage}
                 onSelectedProd={props.onSelectedProd}>
             </CategoryItem>;
         });

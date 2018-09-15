@@ -68,9 +68,9 @@ class App extends React.Component {
         const alert = this.state.alert;
         if (alert.message) {
             return <MessageComponent
-                message={alert.message} 
-                isOpen={alert.open} 
-                onClose={this.handleClose} 
+                message={alert.message}
+                isOpen={alert.open}
+                onClose={this.handleClose}
                 type={alert.type}>
             </MessageComponent>
         }
@@ -94,17 +94,20 @@ class App extends React.Component {
             message: '',
             open: false
         }
-        this.setState({alert})
+        this.setState({ alert })
     }
     render() {
         return (
             <MuiThemeProvider theme={theme}>
                 <div>
                     {this.messageComponent.call(this)}
-                    <Route exact path={AppConstant.LOCATION.home.path} component={InventoryPage}></Route>
-                    <Route path={AppConstant.LOCATION.product.path} 
+                    <Route exact path={AppConstant.LOCATION.home.path}
+                        render={(props) => <InventoryPage {...props}
+                            onHandleMessage={this.handleMessage}></InventoryPage>}>
+                    </Route>
+                    <Route path={AppConstant.LOCATION.product.path}
                         render={(props) => <ProductFormPage {...props}
-                                onHandleMessage={this.handleMessage}></ProductFormPage>}>
+                            onHandleMessage={this.handleMessage}></ProductFormPage>}>
                     </Route>
                     <Route path={AppConstant.LOCATION.shoppingHistory.path}
                         render={(props) => <ShoppingListHistoryPage  {...props}
@@ -113,8 +116,8 @@ class App extends React.Component {
                     </Route>
                     <Route path={AppConstant.LOCATION.shopping.path}
                         render={(props) => <ShoppingPage  {...props}
-                            shoppingList={this.state.shoppingList} 
-                            onHandleMessage={this.handleMessage}/>}>
+                            shoppingList={this.state.shoppingList}
+                            onHandleMessage={this.handleMessage} />}>
                     </Route>
                     <Route
                         path={`${AppConstant.LOCATION.category.path}/:id`}
@@ -143,17 +146,17 @@ class App extends React.Component {
                     </Route>
                     <Switch>
                         <Route
-                            path={`${AppConstant.LOCATION.newRecipe.path}/:id`} 
-                            render={(props) => <RecipePage {...props} 
-                                    onHandleMessage={this.handleMessage}>
-                                </RecipePage>
+                            path={`${AppConstant.LOCATION.newRecipe.path}/:id`}
+                            render={(props) => <RecipePage {...props}
+                                onHandleMessage={this.handleMessage}>
+                            </RecipePage>
                             }>
                         </Route>
                         <Route
-                            path={AppConstant.LOCATION.newRecipe.path} 
-                            render={(props) => <RecipePage {...props} 
-                                    onHandleMessage={this.handleMessage}>
-                                </RecipePage>
+                            path={AppConstant.LOCATION.newRecipe.path}
+                            render={(props) => <RecipePage {...props}
+                                onHandleMessage={this.handleMessage}>
+                            </RecipePage>
                             }>
                         </Route>
                     </Switch>

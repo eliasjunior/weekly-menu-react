@@ -15,7 +15,6 @@ class CategoryItem extends React.Component {
         super(props);
         this.listProducts = this.listProducts.bind(this);
         this.selectionProd = this.selectionProd.bind(this);
-        
     }
     listProducts() {
         const category = {
@@ -31,7 +30,8 @@ class CategoryItem extends React.Component {
                     category={category}
                     product={product}
                     parentComponent={this.props.parentComponent}
-                    onSelectionProd={this.selectionProd}>
+                    onSelectionProd={this.selectionProd}
+                    onHandleMessage={this.props.onHandleMessage}>
                 </ProductComponent>;
             };
             return products.map(productListView);

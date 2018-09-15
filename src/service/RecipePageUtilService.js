@@ -1,29 +1,32 @@
 import UtilCollection from './UtilCollectionService';
+import CloneDeep from 'lodash.clonedeep';
+
 const RecipePageUtilService = {
-    matchProductRecipe(recCategories, categories) {
-        const recProds = recCategories.reduce( (acc, catItem) => {
+    matchProductRecipeAndAddCheck(recCategories, categories) {
+        const reducerAllProducts =  (acc, catItem) => {
             acc = acc.concat(catItem.products)
             return acc;
-        }, []);
-        let products = categories.reduce( (acc, catItem) => {
-            acc = acc.concat(catItem.products);
-            return acc;
-        }, []);
+        };
+        const allProductsRecipe = recCategories.reduce(reducerAllProducts, []);
+
+        let allProducts = categories.reduce(reducerAllProducts, []);
 
         // sort for binary search
-        products = products
+        allProducts = allProducts
             .sort((prodA, prodB) => prodA.name > prodB.name ? 1 : -1);
         
-        recProds.forEach(product => {
-            if(UtilCollection.findItemBinarySearch(product.name, products)) {
-                product.checked = true;
+        allProductsRecipe.forEach(product => {
+            const productFromList = UtilCollection
+                .findItemBinarySearch(product.name, allProducts)
+            if(productFromList) {
+                productFromList.checked = true;
             };
         });
         return categories;
     },
     
     filterProdSelected(categories) {
-        let deepCopy = categories.map(cat => ({...cat}));
+        let deepCopy = CloneDeep(categories);
 
         return deepCopy
             .filter(category => {
