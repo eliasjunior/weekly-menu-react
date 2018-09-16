@@ -5,7 +5,7 @@
 
 
 ## Tasks, for priority sequence
-
+- Add select all to new shopping list
 - Polish
 - add test
 - Review deep copy components

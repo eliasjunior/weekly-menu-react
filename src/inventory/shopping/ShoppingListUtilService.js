@@ -38,12 +38,11 @@ export const ShoppingListUtilService = {
             .getAllSortCategoriesRecipe(recipes);
 
         const mergeProductOfCategory = category => {
-            const categoryInrecipe = Util
-                .findItemBinarySearch(category.name, allCategoriesRecipe);
-
-            if (categoryInrecipe) {
-                category.products = category.products.concat(categoryInrecipe.products)
-            }
+            allCategoriesRecipe.forEach(catRecipe => {
+                if(catRecipe.name === category.name) {
+                    category.products = category.products.concat(catRecipe.products)
+                }
+            });
             return category;
         }    
 
