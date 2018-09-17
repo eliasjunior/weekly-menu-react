@@ -7,18 +7,19 @@ import { AppConstant } from '../../common/AppConstant';
 import CategoryDisplayService from './CategoryDisplayService';
 import PropTypes from 'prop-types';
 
-export const CategoryList = (props) => {
+function CategoryList(props){
     const buildList = (list) => {
         if (!list) {
             console.error('Category list is null');
             return;
         }
-        return list.map((category, index) => {
+        return list.map(category => {
             return <CategoryItem
-                key={index + '-' + (new Date().getTime())} category={{ ...category }}
+                key={category._id} category={{ ...category }}
                 parentComponent={props.parentComponent}
                 onHandleMessage={props.onHandleMessage}
-                onSelectedProd={props.onSelectedProd}>
+                onSelectedProd={props.onSelectedProd}
+                onSelectAllProd={props.onSelectAllProd}>
             </CategoryItem>;
         });
     }
@@ -32,7 +33,6 @@ export const CategoryList = (props) => {
                 </Link>
                 </Button>
             </div>
-
             : ''
     }
     return (

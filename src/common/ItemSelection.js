@@ -3,15 +3,16 @@ import Checkbox from '@material-ui/core/Checkbox'
 
 export const ItemSelection = (props) => {
     const onChangeSelection = (e) => {
-        props.product.checked = e.target.checked;
+        //props.product.checked = e.target.checked;
         const itemProps = {
-            checked: props.product.checked,
+            checked: e.target.checked,
             product: props.product,
             category: props.parent
         }
         props.onChangeSelection(itemProps);
     }
     // function print() {
+    //     if(props.product.checked)
     //     console.log('updated ' + props.product.name, props.product.checked)
     // }
     return (

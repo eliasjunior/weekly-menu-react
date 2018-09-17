@@ -27,6 +27,11 @@ const CategoryDisplayService = {
         return {
             display: parentComponent === AppConstant.PARENT_COMPONENT.INVENTORY_PAGE
         }
+    },
+    selectAllBtn(parentComponent) {
+        return {
+            display: parentComponent === AppConstant.PARENT_COMPONENT.RECIPE_PAGE
+        }
     }
 }
 export default CategoryDisplayService;

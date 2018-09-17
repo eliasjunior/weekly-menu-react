@@ -1,3 +1,5 @@
+import CloneDeep from 'lodash.clonedeep'
+
 const UtilCollectionService = {
     addItem(itemToBeAdded, list) {
         const categories = reducerNewList(itemToBeAdded.category, list);
@@ -84,6 +86,45 @@ const UtilCollectionService = {
         return categories
             .reduce(reducerAllProducts, [])
             .sort((prodA, prodB) => prodA.name > prodB.name ? 1 : -1);
+    },
+    updateProductsSelection(stateCategory, selected) {
+        const categories = CloneDeep(stateCategory)
+        const categoryToUpdate = categories.find(cat => cat._id === selected.catId)
+
+        const updatedProds = categoryToUpdate.products
+            .map(prod => {
+                prod.checked = selected.checked;
+                return prod;
+            });
+        categoryToUpdate.products = updatedProds;
+
+        return categories;
+    },
+    updateProductSelection(stateCategory, selected) {
+        const category = selected.category;
+        const product = selected.product;
+
+        const categories = CloneDeep(stateCategory)
+        categories.forEach(cat => {
+            if (cat._id === category._id) {
+                cat.products.forEach(prod => {
+                    if (prod._id === product._id) {
+                        prod.checked = selected.checked;
+                    }
+                })
+            }
+        })
+        return categories;
+    },
+    getCategorySelected(stateCategory) {
+        const categories = CloneDeep(stateCategory)
+
+        return categories.filter(cat => {
+            return cat.products.filter(prod => prod.checked).length > 0
+        }).map(cat => {
+            cat.products = cat.products.filter(prod => prod.checked)
+            return cat
+        })
     }
 }
 function reducerNewList(item, list) {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { AppWeekBar } from "../../common/AppWeekBar";
-import { CategoryList } from '../../inventory/category/CategoryList';
+import CategoryList from '../../inventory/category/CategoryList';
 import { TextField } from '@material-ui/core';
 import FormChildAction from '../../common/FormChildAction';
 import RecipeService from '../RecipeService';
@@ -14,15 +14,14 @@ class RecipePage extends React.Component {
         super(props);
         this.state = {
             categories: [],
-            selectedProducts: [],
             name: '',
-            id: this.props.match.params.id,
             title: this.props.match.params.id ? 'Update Recipe' : 'New Recipe'
         };
         this.selectedProd = this.selectedProd.bind(this);
         this.saveRecipe = this.saveRecipe.bind(this);
         this.updateRecipe = this.updateRecipe.bind(this);
         this.onChangeName = this.onChangeName.bind(this);
+        this.selectAllProd = this.selectAllProd.bind(this);
     }
     componentDidMount() {
         CategoryService
@@ -32,28 +31,26 @@ class RecipePage extends React.Component {
                 if (recipe) {
                     const categoriesOfRecipe = RecipePageUtilService
                         .matchProductRecipeAndAddCheck(recipe.categories, this.state.categories);
-                    let selectedProducts = RecipePageUtilService.filterProdSelected(categoriesOfRecipe);
-                    this.setState(prevState => factoryMode(prevState, {
+
+                    this.setState({
                         name: recipe.name,
-                        categories: categoriesOfRecipe,
-                        selectedProducts
-                    }));
+                        categories: categoriesOfRecipe
+                    })
                 }
             })
             .catch(reason => this.props.onHandleMessage({ message: reason.message }));
     }
     selectedProd(selected) {
-        // need to receice a category selected
-        let selectedProducts = [...this.state.selectedProducts];
-        const category = selected.category;
-        const product = selected.product;
+        const categories = UtilCollectionService
+            .updateProductSelection(this.state.categories, selected)
 
-        if (selected.checked) {
-            selectedProducts = UtilCollectionService.addItem({ category, product }, selectedProducts)
-        } else {
-            selectedProducts = UtilCollectionService.removeItem({ category, product }, selectedProducts)
-        }
-        this.setState(prevState => factoryMode(prevState, { selectedProducts }));
+        this.setState({ categories });
+    }
+    selectAllProd(selected) {
+        const categories =
+            UtilCollectionService.updateProductsSelection(this.state.categories, selected);
+
+        this.setState({ categories });
     }
     onChangeName(e) {
         this.setState({ name: e.target.value });
@@ -61,7 +58,7 @@ class RecipePage extends React.Component {
     saveRecipe() {
         const recipe = {
             name: this.state.name,
-            categories: this.state.selectedProducts
+            categories: UtilCollectionService.getCategorySelected(this.state.categories)
         };
         RecipeService
             .save(recipe)
@@ -73,8 +70,8 @@ class RecipePage extends React.Component {
     updateRecipe() {
         const recipe = {
             name: this.state.name,
-            _id: this.state.id,
-            categories: this.state.selectedProducts
+            _id: this.props.match.params.id,
+            categories: UtilCollectionService.getCategorySelected(this.state.categories)
         };
         RecipeService
             .update(recipe)
@@ -103,7 +100,8 @@ class RecipePage extends React.Component {
                 <CategoryList
                     list={this.state.categories}
                     parentComponent="RecipePage"
-                    onSelectedProd={this.selectedProd}>
+                    onSelectedProd={this.selectedProd}
+                    onSelectAllProd={this.selectAllProd}>
                 </CategoryList>
             </div>
         );
@@ -118,22 +116,13 @@ const styles = {
     }
 };
 function loadRecipe(id, categories) {
-    this.setState(prevState => factoryMode(prevState, { categories }));
+    this.setState({ categories });
     if (id) {
         return RecipeService.getOne(id);
     } else {
         return Promise.resolve(null);
     }
 }
-function factoryMode(prevState, newState){
-    let {
-        name = prevState.name,
-        categories = prevState.categories,
-        selectedProducts = prevState.selectedProducts,
-        message = prevState.message
-    } = newState;
-    return { name, categories, selectedProducts, message };
-};
 
 export default RecipePage
 

@@ -4,8 +4,9 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ProductService from './ProductService';
 import { EditableLabel } from '../../common/EditableLabel';
 import { CrudActions } from '../../common/CrudActions';
-import { ItemSelection } from '../../common/ItemSelection'; 
-import DisplayService  from '../category/CategoryDisplayService';
+import { ItemSelection } from '../../common/ItemSelection';
+import DisplayService from '../category/CategoryDisplayService';
+import CloneDeep from 'lodash.clonedeep'
 
 // TODO add new states here
 const factoryMode = (prevState, newState) => {
@@ -29,6 +30,14 @@ export class ProductComponent extends React.Component {
         this.updateName = this.updateName.bind(this);
         this.swapIcon = this.swapIcon.bind(this);
         this.selectedProd = this.selectedProd.bind(this);
+    }
+    componentDidUpdate(prevProps) {
+        const prevProduct = prevProps.product;
+        const currentProd = this.props.product;
+        if (prevProduct.checked !== currentProd.checked) {
+            console.log(`Update product ${currentProd.name}`)
+            this.setState({ product: CloneDeep(currentProd) })
+        }
     }
     swapIcon() {
         const newState = {
@@ -62,7 +71,7 @@ export class ProductComponent extends React.Component {
     displayCheckBtn() {
         // TODO check names, it will be generic or cat/prod
         return DisplayService.productCheckboxBtn(this.props.parentComponent).display ?
-            <ItemSelection key={(new Date().getTime())}
+            <ItemSelection
                 onChangeSelection={this.selectedProd}
                 product={this.state.product}
                 parent={this.props.category}>
@@ -85,8 +94,8 @@ export class ProductComponent extends React.Component {
     }
     render() {
         return (
-            <ListItem key={this.state.product._id}   >
-                {this.displayCheckBtn()} 
+            <ListItem key={this.props.product._id}   >
+                {this.displayCheckBtn()}
                 <EditableLabel
                     product={this.props.product}
                     name={this.props.product.name}

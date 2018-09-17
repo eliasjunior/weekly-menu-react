@@ -22,14 +22,12 @@ class App extends React.Component {
         super(props);
         this.state = {
             recipesToInclude: [],
-            shoppingList: null,
             alert: {
                 message: null,
                 open: false
             }
         }
         this.callbackIncludeRecipe = this.callbackIncludeRecipe.bind(this);
-        this.selectedShopList = this.selectedShopList.bind(this);
         this.editShoppingList = this.editShoppingList.bind(this);
         this.handleClose = this.handleClose.bind(this);
         this.handleMessage = this.handleMessage.bind(this);
@@ -50,10 +48,6 @@ class App extends React.Component {
 
             console.log('*', recipesToInclude)
         }
-    }
-    selectedShopList(shoppingList) {
-        console.log('* child set', shoppingList)
-        this.setState({ shoppingList });
     }
     editShoppingList(shoppingList) {
         console.log('Update set', shoppingList)
@@ -116,11 +110,10 @@ class App extends React.Component {
                     </Route>
                     <Route path={AppConstant.LOCATION.shoppingHistory.path}
                         render={(props) => <ShoppingListHistoryPage  {...props}
-                            selectedShopList={this.selectedShopList}
                             onHandleMessage={this.handleMessage}
                             editShoppingList={this.editShoppingList} />}>
                     </Route>
-                    <Route path={AppConstant.LOCATION.shopping.path}
+                    <Route path={`${AppConstant.LOCATION.shopping.path}/:id`}
                         render={(props) => <ShoppingPage  {...props}
                             shoppingList={this.state.shoppingList}
                             onHandleMessage={this.handleMessage} />}>

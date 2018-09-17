@@ -5,18 +5,25 @@ import { ShoppingListUtilService } from './ShoppingListUtilService';
 import { grey } from '@material-ui/core/colors';
 import './ShoppingPage.css'
 import ProductText from './ProductText';
+import ShoppingListService from './ShoppingListService';
 
 class ShoppingPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            shoppingList: props.shoppingList,
+            shoppingList: [],
             completed: false
         }
         this.buildShoppingList = this.buildShoppingList.bind(this);
     }
+    componentDidMount() {
+        ShoppingListService
+            .getOne(this.props.match.params.id)
+            .then(response => this.setState({shoppingList: response}))
+            .catch(reason => this.props.onHandleMessage({ message: reason.message }))
+    }
     buildShoppingList() {
-        if (!this.state.shoppingList || this.state.shoppingList.length === 0) {
+        if (this.state.shoppingList.length === 0) {
             return;
         }
         const shoppingList = this.state.shoppingList;
@@ -24,14 +31,14 @@ class ShoppingPage extends React.Component {
         const categories = shoppingList.categories;
 
         const recipes = ShoppingListUtilService
-            .mapRecAndCatToProducts(shoppingList.recipes);
+            .addRecInfoToProduct(shoppingList.recipes);
 
         const mergedCategories = ShoppingListUtilService.mergeCategories(recipes, categories);
 
         return mergedCategories.map((category, index) => {
-            return <div key={`div-${index}`}>
-                <ListItem key={index}
-                    style={{ backgroundColor: grey[200] }}>
+            return <div key={category._id}>
+                <ListItem 
+                    style={{ backgroundColor: grey[300] }}>
                     <ListItemText>{category.name}</ListItemText>
                 </ListItem>
                 <Collapse in={true} timeout="auto" unmountOnExit>
@@ -40,7 +47,7 @@ class ShoppingPage extends React.Component {
                             .map((prod, j) => <ProductText {...prod}
                                 shopId={shoppingList._id}
                                 catId={category._id}
-                                key={`${index}-${j}`}
+                                key={`${category._id}-${prod._id}`}
                                 onHandleMessage={this.props.onHandleMessage}>
                             </ProductText>)}
                     </List>

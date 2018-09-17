@@ -1,7 +1,7 @@
 import React from 'react';
 import { List, ListItem, ListItemText, ListItemIcon } from '@material-ui/core';
 import { RecipeHeaderItem } from './RecipeHeaderItem';
-import { CategoryList } from '../inventory/category/CategoryList';
+import CategoryList from '../inventory/category/CategoryList';
 import PropTypes from 'prop-types';
 import IconRecipe from '@material-ui/icons/Receipt'
 
@@ -10,7 +10,7 @@ export const RecipeListComponent = (props) => {
         if (props.recipes.length) {
             return props.recipes.map((recipe, index) => {
                 return (
-                    <div key={index}>
+                    <div key={recipe._id}>
                         <List>
                             <RecipeHeaderItem 
                                 recipe={recipe}

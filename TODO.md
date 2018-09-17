@@ -1,16 +1,15 @@
-## Requirements
-  Easy accesss to product list to creation of products CRUD
-  Product list should not be linked with Recipe (need api analysis)   
-  Recipes CRUD, what's Recipe? a product ? need to review the (design)
-
-
 ## Tasks, for priority sequence
+
+- review child changing state, should not change
 - Add select all to new shopping list
+- sort products list, prod of recipe list
 - Polish
 - add test
 - Review deep copy components
 
 ## DONE Cru not delete
+- Shopping page load by id (back end too)
+- fix bug repeated categories
 - Category Crud
 - New Shopping list
 - Product Crud
@@ -50,3 +49,7 @@
   - delete Product(later)
   - add form validation Product
  
+ ## Requirements
+  Easy accesss to product list to creation of products CRUD
+  Product list should not be linked with Recipe (need api analysis)   
+  Recipes CRUD, what's Recipe? a product ? need to review the (design)

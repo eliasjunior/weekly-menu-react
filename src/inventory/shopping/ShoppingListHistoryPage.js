@@ -27,10 +27,7 @@ class ShoppingListHistoryPage extends React.Component {
                     {this.state.list.map(item => {
                         return <ListItem key={item._id}>
                             <Button color="primary" variant="outlined">
-                                <Link to={AppConstant.LOCATION.shopping.path}
-                                    onClick={() => {
-                                        this.props.selectedShopList(item)
-                                    }}>
+                                <Link to={`${AppConstant.LOCATION.shopping.path}/${item._id}`}>
                                     {item.name}
                                 </Link>
                             </Button>

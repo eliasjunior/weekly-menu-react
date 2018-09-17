@@ -7,7 +7,7 @@ describe("ShoppingListUtilService", () => {
         const expected = attrs.expected;
 
         const recipesChanged = ShoppingListUtilService
-            .mapRecAndCatToProducts(attrs.recipes);
+            .addRecInfoToProduct(attrs.recipes);
 
         expect(recipesChanged).toEqual(expected);
 
@@ -19,7 +19,7 @@ describe("ShoppingListUtilService", () => {
         const categories = shoppinpListData.categories;
 
         const recipes = ShoppingListUtilService
-            .mapRecAndCatToProducts(shoppinpListData.recipes);
+            .addRecInfoToProduct(shoppinpListData.recipes);
        
         const mergeCategories = ShoppingListUtilService
             .mergeCategories(recipes, categories);
@@ -32,7 +32,7 @@ describe("ShoppingListUtilService", () => {
         const expected = case2.expected;
 
         const recipes = ShoppingListUtilService
-            .mapRecAndCatToProducts(shoppinpListData.recipes);
+            .addRecInfoToProduct(shoppinpListData.recipes);
         const categories = shoppinpListData.categories;
 
         const mergeCategories = ShoppingListUtilService
@@ -46,7 +46,7 @@ describe("ShoppingListUtilService", () => {
         const expected = case3.expected;
 
         const recipes = ShoppingListUtilService
-            .mapRecAndCatToProducts(shoppinpListData.recipes);
+            .addRecInfoToProduct(shoppinpListData.recipes);
 
         const categories = shoppinpListData.categories;
 
@@ -61,12 +61,28 @@ describe("ShoppingListUtilService", () => {
         const expected = case4.expected;
 
         const recipes = ShoppingListUtilService
-            .mapRecAndCatToProducts(shoppinpListData.recipes);
+            .addRecInfoToProduct(shoppinpListData.recipes);
             
         const categories = shoppinpListData.categories;
 
         const mergeCategories = ShoppingListUtilService
             .mergeCategories(recipes, categories);
+
+        expect(mergeCategories).toEqual(expected);
+    });
+    
+    it('should merge, not repeat category case 5', () => {
+        const case5 = mockData.case5;
+        const shoppinpListData = case5.shoppinpListData;
+        const expected = case5.expected;
+
+        const recipes = ShoppingListUtilService
+        .addRecInfoToProduct(shoppinpListData.recipes);
+
+        const categories = shoppinpListData.categories;
+
+        const mergeCategories = ShoppingListUtilService
+        .mergeCategories(recipes, categories);
 
         expect(mergeCategories).toEqual(expected);
     });

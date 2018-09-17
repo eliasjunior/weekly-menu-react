@@ -39,21 +39,32 @@ export const ShoppingListUtilService = {
 
         const mergeProductOfCategory = category => {
             allCategoriesRecipe.forEach(catRecipe => {
-                if(catRecipe.name === category.name) {
+                if (catRecipe.name === category.name) {
                     category.products = category.products.concat(catRecipe.products)
                 }
             });
             return category;
-        }    
+        }
 
-        let categoriesMerge =
+        const sortAllProducts = category => {
+            category.products = category.products
+                .sort((prodA, prodB) => prodA.name > prodB.name ? 1 : -1)
+            return category;
+        }
+
+        const categoriesMerge =
             CloneDeep(categories)
                 .map(mergeProductOfCategory)
-                .sort((catA, catB) => catA.name > catB.name ? 1 : -1);
+                .sort((catA, catB) => catA.name > catB.name ? 1 : -1)
 
-        return addMissingCategories(allCategoriesRecipe, categoriesMerge);
+        const missingCats =
+            addMissingCategories(allCategoriesRecipe, categoriesMerge)
+            .map(sortAllProducts)
+
+        return missingCats;
     },
-    mapRecAndCatToProducts(recipes) {
+
+    addRecInfoToProduct(recipes) {
         const mapProducts = (recipe, category) => {
             const newProds = category.products.map(product => {
                 return {
@@ -66,12 +77,25 @@ export const ShoppingListUtilService = {
             return category;
         }
         return recipes.map(recipe => {
-            const newCategories = 
+            const newCategories =
                 recipe.categories
                     .map(mapProducts.bind(null, recipe));
             recipe.categories = newCategories;
             return recipe;
         });
+    },
+    groupCategory(categories) {
+        let result = []
+        categories.forEach(category => {
+            let categoryIn = result[category.name];
+            if (categoryIn) {
+                categoryIn.products = [...categoryIn.products, ...category.products]
+            } else {
+                result[category.name] = category
+            }
+            return result
+        })
+        return Object.entries(result).map(([key, values]) => values)
     }
 }
 
@@ -81,7 +105,9 @@ function addMissingCategories(allCatsRecipe, categoriesMerge) {
         return foundInCat === false;
     })
     if (catsMissing.length) {
-        categoriesMerge = categoriesMerge.concat(catsMissing);
+        const groupedCategories = ShoppingListUtilService
+            .groupCategory(catsMissing)
+        categoriesMerge = [...categoriesMerge, ...groupedCategories];
         return categoriesMerge;
     } else {
         return categoriesMerge;
