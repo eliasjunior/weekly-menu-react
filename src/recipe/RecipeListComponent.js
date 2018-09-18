@@ -8,7 +8,7 @@ import IconRecipe from '@material-ui/icons/Receipt'
 export const RecipeListComponent = (props) => {
     const buildRecipeList = () => {
         if (props.recipes.length) {
-            return props.recipes.map((recipe, index) => {
+            return props.recipes.map(recipe => {
                 return (
                     <div key={recipe._id}>
                         <List>
@@ -22,6 +22,10 @@ export const RecipeListComponent = (props) => {
                         <CategoryList
                             list={recipe.categories}
                             onSelectedProd={props.onSelectedProd}
+                            onSelectAllProd={ param=> {
+                                const withRecipe = {...param, recId: recipe._id}
+                                props.onSelectAllProdOfCatRec(withRecipe)
+                            }}
                             parentComponent={props.parentComponent}>
                         </CategoryList>
                     </div>)

@@ -2,29 +2,34 @@ import Button from '@material-ui/core/Button';
 import React from 'react';
 import { AppConstant } from '../../common/AppConstant';
 import { Link } from "react-router-dom";
+import CommmonStyles from '../../styles/CommonStyles';
+import AddIcon from '@material-ui/icons/Add';
+import { withStyles } from '@material-ui/core';
+import SaveIcon from '@material-ui/icons/Save';
 
-export const ShoppingCreateActions = (props) => {
+function ShoppingCreateActions(props){
+    const { classes } = props;
+    console.log(classes)
     const actionButton = () => {
         return props.isUpdate ?
-            <Button color="secondary" variant="outlined"
+            <Button color="secondary" variant="fab"
                 onClick={() => props.updateShoppingList()} >
-                Update List
+                <SaveIcon />
             </Button>
             :
-            <Button color="secondary" variant="outlined"
+            <Button color="secondary" variant="fab"
                 onClick={() => props.createShoppingList()} >
-                Create List
+                <SaveIcon />
             </Button>
     }
 
     return (
-        <div style={styles.buttons}>
-            <Button color="primary" 
-                variant="outlined" 
-                style={styles.firstButton}>
+        <div className={classes.floatingPadding +' '+classes.floatingBtn}>
+            <Button color="primary"
+                variant="fab">
                 <Link
                     to={AppConstant.LOCATION.recipeList.path}>
-                    Include Recipe
+                    <AddIcon />
                 </Link>
             </Button>
             {actionButton()}
@@ -32,11 +37,4 @@ export const ShoppingCreateActions = (props) => {
     )
 }
 
-const styles = {
-    buttons: {
-        margin: '10px'
-    },
-    firstButton: {
-        marginRight: '5px'
-    }
-}
+export default withStyles(CommmonStyles)(ShoppingCreateActions) 

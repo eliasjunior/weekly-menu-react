@@ -44,8 +44,7 @@ export const RecipeHeaderItem = (props) => {
 
     return ( 
         <ListItem 
-            style={{backgroundColor:blue[100]}}
-            >
+            style={{backgroundColor:blue[100]}}>
             {isCheckboxDisplay()}
             <ListItemText primary={props.recipe.name} />
             {isEditBtnDisplay()}

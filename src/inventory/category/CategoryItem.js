@@ -10,6 +10,7 @@ import { CategoryActions } from './CategoryActions';
 import { grey } from '@material-ui/core/colors';
 import DisplayService from './CategoryDisplayService';
 import CloneDeep from 'lodash.clonedeep'
+import SelectAllNone from './SelectAllNone';
 
 class CategoryItem extends React.Component {
     constructor(props) {
@@ -72,13 +73,10 @@ class CategoryItem extends React.Component {
     }
     displaySelectedAll() {
         if (DisplayService.selectAllBtn(this.props.parentComponent).display) {
-            return this.state.categorySelect ?
-                <button onClick={() => this.selectAllNoneProd()}>
-                    Unselect All
-                </button>
-                : <button onClick={() => this.selectAllNoneProd()}>
-                    Select All
-                </button>
+            return <SelectAllNone
+                checked={this.state.categorySelect}
+                onSelectAllNone={this.selectAllNoneProd}>
+            </SelectAllNone>
         } else return ''
     }
     render() {

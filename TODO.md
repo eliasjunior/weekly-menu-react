@@ -1,6 +1,6 @@
 ## Tasks, for priority sequence
 
-- review child changing state, should not change
+- bug add/unadd selecte all
 - Add select all to new shopping list
 - sort products list, prod of recipe list
 - Polish
@@ -8,6 +8,7 @@
 - Review deep copy components
 
 ## DONE Cru not delete
+- review child changing state, should not change
 - Shopping page load by id (back end too)
 - fix bug repeated categories
 - Category Crud

@@ -11,7 +11,7 @@ import blue from '@material-ui/core/colors/blue';
 import teal from '@material-ui/core/colors/orange';
 import { MuiThemeProvider } from '@material-ui/core';
 import CategoryFormPage from './inventory/category/CategoryFormPage';
-import SelectionCollectionService from './service/UtilCollectionService';
+import UtilCollectionService from './service/UtilCollectionService';
 import ShoppingListHistoryPage from './inventory/shopping/ShoppingListHistoryPage';
 import ShoppingPage from './inventory/shopping/ShoppingPage';
 import MessageComponent from './common/MessageComponent';
@@ -35,14 +35,14 @@ class App extends React.Component {
     callbackIncludeRecipe(param) {
         if (param.checked) {
             const recipesToInclude =
-                SelectionCollectionService
+                UtilCollectionService
                     .addRecipe(param.recipe, this.state.recipesToInclude);
             this.setState({ recipesToInclude });
 
             console.log('>', recipesToInclude)
         } else {
             const recipesToInclude =
-                SelectionCollectionService
+                UtilCollectionService
                     .removeRecipe(param.recipe, this.state.recipesToInclude);
             this.setState({ recipesToInclude });
 
@@ -142,7 +142,8 @@ class App extends React.Component {
                         render={(props) =>
                             <ShoppingListPage {...props}
                                 onHandleMessage={this.handleMessage}
-                                shoppingList={this.state.shoppingList} />}>
+                                shoppingList={this.state.shoppingList}
+                                recipesToInclude={this.state.recipesToInclude}  />}>
                     </Route>
                     <Switch>
                         <Route

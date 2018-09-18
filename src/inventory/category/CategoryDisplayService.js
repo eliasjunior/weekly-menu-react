@@ -30,7 +30,8 @@ const CategoryDisplayService = {
     },
     selectAllBtn(parentComponent) {
         return {
-            display: parentComponent === AppConstant.PARENT_COMPONENT.RECIPE_PAGE
+            display: parentComponent === AppConstant.PARENT_COMPONENT.RECIPE_PAGE ||
+            parentComponent === AppConstant.PARENT_COMPONENT.SHOPPING_LIST_PAGE
         }
     }
 }

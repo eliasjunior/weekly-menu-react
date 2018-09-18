@@ -1,13 +1,15 @@
 import React from 'react';
 import CategoryItem from './CategoryItem';
 import List from "@material-ui/core/List";
-import { Button } from '@material-ui/core';
+import { Button, withStyles } from '@material-ui/core';
 import { Link } from "react-router-dom";
 import { AppConstant } from '../../common/AppConstant';
 import CategoryDisplayService from './CategoryDisplayService';
 import PropTypes from 'prop-types';
+import CommmonStyles from '../../styles/CommonStyles';
+import AddIcon from '@material-ui/icons/Add';
 
-function CategoryList(props){
+function CategoryList(props) {
     const buildList = (list) => {
         if (!list) {
             console.error('Category list is null');
@@ -24,13 +26,14 @@ function CategoryList(props){
         });
     }
     const isDisplayCatNewBtn = () => {
+        const { classes } = props
         return CategoryDisplayService.categoryNewBtn(props.parentComponent).display ?
-            <div style={styles.buttons}>
-                <Button color="primary" variant="outlined">
+            <div>
+                <Button color="primary" variant="fab" className={classes.floatingBtn}>
                     <Link
                         to={AppConstant.LOCATION.category.path + '/new_category_create'}>
-                        New Category
-                </Link>
+                        <AddIcon />
+                    </Link>
                 </Button>
             </div>
             : ''
@@ -45,7 +48,7 @@ function CategoryList(props){
     )
 }
 const styles = {
-    buttons : {
+    buttons: {
         margin: '10px'
     }
 }
@@ -56,7 +59,7 @@ CategoryList.propTypes = {
     list: PropTypes.array
 }
 
-export default CategoryList
+export default withStyles(CommmonStyles)(CategoryList)
 
 
 

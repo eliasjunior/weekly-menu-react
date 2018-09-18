@@ -1,6 +1,6 @@
 import React from 'react';
 import { AppWeekBar } from '../../common/AppWeekBar';
-import { ShoppingCreateActions } from './ShoppingCreateActions';
+import ShoppingCreateActions from './ShoppingCreateActions';
 import CategoryService from '../category/CategoryService';
 import UtilCollectionService from '../../service/UtilCollectionService';
 import ErrorBoundary from '../../ErrorBoundaryComponent';
@@ -9,7 +9,6 @@ import CloneDeep from 'lodash.clonedeep';
 import ShoppingListService from './ShoppingListService';
 import { RecipeBox } from './RecipesBox';
 import { ProductBox } from './ProductBox';
-
 
 class ShoppingListComponent extends React.Component {
     constructor(props) {
@@ -24,16 +23,27 @@ class ShoppingListComponent extends React.Component {
         this.selectedProdRecipe = this.selectedProdRecipe.bind(this);
         this.createShoppingList = this.createShoppingList.bind(this);
         this.updateShoppingList = this.updateShoppingList.bind(this);
+        this.selectAllProd = this.selectAllProd.bind(this);
+        this.selectAllProdOfCatRec = this.selectAllProdOfCatRec.bind(this);
     }
     componentDidMount() {
-        //this is the created list -> category/week/shopping 
         CategoryService
             .get()
             .then(categories => {
+                // TODO for update list I can't add another recipe at the moment
+                // I need to merge this.props.shoppingList.recipes with this.props.recipesToInclude
                 if (this.props.shoppingList) {
-                    updateShoppingList.call(this, CloneDeep(this.props.shoppingList), categories)
+                    const shoppingList = this.props.shoppingList;
+                    const existingCats = CloneDeep(shoppingList.categories);
+
+                    const requestedCats =
+                        UtilCollectionService.refreshSelectedItemsShopList(existingCats, categories)
+
+                    this.setState({ recipesToInclude: shoppingList.recipes, categories: requestedCats });
+
                 } else {
-                    this.setState(() => ({ categories }))
+                    // edit items recipesToInclude
+                    this.setState({ categories , recipesToInclude: this.props.recipesToInclude})
                 }
             })
             .catch(reason => {
@@ -41,8 +51,9 @@ class ShoppingListComponent extends React.Component {
             });
     }
     createShoppingList() {
+        const catsSelected = UtilCollectionService.getCategorySelected(this.state.categories)
         const shoppintList =
-            buildObjectToSend(this.state.selectedProducts, this.state.recipesToInclude);
+            buildObjectToSend(catsSelected, this.state.recipesToInclude);
 
         ShoppingListService
             .save(shoppintList)
@@ -53,8 +64,9 @@ class ShoppingListComponent extends React.Component {
 
     }
     updateShoppingList() {
+        const catsSelected = UtilCollectionService.getCategorySelected(this.state.categories)
         const shoppintList =
-            buildObjectToSend(this.state.selectedProducts,
+            buildObjectToSend(catsSelected,
                 this.state.recipesToInclude, this.props.match.params.id);
 
         ShoppingListService
@@ -64,25 +76,33 @@ class ShoppingListComponent extends React.Component {
             })
             .catch(reason => this.props.onHandleMessage({ message: reason.message }));
     }
-    selectedProd(selected) {
-        let selectedProducts = [...this.state.selectedProducts];
-        const category = selected.category;
-        const product = selected.product;
-
-        if (selected.checked) {
-            selectedProducts = UtilCollectionService.addItem({ category, product }, selectedProducts);
-        } else {
-            selectedProducts = UtilCollectionService.removeItem({ category, product }, selectedProducts);
-        }
-        this.setState(prevState => factoryMode(prevState, { selectedProducts }));
-    }
     selectedProdRecipe(selected) {
         const recipesToInclude = ShoppingListUtilService
             .updateRecipesSelection(this.state.recipesToInclude, selected)
 
         this.setState({ recipesToInclude })
     }
+    selectAllProdOfCatRec(selected) {
+        console.log('Selected', selected)
+        const recipesToInclude = CloneDeep(this.state.recipesToInclude)
+        const recipeIn = recipesToInclude.find(rec => rec._id === selected.recId)
 
+        recipeIn.categories = UtilCollectionService
+            .updateProductsSelection(recipeIn.categories, selected)
+
+        this.setState({ recipesToInclude })
+    }
+    selectedProd(selected) {
+        const categories = UtilCollectionService
+            .updateProductSelection(this.state.categories, selected)
+
+        this.setState({ categories });
+    }
+    selectAllProd(selected) {
+        const categories =
+            UtilCollectionService.updateProductsSelection(this.state.categories, selected);
+        this.setState({ categories });
+    }
     render() {
         return (
             <div>
@@ -93,12 +113,15 @@ class ShoppingListComponent extends React.Component {
                         updateShoppingList={this.updateShoppingList}
                         isUpdate={this.props.shoppingList ? true : false}>
                     </ShoppingCreateActions>
-                    <RecipeBox recipesToInclude={this.state.recipesToInclude}
-                        selectedProdRecipe={this.selectedProdRecipe}>
+                    <RecipeBox
+                        recipesToInclude={this.state.recipesToInclude}
+                        onSelectedProdRecipe={this.selectedProdRecipe}
+                        onSelectAllProdOfCatRec={this.selectAllProdOfCatRec}>
                     </RecipeBox>
                     <ProductBox
                         list={this.state.categories}
-                        onSelectedProd={this.selectedProd}>
+                        onSelectedProd={this.selectedProd}
+                        onSelectAllProd={this.selectAllProd}>
                     </ProductBox>
                 </ErrorBoundary>
             </div>
@@ -106,48 +129,21 @@ class ShoppingListComponent extends React.Component {
     }
 }
 
-function buildObjectToSend(selectedProducts, recipesToInclude, id) {
-    const recipes = ShoppingListUtilService
-        .filterSelectedProductInRecipes(recipesToInclude);
+function buildObjectToSend(categories, recipesToInclude, id) {
+    const recipes = UtilCollectionService
+        .getCatsSelectedInRecipes(recipesToInclude);
     if (id) {
         return {
-            categories: selectedProducts,
+            categories: categories,
             recipes,
             _id: id
         }
     } else {
         return {
-            categories: selectedProducts,
+            categories: categories,
             recipes
         }
     }
-}
-
-function updateShoppingList(shoppingList, categories) {
-    const categoriesFromRec = shoppingList.categories;
-
-    const allProducts = UtilCollectionService.getAllSortProducts(categoriesFromRec)
-
-    let selectedProducts = [...this.state.selectedProducts];
-    categories.forEach(category => {
-        category.products.forEach(product => {
-            if (UtilCollectionService.findItemBinarySearch(product.name, allProducts)) {
-                product.checked = true;
-                selectedProducts = UtilCollectionService.addItem({ category, product }, selectedProducts);
-            }
-        });
-    });
-
-    this.setState({ recipesToInclude: shoppingList.recipes, categories, selectedProducts });
-}
-
-function factoryMode(prevState, newState) {
-    let {
-        categories = prevState.categories,
-        selectedProducts = prevState.selectedProducts,
-        message = prevState.message
-    } = newState;
-    return { selectedProducts, categories, message };
 }
 
 export default ShoppingListComponent 

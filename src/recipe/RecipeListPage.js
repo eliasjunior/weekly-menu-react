@@ -5,6 +5,9 @@ import { Button } from "@material-ui/core";
 import PropTypes from "prop-types";
 import UtilCollectionService from "../service/UtilCollectionService";
 import { RecipeListComponent } from "./RecipeListComponent";
+import AddIcon from '@material-ui/icons/Add';
+import {withStyles} from '@material-ui/core/styles'
+import CommonStyles from '../styles/CommonStyles'
 
 class RecipeListPage extends React.Component {
     constructor(props) {
@@ -32,14 +35,17 @@ class RecipeListPage extends React.Component {
             .callbackIncludeRecipe(item);
     }
     render() {
+        const {classes} = this.props
+        console.log(classes)
         return (
             <div >
                 <AppWeekBar title='Recipe List'></AppWeekBar>
-                <Button style={styles.buttons}
+                <Button variant="fab" 
                     color="secondary" 
-                    variant="outlined" 
+                    className={classes.floatingBtn}
+                    aria-label="Add" 
                     onClick={() => this.props.history.goBack()}>
-                    Add
+                    <AddIcon />
                 </Button>
                 <RecipeListComponent
                     recipes={this.state.recipes}
@@ -50,14 +56,8 @@ class RecipeListPage extends React.Component {
         );
     }
 }
-const styles = {
-    buttons : {
-        margin: '10px'
-    }
-}
-
 RecipeListPage.propTypes = {
     callbackIncludeRecipe: PropTypes.func
 }
 
-export default RecipeListPage;
+export default withStyles(CommonStyles)(RecipeListPage);

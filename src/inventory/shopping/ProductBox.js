@@ -17,7 +17,8 @@ export function ProductBox(props) {
             <CategoryList
                 list={props.list}
                 parentComponent="ShoppingListPage"
-                onSelectedProd={props.onSelectedProd}>
+                onSelectedProd={props.onSelectedProd}
+                onSelectAllProd={props.onSelectAllProd}>
             </CategoryList>
         </div>
     )

@@ -8,3 +8,15 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+button.floatingBtn {
+  margin: '10px';
+  z-index: 999;
+  position: 'fixed';
+  bottom: 0;
+  right: 0;
+}
+
+.myclass {
+  margin: '10px';
+}

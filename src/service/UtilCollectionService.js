@@ -1,31 +1,6 @@
 import CloneDeep from 'lodash.clonedeep'
 
 const UtilCollectionService = {
-    addItem(itemToBeAdded, list) {
-        const categories = reducerNewList(itemToBeAdded.category, list);
-        const categorySelected = categories.find(cat => cat._id === itemToBeAdded.category._id);
-
-        categorySelected.products = reducerNewList(itemToBeAdded.product, categorySelected.products);
-
-        return categories;
-    },
-    removeItem(itemToBeRemoved, list) {
-        const categorySelected = list
-            .filter(cat => cat._id === itemToBeRemoved.category._id)
-            .shift();
-
-        if (categorySelected.products.length > 1) {
-            categorySelected.products =
-                categorySelected.products.filter(prod => prod._id !== itemToBeRemoved.product._id)
-            // mutate the list, // TODO add deep copy if it's easy
-            return list
-        } else {
-            const removeCategoryIfThereISNotProduct = () => {
-                return list.filter(cat => cat._id !== itemToBeRemoved.category._id)
-            };
-            return removeCategoryIfThereISNotProduct();
-        }
-    },
     recipeToAdd(recipe) {
         return {
             name: recipe.name,
@@ -116,8 +91,8 @@ const UtilCollectionService = {
         })
         return categories;
     },
-    getCategorySelected(stateCategory) {
-        const categories = CloneDeep(stateCategory)
+    getCategorySelected(stateCategories) {
+        const categories = CloneDeep(stateCategories)
 
         return categories.filter(cat => {
             return cat.products.filter(prod => prod.checked).length > 0
@@ -125,26 +100,31 @@ const UtilCollectionService = {
             cat.products = cat.products.filter(prod => prod.checked)
             return cat
         })
-    }
-}
-function reducerNewList(item, list) {
-    const createANewList = (newList, currentItem) => {
-        const isItemIn = newList
-            .find(itemIn => itemIn._id === currentItem._id);
+    },
+    getCatsSelectedInRecipes(recipes) {
+        const filterCategory = (recipe) => {
+            recipe.categories = this.getCategorySelected(recipe.categories)
+            return recipe.categories.length > 0
+        };
 
-        if (!isItemIn) {
-            newList.push(currentItem);
+        return CloneDeep(recipes)
+            .filter(filterCategory);
+    },
+    refreshSelectedItemsShopList(existingCatsOfShopList, requestedCats) {
+        const allProdsExistingCats = UtilCollectionService.getAllSortProducts(existingCatsOfShopList)
+
+        const addCheckToProds = product => {
+            if (UtilCollectionService.findItemBinarySearch(product.name, allProdsExistingCats)) {
+                product.checked = true;
+            }
+            return product;
         }
-        return newList;
-    }
-    // TODO add deep array copy, but need to add test before, it could break it
-    if (!list) {
-        list = [];
-    }
-    list.push(item);
 
-    const newList = list.reduce(createANewList, [list[0]]);
-    return newList;
+        return requestedCats.map(category => {
+            category.products = category.products.map(addCheckToProds);
+            return category;
+        });
+    }
 }
 function reducerAllCategories(acc, recipe) {
     acc = acc.concat(recipe.categories);

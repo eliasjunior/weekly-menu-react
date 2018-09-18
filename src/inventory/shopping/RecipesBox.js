@@ -11,7 +11,9 @@ export function RecipeBox(props) {
                         isNotEditable={true}
                         isRecipeNotSelectable={true}
                         recipes={props.recipesToInclude}
-                        onSelectedProd={props.selectedProdRecipe}
+                        onSelectedProd={props.onSelectedProdRecipe}
+                        onSelectAllProdOfCatRec={props.onSelectAllProdOfCatRec}
+                        onSelectAllProd={props.onSelectAllProdOfCatRec}
                         parentComponent="ShoppingListPage">
                     </RecipeListComponent>
                 </div>
