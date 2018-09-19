@@ -8,7 +8,7 @@ export const AppConstant = {
         recipeList: { path: '/recipe', label: 'Recipe List' , menu: true },
         newRecipe: { path: '/recipeCreate/new', label:  'New Recipe' , menu: true },
         category: { path: '/category', label: '', menu: false  },
-        product: { path: '/product', label: '', menu: false  },
+        ProductFormPage: { path: '/product', label: '', menu: false  },
         shopping: { path: '/shopping', label: 'Shopping List', menu: false  }
     },
     PARENT_COMPONENT: {

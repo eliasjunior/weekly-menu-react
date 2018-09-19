@@ -23,11 +23,6 @@ const CategoryDisplayService = {
             display: parentComponent === AppConstant.PARENT_COMPONENT.INVENTORY_PAGE
         }
     },
-    categoryNewBtn(parentComponent) {
-        return {
-            display: parentComponent === AppConstant.PARENT_COMPONENT.INVENTORY_PAGE
-        }
-    },
     selectAllBtn(parentComponent) {
         return {
             display: parentComponent === AppConstant.PARENT_COMPONENT.RECIPE_PAGE ||

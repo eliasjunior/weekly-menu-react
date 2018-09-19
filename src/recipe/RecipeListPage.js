@@ -36,7 +36,6 @@ class RecipeListPage extends React.Component {
     }
     render() {
         const {classes} = this.props
-        console.log(classes)
         return (
             <div >
                 <AppWeekBar title='Recipe List'></AppWeekBar>

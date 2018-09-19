@@ -6,7 +6,7 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import Collapse from '@material-ui/core/Collapse';
 import List from '@material-ui/core/List';
-import { CategoryActions } from './CategoryActions';
+import CategoryActions  from '../CategoryActions';
 import { grey } from '@material-ui/core/colors';
 import DisplayService from './CategoryDisplayService';
 import CloneDeep from 'lodash.clonedeep'
@@ -16,7 +16,7 @@ class CategoryItem extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            categorySelect: false
+            categorySelect: false,
         }
         this.listProducts = this.listProducts.bind(this);
         this.selectionProd = this.selectionProd.bind(this);
@@ -67,7 +67,10 @@ class CategoryItem extends React.Component {
             <ListItemSecondaryAction>
                 <CategoryActions
                     name={this.props.category.name}
-                    id={this.props.category._id}>
+                    id={this.props.category._id}
+                    category={this.props.category}
+                    onHandleMessage={this.props.onHandleMessage}
+                    onRefresh={this.props.onRefresh}>
                 </CategoryActions>
             </ListItemSecondaryAction> : ''
     }

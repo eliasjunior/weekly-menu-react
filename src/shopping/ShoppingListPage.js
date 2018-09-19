@@ -1,16 +1,16 @@
 import React from 'react';
-import { AppWeekBar } from '../../common/AppWeekBar';
+import { AppWeekBar } from '../common/AppWeekBar';
 import ShoppingCreateActions from './ShoppingCreateActions';
-import CategoryService from '../category/CategoryService';
-import UtilCollectionService from '../../service/UtilCollectionService';
-import ErrorBoundary from '../../ErrorBoundaryComponent';
+import UtilCollectionService from '../service/UtilCollectionService';
+import ErrorBoundary from '../ErrorBoundaryComponent';
 import { ShoppingListUtilService } from './ShoppingListUtilService';
 import CloneDeep from 'lodash.clonedeep';
 import ShoppingListService from './ShoppingListService';
 import { RecipeBox } from './RecipesBox';
 import { ProductBox } from './ProductBox';
+import CategoryService from '../inventory/category/CategoryService';
 
-class ShoppingListComponent extends React.Component {
+class ShoppingListPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -83,7 +83,6 @@ class ShoppingListComponent extends React.Component {
         this.setState({ recipesToInclude })
     }
     selectAllProdOfCatRec(selected) {
-        console.log('Selected', selected)
         const recipesToInclude = CloneDeep(this.state.recipesToInclude)
         const recipeIn = recipesToInclude.find(rec => rec._id === selected.recId)
 
@@ -146,4 +145,4 @@ function buildObjectToSend(categories, recipesToInclude, id) {
     }
 }
 
-export default ShoppingListComponent 
+export default ShoppingListPage 

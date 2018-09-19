@@ -1,6 +1,6 @@
 import React from 'react';
 import { List, ListItem, ListItemText, Collapse } from '@material-ui/core';
-import { AppWeekBar } from '../../common/AppWeekBar';
+import { AppWeekBar } from '../common/AppWeekBar';
 import { ShoppingListUtilService } from './ShoppingListUtilService';
 import { grey } from '@material-ui/core/colors';
 import './ShoppingPage.css'

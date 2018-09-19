@@ -1,5 +1,5 @@
 import React from 'react';
-import { RecipeListComponent } from '../../recipe/RecipeListComponent';
+import { RecipeListComponent } from '../recipe/RecipeListComponent';
 
 export function RecipeBox(props) {
     const displayRecipes = () => {

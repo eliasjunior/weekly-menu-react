@@ -1,6 +1,9 @@
 import axios from 'axios';
-const baseUrl = 'https://week-menu-api.herokuapp.com/';
-//const baseUrl = 'http://localhost:3002/';
+import runtimeEnv from '@mars/heroku-js-runtime-env';
+
+const env = runtimeEnv();
+const baseUrl = env.NODE_ENV === 'development' ? 'http://localhost:3002/' : 'https://week-menu-api.herokuapp.com/';
+
 
 const ApiService = {
     get: (resourceName) => {

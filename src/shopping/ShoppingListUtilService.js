@@ -1,5 +1,5 @@
 import CloneDeep from 'lodash.clonedeep';
-import Util from '../../service/UtilCollectionService';
+import Util from '../service/UtilCollectionService';
 
 export const ShoppingListUtilService = {
     updateRecipesSelection(oldRecipeList, updateItem) {

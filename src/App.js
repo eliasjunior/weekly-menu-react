@@ -1,19 +1,17 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom'
-import RecipePage from './recipe/recipe-page/RecipePage';
+import RecipePage from './recipe/recipe-form/RecipePage';
 import RecipeListPage from './recipe/RecipeListPage';
-import ShoppingListPage from './inventory/shopping/ShoppingListPage';
+import ShoppingListPage from './shopping/ShoppingListPage';
 import InventoryPage from './inventory/InventoryPage';
-import ProductFormPage from './inventory/product/ProductFormPage';
 import { AppConstant } from './common/AppConstant';
 import { createMuiTheme } from '@material-ui/core/styles';
 import blue from '@material-ui/core/colors/blue';
 import teal from '@material-ui/core/colors/orange';
 import { MuiThemeProvider } from '@material-ui/core';
-import CategoryFormPage from './inventory/category/CategoryFormPage';
 import UtilCollectionService from './service/UtilCollectionService';
-import ShoppingListHistoryPage from './inventory/shopping/ShoppingListHistoryPage';
-import ShoppingPage from './inventory/shopping/ShoppingPage';
+import ShoppingListHistoryPage from './shopping/ShoppingListHistoryPage';
+import ShoppingPage from './shopping/ShoppingPage';
 import MessageComponent from './common/MessageComponent';
 import Dashboard from './Dashboard';
 
@@ -104,10 +102,6 @@ class App extends React.Component {
                         render={(props) => <Dashboard {...props}
                             onHandleMessage={this.handleMessage}></Dashboard>}>
                     </Route>
-                    <Route path={AppConstant.LOCATION.product.path}
-                        render={(props) => <ProductFormPage {...props}
-                            onHandleMessage={this.handleMessage}></ProductFormPage>}>
-                    </Route>
                     <Route path={AppConstant.LOCATION.shoppingHistory.path}
                         render={(props) => <ShoppingListHistoryPage  {...props}
                             onHandleMessage={this.handleMessage}
@@ -117,12 +111,6 @@ class App extends React.Component {
                         render={(props) => <ShoppingPage  {...props}
                             shoppingList={this.state.shoppingList}
                             onHandleMessage={this.handleMessage} />}>
-                    </Route>
-                    <Route
-                        path={`${AppConstant.LOCATION.category.path}/:id`}
-                        render={(props) => <CategoryFormPage {...props}
-                            onHandleMessage={this.handleMessage}>
-                            </CategoryFormPage>}>
                     </Route>
                     <Route
                         path={AppConstant.LOCATION.recipeList.path}

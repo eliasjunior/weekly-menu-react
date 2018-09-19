@@ -1,8 +1,8 @@
 import React from 'react';
 import { List, ListItem, Button, ListItemSecondaryAction } from '@material-ui/core';
 import ShoppingListService from './ShoppingListService';
-import { AppWeekBar } from '../../common/AppWeekBar';
-import { AppConstant } from '../../common/AppConstant';
+import { AppWeekBar } from '../common/AppWeekBar';
+import { AppConstant } from '../common/AppConstant';
 import { Link } from 'react-router-dom';
 
 class ShoppingListHistoryPage extends React.Component {

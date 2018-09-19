@@ -7,6 +7,7 @@ import RecipeService from '../RecipeService';
 import UtilCollectionService from '../../service/UtilCollectionService';
 import CategoryService from '../../inventory/category/CategoryService';
 import RecipePageUtilService from '../../service/RecipePageUtilService';
+import RecipeActions from './RecipeActions';
 
 class RecipePage extends React.Component {
     //React's constructor is called before DOM is mounted.
@@ -22,23 +23,10 @@ class RecipePage extends React.Component {
         this.updateRecipe = this.updateRecipe.bind(this);
         this.onChangeName = this.onChangeName.bind(this);
         this.selectAllProd = this.selectAllProd.bind(this);
+        this.refresh = this.refresh.bind(this)
     }
     componentDidMount() {
-        CategoryService
-            .get()
-            .then(loadRecipe.bind(this, this.props.match.params.id))
-            .then(recipe => {
-                if (recipe) {
-                    const categoriesOfRecipe = RecipePageUtilService
-                        .matchProductRecipeAndAddCheck(recipe.categories, this.state.categories);
-
-                    this.setState({
-                        name: recipe.name,
-                        categories: categoriesOfRecipe
-                    })
-                }
-            })
-            .catch(reason => this.props.onHandleMessage({ message: reason.message }));
+      this.refresh()
     }
     selectedProd(selected) {
         const categories = UtilCollectionService
@@ -67,6 +55,23 @@ class RecipePage extends React.Component {
             .catch(reason => this.props.onHandleMessage({ message: reason.message }));
 
     }
+    refresh() {
+        CategoryService
+        .get()
+        .then(loadRecipe.bind(this, this.props.match.params.id))
+        .then(recipe => {
+            if (recipe) {
+                const categoriesOfRecipe = RecipePageUtilService
+                    .matchProductRecipeAndAddCheck(recipe.categories, this.state.categories);
+
+                this.setState({
+                    name: recipe.name,
+                    categories: categoriesOfRecipe
+                })
+            }
+        })
+        .catch(reason => this.props.onHandleMessage({ message: reason.message }));
+    }
     updateRecipe() {
         const recipe = {
             name: this.state.name,
@@ -90,27 +95,25 @@ class RecipePage extends React.Component {
                     value={this.state.name}
                     onChange={this.onChangeName}>
                 </TextField>
-                <FormChildAction
-                    returnBack={this.props.history.goBack}
+                <RecipeActions
                     isToUpdate={this.props.match.params.id ? true : false}
-                    box={styles.input}
-                    updateAction={this.updateRecipe}
-                    saveAction={this.saveRecipe}>
-                </FormChildAction>
+                    onUpdateAction={this.updateRecipe}
+                    onSaveAction={this.saveRecipe}>
+                </RecipeActions>
                 <CategoryList
                     list={this.state.categories}
                     parentComponent="RecipePage"
                     onSelectedProd={this.selectedProd}
-                    onSelectAllProd={this.selectAllProd}>
+                    onSelectAllProd={this.selectAllProd}
+                    onHandleMessage={this.props.onHandleMessage}
+                    onRefresh={this.refresh}
+                    onOpenDialog={this.openFormDialogCategory}>
                 </CategoryList>
             </div>
         );
     }
 }
 const styles = {
-    box: {
-        margin: '10px'
-    },
     input: {
         margin: '10px'
     }

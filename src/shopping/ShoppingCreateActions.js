@@ -1,15 +1,15 @@
 import Button from '@material-ui/core/Button';
 import React from 'react';
-import { AppConstant } from '../../common/AppConstant';
+import { AppConstant } from '../common/AppConstant';
 import { Link } from "react-router-dom";
-import CommmonStyles from '../../styles/CommonStyles';
-import AddIcon from '@material-ui/icons/Add';
+import CommmonStyles from '../styles/CommonStyles';
 import { withStyles } from '@material-ui/core';
+import IncludeIcon from '@material-ui/icons/Receipt';
 import SaveIcon from '@material-ui/icons/Save';
 
 function ShoppingCreateActions(props){
     const { classes } = props;
-    console.log(classes)
+    const combinedClasses = `${classes.floatingPadding} ${classes.floatingBtn} gridFloatingBtn` 
     const actionButton = () => {
         return props.isUpdate ?
             <Button color="secondary" variant="fab"
@@ -24,12 +24,12 @@ function ShoppingCreateActions(props){
     }
 
     return (
-        <div className={classes.floatingPadding +' '+classes.floatingBtn}>
+        <div className={combinedClasses}>
             <Button color="primary"
                 variant="fab">
                 <Link
                     to={AppConstant.LOCATION.recipeList.path}>
-                    <AddIcon />
+                    <IncludeIcon />
                 </Link>
             </Button>
             {actionButton()}

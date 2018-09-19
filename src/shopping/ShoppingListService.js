@@ -1,4 +1,4 @@
-import ApiService from '../../service/ApiService';
+import ApiService from '../service/ApiService';
 
 const ShoppingListService = {
     update(shoppingList) {
