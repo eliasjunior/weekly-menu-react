@@ -2,7 +2,6 @@ import React from 'react';
 import { AppWeekBar } from "../../common/AppWeekBar";
 import CategoryList from '../../inventory/category/CategoryList';
 import { TextField } from '@material-ui/core';
-import FormChildAction from '../../common/FormChildAction';
 import RecipeService from '../RecipeService';
 import UtilCollectionService from '../../service/UtilCollectionService';
 import CategoryService from '../../inventory/category/CategoryService';
@@ -26,7 +25,7 @@ class RecipePage extends React.Component {
         this.refresh = this.refresh.bind(this)
     }
     componentDidMount() {
-      this.refresh()
+        this.refresh()
     }
     selectedProd(selected) {
         const categories = UtilCollectionService
@@ -57,20 +56,20 @@ class RecipePage extends React.Component {
     }
     refresh() {
         CategoryService
-        .get()
-        .then(loadRecipe.bind(this, this.props.match.params.id))
-        .then(recipe => {
-            if (recipe) {
-                const categoriesOfRecipe = RecipePageUtilService
-                    .matchProductRecipeAndAddCheck(recipe.categories, this.state.categories);
+            .get()
+            .then(loadRecipe.bind(this, this.props.match.params.id))
+            .then(recipe => {
+                if (recipe) {
+                    const categoriesOfRecipe = RecipePageUtilService
+                        .matchProductRecipeAndAddCheck(recipe.categories, this.state.categories);
 
-                this.setState({
-                    name: recipe.name,
-                    categories: categoriesOfRecipe
-                })
-            }
-        })
-        .catch(reason => this.props.onHandleMessage({ message: reason.message }));
+                    this.setState({
+                        name: recipe.name,
+                        categories: categoriesOfRecipe
+                    })
+                }
+            })
+            .catch(reason => this.props.onHandleMessage({ message: reason.message }));
     }
     updateRecipe() {
         const recipe = {

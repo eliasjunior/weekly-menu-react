@@ -16,9 +16,6 @@ export const AppWeekBar = (props) => {
                     <Typography variant="title" color="inherit">
                         {props.title}
                     </Typography>
-                    {/* <IconButton color="inherit" aria-label="Menu">
-                        <ArrowBack />
-                    </IconButton> */}
                 </Toolbar>
             </AppBar>
         </div>

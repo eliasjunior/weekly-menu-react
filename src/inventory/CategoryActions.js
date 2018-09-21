@@ -3,6 +3,7 @@ import { Button } from '@material-ui/core';
 import FormDialog from './FormDialog';
 import ProductService from './product/ProductService';
 import CategoryService from './category/CategoryService';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 
 class CategoryActions extends React.Component {
     constructor(props) {
@@ -11,7 +12,7 @@ class CategoryActions extends React.Component {
             dialogProps: {
                 open: false,
                 isUpdate: false,
-                form : {
+                form: {
                     placeHolder: 'Product name'
                 }
             },
@@ -26,7 +27,7 @@ class CategoryActions extends React.Component {
         this.updateCategory = this.updateCategory.bind(this);
     }
     openFormDialogProduct() {
-        const dialogProps = {...this.state.dialogProps}
+        const dialogProps = { ...this.state.dialogProps }
         dialogProps.open = true;
         dialogProps.title = 'New Product'
         dialogProps.form = {
@@ -34,10 +35,10 @@ class CategoryActions extends React.Component {
             value: ''
         }
         dialogProps.onActionMethod = this.saveProduct
-        this.setState({dialogProps})
+        this.setState({ dialogProps })
     }
     openFormDialogCategory() {
-        const dialogProps = {...this.state.dialogProps}
+        const dialogProps = { ...this.state.dialogProps }
         dialogProps.title = 'Update Category'
         dialogProps.isUpdate = true
         dialogProps.open = true;
@@ -46,10 +47,10 @@ class CategoryActions extends React.Component {
             value: this.props.category.name
         }
         dialogProps.onActionMethod = this.updateCategory
-        this.setState({dialogProps})
+        this.setState({ dialogProps })
     }
     closeDialog() {
-        const dialogProps = {...this.state.dialogProps};
+        const dialogProps = { ...this.state.dialogProps };
         dialogProps.open = false;
         this.setState({ dialogProps })
     }
@@ -91,21 +92,21 @@ class CategoryActions extends React.Component {
         this.setState({ name: ev.target.value });
     }
     render() {
-        return <div>
-                <FormDialog
-                    dialogProps={this.state.dialogProps}
-                    onChangeName={this.onChangeName}
-                    onCloseDialog={this.closeDialog}>
-                </FormDialog>
-                <Button color="primary"
-                    onClick={() => this.openFormDialogCategory()}>
-                    Edit
+        return <ListItemSecondaryAction>
+            <FormDialog
+                dialogProps={this.state.dialogProps}
+                onChangeName={this.onChangeName}
+                onCloseDialog={this.closeDialog}>
+            </FormDialog>
+            <Button color="primary"
+                onClick={() => this.openFormDialogCategory()}>
+                Edit
                 </Button>
-                <Button color="primary" 
-                    onClick={() => this.openFormDialogProduct()}>
-                    New Product
+            <Button color="primary"
+                onClick={() => this.openFormDialogProduct()}>
+                New Product
                 </Button>
-        </div>;
+        </ListItemSecondaryAction>
     }
 }
 export default CategoryActions

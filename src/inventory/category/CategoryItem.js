@@ -1,16 +1,13 @@
 import React from 'react';
-import ListItem from '@material-ui/core/ListItem';
-//import '../styles/CategoryItem.css';
+import PropTypes from 'prop-types'
 import { ProductComponent } from '../product/ProductComponent';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import ListItemText from '@material-ui/core/ListItemText';
 import Collapse from '@material-ui/core/Collapse';
 import List from '@material-ui/core/List';
-import CategoryActions  from '../CategoryActions';
-import { grey } from '@material-ui/core/colors';
+
 import DisplayService from './CategoryDisplayService';
 import CloneDeep from 'lodash.clonedeep'
 import SelectAllNone from './SelectAllNone';
+import CategoryLine from './CategoryLine';
 
 class CategoryItem extends React.Component {
     constructor(props) {
@@ -61,19 +58,6 @@ class CategoryItem extends React.Component {
         this.setState({ categorySelect })
         this.props.onSelectAllProd(itemSelected)
     }
-    categoryButtons() {
-        return DisplayService
-            .categoryBtns(this.props.parentComponent).display ?
-            <ListItemSecondaryAction>
-                <CategoryActions
-                    name={this.props.category.name}
-                    id={this.props.category._id}
-                    category={this.props.category}
-                    onHandleMessage={this.props.onHandleMessage}
-                    onRefresh={this.props.onRefresh}>
-                </CategoryActions>
-            </ListItemSecondaryAction> : ''
-    }
     displaySelectedAll() {
         if (DisplayService.selectAllBtn(this.props.parentComponent).display) {
             return <SelectAllNone
@@ -85,12 +69,12 @@ class CategoryItem extends React.Component {
     render() {
         return (
             <div>
-                <ListItem
-                    style={{ backgroundColor: grey[200] }}
-                    key={this.props.category._id}>
-                    <ListItemText primary={this.props.category.name} ></ListItemText>
-                    {this.categoryButtons()}
-                </ListItem>
+                <CategoryLine
+                    category={this.props.category}
+                    parentComponent={this.props.parentComponent}
+                    onHandleMessage={this.props.onHandleMessage}
+                    onRefresh={this.props.onRefresh}>
+                </CategoryLine>
                 <Collapse in={true} timeout="auto" unmountOnExit>
                     {this.displaySelectedAll()}
                     <List component="div" disablePadding>
@@ -100,5 +84,11 @@ class CategoryItem extends React.Component {
             </div>
         )
     }
+}
+CategoryItem.propTypes = {
+    category: PropTypes.object,
+    onHandleMessage: PropTypes.func,
+    onRefresh: PropTypes.func,
+    parentComponent: PropTypes.string
 }
 export default CategoryItem;

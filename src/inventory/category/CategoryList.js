@@ -31,6 +31,7 @@ function CategoryList(props) {
 
 CategoryList.propTypes = {
     onSelectedProd: PropTypes.func,
+    onSelectAllProd: PropTypes.func,
     parentComponent: PropTypes.string,
     list: PropTypes.array
 }

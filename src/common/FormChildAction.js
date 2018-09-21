@@ -6,11 +6,6 @@ import IconButton from '@material-ui/core/IconButton';
 
 // TODO review this component, maybe dont need it or refactor
 function FormChildAction(props) {
-    const styles = {
-        buttonSave: {
-            marginRight: '10px'
-        }
-    }
     const isUpdateOrSave = (isToUpdate) => {
         if (isToUpdate) {
             return (

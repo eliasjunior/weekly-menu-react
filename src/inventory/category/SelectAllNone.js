@@ -1,5 +1,6 @@
 import React from 'react';
 import { FormGroup, FormControlLabel, Switch } from '@material-ui/core';
+import PropTypes from 'prop-types'
 
 function SelectAllNone(props) {
     const label = props.checked ? 'Unselect All' : 'Select All'
@@ -22,4 +23,8 @@ const styles = {
     }
 }
 
+SelectAllNone.propTypes = {
+    checked: PropTypes.bool,
+    onSelectAllNone: PropTypes.func
+}
 export default SelectAllNone;

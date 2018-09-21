@@ -3,23 +3,10 @@ import Util from '../service/UtilCollectionService';
 
 export const ShoppingListUtilService = {
     updateRecipesSelection(oldRecipeList, updateItem) {
-        const product = updateItem.product;
+        const newRecipe = CloneDeep(oldRecipeList)
+        const product = {...updateItem.product};
         // review this 3 loops later
-        oldRecipeList.forEach(rec => {
-            rec.categories.forEach(cat => {
-                cat.products.forEach(prod => {
-                    if (prod._id === product._id) {
-                        product.checked = updateItem.checked
-                    }
-                })
-            })
-        })
-        return oldRecipeList
-    },
-    updateRecipesSelection(oldRecipeList, updateItem) {
-        const product = updateItem.product;
-        // review this 3 loops later
-        oldRecipeList.forEach(rec => {
+        newRecipe.forEach(rec => {
             rec.categories.forEach(cat => {
                 cat.products.forEach(prod => {
                     if (prod._id === product._id) {
