@@ -15,7 +15,8 @@ class RecipePage extends React.Component {
         this.state = {
             categories: [],
             name: '',
-            title: this.props.match.params.id ? 'Update Recipe' : 'New Recipe'
+            title: this.props.match.params.id ? 'Update Recipe' : 'New Recipe',
+            id: this.props.match.params.id
         };
         this.selectedProd = this.selectedProd.bind(this);
         this.saveRecipe = this.saveRecipe.bind(this);
@@ -26,6 +27,19 @@ class RecipePage extends React.Component {
     }
     componentDidMount() {
         this.refresh()
+    }
+    componentDidUpdate(prevProps) {
+        const { id: previousId } = prevProps.match.params
+        const { id: currentId } = this.props.match.params
+
+        if (currentId !== previousId && !currentId) {
+            this.refresh()
+            this.setState({ 
+                    name: '',
+                    id: null , 
+                    title: 'New Recipe',
+            })
+        }
     }
     selectedProd(selected) {
         const categories = UtilCollectionService
@@ -41,18 +55,6 @@ class RecipePage extends React.Component {
     }
     onChangeName(e) {
         this.setState({ name: e.target.value });
-    }
-    saveRecipe() {
-        const recipe = {
-            name: this.state.name,
-            categories: UtilCollectionService.getCategorySelected(this.state.categories)
-        };
-        RecipeService
-            .save(recipe)
-            .then(() => this.props
-                .onHandleMessage({ message: 'Hooray, recipe created!', type: 'success' }))
-            .catch(reason => this.props.onHandleMessage({ message: reason.message }));
-
     }
     refresh() {
         CategoryService
@@ -71,10 +73,26 @@ class RecipePage extends React.Component {
             })
             .catch(reason => this.props.onHandleMessage({ message: reason.message }));
     }
+    saveRecipe() {
+        const recipe = {
+            name: this.state.name,
+            categories: UtilCollectionService.getCategorySelected(this.state.categories)
+        };
+        RecipeService
+            .save(recipe)
+            .then(response => {
+                this.setState({ id: response._id })
+                this.props.onHandleMessage({
+                    message: 'Hooray, recipe created!', type: 'success'
+                })
+            })
+            .catch(reason => this.props.onHandleMessage({ message: reason.message }));
+
+    }
     updateRecipe() {
         const recipe = {
             name: this.state.name,
-            _id: this.props.match.params.id,
+            _id: this.state.id,
             categories: UtilCollectionService.getCategorySelected(this.state.categories)
         };
         RecipeService
@@ -95,7 +113,7 @@ class RecipePage extends React.Component {
                     onChange={this.onChangeName}>
                 </TextField>
                 <RecipeActions
-                    isToUpdate={this.props.match.params.id ? true : false}
+                    isToUpdate={this.state.id ? true : false}
                     onUpdateAction={this.updateRecipe}
                     onSaveAction={this.saveRecipe}>
                 </RecipeActions>

@@ -1,13 +1,24 @@
 ## Tasks, for priority sequence
 
 
-- Add select all to new shopping list
-- sort products list, prod of recipe list
+
+Save by action rec list and shp list/ after update or create loses the checkbox
+Post should close or redirect to edit, new recipe
+Display prod total selected on 
+Fix repeat prod name rec list
+Fix data
+History date shop list
+Search prod
+typing name too slow
+Bug category name, if try same name
+
+
 - Polish
 - add test
 - Review deep copy components
 
-## DONE Cru not delete
+## DONE 
+- Add qtd to shopping list
 - bug add/unadd selecte all
 - review child changing state, should not change
 - Shopping page load by id (back end too)
@@ -33,6 +44,8 @@
     1 - just select and create list based on the products
     2 - add recipe, ignore repeated        
 - shopping list view and shopping list history
+- Add select all to new shopping list
+- sort products list, prod of recipe list
 
 - Sub Documents Cat/Product List
   Update, trigger

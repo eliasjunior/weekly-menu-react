@@ -12,6 +12,11 @@ const CategoryDisplayService = {
                 || parentComponent === AppConstant.PARENT_COMPONENT.RECIPE_PAGE
         }
     },
+    categoryLineHide(parentComponent) {
+        return {
+            display: parentComponent === AppConstant.PARENT_COMPONENT.RECIPE_LIST_PAGE
+        }
+    },
     productCheckboxBtn(parentComponent) {
         return {
             display: parentComponent === AppConstant.PARENT_COMPONENT.SHOPPING_LIST_PAGE ||

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { AppConstant } from '../common/AppConstant';
 import { Button, ListItem, Checkbox, ListItemText, ListItemSecondaryAction } from "@material-ui/core";
 import PropTypes from 'prop-types';
-import {blue} from '@material-ui/core/colors';
+import {grey} from '@material-ui/core/colors';
 
 export const RecipeHeaderItem = (props) => {
     const onCheckAction = (e) => {
@@ -26,7 +26,6 @@ export const RecipeHeaderItem = (props) => {
             </Checkbox>
         }
     }
-
     // TODO do like in category, add to a service
     const isEditBtnDisplay = () => {
         if (props.isNotEditable) {
@@ -44,7 +43,7 @@ export const RecipeHeaderItem = (props) => {
 
     return ( 
         <ListItem 
-            style={{backgroundColor:blue[100]}}>
+            style={{backgroundColor:grey[400]}}>
             {isCheckboxDisplay()}
             <ListItemText primary={props.recipe.name} />
             {isEditBtnDisplay()}

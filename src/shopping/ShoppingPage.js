@@ -3,7 +3,6 @@ import { List, ListItem, ListItemText, Collapse } from '@material-ui/core';
 import { AppWeekBar } from '../common/AppWeekBar';
 import { ShoppingListUtilService } from './ShoppingListUtilService';
 import { grey } from '@material-ui/core/colors';
-import './ShoppingPage.css'
 import ProductText from './ProductText';
 import ShoppingListService from './ShoppingListService';
 

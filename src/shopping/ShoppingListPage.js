@@ -19,10 +19,10 @@ class ShoppingListPage extends React.Component {
             recipesToInclude: CloneDeep(props.recipesToInclude),
             title: props.shoppingList ? 'Update Shopping list' : 'New Shopping list'
         }
-        this.selectedProd = this.selectedProd.bind(this);
         this.selectedProdRecipe = this.selectedProdRecipe.bind(this);
         this.createShoppingList = this.createShoppingList.bind(this);
         this.updateShoppingList = this.updateShoppingList.bind(this);
+        this.selectedProd = this.selectedProd.bind(this);
         this.selectAllProd = this.selectAllProd.bind(this);
         this.selectAllProdOfCatRec = this.selectAllProdOfCatRec.bind(this);
     }

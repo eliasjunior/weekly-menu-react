@@ -1,50 +1,62 @@
 import React from 'react';
-import { ListItemText, ListItem, Divider } from '@material-ui/core';
+import { ListItemText, ListItem, Divider, ListItemSecondaryAction, Button } from '@material-ui/core';
 import { blue } from '@material-ui/core/colors';
 import ShoppingListService from './ShoppingListService'
-
+import Add from '@material-ui/icons/Add'
+import Remove from '@material-ui/icons/Remove'
+import {green, red} from '@material-ui/core/colors'
 class ProductText extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             ...props
         };
-        this.onItemCompleted = this.onItemCompleted.bind(this);
+        this.setComplete = this.setComplete.bind(this);
+        this.increment = this.increment.bind(this);
+        this.decrement = this.decrement.bind(this);
+        this.update = this.update.bind(this);
     }
-    onItemCompleted() {
-        const updateData = {...this.state};
-        updateData.completed = !this.state.completed;
+    setComplete() {
+        const shoppingListData = { ...this.state };
+        shoppingListData.completed = !this.state.completed;
         this.setState({ completed: !this.state.completed });
-
-        console.log('to send', updateData)
-        
+        this.update(shoppingListData)
+    }
+    increment() {
+        const shopList = {...this.state}
+        shopList.quantity = this.state.quantity + 1
+        this.setState({ quantity: this.state.quantity + 1 })
+        this.update(shopList)
+    }
+    decrement() {
+        const shopList = {...this.state}
+        shopList.quantity = this.state.quantity - 1
+        this.setState({ quantity: this.state.quantity - 1 })
+        this.update(shopList)
+    }
+    update(shoppingListData) {
         ShoppingListService
-            .updateItem(updateData)
-            .then( doc => {
+            .updateItem(shoppingListData)
+            .then(doc => {
                 console.log('updated stuffs', doc)
             }).catch(reason => this.props.onHandleMessage({ message: reason.message }));
     }
     render() {
-        const displayText = () => {
-            return this.state.recName ?
-                <ListItemText 
-                    style={this.state.completed ? styles.completed : styles.notCompleted}
-                    primary={this.state.name}
-                    secondary={`Recipe: ${this.state.recName}`}>
-                </ListItemText>
-                :
-                <ListItemText 
-                    style={this.state.completed ? styles.completed : styles.notCompleted}
-                    primary={this.state.name}>
-                </ListItemText>
-        }
-
         return (
             <div>
                 <ListItem dense={this.state.completed}
-                    button onClick={this.onItemCompleted}
+                    button  
                     style={!this.state.completed ? styles.rowNotCompleted : styles.rowCompleted}>
-                    {displayText()}
+                    <ListItemText onClick={this.setComplete}
+                        style={this.state.completed ? styles.completed : styles.notCompleted}
+                        primary={this.state.name}
+                        secondary={this.state.recName ? `Recipe: ${this.state.recName}` : ''}>
+                    </ListItemText>
+                    <ListItemSecondaryAction>
+                        <Add onClick={this.increment} style={{color: green[400]}} />
+                        <Button> {this.state.quantity}</Button>
+                        <Remove onClick={this.decrement} style={{color: red[400]}} />
+                    </ListItemSecondaryAction>
                 </ListItem>
                 <Divider></Divider>
             </div>

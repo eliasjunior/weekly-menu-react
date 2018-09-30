@@ -18,12 +18,23 @@ export default function CategoryLine(props) {
             </CategoryActions>
             : ''
     }
+    const content = () => {
+        if (DisplayService.categoryLineHide(props.parentComponent).display) {
+            return ''
+        }
+        return (
+            <ListItem
+                style={{ backgroundColor: grey[200] }}
+                key={props.category._id}>
+                <ListItemText primary={props.category.name} ></ListItemText>
+                {categoryButtons()}
+            </ListItem>
+        )
+    }
     return (
-        <ListItem
-            style={{ backgroundColor: grey[200] }}
-            key={props.category._id}>
-            <ListItemText primary={props.category.name} ></ListItemText>
-            {categoryButtons()}
-        </ListItem>
+        <div>
+            {content()}
+        </div>
+
     )
 }

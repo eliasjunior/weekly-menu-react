@@ -29,7 +29,6 @@ export class ProductComponent extends React.Component {
         this.deleteItem = this.deleteItem.bind(this);
         this.updateName = this.updateName.bind(this);
         this.swapIcon = this.swapIcon.bind(this);
-        this.selectedProd = this.selectedProd.bind(this);
     }
     componentDidUpdate(prevProps) {
         const prevProduct = prevProps.product;
@@ -65,14 +64,11 @@ export class ProductComponent extends React.Component {
         };
         this.setState((prevState, props) => factoryMode(prevState, newState));
     }
-    selectedProd(itemProps) {
-        this.props.onSelectionProd(itemProps);
-    }
     displayCheckBtn() {
         // TODO check names, it will be generic or cat/prod
         return DisplayService.productCheckboxBtn(this.props.parentComponent).display ?
             <ItemSelection
-                onChangeSelection={this.selectedProd}
+                onChangeSelection={this.props.onSelectedProd}
                 product={this.state.product}
                 parent={this.props.category}>
             </ItemSelection>
