@@ -1,7 +1,6 @@
 import axios from 'axios';
 //import runtimeEnv from '@mars/heroku-js-runtime-env';
-
-const env = runtimeEnv();
+//const env = runtimeEnv();
 //const baseUrl = env.NODE_ENV === 'development' ? 'http://localhost:3002/' : 'https://week-menu-api.herokuapp.com/';
 const baseUrl = 'https://week-menu-api.herokuapp.com/'
 
