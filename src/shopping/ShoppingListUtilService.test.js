@@ -1,5 +1,5 @@
 import { ShoppingListUtilService } from './ShoppingListUtilService';
-import mockData from '../../tests/shopping.list';
+import mockData from '../tests/shopping.list'
 
 describe("ShoppingListUtilService", () => {
     it('should add attrs to product', () => {
@@ -20,7 +20,7 @@ describe("ShoppingListUtilService", () => {
 
         const recipes = ShoppingListUtilService
             .addRecInfoToProduct(shoppinpListData.recipes);
-       
+
         const mergeCategories = ShoppingListUtilService
             .mergeCategories(recipes, categories);
 
@@ -62,7 +62,7 @@ describe("ShoppingListUtilService", () => {
 
         const recipes = ShoppingListUtilService
             .addRecInfoToProduct(shoppinpListData.recipes);
-            
+
         const categories = shoppinpListData.categories;
 
         const mergeCategories = ShoppingListUtilService
@@ -70,20 +70,37 @@ describe("ShoppingListUtilService", () => {
 
         expect(mergeCategories).toEqual(expected);
     });
-    
+
     it('should merge, not repeat category case 5', () => {
         const case5 = mockData.case5;
         const shoppinpListData = case5.shoppinpListData;
         const expected = case5.expected;
 
         const recipes = ShoppingListUtilService
-        .addRecInfoToProduct(shoppinpListData.recipes);
+            .addRecInfoToProduct(shoppinpListData.recipes);
 
         const categories = shoppinpListData.categories;
 
         const mergeCategories = ShoppingListUtilService
-        .mergeCategories(recipes, categories);
+            .mergeCategories(recipes, categories);
 
         expect(mergeCategories).toEqual(expected);
     });
+
+    it('should check prod recipes include', () => {
+        const case6 = mockData.includeRecipe;
+        const recipes = case6.shoppinpListData.recipes;
+        const itemSelected = case6.shoppinpListData.itemSelected
+        const expected = case6.expected;
+        const result = ShoppingListUtilService.updateRecipesSelection(recipes, itemSelected)
+        expect(result).toEqual(expected)
+    })
+    it('should unchecked prod recipes include', () => {
+        const case6 = mockData.includeRecipe2;
+        const recipes = case6.shoppinpListData.recipes;
+        const itemSelected = case6.shoppinpListData.itemSelected
+        const expected = case6.expected;
+        const result = ShoppingListUtilService.updateRecipesSelection(recipes, itemSelected)
+        expect(result).toEqual(expected)
+    })
 });

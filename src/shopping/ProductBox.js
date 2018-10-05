@@ -2,14 +2,15 @@ import React from 'react';
 import CategoryList from '../inventory/category/CategoryList';
 import { List, ListItem, ListItemText, ListItemIcon } from '@material-ui/core';
 import IconProduct from '@material-ui/icons/ShoppingBasket'
+import { green } from '@material-ui/core/colors'
 
 export function ProductBox(props) {
     return (
         <div>
             <List>
-                <ListItem>
+                <ListItem style={{ backgroundColor: green[400] }}>
                     <ListItemIcon>
-                        < IconProduct/>
+                        < IconProduct />
                     </ListItemIcon>
                     <ListItemText primary="Products"></ListItemText>
                 </ListItem>

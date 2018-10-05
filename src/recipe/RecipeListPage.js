@@ -4,16 +4,20 @@ import RecipeService from './RecipeService';
 import { Button } from "@material-ui/core";
 import PropTypes from "prop-types";
 import UtilCollectionService from "../service/UtilCollectionService";
-import { RecipeListComponent } from "./RecipeListComponent";
+import RecipeListComponent from "./RecipeListComponent";
+import IncludeRecipe from '@material-ui/icons/PlaylistAdd';
 import AddIcon from '@material-ui/icons/Add';
-import {withStyles} from '@material-ui/core/styles'
+import { withStyles } from '@material-ui/core/styles'
 import CommonStyles from '../styles/CommonStyles'
+import { Link } from "react-router-dom";
+import { AppConstant } from "../common/AppConstant";
 
 class RecipeListPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            recipes: []
+            recipes: [],
+            isFromShoppingList: props.location.search ? true : false
         }
         this.onSelectRecipe = this.onSelectRecipe.bind(this);
     }
@@ -35,17 +39,31 @@ class RecipeListPage extends React.Component {
             .callbackIncludeRecipe(item);
     }
     render() {
-        const {classes} = this.props
+        const { classes } = this.props
+        const addButton = () => {
+            return this.props.location.search ?
+                <Button variant="fab"
+                    color="secondary"
+                    className={classes.floatingBtn}
+                    aria-label="Add"
+                    onClick={() => this.props.history.goBack()}>
+                    <IncludeRecipe />
+                </Button> :
+                <Button
+                    variant="fab"
+                    color="secondary"
+                    className={classes.floatingBtn}
+                    aria-label="Add">
+                    <Link
+                        to={AppConstant.LOCATION.newRecipe.path}>
+                        <AddIcon />
+                    </Link>
+                </Button>
+        }
         return (
             <div >
                 <AppWeekBar title='Recipe List'></AppWeekBar>
-                <Button variant="fab" 
-                    color="secondary" 
-                    className={classes.floatingBtn}
-                    aria-label="Add" 
-                    onClick={() => this.props.history.goBack()}>
-                    <AddIcon />
-                </Button>
+                {addButton()}
                 <RecipeListComponent
                     recipes={this.state.recipes}
                     onSelectRecipe={this.onSelectRecipe}

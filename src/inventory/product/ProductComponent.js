@@ -33,8 +33,8 @@ export class ProductComponent extends React.Component {
     componentDidUpdate(prevProps) {
         const prevProduct = prevProps.product;
         const currentProd = this.props.product;
+        // TODO revise here, calling all prods in check/recipe includes
         if (prevProduct.checked !== currentProd.checked) {
-            console.log(`Update product ${currentProd.name}`)
             this.setState({ product: CloneDeep(currentProd) })
         }
     }

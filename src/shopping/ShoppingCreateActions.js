@@ -28,7 +28,7 @@ function ShoppingCreateActions(props){
             <Button color="primary"
                 variant="fab">
                 <Link
-                    to={AppConstant.LOCATION.recipeList.path}>
+                    to={`${AppConstant.LOCATION.recipeList.path}?include=true`}>
                     <IncludeIcon />
                 </Link>
             </Button>

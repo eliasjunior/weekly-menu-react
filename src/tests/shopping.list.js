@@ -476,6 +476,112 @@ const shoppingListTestCase = {
                 ]
             }
         ]
+    },
+    "includeRecipe": {
+        "shoppinpListData": {
+            "recipes": [
+                {
+                    "name": "Pie",
+                    "_id": "5b997232fb7dfee0ed8180ed",
+                    "categories": [
+                        {
+                            "name": "Meat",
+                            "_id": "5b9971bbfb7dfee0ed8180e8",
+                            "products": [
+                                {
+                                    "name": "Chicken",
+                                    "_id": "5b9971c2fb7dfee0ed8180e9",
+                                    "checked": false
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "itemSelected": {
+                "category": {
+                    "name": "Meat",
+                    "_id": "5b9971bbfb7dfee0ed8180e8",
+                },
+                "checked": true,
+                "product": {
+                    name: "Chicken",
+                    _id: "5b9971c2fb7dfee0ed8180e9"
+                }
+            }
+        },
+        "expected": [
+            {
+                "name": "Pie",
+                "_id": "5b997232fb7dfee0ed8180ed",
+                "categories": [
+                    {
+                        "name": "Meat",
+                        "_id": "5b9971bbfb7dfee0ed8180e8",
+                        "products": [
+                            {
+                                "name": "Chicken",
+                                "_id": "5b9971c2fb7dfee0ed8180e9",
+                                "checked": true
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    "includeRecipe2": {
+        "shoppinpListData": {
+            "recipes": [
+                {
+                    "name": "Pie",
+                    "_id": "5b997232fb7dfee0ed8180ed",
+                    "categories": [
+                        {
+                            "name": "Meat",
+                            "_id": "5b9971bbfb7dfee0ed8180e8",
+                            "products": [
+                                {
+                                    "name": "Chicken",
+                                    "_id": "5b9971c2fb7dfee0ed8180e9",
+                                    "checked": true
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "itemSelected": {
+                "category": {
+                    "name": "Meat",
+                    "_id": "5b9971bbfb7dfee0ed8180e8",
+                },
+                "checked": false,
+                "product": {
+                    name: "Chicken",
+                    _id: "5b9971c2fb7dfee0ed8180e9"
+                }
+            }
+        },
+        "expected": [
+            {
+                "name": "Pie",
+                "_id": "5b997232fb7dfee0ed8180ed",
+                "categories": [
+                    {
+                        "name": "Meat",
+                        "_id": "5b9971bbfb7dfee0ed8180e8",
+                        "products": [
+                            {
+                                "name": "Chicken",
+                                "_id": "5b9971c2fb7dfee0ed8180e9",
+                                "checked": false
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
     }
 }
 

@@ -3,7 +3,6 @@ import React from 'react';
 import CommmonStyles from '../../styles/CommonStyles';
 import { withStyles } from '@material-ui/core';
 import SaveIcon from '@material-ui/icons/Save';
-import Edit from '@material-ui/icons/Create';
 
 function RecipeActions(props){
     const { classes } = props;
@@ -12,7 +11,7 @@ function RecipeActions(props){
         return props.isToUpdate ?
             <Button color="secondary" variant="fab"
                 onClick={() => props.onUpdateAction()} >
-                <Edit />
+                <SaveIcon />
             </Button>
             :
             <Button color="secondary" variant="fab"

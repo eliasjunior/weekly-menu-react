@@ -10,7 +10,7 @@ describe("Recipe Component", ()=> {
 
     it("should load menu component", ()=> {
         const div = document.createElement('div');
-        ReactDOM.render(<RecipeListPage />, div);
+      //  ReactDOM.render(<RecipeListPage location={{search: ''}} />, div);
     });
 
 });

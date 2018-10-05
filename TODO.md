@@ -1,15 +1,16 @@
 ## Tasks, for priority sequence
 
 
-
-Save by action rec list and shp list/ after update or create loses the checkbox
-Post should close or redirect to edit, new recipe
-Display prod total selected on 
-Fix repeat prod name rec list
-Fix data
-History date shop list
-Search prod
+Fix duplicate prod name rec list
 typing name too slow
+Save by action rec list and shop list/ after update or create loses the checkbox
+save prod when is creating shop list and copy the state / also for new recipe
+Display prod total selected on 
+Fix data
+bug recipes include, add recipes then save, add another one, not updating
+History date shop list
+
+
 Bug category name, if try same name
 
 
@@ -18,6 +19,11 @@ Bug category name, if try same name
 - Review deep copy components
 
 ## DONE 
+- Search by name
+- Bug select all
+- Add btn recipe list need to also go to new recipe
+- add test recipe check
+- Post should close or redirect to edit, new recipe
 - Add qtd to shopping list
 - bug add/unadd selecte all
 - review child changing state, should not change

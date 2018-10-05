@@ -20,6 +20,7 @@ class App extends React.Component {
         super(props);
         this.state = {
             recipesToInclude: [],
+            appLocation: 'dashboard',
             alert: {
                 message: null,
                 open: false
@@ -30,21 +31,22 @@ class App extends React.Component {
         this.handleClose = this.handleClose.bind(this);
         this.handleMessage = this.handleMessage.bind(this);
     }
-    callbackIncludeRecipe(param) {
-        if (param.checked) {
+    callbackIncludeRecipe(_recipeRow_) {
+        if (_recipeRow_.checked) {
             const recipesToInclude =
                 UtilCollectionService
-                    .addRecipe(param.recipe, this.state.recipesToInclude);
+                    .addRecipe(_recipeRow_.recipe, this.state.recipesToInclude);
             this.setState({ recipesToInclude });
 
-            console.log('>', recipesToInclude)
+            console.log('add', _recipeRow_.recipe)
+            console.log('list', recipesToInclude)
         } else {
             const recipesToInclude =
                 UtilCollectionService
-                    .removeRecipe(param.recipe, this.state.recipesToInclude);
+                    .removeRecipe(_recipeRow_.recipe, this.state.recipesToInclude);
             this.setState({ recipesToInclude });
 
-            console.log('*', recipesToInclude)
+            console.log('remove', _recipeRow_.recipe)
         }
     }
     editShoppingList(shoppingList) {

@@ -2,20 +2,20 @@ import CloneDeep from 'lodash.clonedeep';
 import Util from '../service/UtilCollectionService';
 
 export const ShoppingListUtilService = {
-    updateRecipesSelection(oldRecipeList, updateItem) {
-        const newRecipe = CloneDeep(oldRecipeList)
-        const product = {...updateItem.product};
+    updateRecipesSelection(_currentRecList_, _updateItem_) {
+        const updateRecipe = CloneDeep(_currentRecList_)
+        const selectedProd = {..._updateItem_.product};
         // review this 3 loops later
-        newRecipe.forEach(rec => {
+        updateRecipe.forEach(rec => {
             rec.categories.forEach(cat => {
                 cat.products.forEach(prod => {
-                    if (prod._id === product._id) {
-                        product.checked = updateItem.checked
+                    if (prod._id === selectedProd._id) {
+                        prod.checked = _updateItem_.checked
                     }
                 })
             })
         })
-        return oldRecipeList
+        return updateRecipe
     },
     mergeCategories(recipes, categories) {
         const allCategoriesRecipe = Util

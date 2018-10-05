@@ -32,7 +32,7 @@ const RecipePageUtilService = {
             .filter(category => {
                 category.products = category.products.filter(product => product.checked)
 
-            return category.products.length ? true : false;
+            return category.products.length > 0;
         });
     }
 }
