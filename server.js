@@ -7,15 +7,23 @@ const app = express();
 
 app.use(express.static('./build'));
 
-// app.get('/', function (req, res) {
-//     res.sendFile(path.join(__dirname, './build', 'index.html'));
-// });
-
 app.get('/*', (req, res) => {
-    console.log('*************************** herroku works')
-    console.log(path.join(__dirname))
-    console.log('*************************** herroku works')
+    _log('*** React local server running herroku **** ')
+    _log('Base path ' + path.join(__dirname))
     res.sendFile(path.join(__dirname, './build', 'index.html'));
 });
+const port = process.env.PORT || 9000
 
-app.listen(process.env.PORT || 9000);
+app.listen(port, () => {
+    _log("Application heroku started. Listening on port:" + port);
+});
+
+function _log() {
+    if (process.env.NODE_ENV !== 'test') {
+        console.log("Log " + getLogDate(), arguments[0]);
+    }
+}
+function getLogDate() {
+    let date = new Date();
+    return date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+}
