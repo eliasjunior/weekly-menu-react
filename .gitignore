@@ -27,7 +27,6 @@ npm-debug.log
 
 .tmp/
 #bower
-build/
 node_modules/
 www/build/
 platforms/
