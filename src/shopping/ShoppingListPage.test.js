@@ -20,6 +20,4 @@ describe("ShoppingListComponent", () => {
         expect(ShoppingListComponent.prototype.componentDidMount.calledOnce).toBe(true);
 
     });
-
-
 });

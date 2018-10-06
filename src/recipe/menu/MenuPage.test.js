@@ -4,13 +4,11 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import MenuComponent from './MenuComponent'
+import MenuPage from './MenuPage'
 
 describe("Menu Component", ()=> {
-
-    it("should load menu component", ()=> {
+    it("should load menu page", ()=> {
         const div = document.createElement('div');
-        ReactDOM.render(<MenuComponent />, div);
+        ReactDOM.render(<MenuPage />, div);
     });
-
 });

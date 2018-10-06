@@ -11,6 +11,7 @@ function Dashboard(props) {
             <List>
                 {getItems()}
             </List>
+            <div>v_1</div>
         </div>
     )
 }
