@@ -20,7 +20,7 @@ export default function SearchName(props) {
                     InputProps={{
                         startAdornment: (
                             <InputAdornment position="end">
-                                <Search />
+                                <Search onClick={props.onResetSearch}/>
                             </InputAdornment>
                         ),
                     }}
