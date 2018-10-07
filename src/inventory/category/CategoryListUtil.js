@@ -1,5 +1,6 @@
 const CategoryListUtil = {
     // TODO add test for it
+    // Also change categoty list to call here
     isListChanged(_prevCats_, categories , propToCheck) {
         const reducerCount = (acc, item) => {
             const totalSelected = item.products.filter(prod => prod[propToCheck]).length
