@@ -14,6 +14,7 @@ class CategoryList extends React.Component {
         }
     }
     componentDidUpdate(prevProps) {
+        // TODO change list to categories
         const { list: prevList } = prevProps
         const { list } = this.props
         const reducerCount = (acc, item) => {
@@ -74,7 +75,9 @@ class CategoryList extends React.Component {
             .searchInput(this.props.parentComponent).display
 
         const searchNode = <SearchName onSearch={this.state.search}
-            onChangeName={this.handleChange} onResetSearch={this.resetSearch}>
+            onChangeName={this.handleChange} 
+            onResetSearch={this.resetSearch}
+            searchTitle={this.props.searchTitle}>
         </SearchName>
 
         return isVisible ? searchNode : ''

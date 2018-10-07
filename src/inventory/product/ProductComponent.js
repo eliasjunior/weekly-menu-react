@@ -4,7 +4,7 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ProductService from './ProductService';
 import { EditableLabel } from '../../common/EditableLabel';
 import { CrudActions } from '../../common/CrudActions';
-import { ItemSelection } from '../../common/ItemSelection';
+import ItemSelection from '../../common/ItemSelection';
 import DisplayService from '../category/CategoryDisplayService';
 import CloneDeep from 'lodash.clonedeep'
 

@@ -1,23 +1,21 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import ShoppingListComponent from "./ShoppingListComponent";
+import ShoppingListPage from "./ShoppingListPage";
 import sinon from 'sinon';
 import { mount } from 'enzyme';
+import { shallow } from 'enzyme';
+import { MemoryRouter } from 'react-router-dom'
 
 
 describe("ShoppingListComponent", () => {
-
     it("should load component * ", () => {
-        const div = document.createElement('div');
-        ReactDOM.render(<ShoppingListComponent/>, div);
+        shallow(<MemoryRouter><ShoppingListPage/></MemoryRouter> )
     });
 
     it("should call componentDidMount", ()=> {
 
-        sinon.spy(ShoppingListComponent.prototype, 'componentDidMount');
+        sinon.spy(ShoppingListPage.prototype, 'componentDidMount');
         //TODO more test here
-        const wrapper = mount(<ShoppingListComponent/>);
-        expect(ShoppingListComponent.prototype.componentDidMount.calledOnce).toBe(true);
-
+        const wrapper = mount(<MemoryRouter><ShoppingListPage/></MemoryRouter> );
+        expect(ShoppingListPage.prototype.componentDidMount.calledOnce).toBe(true);
     });
 });

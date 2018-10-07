@@ -1,7 +1,9 @@
 ## Tasks, for priority sequence
 
-
-Fix duplicate prod name rec list
+WRITE test for item selection and parent component, need to be consistend
+Bug include recipe in shop list, create a new SL and then try edit add another rec
+    maybe change the feature, instead deep in memory always save
+Fix duplicate prod name rec list(API)
 typing name too slow
 Save by action rec list and shop list/ after update or create loses the checkbox
 save prod when is creating shop list and copy the state / also for new recipe
@@ -20,6 +22,7 @@ Bug category name, if try same name
 
 ## DONE 
 - Search by name
+- Bug select persist, add test for it
 - Bug select all
 - Add btn recipe list need to also go to new recipe
 - add test recipe check

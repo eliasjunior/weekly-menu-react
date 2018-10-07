@@ -1,7 +1,7 @@
 import React from 'react';
 import Checkbox from '@material-ui/core/Checkbox'
 
-export const ItemSelection = (props) => {
+export default function ItemSelection(props){
     const onChangeSelection = (e) => {
         const itemProps = {
             checked: e.target.checked,

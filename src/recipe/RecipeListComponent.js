@@ -6,6 +6,8 @@ import PropTypes from 'prop-types';
 import IconRecipe from '@material-ui/icons/Receipt'
 import CloneDeep from 'lodash.clonedeep';
 import SearchName from '../common/SearchName';
+import { purple } from '@material-ui/core/colors'
+import CategoryListUtil from '../inventory/category/CategoryListUtil';
 class RecipeListComponent extends React.Component {
     constructor(props) {
         super(props)
@@ -15,7 +17,23 @@ class RecipeListComponent extends React.Component {
         }
     }
     componentDidUpdate(prevProps) {
-        if (prevProps.recipes.length !== this.props.recipes.length) {
+        let hasChanged = false;
+        prevProps.recipes.forEach(_recPrev => {
+            const currentRec = this.props.recipes
+                .filter(rec => rec._id = _recPrev._id)
+                .pop();
+            if(!currentRec) {
+                console.error('componentDidUpdate props is ansync with prevProps')
+                return
+            }
+            const prevList = _recPrev.categories
+            const categories = currentRec.categories
+            hasChanged = CategoryListUtil
+                .isListChanged(prevList, categories, 'checked')
+        })
+
+        if (prevProps.recipes.length !== this.props.recipes.length ||
+            hasChanged) {
             this.setState({ recipes: this.props.recipes })
         }
     }
@@ -32,10 +50,10 @@ class RecipeListComponent extends React.Component {
         const { recipes } = this.state
 
         if (recipes.length) {
-            return recipes.map(recipe => {
+            return recipes.map((recipe, index) => {
                 return (
-                    <div key={recipe._id}>
-                        <List>
+                    <div key={index}>
+                        <List component="div" disablePadding key={recipe._id}>
                             <RecipeHeaderItem
                                 recipe={recipe}
                                 isNotEditable={isNotEditable}
@@ -46,13 +64,14 @@ class RecipeListComponent extends React.Component {
                         <CategoryList
                             list={recipe.categories}
                             onSelectedProd={onSelectedProd}
-                            onSelectAllProd={param => {
-                                const withRecipe = { ...param, recId: recipe._id }
+                            onSelectAllProd={selectedCategory => {
+                                const withRecipe = { ...selectedCategory, recId: recipe._id }
                                 onSelectAllProdOfCatRec(withRecipe)
                             }}
-                            parentComponent={parentComponent}>
+                            parentComponent={parentComponent}
+                            searchTitle="Search Product In Recipe">
                         </CategoryList>
-                    </div>)
+                    </div >)
             });
         } else {
             return ''
@@ -67,7 +86,7 @@ class RecipeListComponent extends React.Component {
 
         if (title && recipes.length) {
             return <List>
-                <ListItem>
+                <ListItem style={{ backgroundColor: purple[300] }}>
                     <ListItemIcon>
                         <IconRecipe />
                     </ListItemIcon>
@@ -105,7 +124,9 @@ class RecipeListComponent extends React.Component {
             <div>
                 {this.isTitleDisplay()}
                 <SearchName onSearch={this.state.search}
-                    onChangeName={this.handleChange} onResetSearch={this.resetSearch}>
+                    onChangeName={this.handleChange}
+                    onResetSearch={this.resetSearch}
+                    searchTitle="Search Recipe">
                 </SearchName>
                 <List>
                     {this.buildRecipeList()}
