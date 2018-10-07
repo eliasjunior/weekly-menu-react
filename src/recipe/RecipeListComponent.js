@@ -8,6 +8,7 @@ import CloneDeep from 'lodash.clonedeep';
 import SearchName from '../common/SearchName';
 import { purple } from '@material-ui/core/colors'
 import CategoryListUtil from '../inventory/category/CategoryListUtil';
+import RecipeListUtil from './RecipeListUtil';
 class RecipeListComponent extends React.Component {
     constructor(props) {
         super(props)
@@ -18,23 +19,20 @@ class RecipeListComponent extends React.Component {
     }
     componentDidUpdate(prevProps) {
         let hasChanged = false;
-        prevProps.recipes.forEach(_recPrev => {
-            const currentRec = this.props.recipes
-                .filter(rec => rec._id = _recPrev._id)
-                .pop();
-            if(!currentRec) {
-                console.error('componentDidUpdate props is ansync with prevProps')
-                return
-            }
+        const { recipes: prevRecipes} = prevProps
+        const { recipes } = this.props
+        let i = 0;
+        while(!hasChanged && prevRecipes.length > i) {
+            const _recPrev = prevRecipes[i];
             const prevList = _recPrev.categories
-            const categories = currentRec.categories
+            const categories = RecipeListUtil.getCatsFromProps(recipes, _recPrev._id)
+
             hasChanged = CategoryListUtil
                 .isListChanged(prevList, categories, 'checked')
-        })
-
-        if (prevProps.recipes.length !== this.props.recipes.length ||
-            hasChanged) {
-            this.setState({ recipes: this.props.recipes })
+            i++;    
+        }
+        if (prevProps.recipes.length !== recipes.length || hasChanged) {
+            this.setState({ recipes })
         }
     }
     buildRecipeList = () => {
