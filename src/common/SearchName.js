@@ -1,5 +1,5 @@
 import React from 'react';
-import Search from '@material-ui/icons/Search'
+import Search from '@material-ui/icons/Clear'
 import { TextField, InputAdornment } from '@material-ui/core';
 
 export default function SearchName(props) {

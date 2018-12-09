@@ -10,24 +10,25 @@ class MenuIconComponent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            open: false,
             anchorEl: null
         }
-        this.onDisplayMenuOption = this.onDisplayMenuOption.bind(this);
-        this.onDisplayClose = this.onDisplayClose.bind(this);
+        this.displayMenuOption = this.displayMenuOption.bind(this);
+        this.closeMenu = this.closeMenu.bind(this);
     }
-    onDisplayMenuOption = (event) => {
+    displayMenuOption = (event) => {
         this.setState({ anchorEl: event.currentTarget });
     }
-    onDisplayClose(event) {
-        this.setState({ anchorEl: null, open: false });
+    closeMenu() {
+        console.log('Close menu')
+        this.setState({ anchorEl: null});
     }
     render() {
+        const { anchorEl } = this.state;
         return (
             <div>
                 <IconButton
-                    aria-owns={this.state.open ? 'menu-appbar' : null}
-                    onClick={this.onDisplayMenuOption}
+                    aria-owns={anchorEl ? 'menu-appbar' : null}
+                    onClick={this.displayMenuOption}
                     aria-label="Menu"
                     aria-haspopup="true"
                     color="inherit">
@@ -35,7 +36,8 @@ class MenuIconComponent extends React.Component {
                 </IconButton>
                 <Menu
                     id="menu-appbar"
-                    anchorEl={this.state.anchorEl}
+                    anchorEl={anchorEl}
+                    open={Boolean(anchorEl)}
                     anchorOrigin={{
                         vertical: 'top',
                         horizontal: 'left',
@@ -44,7 +46,6 @@ class MenuIconComponent extends React.Component {
                         vertical: 'top',
                         horizontal: 'left',
                     }}
-                    open={Boolean(this.state.anchorEl)}
                     onClose={this.handleClose}>
                     {getItemsForSideMenu.call(this)}
                 </Menu>
@@ -58,7 +59,7 @@ function getItemsForSideMenu() {
         .entries(AppConstant.LOCATION)
         .filter(([key, location]) => location.menu)
         .map(([key, location]) =>  {
-            return <MenuItem key={key} onClick={this.onDisplayClose}>
+            return <MenuItem key={key} onClick={this.closeMenu}>
                 <Link to={location.path}>{location.label}</Link>
             </MenuItem>
         });

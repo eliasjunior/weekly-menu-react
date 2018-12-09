@@ -31,6 +31,7 @@ class RecipeListPage extends React.Component {
             .catch(reason => { console.error(reason) });
     }
     onSelectRecipe(selected) {
+        // TODO replace this here with localApi
         const item = {
             recipe: UtilCollectionService.recipeToAdd(selected.recipe),
             checked: selected.checked
@@ -45,7 +46,7 @@ class RecipeListPage extends React.Component {
                 <Button variant="fab"
                     color="secondary"
                     className={classes.floatingBtn}
-                    aria-label="Add"
+                    aria-label="include Recipe"
                     onClick={() => this.props.history.goBack()}>
                     <IncludeRecipe />
                 </Button> :
@@ -53,7 +54,7 @@ class RecipeListPage extends React.Component {
                     variant="fab"
                     color="secondary"
                     className={classes.floatingBtn}
-                    aria-label="Add">
+                    aria-label="new Recipe">
                     <Link
                         to={AppConstant.LOCATION.newRecipe.path}>
                         <AddIcon />

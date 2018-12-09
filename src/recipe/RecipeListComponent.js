@@ -67,7 +67,7 @@ class RecipeListComponent extends React.Component {
                                 onSelectAllProdOfCatRec(withRecipe)
                             }}
                             parentComponent={parentComponent}
-                            searchTitle="Search Product In Recipe">
+                            searchTitle={`Search Product In ${recipe.name}`}>
                         </CategoryList>
                     </div >)
             });
@@ -94,7 +94,7 @@ class RecipeListComponent extends React.Component {
         } else return '';
     }
     handleChange = (e) => {
-        const { recipes } = this.state
+        const { recipes } = this.props
         const value = e.target.value;
 
         if (value === '') {

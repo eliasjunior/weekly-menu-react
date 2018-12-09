@@ -7,21 +7,9 @@ import { withStyles } from '@material-ui/core';
 import IncludeIcon from '@material-ui/icons/Receipt';
 import SaveIcon from '@material-ui/icons/Save';
 
-function ShoppingCreateActions(props){
+function ShoppingCreateActions(props) {
     const { classes } = props;
-    const combinedClasses = `${classes.floatingPadding} ${classes.floatingBtn} gridFloatingBtn` 
-    const actionButton = () => {
-        return props.isUpdate ?
-            <Button color="secondary" variant="fab"
-                onClick={() => props.updateShoppingList()} >
-                <SaveIcon />
-            </Button>
-            :
-            <Button color="secondary" variant="fab"
-                onClick={() => props.createShoppingList()} >
-                <SaveIcon />
-            </Button>
-    }
+    const combinedClasses = `${classes.floatingPadding} ${classes.floatingBtn} gridFloatingBtn`
 
     return (
         <div className={combinedClasses}>
@@ -32,7 +20,10 @@ function ShoppingCreateActions(props){
                     <IncludeIcon />
                 </Link>
             </Button>
-            {actionButton()}
+            <Button color="secondary" variant="fab"
+                onClick={() => props.onSaveShoppingList()} >
+                <SaveIcon />
+            </Button>
         </div>
     )
 }

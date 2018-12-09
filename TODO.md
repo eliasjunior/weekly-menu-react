@@ -1,9 +1,10 @@
 ## Tasks, for priority sequence
 
-WRITE test for item selection and parent component, need to be consistend
+
 Bug include recipe in shop list, create a new SL and then try edit add another rec
-    maybe change the feature, instead deep in memory always save
+    maybe change the behaviour, instead save in memory always save
 Fix duplicate prod name rec list(API)
+Bug Duplicate prod in shopping list, should not check dupl in the SL
 typing name too slow
 Save by action rec list and shop list/ after update or create loses the checkbox
 save prod when is creating shop list and copy the state / also for new recipe
@@ -11,6 +12,11 @@ Display prod total selected on
 Fix data
 bug recipes include, add recipes then save, add another one, not updating
 History date shop list
+Loading after action
+RecipePage need to able to filter prod selected
+Menu Item does not work properly, 
+    click outside is not working
+Add btn rec list when come from SL, one way flow, in case need to create a new rec list
 
 
 Bug category name, if try same name
@@ -21,6 +27,7 @@ Bug category name, if try same name
 - Review deep copy components
 
 ## DONE 
+- WRITE test for item selection and parent component, need to be consistend
 - Search by name
 - Bug select persist, add test for it
 - Bug select all
