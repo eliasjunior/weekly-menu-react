@@ -2,6 +2,7 @@ export const AppConstant = {
     LOCATION: {
         dashboard: { path: '/', label: 'Dashboard', menu: false  },
         products: { path: '/products', label: 'Products', menu: true  },
+        login: { path: '/login', label: 'Login', menu: true  },
         newShoppingList: { path:'/newshopping', label: 'New Shopping List', menu: true },
         editShoppingList: { path:'/editshopping', label: '', menu: false },
         shoppingHistory: { path: '/shoppinghistory', label: 'Shopping history', menu: true  },

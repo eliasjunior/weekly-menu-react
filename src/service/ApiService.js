@@ -8,28 +8,38 @@ const baseUrl = process.env.REACT_APP_API_URL
 
 const ApiService = {
     get: (resourceName) => {
-        return axios.get(baseUrl + resourceName)
+        return axios.get(baseUrl + resourceName, {headers: {
+            'Authorization': localStorage.getItem("JWT")
+          }})
             .then(response => response.data)
             .catch(reason => getErrorFromResponse(reason));
     },
     post: (resourceName, object) => {
         return axios
-            .post(baseUrl + resourceName, object)
+            .post(baseUrl + resourceName, object, {headers: {
+                'Authorization': localStorage.getItem("JWT")
+              }})
             .then(response => response.data)
             .catch(reason => getErrorFromResponse(reason));
     },
     put(resourceName, object) {
         return axios
-                .put(baseUrl + resourceName, object)
+                .put(baseUrl + resourceName, object, {headers: {
+                    'Authorization': localStorage.getItem("JWT")
+                  }})
                 .then(response => response.data)
                 .catch(reason => getErrorFromResponse(reason));    
     }
 }
 function getErrorFromResponse(reason) {
     const response = reason['response'];
-    if (response && response.status === 404) {
-        console.log('return 404')
-        return Promise.reject({ message: 'Not Found' });
+    if (response) {
+        if (response.status === 404) {
+            console.log('return 404')
+            return Promise.reject({ message: 'Not Found' });
+        } else if (response.status === 401) {
+            window.location = "/login";
+        }
     } else {
         const error = reason.response ? reason.response.data : reason;
         return Promise.reject(error);

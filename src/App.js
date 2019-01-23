@@ -14,6 +14,7 @@ import ShoppingListHistoryPage from './shopping/ShoppingListHistoryPage';
 import ShoppingPage from './shopping/ShoppingPage';
 import MessageComponent from './common/MessageComponent';
 import Dashboard from './Dashboard';
+import Login from './login/Login';
 
 class App extends React.Component {
     constructor(props) {
@@ -96,6 +97,10 @@ class App extends React.Component {
             <MuiThemeProvider theme={theme}>
                 <div>
                     {this.messageComponent.call(this)}
+                    <Route exact path={AppConstant.LOCATION.login.path}
+                        render={(props) => <Login {...props}
+                            onHandleMessage={this.handleMessage}></Login>}>
+                    </Route>
                     <Route exact path={AppConstant.LOCATION.products.path}
                         render={(props) => <InventoryPage {...props}
                             onHandleMessage={this.handleMessage}></InventoryPage>}>
