@@ -1,68 +1,126 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# TODO
 
-## Available Scripts
+## 2020 Fenix Program
 
-In the project directory, you can run:
+- Refactoring Service layer to use cases
+- Refactoring Components
+ ~~Update latest React~~
+ ~~Mock Back-end data JSON (plugin or anything can abstract from http)~~
+  
+## Mock server
 
-### `yarn start`
+Start JSON server
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+````
+json-server --watch db.json
+````
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+[json server](https://www.npmjs.com/package/json-server)
 
-### `yarn test`
+## Tasks, for priority sequence
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `yarn build`
+Bug include recipe in shop list, create a new SL and then try edit add another rec
+    maybe change the behaviour, instead save in memory always save
+Fix duplicate prod name rec list(API)
+Bug Duplicate prod in shopping list, should not check dupl in the SL
+typing name too slow
+Save by action rec list and shop list/ after update or create loses the checkbox
+save prod when is creating shop list and copy the state / also for new recipe
+Display prod total selected on 
+Fix data
+bug recipes include, add recipes then save, add another one, not updating
+History date shop list
+Loading after action
+RecipePage need to able to filter prod selected
+Menu Item does not work properly, 
+    click outside is not working
+Add btn rec list when come from SL, one way flow, in case need to create a new rec list
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Bug category name, if try same name
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+- Polish
+- add test
+- Review deep copy components
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## DONE 
 
-### `yarn eject`
+- WRITE test for item selection and parent component, need to be consistend
+- Search by name
+- Bug select persist, add test for it
+- Bug select all
+- Add btn recipe list need to also go to new recipe
+- add test recipe check
+- Post should close or redirect to edit, new recipe
+- Add qtd to shopping list
+- bug add/unadd selecte all
+- review child changing state, should not change
+- Shopping page load by id (back end too)
+- fix bug repeated categories
+- Category Crud
+- New Shopping list
+- Product Crud
+- Recipe
+ * List
+ * update, name and prods
+ - Product list
+     - update
+       > call Rest api(NEED to fix and refactor it the API)
+       > change update icon to save when the input is updatable
+     - add(only name)
+        > send category id
+        > message success 
+        > add back button
+        > message fail 
+    - Service 
+        > filter only the data, service and component does not need to know the headers   
+- New Shopping list
+    1 - just select and create list based on the products
+    2 - add recipe, ignore repeated        
+- shopping list view and shopping list history
+- Add select all to new shopping list
+- sort products list, prod of recipe list
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- Sub Documents Cat/Product List
+  Update, trigger
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+### Backlog
+  - Update Shopping list
+  
+  - Edit/update shopping list, leave for later
+  - Define Props component Very important 
+  - Message Service
+        * fade message , add transition  
+  - Need to add test to it, but after a few more complexity
+  - User account
+  - Recipes recomendation based on products left
+  - styles/colors, need a upgrade primary/secondary colors
+  - delete Product(later)
+  - add form validation Product
+  - form validation data
+            TODO handle form server errors
+                {  
+                "message":"Internal server error",
+                "name":"ValidationError",
+                "errors":{  
+                    "name":{  
+                        "message":"Path `name` is required.",
+                        "name":"ValidatorError",
+                        "properties":{  
+                            "type":"required",
+                            "message":"Path `{PATH}` is required.",
+                            "path":"name",
+                            "value":""
+                        },
+                        "kind":"required",
+                        "path":"name",
+                        "value":""
+                    }
+                }
+                }
+            
+ 
+ ## Requirements
+  Easy accesss to product list to creation of products CRUD
+  Product list should not be linked with Recipe (need api analysis)   
+  Recipes CRUD, what's Recipe? a product ? need to review the (design)
