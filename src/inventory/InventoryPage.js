@@ -1,5 +1,5 @@
 import React from 'react';
-import CategoryList from './category/CategoryList';
+import CategoryList from './category/category-list/components';
 import { AppWeekBar } from '../common/AppWeekBar';
 import CategoryService from './category/CategoryService';
 import FormDialog from './FormDialog';

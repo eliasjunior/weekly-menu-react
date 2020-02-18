@@ -1,7 +1,7 @@
 import React from 'react';
 import { List, ListItem, ListItemText, ListItemIcon } from '@material-ui/core';
 import { RecipeHeaderItem } from './RecipeHeaderItem';
-import CategoryList from '../inventory/category/CategoryList';
+import CategoryList from '../inventory/category/category-list/components';
 import PropTypes from 'prop-types';
 import IconRecipe from '@material-ui/icons/Receipt'
 import CloneDeep from 'lodash.clonedeep';

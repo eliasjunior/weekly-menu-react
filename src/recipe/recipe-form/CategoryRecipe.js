@@ -1,5 +1,5 @@
 import React from 'react'
-import { CategoryList } from '../../inventory/category/CategoryList';
+import CategoryList  from '../../inventory/category/CategoryList';
 
 export function CategoryRecipe(props) {
     return <CategoryList

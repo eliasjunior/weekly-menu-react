@@ -1,5 +1,5 @@
 import React from 'react';
-import CategoryList from '../inventory/category/CategoryList';
+import CategoryList from '../inventory/category/category-list/components';
 import { List, ListItem, ListItemText, ListItemIcon } from '@material-ui/core';
 import IconProduct from '@material-ui/icons/ShoppingBasket'
 import { green } from '@material-ui/core/colors'

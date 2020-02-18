@@ -1,6 +1,6 @@
 import React from 'react';
 import { AppWeekBar } from "../../common/AppWeekBar";
-import CategoryList from '../../inventory/category/CategoryList';
+import  CategoryList from '../../inventory/category/category-list/components';
 import { TextField } from '@material-ui/core';
 import RecipeService from '../RecipeService';
 import UtilCollectionService from '../../service/UtilCollectionService';
