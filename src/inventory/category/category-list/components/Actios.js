@@ -6,14 +6,14 @@ export default function Actions({ setSearch, setCategories }) {
       setSearch(search);
       setCategories(list);
     },
-    handleChange: (value, list) => {
+    handleSearchProduct: (value, list) => {
       if (value === "") {
         setSearch("");
         setCategories(list);
         return;
       }
 
-      // TODO cloneDeep hurts performance
+      // TODO don't fix it now, the search will change, cloneDeep hurts performance,
       const cats = CloneDeep(list).filter(cat => {
         cat.products = cat.products.filter(prod => {
           return prod.name.toLowerCase().indexOf(value.toLowerCase()) !== -1;

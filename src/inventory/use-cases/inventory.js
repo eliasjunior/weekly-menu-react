@@ -1,3 +1,13 @@
-export default function Inventory(input) {
-    return {}
+export default function Inventory({ CategoryService }) {
+  async function getCategories() {
+    try {
+      return await CategoryService.get();
+    } catch (error) {
+      return error;
+    }
+  }
+
+  return {
+    getCategories
+  };
 }

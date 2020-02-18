@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 
 import CategoryDisplayService from "../../CategoryDisplayService";
 import SearchName from "../../../../common/SearchName";
-import Presenter from "../../../presenter";
+import Presenter from "../../presenter";
 import Actions from "./Actios";
 
 const { categories, compareListsSize } = Presenter;
@@ -20,17 +20,20 @@ export default function CategoryList({
   onRefresh,
   searchTitle
 }) {
-  const [catList, setCategories] = useState(categories);
+  const [catList, setCatList] = useState(categories);
   const [search, setSearch] = useState("");
 
-  const { resetSearch, handleChange } = Actions({ setCategories, setSearch });
+  const { resetSearch, handleSearchProduct } = Actions({
+    setCatList,
+    setSearch
+  });
 
   useEffect(() => {
     const hasChanged = compareListsSize(catList, list);
     if (hasChanged) {
-      setCategories(list);
+      setCatList(list);
     }
-  });
+  }, [catList, list]);
 
   const buildList = () => {
     return catList.map(category => {
@@ -48,26 +51,17 @@ export default function CategoryList({
     });
   };
 
-  const displaySearch = () => {
-    const isVisible = searchInput(parentComponent).display;
-    if (!isVisible) {
-      return "";
-    }
-
-    return (
+  return (
+    <React.Fragment>
       <SearchName
+        isVisible={searchInput(parentComponent).display}
         onSearch={search}
-        onChangeName={e => handleChange(e.target.value, catList)}
+        onChangeName={e => handleSearchProduct(e.target.value, catList)}
         onResetSearch={resetSearch}
         searchTitle={searchTitle}
       ></SearchName>
-    );
-  };
-  return (
-    <div>
-      {displaySearch()}
       <List>{buildList()}</List>
-    </div>
+    </React.Fragment>
   );
 }
 

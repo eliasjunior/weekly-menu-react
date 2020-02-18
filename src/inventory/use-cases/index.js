@@ -1,12 +1,9 @@
 //  import RestAPI from "../vendor/rest-API";
 import inventoryUseCase from "./inventory";
+import CategoryService from "../category/CategoryService";
 
-//const { getPlayerList, updatePlayerList, addAll } = persistenceAPI();
-
-const { categories } = inventoryUseCase({});
+const { getCategories } = inventoryUseCase({ CategoryService });
 
 export default {
-  getCategories: () => {
-      return [];
-  }
+  getCategories
 };

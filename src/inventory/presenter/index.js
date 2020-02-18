@@ -1,14 +1,8 @@
-import CategoryList from "../use-cases";
-import Util from "../util/inventoryUtil";
+import Inventory from "../use-cases";
 
-const { getCategories } = CategoryList;
-
-const { compareListsSize } = Util;
-
-const categories = getCategories();
-console.log("Loaded cats", categories);
+const { getCategories } = Inventory;
 
 export default {
-  categories,
-  compareListsSize
+  getCategories,
+  save: () => {}
 };

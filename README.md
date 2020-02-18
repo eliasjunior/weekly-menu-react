@@ -4,8 +4,10 @@
 
 - Refactoring Service layer to use cases
 - Refactoring Components
- ~~Update latest React~~
- ~~Mock Back-end data JSON (plugin or anything can abstract from http)~~
+  - ~~CategoryList~~
+- Refactoring Services
+- ~~Update latest React~~
+- ~~Mock Back-end data JSON (plugin or anything can abstract from http)~~
   
 ## Mock server
 
