@@ -1,7 +1,7 @@
 import axios from "axios";
 const getBaseUrl = () => {
   return process.env.NODE_ENV === "development"
-    ? "http://localhost:3000/"
+    ? "http://localhost:3004/"
     : "https://week-menu-api.herokuapp.com/";
 };
 
@@ -20,7 +20,7 @@ const ApiService = {
   },
   put(resourceName, object) {
     return axios
-      .put(getBaseUrl() + resourceName, object)
+      .put(getBaseUrl() + resourceName + "/" + object._id, object)
       .then(response => response.data)
       .catch(reason => getErrorFromResponse(reason));
   }

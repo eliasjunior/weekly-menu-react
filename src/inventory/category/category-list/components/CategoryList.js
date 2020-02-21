@@ -4,15 +4,15 @@ import List from "@material-ui/core/List";
 import PropTypes from "prop-types";
 
 import CategoryDisplayService from "../../CategoryDisplayService";
-import SearchName from "../../../../common/SearchName";
-import Presenter from "../../presenter";
+import SearchName from "common/SearchName";
+import Presenter from "inventory/presenter";
 import Actions from "./Actios";
+import CloneDeep from "lodash.clonedeep";
 
-const { categories, compareListsSize } = Presenter;
+const { getCategories } = Presenter;
 const { searchInput } = CategoryDisplayService;
 
 export default function CategoryList({
-  list,
   parentComponent,
   onHandleMessage,
   onSelectedProd,
@@ -20,23 +20,27 @@ export default function CategoryList({
   onRefresh,
   searchTitle
 }) {
-  const [catList, setCatList] = useState(categories);
-  const [search, setSearch] = useState("");
+  const [displayCats, setDisplayCats] = useState([]);
+  const [cacheCats, setCacheCats] = useState([]);
+  const [searchText, setSearchText] = useState("");
 
-  const { resetSearch, handleSearchProduct } = Actions({
-    setCatList,
-    setSearch
+  const { handleSearchProduct } = Actions({
+    setDisplayCats,
+    setSearchText
   });
 
   useEffect(() => {
-    const hasChanged = compareListsSize(catList, list);
-    if (hasChanged) {
-      setCatList(list);
+    async function fetchCat() {
+      const result = await getCategories();
+      setDisplayCats(result);
+      // need to have a separate copy from the display because the search
+      setCacheCats(CloneDeep(result));
     }
-  }, [catList, list]);
+    fetchCat();
+  }, displayCats);
 
   const buildList = () => {
-    return catList.map(category => {
+    return displayCats.map(category => {
       return (
         <CategoryItem
           key={category._id}
@@ -55,9 +59,12 @@ export default function CategoryList({
     <React.Fragment>
       <SearchName
         isVisible={searchInput(parentComponent).display}
-        onSearch={search}
-        onChangeName={e => handleSearchProduct(e.target.value, catList)}
-        onResetSearch={resetSearch}
+        onSearch={searchText}
+        onChangeName={e => handleSearchProduct(e.target.value, cacheCats)}
+        onResetSearch={() => {
+          setSearchText("");
+          setDisplayCats(cacheCats);
+        }}
         searchTitle={searchTitle}
       ></SearchName>
       <List>{buildList()}</List>

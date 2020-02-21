@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import CategoryList from "./category/category-list/components";
 import { AppWeekBar } from "../common/AppWeekBar";
 import FormDialog from "./FormDialog";
@@ -8,25 +8,18 @@ import CommmonStyles from "../styles/CommonStyles";
 import AddIcon from "@material-ui/icons/Add";
 import Presenter from "./presenter";
 
-const { getCategories, save } = Presenter;
+const { save } = Presenter;
 
 function InventoryPage(props) {
-  const [categories, setCategories] = useState([]);
-  const [name, setName] = useState("");
+  const [catName, setCatName] = useState("");
+  const [openModal, setOpenModal] = useState(false);
 
-  useEffect(() => {
-    async function fetchCat() {
-      setCategories(await getCategories());
-    }
-    fetchCat();
-  }, []);
-
-  const onChangeName = ev => {
-    setName(ev.target.value);
+  const handleChangeName = ev => {
+    setCatName(ev.target.value);
   };
   const saveCategory = () => {
     const category = {
-      name
+      catName
     };
     save(category)
       .then(() => {
@@ -34,13 +27,13 @@ function InventoryPage(props) {
           message: "Uhhuu Category saved",
           type: "success"
         });
-        closeDialog();
         //refresh(); use Effect ?
+        setOpenModal(false);
       })
       .catch(reason => props.onHandleMessage({ message: reason.message }));
   };
   let dialogProps = {
-    open: false,
+    open: openModal,
     isUpdate: false,
     title: "Create Category",
     form: {
@@ -49,17 +42,11 @@ function InventoryPage(props) {
       onActionMethod: saveCategory
     }
   };
-  const closeDialog = () => {
-    const dialogProps = { ...dialogProps };
-    dialogProps.open = false;
-    //setDialogProps(dialogProps);
-  };
   const { classes } = props;
   return (
     <div>
       <AppWeekBar title="Product List"></AppWeekBar>
       <CategoryList
-        list={categories}
         parentComponent="InventoryPage"
         onHandleMessage={props.onHandleMessage}
       ></CategoryList>
@@ -68,15 +55,15 @@ function InventoryPage(props) {
         variant="fab"
         className={classes.floatingBtn}
         onClick={() => {
-          dialogProps.open = true;
+          setOpenModal(true);
         }}
       >
         <AddIcon />
       </Button>
       <FormDialog
         dialogProps={dialogProps}
-        onChangeName={onChangeName}
-        onCloseDialog={closeDialog}
+        onChangeName={handleChangeName}
+        onCloseDialog={() => setOpenModal(false)}
       ></FormDialog>
     </div>
   );

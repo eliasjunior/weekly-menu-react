@@ -1,27 +1,24 @@
 import CloneDeep from "lodash.clonedeep";
 
-export default function Actions({ setSearch, setCategories }) {
+export default function Actions({ setSearchText, setDisplayCats }) {
   return {
-    resetSearch: (search, list) => {
-      setSearch(search);
-      setCategories(list);
-    },
     handleSearchProduct: (value, list) => {
+      const cacheCat = CloneDeep(list);
       if (value === "") {
-        setSearch("");
-        setCategories(list);
+        setSearchText("");
+        setDisplayCats(list);
         return;
       }
 
       // TODO don't fix it now, the search will change, cloneDeep hurts performance,
-      const cats = CloneDeep(list).filter(cat => {
+      const cats = cacheCat.filter(cat => {
         cat.products = cat.products.filter(prod => {
           return prod.name.toLowerCase().indexOf(value.toLowerCase()) !== -1;
         });
         return cat.products.length > 0;
       });
-      setSearch(value);
-      setCategories(cats);
+      setSearchText(value);
+      setDisplayCats(cats);
     }
   };
 }
