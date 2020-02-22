@@ -2,7 +2,7 @@ import React from "react";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import { grey } from "@material-ui/core/colors";
-import CategoryActions from "../CategoryActions";
+import CategoryActions from "./CategoryActions";
 import DisplayService from "./CategoryDisplayService";
 
 export default function CategoryHead(props) {

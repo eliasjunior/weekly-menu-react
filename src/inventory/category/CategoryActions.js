@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { Button } from "@material-ui/core";
-import FormDialog from "./FormDialog";
-import ProductService from "./product/ProductService";
-import CategoryService from "./category/CategoryService";
+import FormDialog from "../FormDialog";
+import ProductService from "../product/ProductService";
+import CategoryService from "./CategoryService";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
+import Presenter from "../presenter";
+
+const { updateCategory } = Presenter;
 
 function CategoryActions(props) {
   const [catName, setCatName] = useState("");
@@ -37,18 +40,23 @@ function CategoryActions(props) {
       })
       .catch(reason => props.onHandleMessage({ message: reason.message }));
   };
-  const updateCategory = () => {
+  const handleUpdateCategory = async () => {
     props.category.name = catName;
-    CategoryService.update(props.category)
-      .then(() => {
-        props.onHandleMessage({
-          message: "Uhhuu Category saved",
-          type: "success"
-        });
-        setCatDisplay(false);
-        // props.onRefresh(); call get cat
-      })
-      .catch(reason => props.onHandleMessage({ message: reason.message }));
+    props.category._id = 11;
+
+    try {
+      await updateCategory(props.category);
+
+      //TODO update the categories or fetch again, how to update the parent
+
+      props.onHandleMessage({
+        message: "Uhhuu Category saved",
+        type: "success"
+      });
+      setCatDisplay(false);
+    } catch (error) {
+      props.onHandleMessage({ message: error.message });
+    }
   };
   return (
     <ListItemSecondaryAction>
@@ -61,7 +69,7 @@ function CategoryActions(props) {
         onDisplay={displayCat}
         onChangeName={e => setCatName(e.target.value)}
         onClose={() => setCatDisplay(false)}
-        onActionMethod={updateCategory}
+        onActionMethod={handleUpdateCategory}
       ></FormDialog>
       <FormDialog
         form={{
