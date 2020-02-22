@@ -61,6 +61,8 @@ function InventoryPage(props) {
         <AddIcon />
       </Button>
       <FormDialog
+        form={{}}
+        onDisplay={false}
         dialogProps={dialogProps}
         onChangeName={handleChangeName}
         onCloseDialog={() => setOpenModal(false)}

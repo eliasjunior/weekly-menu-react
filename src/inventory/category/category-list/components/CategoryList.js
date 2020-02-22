@@ -37,7 +37,7 @@ export default function CategoryList({
       setCacheCats(CloneDeep(result));
     }
     fetchCat();
-  }, displayCats);
+  }, []);
 
   const buildList = () => {
     return displayCats.map(category => {

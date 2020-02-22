@@ -1,38 +1,46 @@
-import React from 'react';
+import React from "react";
 import {
-    Dialog,
-    DialogTitle,
-    DialogContent,
-    TextField,
-    DialogActions
-} from '@material-ui/core';
-import FormChildAction from '../common/FormChildAction';
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  TextField,
+  DialogActions
+} from "@material-ui/core";
+import FormChildAction from "../common/FormChildAction";
+import { requiredParameter } from "common/Util";
 
-function FormDialog(props) {
-    return (
-        <div>
-            <Dialog
-                open={props.dialogProps.open}
-                onClose={() => props.onCloseDialog()}
-                aria-labelledby="form-dialog-title">
-                <DialogTitle id="form-dialog-title">{props.dialogProps.title}</DialogTitle>
-                <DialogContent>
-                    <TextField 
-                        label={props.dialogProps.form.placeHolder}
-                        defaultValue={props.dialogProps.form.value}
-                        onChange={props.onChangeName}>
-                    </TextField>
-                </DialogContent>
-                <DialogActions>
-                    <FormChildAction
-                        onActionMethod={props.dialogProps.onActionMethod}
-                        isUpdate={props.dialogProps.isUpdate}
-                        onCloseDialog={props.onCloseDialog}>
-                    </FormChildAction>
-                </DialogActions>
-            </Dialog>
-        </div>
-    )
+function FormDialog({
+  onDisplay = requiredParameter("onDisplay"),
+  title,
+  form = requiredParameter("form"),
+  onClose,
+  onChangeName,
+  onActionMethod
+}) {
+  return (
+    <div>
+      <Dialog
+        open={onDisplay}
+        onClose={() => onClose()}
+        aria-labelledby="form-dialog-title"
+      >
+        <DialogTitle id="form-dialog-title">{title}</DialogTitle>
+        <DialogContent>
+          <TextField
+            label={form.placeHolder}
+            defaultValue={form.value}
+            onChange={onChangeName}
+          ></TextField>
+        </DialogContent>
+        <DialogActions>
+          <FormChildAction
+            onActionMethod={onActionMethod}
+            onCloseDialog={onClose}
+          ></FormChildAction>
+        </DialogActions>
+      </Dialog>
+    </div>
+  );
 }
 
 export default FormDialog;
