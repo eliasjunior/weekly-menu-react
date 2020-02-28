@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {
   Dialog,
   DialogTitle,
@@ -42,5 +43,9 @@ function FormDialog({
     </div>
   );
 }
+FormDialog.propTypes = {
+  onActionMethod: PropTypes.func,
+  title: PropTypes.string
+};
 
 export default FormDialog;

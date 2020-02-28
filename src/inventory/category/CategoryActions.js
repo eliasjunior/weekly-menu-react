@@ -2,11 +2,9 @@ import React, { useState } from "react";
 import { Button } from "@material-ui/core";
 import FormDialog from "../FormDialog";
 import ProductService from "../product/ProductService";
-import CategoryService from "./CategoryService";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import Presenter from "../presenter";
-
-const { updateCategory } = Presenter;
+import { useDispatch } from "react-redux";
+import { updateCategoryAsync } from "vendor/actions/InventoryActions";
 
 function CategoryActions(props) {
   const [catName, setCatName] = useState("");
@@ -15,13 +13,15 @@ function CategoryActions(props) {
   const [prodName, setProdName] = useState("");
   const [displayProd, setProdDisplay] = useState(false);
 
+  const dispatch = useDispatch();
+
   const openDialogProduct = () => {
     setProdDisplay(true);
   };
   const openDialogCategory = () => {
     setCatDisplay(true);
   };
-  const saveProduct = () => {
+  const handleSaveProduct = () => {
     props.category.products.push({
       completed: false,
       quantity: 1,
@@ -42,12 +42,13 @@ function CategoryActions(props) {
   };
   const handleUpdateCategory = async () => {
     props.category.name = catName;
-    props.category._id = 11;
-
     try {
-      await updateCategory(props.category);
-
-      //TODO update the categories or fetch again, how to update the parent
+      const result = await dispatch(updateCategoryAsync(props.category));
+      if (result.error) {
+        // move these to another layer
+        props.onHandleMessage({ message: result.error.message });
+        return;
+      }
 
       props.onHandleMessage({
         message: "Uhhuu Category saved",
@@ -79,7 +80,7 @@ function CategoryActions(props) {
         onDisplay={displayProd}
         onChangeName={e => setProdName(e.target.value)}
         onClose={() => setProdDisplay(false)}
-        onActionMethod={saveProduct}
+        onActionMethod={handleSaveProduct}
       ></FormDialog>
       <Button color="primary" onClick={() => openDialogCategory()}>
         Edit

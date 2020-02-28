@@ -1,14 +1,16 @@
 import CloneDeep from "lodash.clonedeep";
 
-export default function Actions({ setSearchText, setDisplayCats }) {
+export default function Actions({ setSearchText }) {
   return {
     handleSearchProduct: (value, list) => {
       const cacheCat = CloneDeep(list);
+      console.log(value);
       if (value === "") {
-        setSearchText("");
-        setDisplayCats(list);
+        //   setSearchText("");
+        //  setDisplayCats(list);
         return;
       }
+      setSearchText(value);
 
       // TODO don't fix it now, the search will change, cloneDeep hurts performance,
       const cats = cacheCat.filter(cat => {
@@ -17,8 +19,8 @@ export default function Actions({ setSearchText, setDisplayCats }) {
         });
         return cat.products.length > 0;
       });
-      setSearchText(value);
-      setDisplayCats(cats);
+      //  setSearchText(value);
+      //
     }
   };
 }

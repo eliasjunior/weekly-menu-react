@@ -2,8 +2,13 @@
 
 ## 2020 Fenix Program
 
+- redux
+  - reducer filter
+  - update category, share state (categoryList and categoryItem)
+  - reducer category
 - Refactoring Service layer to use cases
 - Refactoring Components
+
   - ~~CategoryList~~
   - CategoryActions
   - CategoryHead
@@ -12,35 +17,41 @@
 - ~~Update latest React~~
 - ~~Mock Back-end data JSON (plugin or anything can abstract from http)~~
 - Refactoring Services
-- 
+-
+
 ## Mock server
 
 Start JSON server
 
-````
+```bash
 json-server --watch db.json
-````
+```
+
+Change port and change id defaul
+
+```bash
+json-server --watch db.json --port 3004 -i _id
+```
 
 [json server](https://www.npmjs.com/package/json-server)
 
 ## Tasks, for priority sequence
 
-
 Bug include recipe in shop list, create a new SL and then try edit add another rec
-    maybe change the behaviour, instead save in memory always save
+maybe change the behaviour, instead save in memory always save
 Fix duplicate prod name rec list(API)
 Bug Duplicate prod in shopping list, should not check dupl in the SL
 typing name too slow
 Save by action rec list and shop list/ after update or create loses the checkbox
 save prod when is creating shop list and copy the state / also for new recipe
-Display prod total selected on 
+Display prod total selected on
 Fix data
 bug recipes include, add recipes then save, add another one, not updating
 History date shop list
 Loading after action
 RecipePage need to able to filter prod selected
-Menu Item does not work properly, 
-    click outside is not working
+Menu Item does not work properly,
+click outside is not working
 Add btn rec list when come from SL, one way flow, in case need to create a new rec list
 
 Bug category name, if try same name
@@ -49,7 +60,7 @@ Bug category name, if try same name
 - add test
 - Review deep copy components
 
-## DONE 
+## DONE
 
 - WRITE test for item selection and parent component, need to be consistend
 - Search by name
@@ -67,22 +78,24 @@ Bug category name, if try same name
 - New Shopping list
 - Product Crud
 - Recipe
- * List
- * update, name and prods
- - Product list
-     - update
-       > call Rest api(NEED to fix and refactor it the API)
-       > change update icon to save when the input is updatable
-     - add(only name)
-        > send category id
-        > message success 
-        > add back button
-        > message fail 
-    - Service 
-        > filter only the data, service and component does not need to know the headers   
+
+* List
+* update, name and prods
+
+- Product list
+  - update
+    > call Rest api(NEED to fix and refactor it the API)
+    > change update icon to save when the input is updatable
+  - add(only name)
+    > send category id
+    > message success
+    > add back button
+    > message fail
+  - Service
+    > filter only the data, service and component does not need to know the headers
 - New Shopping list
-    1 - just select and create list based on the products
-    2 - add recipe, ignore repeated        
+  1 - just select and create list based on the products
+  2 - add recipe, ignore repeated
 - shopping list view and shopping list history
 - Add select all to new shopping list
 - sort products list, prod of recipe list
@@ -91,42 +104,42 @@ Bug category name, if try same name
   Update, trigger
 
 ### Backlog
-  - Update Shopping list
-  
-  - Edit/update shopping list, leave for later
-  - Define Props component Very important 
-  - Message Service
-        * fade message , add transition  
-  - Need to add test to it, but after a few more complexity
-  - User account
-  - Recipes recomendation based on products left
-  - styles/colors, need a upgrade primary/secondary colors
-  - delete Product(later)
-  - add form validation Product
-  - form validation data
-            TODO handle form server errors
-                {  
-                "message":"Internal server error",
-                "name":"ValidationError",
-                "errors":{  
-                    "name":{  
-                        "message":"Path `name` is required.",
-                        "name":"ValidatorError",
-                        "properties":{  
-                            "type":"required",
-                            "message":"Path `{PATH}` is required.",
-                            "path":"name",
-                            "value":""
-                        },
-                        "kind":"required",
-                        "path":"name",
-                        "value":""
-                    }
-                }
-                }
-            
- 
- ## Requirements
-  Easy accesss to product list to creation of products CRUD
-  Product list should not be linked with Recipe (need api analysis)   
-  Recipes CRUD, what's Recipe? a product ? need to review the (design)
+
+- Update Shopping list
+
+- Edit/update shopping list, leave for later
+- Define Props component Very important
+- Message Service \* fade message , add transition
+- Need to add test to it, but after a few more complexity
+- User account
+- Recipes recomendation based on products left
+- styles/colors, need a upgrade primary/secondary colors
+- delete Product(later)
+- add form validation Product
+- form validation data
+  TODO handle form server errors
+  {  
+   "message":"Internal server error",
+  "name":"ValidationError",
+  "errors":{  
+   "name":{  
+   "message":"Path `name` is required.",
+  "name":"ValidatorError",
+  "properties":{  
+   "type":"required",
+  "message":"Path `{PATH}` is required.",
+  "path":"name",
+  "value":""
+  },
+  "kind":"required",
+  "path":"name",
+  "value":""
+  }
+  }
+  }
+
+## Requirements
+
+Easy accesss to product list to creation of products CRUD
+Product list should not be linked with Recipe (need api analysis)  
+ Recipes CRUD, what's Recipe? a product ? need to review the (design)

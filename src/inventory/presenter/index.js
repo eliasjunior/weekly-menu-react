@@ -4,5 +4,5 @@ const { getCategories, updateCategory } = Inventory;
 
 export default {
   getCategories,
-  updateCategory
+  putAction: updateCategory
 };

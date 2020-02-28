@@ -2,14 +2,12 @@ import React, { useState, useEffect } from "react";
 import CategoryItem from "../../CategoryItem";
 import List from "@material-ui/core/List";
 import PropTypes from "prop-types";
-
 import CategoryDisplayService from "../../CategoryDisplayService";
 import SearchName from "common/SearchName";
-import Presenter from "inventory/presenter";
 import Actions from "./Actios";
-import CloneDeep from "lodash.clonedeep";
+import { useSelector, useDispatch, shallowEqual } from "react-redux";
+import { fetchCategoryAsync } from "vendor/actions/InventoryActions";
 
-const { getCategories } = Presenter;
 const { searchInput } = CategoryDisplayService;
 
 export default function CategoryList({
@@ -20,27 +18,26 @@ export default function CategoryList({
   onRefresh,
   searchTitle
 }) {
-  const [displayCats, setDisplayCats] = useState([]);
-  const [cacheCats, setCacheCats] = useState([]);
   const [searchText, setSearchText] = useState("");
 
   const { handleSearchProduct } = Actions({
-    setDisplayCats,
     setSearchText
   });
-
+  const dispatch = useDispatch();
+  //
+  //const store = useStore();
+  const categories = useSelector(state => state.categories, shallowEqual);
+  // const cacheCats = CloneDeep(categories);
+  // need to have a separate copy from the display because the search
+  //setCacheCats(CloneDeep(categories));
+  console.log("component Render", categories);
   useEffect(() => {
-    async function fetchCat() {
-      const result = await getCategories();
-      setDisplayCats(result);
-      // need to have a separate copy from the display because the search
-      setCacheCats(CloneDeep(result));
-    }
-    fetchCat();
+    console.log("*** useEffect *** ", categories.length);
+    dispatch(fetchCategoryAsync());
   }, []);
 
   const buildList = () => {
-    return displayCats.map(category => {
+    return categories.map(category => {
       return (
         <CategoryItem
           key={category._id}
@@ -60,10 +57,10 @@ export default function CategoryList({
       <SearchName
         isVisible={searchInput(parentComponent).display}
         onSearch={searchText}
-        onChangeName={e => handleSearchProduct(e.target.value, cacheCats)}
+        onChangeName={e => handleSearchProduct(e.target.value, categories)}
         onResetSearch={() => {
           setSearchText("");
-          setDisplayCats(cacheCats);
+          //  setDisplayCats(categories);
         }}
         searchTitle={searchTitle}
       ></SearchName>
