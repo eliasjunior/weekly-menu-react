@@ -1,4 +1,6 @@
 import axios from "axios";
+import { getErrorFromResponse } from "error-handlers/ErrorUtil";
+
 const getBaseUrl = () => {
   return process.env.NODE_ENV === "development"
     ? "http://localhost:3004/"
@@ -25,14 +27,5 @@ const ApiService = {
       .catch(reason => getErrorFromResponse(reason));
   }
 };
-function getErrorFromResponse(reason) {
-  const response = reason["response"];
-  if (response && response.status === 404) {
-    console.log("return 404");
-    return Promise.reject({ message: "Not Found" });
-  } else {
-    const error = reason.response ? reason.response.data : reason;
-    return Promise.reject(error);
-  }
-}
+
 export default ApiService;
