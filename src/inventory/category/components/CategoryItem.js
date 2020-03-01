@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import CloneDeep from "lodash.clonedeep";
-import CategoryHead from "./components/CategoryHead";
-import ProductList from "../product/components/ProductList";
+import CategoryHead from "./CategoryHead";
+import ProductList from "../../product/components/ProductList";
 
 function CategoryItem(props) {
   const [categorySelect, setCategorySelect] = useState(false);

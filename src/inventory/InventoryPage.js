@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import CategoryList from "./category/category-list/components";
-import { AppWeekBar } from "../common/AppWeekBar";
+import CategoryList from "./category/components";
+import { AppWeekBar } from "../header/AppWeekBar";
 import FormDialog from "./FormDialog";
 import { Button } from "@material-ui/core";
 import { withStyles } from "@material-ui/core";
