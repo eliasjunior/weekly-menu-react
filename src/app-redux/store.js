@@ -1,13 +1,19 @@
 import { createStore, applyMiddleware } from "redux";
-import categories from "./reducers/InventoryReducer";
-import catsFilter from "./reducers/InventoryFilterReducer";
+import categories from "app-redux//reducers/InventoryReducer";
+import catsFilter from "app-redux//reducers/InventoryFilterReducer";
+import errorHandler from "app-redux//reducers/ErrorHandlerReducer";
+import alertHandler from "app-redux//reducers/AlertHandlerReducer";
+import loading from "app-redux/reducers/LoadingReducer";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { combineReducers } from "redux";
 
 const rootReducer = combineReducers({
   categories,
-  catsFilter
+  catsFilter,
+  errorHandler,
+  alertHandler,
+  loading
 });
 
 const store = createStore(

@@ -28,8 +28,11 @@ export default function CategoryList({
   const { categories, catsFilter } = useSelector(state => state, shallowEqual);
 
   useEffect(() => {
-    dispatch(fetchCategoryAsync());
-  });
+    async function asyncFetch() {
+      dispatch(fetchCategoryAsync());
+    }
+    asyncFetch();
+  }, []);
 
   const buildList = () => {
     const displayCategory = searchText.length === 0 ? categories : catsFilter;

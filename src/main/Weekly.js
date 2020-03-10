@@ -12,10 +12,12 @@ import { MuiThemeProvider } from "@material-ui/core";
 import UtilCollectionService from "service/UtilCollectionService";
 import ShoppingListHistoryPage from "shopping-list/ShoppingListHistoryPage";
 import ShoppingPage from "shopping-list/ShoppingPage";
-import MessageComponent from "common/MessageComponent";
 import Dashboard from "dashboard/Dashboard";
 import store from "../app-redux/store";
 import { Provider } from "react-redux";
+import ErrorHandlerMessage from "components/ErrorHandlerMessage";
+import AlertMessage from "components/AlertMessage";
+import Loading from "components/Loading";
 
 class Weekly extends React.Component {
   constructor(props) {
@@ -63,20 +65,6 @@ class Weekly extends React.Component {
     });
     this.setState({ shoppingList });
   }
-  messageComponent() {
-    const alert = this.state.alert;
-    if (alert.message) {
-      return (
-        <MessageComponent
-          message={alert.message}
-          isOpen={alert.open}
-          onClose={this.handleClose}
-          type={alert.type}
-        ></MessageComponent>
-      );
-    }
-    return "";
-  }
   handleMessage(alert) {
     let { message, type } = alert;
     this.setState({
@@ -99,7 +87,9 @@ class Weekly extends React.Component {
       <MuiThemeProvider theme={theme}>
         <Provider store={store}>
           <div>
-            {this.messageComponent.call(this)}
+            <ErrorHandlerMessage></ErrorHandlerMessage>
+            <AlertMessage></AlertMessage>
+            <Loading></Loading>
             <Route
               exact
               path={AppConstant.LOCATION.products.path}

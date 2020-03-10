@@ -1,8 +1,9 @@
 import Inventory from "../use-cases";
 
-const { getCategories, updateCategory } = Inventory;
+const { getCategories, updateCategory, saveProduct } = Inventory;
 
 export default {
   getCategories,
-  putAction: updateCategory
+  putAction: updateCategory,
+  postActionProduct: saveProduct
 };
