@@ -18,11 +18,10 @@ export default function ProductForm({
   const [name, setName] = useState(product.name);
   const [editFieldMode, setEditFieldMode] = useState(false);
   const dispatch = useDispatch();
-  const componentIds = useSelector(state => state.formProduct);
-
-  if (!componentIds) {
-    throw new Error("Redux PAU!");
-  }
+  const { formProduct = requiredParameter("formProduct") } = useSelector(
+    state => state
+  );
+  const componentIds = [...formProduct];
 
   const handleChangeName = e => {
     setName(e.target.value);

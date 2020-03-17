@@ -28,7 +28,7 @@ function InventoryPage(props) {
   useEffect(() => {
     async function asyncFetch() {
       dispatch(fetchCategoryAsync());
-      // dispatch(formProductAction());
+      dispatch(formProductAction());
     }
     asyncFetch();
   }, []);

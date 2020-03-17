@@ -14,7 +14,8 @@ const rootReducer = combineReducers({
   catsFilter,
   errorHandler,
   alertHandler,
-  loading
+  loading,
+  formProduct
 });
 
 const store = createStore(

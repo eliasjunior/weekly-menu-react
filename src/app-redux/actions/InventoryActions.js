@@ -2,7 +2,6 @@ import Presenter from "inventory/presenter";
 import { httpError } from "./ErrorHandlerAction";
 import { successMessage } from "./AlertHandlerAction";
 import { loadingSomething } from "./LoadingAction";
-import { formProductAction } from "app-redux/actions/FormProductAction";
 const { getCategories, putCategory } = Presenter;
 
 export const UPDATE_CAT = "UPDATE_CAT";
@@ -32,7 +31,6 @@ export function fetchCategoryAsync() {
       const data = await getCategories();
       dispatch(fetchCategory(data));
       dispatch(loadingSomething(false));
-      // dispatch(formProductAction());
     } catch (error) {
       dispatch(httpError(error));
       dispatch(loadingSomething(false));
