@@ -11,7 +11,7 @@ import Presenter from "./presenter";
 import SearchName from "components/SearchName";
 import { fetchCategoryAsync } from "app-redux/actions/InventoryActions";
 import CategoryDisplayHelper from "inventory/category/services/CategoryDisplayService";
-import { formProductAction } from "app-redux/actions/FormProductAction";
+import { formViewAction } from "app-redux/actions/FormProductAction";
 import ErrorBoundaryInventory from "error-handlers/ErrorBoundaryComponent";
 import ErrorBoundary from "error-handlers/ErrorBoundaryComponent";
 
@@ -28,7 +28,7 @@ function InventoryPage(props) {
   useEffect(() => {
     async function asyncFetch() {
       dispatch(fetchCategoryAsync());
-      dispatch(formProductAction());
+      dispatch(formViewAction());
     }
     asyncFetch();
   }, []);

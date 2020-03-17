@@ -1,9 +1,9 @@
 import React from "react";
 import Collapse from "@material-ui/core/Collapse";
 import List from "@material-ui/core/List";
-import ProductComponent from "./ProductComponent";
-import DisplayService from "../../category/services/CategoryDisplayService";
+import DisplayService from "inventory/category/services/CategoryDisplayService";
 import SelectAllNone from "common/SelectAllNone";
+import ProductForm from "./ProductForm";
 
 export default function ProductList({
   category,
@@ -20,12 +20,11 @@ export default function ProductList({
     const productListView = (product, index) => {
       return (
         <div key={index}>
-          <ProductComponent
+          <ProductForm
             category={category}
             product={product}
-            parentComponent={parentComponent}
             onSelectedProd={onSelectedProd}
-          ></ProductComponent>
+          ></ProductForm>
         </div>
       );
     };
