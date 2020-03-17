@@ -4,9 +4,10 @@ import CategoryList from "../../inventory/category/components";
 import { TextField } from "@material-ui/core";
 import RecipeService from "../RecipeService";
 import UtilCollectionService from "../../service/UtilCollectionService";
-import CategoryService from "../../inventory/category/services/CategoryService";
 import RecipePageUtilService from "../../service/RecipePageUtilService";
 import RecipeActions from "./RecipeActions";
+
+const CategoryService = {}; // TODO temp
 
 class RecipePage extends React.Component {
   //React's constructor is called before DOM is mounted.

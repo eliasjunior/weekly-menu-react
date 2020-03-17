@@ -8,7 +8,7 @@ import CloneDeep from "lodash.clonedeep";
 import ShoppingListService from "./ShoppingListService";
 import { RecipeBox } from "./RecipesBox";
 import { ProductBox } from "./ProductBox";
-import CategoryService from "../inventory/category/services/CategoryService";
+const CategoryService = {};
 
 class ShoppingListPage extends React.Component {
   constructor(props) {

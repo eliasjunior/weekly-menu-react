@@ -5,7 +5,7 @@ import CategoryList from "../inventory/category/components";
 import PropTypes from "prop-types";
 import IconRecipe from "@material-ui/icons/Receipt";
 import CloneDeep from "lodash.clonedeep";
-import SearchName from "../common/SearchName";
+import SearchName from "components/SearchName";
 import { purple } from "@material-ui/core/colors";
 import CategoryListUtil from "../inventory/category/helpers/CategoryListUtil";
 import RecipeListUtil from "./RecipeListUtil";

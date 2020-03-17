@@ -1,14 +1,9 @@
 import React, { useState } from "react";
 import { Button } from "@material-ui/core";
 import FormDialog from "../../FormDialog";
-import ProductService from "../../product/service/ProductService";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import { useDispatch } from "react-redux";
-import {
-  updateCategoryAsync,
-  updateProductAsync,
-  saveProductAsync
-} from "app-redux/actions/InventoryActions";
+import { updateCategoryAsync } from "app-redux/actions/InventoryActions";
 
 function CategoryActions({ category }) {
   const [catName, setCatName] = useState("");
@@ -26,14 +21,15 @@ function CategoryActions({ category }) {
     setCatDisplay(true);
   };
   const handleSaveProduct = async () => {
-    category.products.push({
+    const newProduct = {
       completed: false,
       quantity: 1,
       name: prodName,
       checked: false
-    });
-
-    dispatch(saveProductAsync(category));
+    };
+    category.products.push(newProduct);
+    await dispatch(updateCategoryAsync(category));
+    setProdDisplay(false);
   };
   const handleUpdateCategory = async () => {
     category.name = catName;

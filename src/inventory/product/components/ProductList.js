@@ -1,46 +1,45 @@
 import React from "react";
 import Collapse from "@material-ui/core/Collapse";
 import List from "@material-ui/core/List";
-import { ProductComponent } from "./ProductComponent";
+import ProductComponent from "./ProductComponent";
 import DisplayService from "../../category/services/CategoryDisplayService";
-import SelectAllNone from "../../../common/SelectAllNone";
+import SelectAllNone from "common/SelectAllNone";
 
-export default function ProductList(props) {
+export default function ProductList({
+  category,
+  parentComponent,
+  onSelectedProd,
+  onSelectAllNoneProd,
+  categorySelect
+}) {
   const listProducts = () => {
-    const categoryProps = props.category;
-    const category = {
-      name: categoryProps.name,
-      _id: categoryProps._id
-    };
-    const products = categoryProps.products;
-
-    if (products.length) {
-      const productListView = product => {
-        return (
-          <ProductComponent
-            key={product._id}
-            category={category}
-            product={product}
-            parentComponent={props.parentComponent}
-            onSelectedProd={props.onSelectedProd}
-            onHandleMessage={props.onHandleMessage}
-          ></ProductComponent>
-        );
-      };
-      return products.map(productListView);
-    } else {
+    const products = category.products;
+    if (!products.length) {
       return "";
     }
+    const productListView = (product, index) => {
+      return (
+        <div key={index}>
+          <ProductComponent
+            category={category}
+            product={product}
+            parentComponent={parentComponent}
+            onSelectedProd={onSelectedProd}
+          ></ProductComponent>
+        </div>
+      );
+    };
+    return products.map(productListView);
   };
   const displaySelectedAll = () => {
-    if (DisplayService.selectAllBtn(props.parentComponent).display) {
-      return (
-        <SelectAllNone
-          checked={props.categorySelect}
-          onSelectAllNone={props.onSelectAllNoneProd}
-        ></SelectAllNone>
-      );
-    } else return "";
+    return DisplayService.selectAllBtn(parentComponent).display ? (
+      <SelectAllNone
+        checked={categorySelect}
+        onSelectAllNone={onSelectAllNoneProd}
+      ></SelectAllNone>
+    ) : (
+      ""
+    );
   };
   return (
     <Collapse in={true} timeout="auto" unmountOnExit>

@@ -93,12 +93,7 @@ class Weekly extends React.Component {
             <Route
               exact
               path={AppConstant.LOCATION.products.path}
-              render={props => (
-                <InventoryPage
-                  {...props}
-                  onHandleMessage={this.handleMessage}
-                ></InventoryPage>
-              )}
+              render={props => <InventoryPage {...props}></InventoryPage>}
             ></Route>
             <Route
               exact

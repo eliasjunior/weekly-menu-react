@@ -1,35 +1,26 @@
 import ApiService from "service/ApiService";
+import { requiredParameter } from "common/Util";
 
 export default {
   getCategories: () => ApiService.get("categories"),
-  saveCategory: category => ApiService.post("categories", category),
-  getCategory,
-  updateCategory: category => ApiService.put("categories", category),
-  updateProduct: productService,
-  saveProduct: category => ApiService.post("categories", category)
+  saveCategoryAsync: category => ApiService.post("categories", category),
+  updateCategoryAsync: category => ApiService.put("categories", category),
+  getCategoryAsync: id => ApiService.get("categories/" + id),
+  updateProductInCategory
 };
 
-async function productService(product, catId) {
-  return {
-    updateProduct: async () => {
-      try {
-        const cats = await getCategory(catId);
-        console.log(cats);
-
-        return cats.filter(cat => {
-          return cat.products.filter(prod => prod._id === product._id);
-        });
-      } catch (error) {
-        throw error;
-      }
+function updateProductInCategory(
+  category = requiredParameter("category"),
+  product = requiredParameter("product")
+) {
+  const products = category.products.reduce((acc, prod) => {
+    if (prod._id !== product._id) {
+      acc.push(prod);
+    } else {
+      acc.push(product);
     }
-  };
-}
-
-async function getCategory(id) {
-  try {
-    return await ApiService.get("categories/" + id);
-  } catch (error) {
-    throw error;
-  }
+    return acc;
+  }, []);
+  category.products = products;
+  return category;
 }

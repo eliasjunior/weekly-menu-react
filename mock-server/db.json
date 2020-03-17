@@ -125,9 +125,156 @@
           "quantity": 1,
           "_id": "5bba01565116e70013de75a2",
           "name": "Burger bread"
+        },
+        {
+          "completed": false,
+          "quantity": 1,
+          "name": "opaopa",
+          "checked": false
+        },
+        {
+          "completed": false,
+          "quantity": 1,
+          "name": "opaopa",
+          "checked": false
         }
       ],
-      "__v": 9
+      "__v": 9,
+      "product": [
+        {
+          "completed": false,
+          "quantity": 1,
+          "name": "Flour - Whole",
+          "insertDate": "2018-09-15T14:55:55.532Z",
+          "_id": "5b9d1d7bed2ee113002f7040",
+          "checked": false
+        },
+        {
+          "completed": false,
+          "quantity": 1,
+          "name": "Prunes",
+          "insertDate": "2018-09-15T14:55:55.532Z",
+          "_id": "5b9d1d7bed2ee113002f703f",
+          "checked": false
+        },
+        {
+          "completed": false,
+          "quantity": 1,
+          "name": "Sugar",
+          "insertDate": "2018-09-15T14:55:55.532Z",
+          "_id": "5b9d1d7bed2ee113002f703e",
+          "checked": false
+        },
+        {
+          "completed": false,
+          "quantity": 1,
+          "name": "Vanilla",
+          "insertDate": "2018-09-15T14:55:55.532Z",
+          "_id": "5b9d1d7bed2ee113002f703d",
+          "checked": false
+        },
+        {
+          "completed": false,
+          "quantity": 1,
+          "name": "Sesame seeds",
+          "insertDate": "2018-09-15T14:55:55.532Z",
+          "_id": "5b9d1d7bed2ee113002f703c",
+          "checked": false
+        },
+        {
+          "completed": false,
+          "quantity": 1,
+          "name": "Bicarbonate",
+          "insertDate": "2018-09-15T14:55:55.532Z",
+          "_id": "5b9d1d7bed2ee113002f703b",
+          "checked": false
+        },
+        {
+          "completed": false,
+          "quantity": 1,
+          "name": "Raisins",
+          "insertDate": "2018-09-15T14:55:55.532Z",
+          "_id": "5b9d1d7bed2ee113002f703a",
+          "checked": false
+        },
+        {
+          "completed": false,
+          "quantity": 1,
+          "name": "Chocolate chips",
+          "insertDate": "2018-09-15T14:55:55.532Z",
+          "_id": "5b9d1d7bed2ee113002f7039",
+          "checked": false
+        },
+        {
+          "completed": false,
+          "quantity": 1,
+          "_id": "5b9e350fb3af7100133650fa",
+          "name": "Plain flour",
+          "insertDate": "2018-09-16T10:48:47.163Z"
+        },
+        {
+          "completed": false,
+          "quantity": 1,
+          "_id": "5b9e5b678a611e00132b227d",
+          "name": "Condensed Milk",
+          "insertDate": "2018-09-16T13:32:24.081Z"
+        },
+        {
+          "completed": false,
+          "quantity": 1,
+          "_id": "5b9e5b878a611e00132b227e",
+          "name": "Peanuts",
+          "insertDate": "2018-09-16T13:32:56.089Z"
+        },
+        {
+          "completed": false,
+          "quantity": 1,
+          "_id": "5ba650dceb672d00133fcd59",
+          "name": "Corn flour"
+        },
+        {
+          "completed": false,
+          "quantity": 1,
+          "_id": "5ba6583beb672d00133fcdd0",
+          "name": "Baking powder test"
+        },
+        {
+          "completed": false,
+          "quantity": 1,
+          "_id": "5ba658dceb672d00133fcdd3",
+          "name": "Dry mango"
+        },
+        {
+          "completed": false,
+          "quantity": 1,
+          "_id": "5ba658e7eb672d00133fcdd4",
+          "name": "Dried mango"
+        },
+        {
+          "completed": false,
+          "quantity": 1,
+          "_id": "5bba013b5116e70013de75a1",
+          "name": "Bread"
+        },
+        {
+          "completed": false,
+          "quantity": 1,
+          "_id": "5bba01565116e70013de75a2",
+          "name": "Burger bread"
+        },
+        {
+          "completed": false,
+          "quantity": 1,
+          "name": "papa",
+          "checked": false
+        },
+        {
+          "completed": false,
+          "quantity": 1,
+          "name": "papa",
+          "checked": false
+        }
+      ]
     },
     {
       "_id": "5b9d1d7bed2ee113002f7004",

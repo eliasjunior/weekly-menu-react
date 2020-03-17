@@ -1,6 +1,6 @@
-import { AppConstant } from "../../../common/AppConstant";
+import { AppConstant } from "common/AppConstant";
 
-const CategoryDisplayService = {
+const CategoryDisplayHelper = {
   recipeSelectionBtn(parentComponent) {
     return {
       display:
@@ -38,10 +38,10 @@ const CategoryDisplayService = {
         parentComponent === AppConstant.PARENT_COMPONENT.SHOPPING_LIST_PAGE
     };
   },
-  searchInput(parentComponent) {
+  filterInputVisibility(parentComponent) {
     return {
       display: parentComponent !== AppConstant.PARENT_COMPONENT.RECIPE_LIST_PAGE
     };
   }
 };
-export default CategoryDisplayService;
+export default CategoryDisplayHelper;

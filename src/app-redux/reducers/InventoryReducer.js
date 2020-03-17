@@ -18,4 +18,5 @@ export default function InventoryReducer(state = [], action) {
   }
 }
 
+// selectors
 //export const getCategories = state => state.categories;

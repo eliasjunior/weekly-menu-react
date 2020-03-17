@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch, shallowEqual } from "react-redux";
 import CategoryList from "./category/components";
 import { AppWeekBar } from "../header/AppWeekBar";
 import FormDialog from "./FormDialog";
@@ -7,13 +8,31 @@ import { withStyles } from "@material-ui/core";
 import CommmonStyles from "../styles/CommonStyles";
 import AddIcon from "@material-ui/icons/Add";
 import Presenter from "./presenter";
+import SearchName from "components/SearchName";
+import { fetchCategoryAsync } from "app-redux/actions/InventoryActions";
+import CategoryDisplayHelper from "inventory/category/services/CategoryDisplayService";
+import { formProductAction } from "app-redux/actions/FormProductAction";
+import ErrorBoundaryInventory from "error-handlers/ErrorBoundaryComponent";
+import ErrorBoundary from "error-handlers/ErrorBoundaryComponent";
+
+//TODO need to change searchInput(display the component or not) and CategoryDisplayService names are misleading
+const { filterInputVisibility } = CategoryDisplayHelper;
 
 const { save } = Presenter;
 
 function InventoryPage(props) {
   const [catName, setCatName] = useState("");
   const [openModal, setOpenModal] = useState(false);
-
+  const { categories } = useSelector(state => state, shallowEqual);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    async function asyncFetch() {
+      dispatch(fetchCategoryAsync());
+      // dispatch(formProductAction());
+    }
+    asyncFetch();
+  }, []);
+  const { classes } = props;
   const handleChangeName = ev => {
     setCatName(ev.target.value);
   };
@@ -21,12 +40,13 @@ function InventoryPage(props) {
     const category = {
       catName
     };
+    //await dispatch(saveCategoryAsync(category));
     save(category)
       .then(() => {
-        props.onHandleMessage({
-          message: "Uhhuu Category saved",
-          type: "success"
-        });
+        // props.onHandleMessage({
+        //   message: "Uhhuu Category saved",
+        //   type: "success"
+        // });
         //refresh(); use Effect ?
         setOpenModal(false);
       })
@@ -42,14 +62,20 @@ function InventoryPage(props) {
       onActionMethod: saveCategory
     }
   };
-  const { classes } = props;
+
+  const displayFilterInput = () => {
+    return filterInputVisibility("InventoryPage").display ? (
+      <SearchName displayList={categories}></SearchName>
+    ) : (
+      ""
+    );
+  };
+
   return (
-    <div>
+    <ErrorBoundary>
       <AppWeekBar title="Product List"></AppWeekBar>
-      <CategoryList
-        parentComponent="InventoryPage"
-        onHandleMessage={props.onHandleMessage}
-      ></CategoryList>
+      {displayFilterInput()}
+      <CategoryList parentComponent="InventoryPage"></CategoryList>
       <Button
         color="primary"
         variant="fab"
@@ -67,7 +93,7 @@ function InventoryPage(props) {
         onChangeName={handleChangeName}
         onCloseDialog={() => setOpenModal(false)}
       ></FormDialog>
-    </div>
+    </ErrorBoundary>
   );
 }
 export default withStyles(CommmonStyles)(InventoryPage);
