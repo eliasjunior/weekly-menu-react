@@ -1,6 +1,11 @@
 import axios from "axios";
 import { httpError } from "../app-redux/actions/ErrorHandlerAction";
 import ErrorReducer from "../app-redux/reducers/ErrorHandlerReducer";
+import {
+  categoryMapper,
+  categoryConverter,
+  categoryListMapper
+} from "inventory/use-cases/categoryMapper";
 
 const getBaseUrl = () => {
   return process.env.NODE_ENV === "development"
@@ -9,27 +14,34 @@ const getBaseUrl = () => {
 };
 
 const ApiService = {
-  get: resourceName => {
-    return axios
-      .get(getBaseUrl() + resourceName)
-      .then(response => response.data)
-      .catch(reason => ErrorReducer(httpError(reason)));
+  async get(resourceName) {
+    try {
+      const response = await axios.get(getBaseUrl() + resourceName);
+      return categoryListMapper(response.data);
+    } catch (error) {
+      ErrorReducer(httpError(error));
+    }
   },
-  post: (resourceName, object) => {
-    return axios
-      .post(getBaseUrl() + resourceName, object)
-      .then(response => response.data)
-      .catch(reason => reason);
+  async post(resourceName, object) {
+    try {
+      const response = await axios.post(
+        getBaseUrl() + resourceName,
+        categoryConverter(object)
+      );
+      return categoryMapper(response.data);
+    } catch (error) {
+      ErrorReducer(httpError(error));
+    }
   },
   async put(resourceName, object) {
     try {
       const response = await axios.put(
-        getBaseUrl() + resourceName + "/" + object._id,
-        object
+        getBaseUrl() + resourceName + "/" + object.id,
+        categoryConverter(object)
       );
-      return response.data;
-    } catch (reason) {
-      throw reason.response;
+      return categoryMapper(response.data);
+    } catch (error) {
+      ErrorReducer(httpError(error));
     }
   }
 };

@@ -2,16 +2,16 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { requiredParameter } from "common/Util";
 import { ListItem } from "@material-ui/core";
-import FormComponents from "./ComponentCatelog";
+import FormComponents from "./ComponentCatalog";
 
 export default function ProductForm({
   product = requiredParameter("product"),
   category = requiredParameter("category"),
   onSelectedProd
 }) {
-  const { formProduct = requiredParameter("formProduct") } = useSelector(
-    state => state
-  );
+  const {
+    componentFormNames = requiredParameter("componentFormNames")
+  } = useSelector(state => state);
 
   const formComponents = FormComponents({
     product,
@@ -19,13 +19,13 @@ export default function ProductForm({
     onSelectedProd
   });
 
-  const componentKeys = [...formProduct];
+  const componentKeys = [...componentFormNames];
 
   const buildForm = () => {
     const result = [];
 
     while (componentKeys.length) {
-      const currentKey = componentKeys.shift(); // always remove
+      const currentKey = componentKeys.shift();
       const component = formComponents(currentKey); // search in the catalog
       if (component) {
         result.push(component);
@@ -33,9 +33,5 @@ export default function ProductForm({
     }
     return result;
   };
-  return (
-    <ListItem>
-      <form>{buildForm()}</form>
-    </ListItem>
-  );
+  return <ListItem>{buildForm()}</ListItem>;
 }

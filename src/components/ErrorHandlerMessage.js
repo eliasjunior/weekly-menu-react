@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import MessageComponent from "./MessageComponent";
-import { closeMessage } from "app-redux/actions/ErrorHandlerAction";
+import { closeMessage } from "app-redux/actions/AlertHandlerAction";
 
 export default function() {
   const message = useSelector(state => state.errorHandler.message);

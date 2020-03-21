@@ -30,7 +30,7 @@ export const RecipeHeaderItem = props => {
         <Checkbox
           checked={props.recipe.checked}
           onClick={onCheckAction}
-          value={props.recipe._id}
+          value={props.recipe.id}
         ></Checkbox>
       );
     }
@@ -44,7 +44,7 @@ export const RecipeHeaderItem = props => {
         <ListItemSecondaryAction>
           <Button variant="outlined" color="primary">
             <Link
-              to={`${AppConstant.LOCATION.newRecipe.path}/${props.recipe._id}`}
+              to={`${AppConstant.LOCATION.newRecipe.path}/${props.recipe.id}`}
             >
               EDIT
             </Link>

@@ -1,19 +1,16 @@
-import { HTTP_ERROR, CLOSE_MESSAGE } from "../actions/ErrorHandlerAction";
+import { HTTP_ERROR } from "../actions/ErrorHandlerAction";
 
 export default function ErrorHandlerReducer(state = {}, action) {
   const { type, response } = action;
   switch (type) {
     case HTTP_ERROR:
       return validateErrorCode(response);
-    case CLOSE_MESSAGE:
-      return {
-        message: ""
-      };
     default:
       return state;
   }
 }
 
+//TODO move to usecase or helper, error-handler ?
 function validateErrorCode({ status, response, message }) {
   switch (status) {
     case 404:
@@ -25,7 +22,7 @@ function validateErrorCode({ status, response, message }) {
       };
     default:
       return {
-        message: "Server Error",
+        message: "Server Error server code=" + status,
         response
       };
   }

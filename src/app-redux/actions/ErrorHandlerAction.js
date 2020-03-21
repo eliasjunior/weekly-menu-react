@@ -1,5 +1,4 @@
 export const HTTP_ERROR = "HTTP_ERROR";
-export const CLOSE_MESSAGE = "CLOSE_MESSAGE";
 
 export function httpError(response) {
   const validResponse = ErrorMapper(response);
@@ -9,14 +8,16 @@ export function httpError(response) {
   };
 }
 
-export function closeMessage() {
-  return {
-    type: CLOSE_MESSAGE
-  };
-}
-
 //TODO move to usecases
 function ErrorMapper(response = {}) {
+  if (!response.status || !statusText) {
+    console.error(response);
+    return {
+      message: "Application view error",
+      data: null,
+      type: "error"
+    };
+  }
   const { status, statusText, data } = response;
   return {
     status,

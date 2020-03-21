@@ -10,14 +10,15 @@ export default function CategoryList({
   onSelectAllProd,
   onRefresh
 }) {
-  const { catsFilter, categories } = useSelector(state => state);
+  const categories = useSelector(state => state.categories);
+  const catsFilter = useSelector(state => state.catsFilter);
   const { displayCats, textFilter } = catsFilter;
   const currentList = textFilter.length === 0 ? categories : displayCats;
   const buildList = () => {
     return currentList.map(category => {
       return (
         <CategoryItem
-          key={category._id}
+          key={category.id}
           category={{ ...category }}
           parentComponent={parentComponent}
           onSelectedProd={onSelectedProd}

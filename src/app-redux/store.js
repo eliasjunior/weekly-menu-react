@@ -6,8 +6,9 @@ import categories from "app-redux/reducers/InventoryReducer";
 import catsFilter from "app-redux/reducers/InventoryFilterReducer";
 import errorHandler from "app-redux/reducers/ErrorHandlerReducer";
 import alertHandler from "app-redux/reducers/AlertHandlerReducer";
-import formProduct from "app-redux/reducers/FormProductReducer";
+import componentFormNames from "app-redux/reducers/ProductFormReducer";
 import loading from "app-redux/reducers/LoadingReducer";
+import recipeProds from "app-redux/reducers/RecipeReducer";
 
 const rootReducer = combineReducers({
   categories,
@@ -15,7 +16,8 @@ const rootReducer = combineReducers({
   errorHandler,
   alertHandler,
   loading,
-  formProduct
+  componentFormNames,
+  recipeProds
 });
 
 const store = createStore(

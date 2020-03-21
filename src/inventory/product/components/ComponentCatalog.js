@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { styles } from "./styles";
 import { useDispatch } from "react-redux";
-import ItemSelection from "common/ItemSelection";
+import ItemSelection from "components/ItemSelection";
 import CreateIcon from "@material-ui/icons/Create";
 import SaveIcon from "@material-ui/icons/Save";
 import TextField from "@material-ui/core/TextField";
@@ -11,19 +11,19 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import IconButton from "@material-ui/core/IconButton";
 import { successMessage } from "app-redux/actions/AlertHandlerAction";
 import { updateCategoryAsync } from "app-redux/actions/InventoryActions";
-import { formEditAction } from "app-redux/actions/FormProductAction";
+import { formEditAction } from "app-redux/actions/ProductFormAction";
 import {
   FORM_VIEW_EDIT,
   FORM_VIEW_LABEL,
   BTN_EDIT_MODE,
   BTN_VIEW_MODE,
-  PROD_SELECTION
-} from "app-redux/actions/FormProductAction";
+  BTN_SELECTION
+} from "app-redux/actions/ProductFormAction";
 
 import Presenter from "inventory/presenter";
 const { updateProductInCategory } = Presenter;
 
-export default function({ onSelectedProd, category, product }) {
+export default function({ category, product }) {
   const [name, setName] = useState(product.name);
 
   const handleChangeName = e => {
@@ -43,13 +43,13 @@ export default function({ onSelectedProd, category, product }) {
   };
   return function(key) {
     switch (key) {
-      case PROD_SELECTION:
+      case BTN_SELECTION:
         return (
           <ItemSelection
             key="ItemSelection"
-            onChangeSelection={onSelectedProd}
-            product={product}
-            parent={category}
+            checked={"false"}
+            name={product.name}
+            prodId={product.id}
           ></ItemSelection>
         );
       case FORM_VIEW_EDIT:

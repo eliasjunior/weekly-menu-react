@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch, shallowEqual } from "react-redux";
 import CategoryList from "./category/components";
 import { AppWeekBar } from "../header/AppWeekBar";
@@ -7,50 +7,32 @@ import { Button } from "@material-ui/core";
 import { withStyles } from "@material-ui/core";
 import CommmonStyles from "../styles/CommonStyles";
 import AddIcon from "@material-ui/icons/Add";
-import Presenter from "./presenter";
 import SearchName from "components/SearchName";
-import { fetchCategoryAsync } from "app-redux/actions/InventoryActions";
+import { createCategoryAsync } from "app-redux/actions/InventoryActions";
 import CategoryDisplayHelper from "inventory/category/services/CategoryDisplayService";
-import { formViewAction } from "app-redux/actions/FormProductAction";
-import ErrorBoundaryInventory from "error-handlers/ErrorBoundaryComponent";
+import { formViewAction } from "app-redux/actions/ProductFormAction";
 import ErrorBoundary from "error-handlers/ErrorBoundaryComponent";
 
 //TODO need to change searchInput(display the component or not) and CategoryDisplayService names are misleading
 const { filterInputVisibility } = CategoryDisplayHelper;
 
-const { save } = Presenter;
-
 function InventoryPage(props) {
   const [catName, setCatName] = useState("");
   const [openModal, setOpenModal] = useState(false);
-  const { categories } = useSelector(state => state, shallowEqual);
+  //TODO review here categotyList also subscribes
+  const categories = useSelector(state => state.categories, shallowEqual);
   const dispatch = useDispatch();
-  useEffect(() => {
-    async function asyncFetch() {
-      dispatch(fetchCategoryAsync());
-      dispatch(formViewAction());
-    }
-    asyncFetch();
-  }, []);
+  dispatch(formViewAction());
   const { classes } = props;
   const handleChangeName = ev => {
     setCatName(ev.target.value);
   };
   const saveCategory = () => {
     const category = {
-      catName
+      name: catName
     };
-    //await dispatch(saveCategoryAsync(category));
-    save(category)
-      .then(() => {
-        // props.onHandleMessage({
-        //   message: "Uhhuu Category saved",
-        //   type: "success"
-        // });
-        //refresh(); use Effect ?
-        setOpenModal(false);
-      })
-      .catch(reason => props.onHandleMessage({ message: reason.message }));
+    dispatch(createCategoryAsync(category));
+    setOpenModal(false);
   };
   let dialogProps = {
     open: openModal,

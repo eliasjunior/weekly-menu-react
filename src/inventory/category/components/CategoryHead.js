@@ -10,7 +10,7 @@ export default function CategoryHead(props) {
     return DisplayService.categoryBtns(props.parentComponent).display ? (
       <CategoryActions
         name={props.category.name}
-        id={props.category._id}
+        id={props.category.id}
         category={props.category}
         onHandleMessage={props.onHandleMessage}
         onRefresh={props.onRefresh}
@@ -24,7 +24,7 @@ export default function CategoryHead(props) {
       return "";
     }
     return (
-      <ListItem style={{ backgroundColor: grey[200] }} key={props.category._id}>
+      <ListItem style={{ backgroundColor: grey[200] }} key={props.category.id}>
         <ListItemText primary={props.category.name}></ListItemText>
         {categoryButtons()}
       </ListItem>

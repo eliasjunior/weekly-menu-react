@@ -1,12 +1,16 @@
-import { SUCCESS_MESSAGE, CLOSE_MESSAGE } from "../actions/AlertHandlerAction";
+import {
+  SUCCESS_MESSAGE,
+  CLOSE_MESSAGE,
+  INFO_MESSAGE
+} from "../actions/AlertHandlerAction";
 
-export default function(state = {}, action) {
-  const { type, message } = action;
+export default function AlertReducer(state = {}, action) {
+  const { type, payload } = action;
+
   switch (type) {
     case SUCCESS_MESSAGE:
-      return {
-        message
-      };
+    case INFO_MESSAGE:
+      return { ...payload };
     case CLOSE_MESSAGE:
       return {
         message: ""

@@ -1,9 +1,34 @@
 export const SUCCESS_MESSAGE = "SUCCESS_MESSAGE";
 export const CLOSE_MESSAGE = "CLOSE_MESSAGE";
+export const INFO_MESSAGE = "INFO_MESSAGE";
+
+export const MESSAGE_TYPE_SUCCESS = "MESSAGE_TYPE_SUCCESS";
+export const MESSAGE_TYPE_ERROR = "MESSAGE_TYPE_ERROR";
+export const MESSAGE_TYPE_INFO = "MESSAGE_TYPE_INFO";
+export const MESSAGE_TYPE_WARNING = "MESSAGE_TYPE_WARNING";
 
 export function successMessage(message = "Congratulations! you made it!") {
   return {
     type: SUCCESS_MESSAGE,
-    message
+    payload: {
+      message,
+      type: MESSAGE_TYPE_SUCCESS
+    }
+  };
+}
+
+export function infoMessage(message = "Hey Hey!") {
+  return {
+    type: INFO_MESSAGE,
+    payload: {
+      message,
+      type: MESSAGE_TYPE_INFO
+    }
+  };
+}
+
+export function closeMessage() {
+  return {
+    type: CLOSE_MESSAGE
   };
 }

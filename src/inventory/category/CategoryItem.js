@@ -11,7 +11,7 @@ function CategoryItem(props) {
     const category = CloneDeep(props.category);
     const itemSelected = {
       categoryName: category.name,
-      catId: category._id,
+      catId: category.id,
       checked: !categorySelect
     };
     setCategorySelect(itemSelected.checked);
@@ -22,13 +22,11 @@ function CategoryItem(props) {
       <CategoryHead
         category={props.category}
         parentComponent={props.parentComponent}
-        onHandleMessage={props.onHandleMessage}
         onRefresh={props.onRefresh}
       ></CategoryHead>
       <ProductList
         parentComponent={props.parentComponent}
         category={props.category}
-        onHandleMessage={props.onHandleMessage}
         onSelectedProd={props.onSelectedProd}
         onSelectAllNoneProd={selectAllNoneProd}
         categorySelect={categorySelect}

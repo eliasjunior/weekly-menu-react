@@ -1,18 +1,24 @@
 import Presenter from "inventory/presenter";
-import { httpError } from "./ErrorHandlerAction";
-import { successMessage } from "./AlertHandlerAction";
 import { loadingSomething } from "./LoadingAction";
-const { getCategories, putCategory } = Presenter;
+import { afterResquest, afterRequestError } from "./common";
+const { getCategories, putCategory, postCategory } = Presenter;
 
 export const UPDATE_CAT = "UPDATE_CAT";
 export const FETCH_CATS = "FETCH_CATS";
-export const ADD_CAT = "ADD_CAT";
+export const CREATE_CAT = "CREATE_CAT";
 
 export const ERROR_REQUEST = "ERROR_REQUEST";
 
 export function updateCategory(category) {
   return {
     type: UPDATE_CAT,
+    category
+  };
+}
+
+export function createCategory(category) {
+  return {
+    type: CREATE_CAT,
     category
   };
 }
@@ -32,8 +38,7 @@ export function fetchCategoryAsync() {
       dispatch(fetchCategory(data));
       dispatch(loadingSomething(false));
     } catch (error) {
-      dispatch(httpError(error));
-      dispatch(loadingSomething(false));
+      afterRequestError(dispatch);
     }
   };
 }
@@ -44,11 +49,22 @@ export function updateCategoryAsync(category) {
     try {
       const data = await putCategory(category);
       dispatch(updateCategory(data));
-      dispatch(successMessage());
-      dispatch(loadingSomething(false));
+      afterResquest(dispatch);
     } catch (error) {
-      dispatch(httpError(error));
-      dispatch(loadingSomething(false));
+      afterRequestError(dispatch);
+    }
+  };
+}
+
+export function createCategoryAsync(category) {
+  return async dispatch => {
+    dispatch(loadingSomething(true));
+    try {
+      const data = await postCategory(category);
+      dispatch(updateCategory(data));
+      afterResquest(dispatch);
+    } catch (error) {
+      afterRequestError(dispatch);
     }
   };
 }

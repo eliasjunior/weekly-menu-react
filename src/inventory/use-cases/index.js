@@ -14,7 +14,7 @@ function updateProductInCategory(
   product = requiredParameter("product")
 ) {
   const products = category.products.reduce((acc, prod) => {
-    if (prod._id !== product._id) {
+    if (prod.id !== product.id) {
       acc.push(prod);
     } else {
       acc.push(product);
