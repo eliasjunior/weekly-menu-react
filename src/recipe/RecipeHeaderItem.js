@@ -6,58 +6,67 @@ import {
   ListItem,
   Checkbox,
   ListItemText,
-  ListItemSecondaryAction
+  ListItemSecondaryAction,
+  ListItemIcon
 } from "@material-ui/core";
+import IconRecipe from "@material-ui/icons/Receipt";
 import PropTypes from "prop-types";
-import { grey } from "@material-ui/core/colors";
+import { purple } from "@material-ui/core/colors";
+import { recipeCurrentUpdate } from "app-redux/actions/RecipeAction";
+import { useDispatch } from "react-redux";
 
-export const RecipeHeaderItem = props => {
+export const RecipeHeaderItem = ({ recipe, onSelectRecipe }) => {
+  const dispatch = useDispatch();
   const onCheckAction = e => {
-    props.recipe.checked = e.target.checked;
+    recipe.checked = e.target.checked;
     const itemProps = {
-      checked: props.recipe.checked,
-      recipe: props.recipe
+      checked: recipe.checked,
+      recipe
     };
-    props.onSelectRecipe(itemProps);
+    onSelectRecipe(itemProps);
   };
 
   // TODO do like in category, add to a service
   const isCheckboxDisplay = () => {
-    if (props.isRecipeNotSelectable) {
-      return "";
-    } else {
-      return (
-        <Checkbox
-          checked={props.recipe.checked}
-          onClick={onCheckAction}
-          value={props.recipe.id}
-        ></Checkbox>
-      );
-    }
+    return (
+      <Checkbox
+        checked={recipe.checked}
+        onClick={onCheckAction}
+        value={recipe.id ? recipe.id.toString() : ""}
+      ></Checkbox>
+    );
   };
   // TODO do like in category, add to a service
   const isEditBtnDisplay = () => {
-    if (props.isNotEditable) {
-      return "";
-    } else {
-      return (
-        <ListItemSecondaryAction>
-          <Button variant="outlined" color="primary">
-            <Link
-              to={`${AppConstant.LOCATION.newRecipe.path}/${props.recipe.id}`}
-            >
-              EDIT
-            </Link>
-          </Button>
-        </ListItemSecondaryAction>
-      );
-    }
+    return (
+      <ListItemSecondaryAction>
+        <Button variant="outlined" color="primary">
+          <Link
+            to={`${AppConstant.LOCATION.newRecipe.path}/${recipe.id}`}
+            onClick={() => {
+              dispatch(
+                recipeCurrentUpdate({
+                  name: recipe.name,
+                  id: recipe.id,
+                  products: recipe.products
+                })
+              );
+            }}
+          >
+            EDIT
+          </Link>
+        </Button>
+      </ListItemSecondaryAction>
+    );
   };
 
   return (
-    <ListItem style={{ backgroundColor: grey[400] }}>
+    <ListItem style={{ backgroundColor: purple[300] }}>
       {isCheckboxDisplay()}
-      <ListItemText primary={props.recipe.name} />
+      <ListItemIcon>
+        <IconRecipe />
+      </ListItemIcon>
+      <ListItemText primary={recipe.name} />
       {isEditBtnDisplay()}
     </ListItem>
   );

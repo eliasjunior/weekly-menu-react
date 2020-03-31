@@ -1,6 +1,5 @@
-import { successMessage } from "./AlertHandlerAction";
+import { successMessage, httpError } from "./AlertHandlerAction";
 import { loadingSomething } from "./LoadingAction";
-import { httpError } from "./ErrorHandlerAction";
 
 export function afterResquest(dispatch) {
   dispatch(successMessage());
@@ -8,6 +7,8 @@ export function afterResquest(dispatch) {
 }
 
 export function afterRequestError(dispatch, error) {
+  //TODO review here, if error occurs on the redux flow make sure to print it
+  console.error("afterRequestError", error);
   dispatch(httpError(error));
   dispatch(loadingSomething(false));
 }

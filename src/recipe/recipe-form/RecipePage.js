@@ -2,49 +2,41 @@ import React, { useState } from "react";
 import { AppWeekBar } from "header/AppWeekBar";
 import CategoryList from "inventory/category/components";
 import { TextField } from "@material-ui/core";
-import RecipeActions from "./RecipeActions";
+import RecipeBtns from "./RecipeBtns";
 import { styles } from "./styles";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { formSelectionAction } from "app-redux/actions/ProductFormAction";
-import ErrorBoundary from "error-handlers/ErrorBoundaryComponent";
-import { infoMessage } from "app-redux/actions/AlertHandlerAction";
+import { listFilterAction } from "app-redux/actions/ListFilterAction";
+import CommonErrorBoundary from "error-handlers/CommonErrorBoundary";
+import { recipeUpdateName } from "app-redux/actions/RecipeAction";
 
 function RecipePage() {
-  const [name, setName] = useState("");
-  const [id, setId] = useState("");
   const dispatch = useDispatch();
 
-  const onChangeName = e => {
-    setName(e.target.value);
-  };
-  const updateRecipe = () => {};
-  const saveRecipe = () => {
-    if (!name) {
-      dispatch(infoMessage("oops blanco noooo"));
-    }
-  };
+  const categories = useSelector(state => state.categories, shallowEqual);
+  const recipe = useSelector(state => state.currentRecipe);
 
+  //Initial sets to the children
   dispatch(formSelectionAction());
+  dispatch(listFilterAction("", categories));
+
+  const onChangeName = e => dispatch(recipeUpdateName({ name: e.target.name }));
+
   return (
-    <ErrorBoundary>
+    <CommonErrorBoundary>
       <AppWeekBar title={"Recipe"}></AppWeekBar>
       <TextField
         style={styles.input}
         label="Recipe name"
-        value={name}
+        value={recipe.name}
         onChange={onChangeName}
       ></TextField>
-      <RecipeActions
-        isToUpdate={id ? true : false}
-        onUpdateAction={updateRecipe}
-        onSaveAction={saveRecipe}
-      ></RecipeActions>
-      <CategoryList
-        parentComponent="RecipePage"
-        onSelectAllProd={() => {}}
-        onOpenDialog={() => {}}
-      ></CategoryList>
-    </ErrorBoundary>
+      <RecipeBtns
+        isToUpdate={recipe.id ? true : false}
+        name={recipe.name}
+      ></RecipeBtns>
+      <CategoryList></CategoryList>
+    </CommonErrorBoundary>
   );
 }
 export default RecipePage;

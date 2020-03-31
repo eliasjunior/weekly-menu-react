@@ -1,10 +1,9 @@
 import { recipeClickAction } from "app-redux/actions/RecipeAction";
-export function getChecked(recipeProds, prodId) {
+export function getChecked(products, prodId) {
   return (
-    recipeProds.filter(recProd => recProd.prodId && recProd.prodId === prodId)
-      .length > 0
+    products.filter(recProd => recProd.id && recProd.id === prodId).length > 0
   );
 }
-export function handleOnChange({ dispatch, prodId, name }) {
-  dispatch(recipeClickAction({ prodId, name }));
+export function handleOnChange({ dispatch, id, name }) {
+  dispatch(recipeClickAction({ id, name }));
 }

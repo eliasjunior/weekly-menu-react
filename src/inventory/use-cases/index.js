@@ -1,11 +1,50 @@
 import ApiService from "service/ApiService";
 import { requiredParameter } from "common/Util";
+import {
+  categoryMapper,
+  categoryConverter,
+  categoryListMapper
+} from "./categoryMapper";
 
 export default {
-  getCategories: () => ApiService.get("categories"),
-  saveCategoryAsync: category => ApiService.post("categories", category),
-  updateCategoryAsync: category => ApiService.put("categories", category),
-  getCategoryAsync: id => ApiService.get("categories/" + id),
+  getCategories: async () => {
+    try {
+      const data = await ApiService.get("categories");
+      return categoryListMapper(data);
+    } catch (error) {
+      throw error;
+    }
+  },
+  saveCategoryAsync: async category => {
+    try {
+      const data = await ApiService.post(
+        "categories",
+        categoryConverter(category)
+      );
+      return categoryMapper(data);
+    } catch (error) {
+      throw error;
+    }
+  },
+  updateCategoryAsync: async category => {
+    try {
+      const data = await ApiService.put(
+        "categories",
+        categoryConverter(category)
+      );
+      return categoryMapper(data);
+    } catch (error) {
+      throw error;
+    }
+  },
+  getCategoryAsync: async id => {
+    try {
+      const data = await ApiService.get("categories/" + id);
+      return categoryMapper(data);
+    } catch (error) {
+      throw error;
+    }
+  },
   updateProductInCategory
 };
 

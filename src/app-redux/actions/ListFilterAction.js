@@ -1,9 +1,9 @@
 export const SET_FILTER_NAME = "SET_FILTER_NAME";
 
-export function inventoryFilter(textFilter, categories) {
+export function listFilterAction(textFilter, listDB) {
   return {
     type: SET_FILTER_NAME,
     textFilter,
-    categories
+    listDB
   };
 }

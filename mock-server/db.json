@@ -339,5 +339,75 @@
       "__v": 2
     }
   ],
-  "recipes": []
+  "recipes": [
+    {
+      "name": "Caki dourado",
+      "products": [
+        {
+          "name": "Sesame seeds"
+        }
+      ],
+      "_id": 1
+    },
+    {
+      "name": "Sopa de casco",
+      "products": [
+        {
+          "name": "Flour "
+        },
+        {
+          "name": "Sugar"
+        },
+        {
+          "name": "Vanilla"
+        },
+        {
+          "name": "Sesame seeds"
+        },
+        {
+          "name": "Bicarbonate"
+        },
+        {
+          "name": "Raisins"
+        },
+        {
+          "name": "Chocolate chips"
+        },
+        {
+          "name": "Plain flour"
+        },
+        {
+          "name": "Condensed Milk"
+        },
+        {
+          "name": "Peanuts"
+        },
+        {
+          "name": "Corn flour"
+        },
+        {
+          "name": "Baking powder test"
+        },
+        {
+          "name": "Dry mango"
+        },
+        {
+          "name": "Dried mango"
+        },
+        {
+          "name": "Bread"
+        },
+        {
+          "name": "Burger bread"
+        },
+        {
+          "name": "opaopa"
+        },
+        {
+          "name": "opaopa"
+        }
+      ],
+      "_id": 2
+    }
+  ]
 }

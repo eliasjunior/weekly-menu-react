@@ -1,5 +1,5 @@
-import reducer from "./InventoryFilterReducer";
-import { SET_FILTER_NAME } from "../actions/InventoryFilterAction";
+import reducer from "./ListFilterReducer";
+import { SET_FILTER_NAME } from "../actions/ListFilterAction";
 
 describe("Visibility filter", () => {
   it("should not throw an error", () => {

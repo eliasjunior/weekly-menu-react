@@ -3,7 +3,7 @@ import { useSelector, useDispatch, shallowEqual } from "react-redux";
 import CategoryList from "./category/components";
 import { AppWeekBar } from "../header/AppWeekBar";
 import FormDialog from "./FormDialog";
-import { Button } from "@material-ui/core";
+import { Fab } from "@material-ui/core";
 import { withStyles } from "@material-ui/core";
 import CommmonStyles from "../styles/CommonStyles";
 import AddIcon from "@material-ui/icons/Add";
@@ -11,7 +11,8 @@ import SearchName from "components/SearchName";
 import { createCategoryAsync } from "app-redux/actions/InventoryActions";
 import CategoryDisplayHelper from "inventory/category/services/CategoryDisplayService";
 import { formViewAction } from "app-redux/actions/ProductFormAction";
-import ErrorBoundary from "error-handlers/ErrorBoundaryComponent";
+import CommonErrorBoundary from "error-handlers/CommonErrorBoundary";
+import { listFilterAction } from "app-redux/actions/ListFilterAction";
 
 //TODO need to change searchInput(display the component or not) and CategoryDisplayService names are misleading
 const { filterInputVisibility } = CategoryDisplayHelper;
@@ -21,8 +22,11 @@ function InventoryPage(props) {
   const [openModal, setOpenModal] = useState(false);
   //TODO review here categotyList also subscribes
   const categories = useSelector(state => state.categories, shallowEqual);
+
   const dispatch = useDispatch();
+  dispatch(listFilterAction("", categories));
   dispatch(formViewAction());
+
   const { classes } = props;
   const handleChangeName = ev => {
     setCatName(ev.target.value);
@@ -47,27 +51,26 @@ function InventoryPage(props) {
 
   const displayFilterInput = () => {
     return filterInputVisibility("InventoryPage").display ? (
-      <SearchName displayList={categories}></SearchName>
+      <SearchName listDB={categories}></SearchName>
     ) : (
       ""
     );
   };
 
   return (
-    <ErrorBoundary>
+    <CommonErrorBoundary>
       <AppWeekBar title="Product List"></AppWeekBar>
       {displayFilterInput()}
-      <CategoryList parentComponent="InventoryPage"></CategoryList>
-      <Button
+      <CategoryList></CategoryList>
+      <Fab
         color="primary"
-        variant="fab"
         className={classes.floatingBtn}
         onClick={() => {
           setOpenModal(true);
         }}
       >
         <AddIcon />
-      </Button>
+      </Fab>
       <FormDialog
         form={{}}
         onDisplay={false}
@@ -75,7 +78,7 @@ function InventoryPage(props) {
         onChangeName={handleChangeName}
         onCloseDialog={() => setOpenModal(false)}
       ></FormDialog>
-    </ErrorBoundary>
+    </CommonErrorBoundary>
   );
 }
 export default withStyles(CommmonStyles)(InventoryPage);

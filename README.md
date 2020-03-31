@@ -2,22 +2,16 @@
 
 ## 2020 Fenix Program
 
-- redux
-  - reducer filter
-  - update category, share state (categoryList and categoryItem)
-  - reducer category
-- Refactoring Service layer to use cases
-- Refactoring Components
+### Sprint 31/03 - 07/04
 
-  - ~~CategoryList~~
-  - CategoryActions
-  - CategoryHead
-  - InventoryPage
+0 - FIX display list --> DONE
+1 - Update Recipe List - (3)
+2 - Search name - (1)
+On the top page (Inventory, Recipe)
+   dispatch(listFilterAction("", recipes));
+I need a action and reducer to CREATE_DISPLAY_LIST, that copies from the DB   
+3 - **SPIKE** convert the data to DB format, see https://github.com/eliasjunior/normalize/blob/master/normalization/normalization-instructions.txt (TIME-BOXED 1)
 
-- ~~Update latest React~~
-- ~~Mock Back-end data JSON (plugin or anything can abstract from http)~~
-- Refactoring Services
--
 
 ## Mock server
 

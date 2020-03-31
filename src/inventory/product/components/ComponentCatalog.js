@@ -33,11 +33,11 @@ export default function({ category, product }) {
   const dispatch = useDispatch();
   const deleteButton = () => {
     return (
-      <IconButton aria-label="Comments">
-        <DeleteIcon
-          style={styles.deleteIcon}
-          onClick={() => dispatch(successMessage("not ready!"))}
-        ></DeleteIcon>
+      <IconButton
+        aria-label="Comments"
+        onClick={() => dispatch(successMessage("not ready!"))}
+      >
+        <DeleteIcon style={styles.deleteIcon}></DeleteIcon>
       </IconButton>
     );
   };
@@ -83,11 +83,11 @@ export default function({ category, product }) {
       case BTN_VIEW_MODE:
         return (
           <ListItemSecondaryAction key={"ListItemSecondaryAction_2"}>
-            <IconButton aria-label="Comments">
-              <CreateIcon
-                style={styles.editIcon}
-                onClick={() => dispatch(formEditAction())}
-              />
+            <IconButton
+              aria-label="Comments"
+              onClick={() => dispatch(formEditAction())}
+            >
+              <CreateIcon style={styles.editIcon} />
             </IconButton>
             {deleteButton()}
           </ListItemSecondaryAction>

@@ -1,7 +1,6 @@
 import React from "react";
 import { AppWeekBar } from "../header/AppWeekBar";
-import RecipeService from "./RecipeService";
-import { Button } from "@material-ui/core";
+import { Button, Fab } from "@material-ui/core";
 import PropTypes from "prop-types";
 import UtilCollectionService from "../service/UtilCollectionService";
 import RecipeListComponent from "./RecipeListComponent";
@@ -11,73 +10,59 @@ import { withStyles } from "@material-ui/core/styles";
 import CommonStyles from "../styles/CommonStyles";
 import { Link } from "react-router-dom";
 import { AppConstant } from "../common/AppConstant";
+import { useDispatch, useSelector, shallowEqual } from "react-redux";
+import { formSelectionAction } from "app-redux/actions/ProductFormAction";
+import { listFilterAction } from "app-redux/actions/ListFilterAction";
 
-class RecipeListPage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      recipes: [],
-      isFromShoppingList: props.location.search ? true : false
-    };
-    this.onSelectRecipe = this.onSelectRecipe.bind(this);
-  }
-  componentDidMount = () => {
-    RecipeService.get("recipe")
-      .then(response => {
-        this.setState({
-          recipes: response
-        });
-      })
-      .catch(reason => {
-        console.error(reason);
-      });
-  };
-  onSelectRecipe(selected) {
+function RecipeListPage(props) {
+  const recipes = useSelector(state => state.recipes, shallowEqual);
+  const dispatch = useDispatch();
+  //Initial sets to the children
+  dispatch(formSelectionAction());
+  dispatch(listFilterAction("", recipes));
+  const { classes } = props;
+  const onSelectRecipe = selected => {
     // TODO replace this here with localApi
-    const item = {
-      recipe: UtilCollectionService.recipeToAdd(selected.recipe),
-      checked: selected.checked
-    };
-    this.props.callbackIncludeRecipe(item);
-  }
-  render() {
-    const { classes } = this.props;
-    const addButton = () => {
-      return this.props.location.search ? (
-        <Button
-          variant="fab"
-          color="secondary"
-          className={classes.floatingBtn}
-          aria-label="include Recipe"
-          onClick={() => this.props.history.goBack()}
-        >
-          <IncludeRecipe />
-        </Button>
-      ) : (
-        <Button
-          variant="fab"
-          color="secondary"
-          className={classes.floatingBtn}
-          aria-label="new Recipe"
-        >
-          <Link to={AppConstant.LOCATION.newRecipe.path}>
-            <AddIcon />
-          </Link>
-        </Button>
-      );
-    };
-    return (
-      <div>
-        <AppWeekBar title="Recipe List"></AppWeekBar>
-        {addButton()}
-        <RecipeListComponent
-          recipes={this.state.recipes}
-          onSelectRecipe={this.onSelectRecipe}
-          parentComponent="RecipeListPage"
-        ></RecipeListComponent>
-      </div>
+    // const item = {
+    //   recipe: UtilCollectionService.recipeToAdd(selected.recipe),
+    //   checked: selected.checked
+    // };
+    //  props.callbackIncludeRecipe(item);
+    console.log("rebuild");
+  };
+
+  const addButton = () => {
+    return props.location.search ? (
+      <Fab
+        color="secondary"
+        className={classes.floatingBtn}
+        aria-label="include Recipe"
+        onClick={() => props.history.goBack()}
+      >
+        <IncludeRecipe />
+      </Fab>
+    ) : (
+      <Fab
+        color="secondary"
+        className={classes.floatingBtn}
+        aria-label="new Recipe"
+      >
+        <Link to={AppConstant.LOCATION.newRecipe.path}>
+          <AddIcon />
+        </Link>
+      </Fab>
     );
-  }
+  };
+  return (
+    <div>
+      <AppWeekBar title="Recipe List"></AppWeekBar>
+      {addButton()}
+      <RecipeListComponent
+        onSelectRecipe={onSelectRecipe}
+        recipes={recipes}
+      ></RecipeListComponent>
+    </div>
+  );
 }
 RecipeListPage.propTypes = {
   callbackIncludeRecipe: PropTypes.func

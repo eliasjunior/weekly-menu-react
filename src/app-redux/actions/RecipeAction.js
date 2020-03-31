@@ -1,18 +1,13 @@
-import { loadingSomething } from "./LoadingAction";
-import { afterResquest, afterRequestError } from "./common";
-import Presenter from "recipe/presenter";
-
 export const RECIPE_CHECK_CLICK = "RECIPE_CHECK_CLICK";
 export const RECIPE_CHECK_ALL_CLICK = "RECIPE_CHECK_ALL_CLICK";
-export const RECIPE_CREATE = "RECIPE_CREATE";
+export const RECIPE_CURRENT_UPDATE = "RECIPE_CURRENT_UPDATE";
+export const RECIPE_UPDATE_NAME = "RECIPE_UPDATE_NAME";
 
-const { postRecipe } = Presenter;
-
-export function recipeClickAction({ prodId, name }) {
+export function recipeClickAction({ id, name }) {
   return {
     type: RECIPE_CHECK_CLICK,
     payload: {
-      prodId,
+      id,
       name
     }
   };
@@ -28,25 +23,22 @@ export function recipeClickAllAction({ checkedAll, products }) {
   };
 }
 
-function createRecipe({ recipe, products }) {
+export function recipeUpdateName({ name }) {
   return {
-    type: RECIPE_CREATE,
+    type: RECIPE_UPDATE_NAME,
     payload: {
-      recipe,
-      products
+      name
     }
   };
 }
 
-export function createRecipeAsync(recipe) {
-  return async dispatch => {
-    dispatch(loadingSomething(true));
-    try {
-      const data = await postRecipe(recipe);
-      dispatch(createRecipe(data));
-      afterResquest(dispatch);
-    } catch (error) {
-      afterRequestError(dispatch, error);
+export function recipeCurrentUpdate({ name, id, products }) {
+  return {
+    type: RECIPE_CURRENT_UPDATE,
+    payload: {
+      id,
+      name,
+      products
     }
   };
 }

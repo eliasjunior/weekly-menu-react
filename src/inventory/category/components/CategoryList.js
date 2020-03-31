@@ -4,23 +4,20 @@ import List from "@material-ui/core/List";
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 
+//TODO review props on pages that call CategoryList
 export default function CategoryList({
-  parentComponent,
   onSelectedProd,
   onSelectAllProd,
   onRefresh
 }) {
-  const categories = useSelector(state => state.categories);
-  const catsFilter = useSelector(state => state.catsFilter);
-  const { displayCats, textFilter } = catsFilter;
-  const currentList = textFilter.length === 0 ? categories : displayCats;
+  const { displayList } = useSelector(state => state.listFilter);
+
   const buildList = () => {
-    return currentList.map(category => {
+    return displayList.map(category => {
       return (
         <CategoryItem
           key={category.id}
           category={{ ...category }}
-          parentComponent={parentComponent}
           onSelectedProd={onSelectedProd}
           onSelectAllProd={onSelectAllProd}
           onRefresh={onRefresh}

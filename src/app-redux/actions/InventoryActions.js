@@ -38,7 +38,7 @@ export function fetchCategoryAsync() {
       dispatch(fetchCategory(data));
       dispatch(loadingSomething(false));
     } catch (error) {
-      afterRequestError(dispatch);
+      afterRequestError(dispatch, error);
     }
   };
 }
@@ -51,7 +51,7 @@ export function updateCategoryAsync(category) {
       dispatch(updateCategory(data));
       afterResquest(dispatch);
     } catch (error) {
-      afterRequestError(dispatch);
+      afterRequestError(dispatch, error);
     }
   };
 }
@@ -64,7 +64,7 @@ export function createCategoryAsync(category) {
       dispatch(updateCategory(data));
       afterResquest(dispatch);
     } catch (error) {
-      afterRequestError(dispatch);
+      afterRequestError(dispatch, error);
     }
   };
 }

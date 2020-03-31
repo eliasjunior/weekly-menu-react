@@ -13,7 +13,7 @@ export const AppWeekBar = props => {
       <AppBar position="static">
         <Toolbar>
           <MenuIconComponent></MenuIconComponent>
-          <Typography variant="title" color="inherit">
+          <Typography variant="h6" color="inherit">
             {props.title}
           </Typography>
         </Toolbar>

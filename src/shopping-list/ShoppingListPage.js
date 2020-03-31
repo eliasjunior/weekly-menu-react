@@ -2,7 +2,7 @@ import React from "react";
 import { AppWeekBar } from "../header/AppWeekBar";
 import ShoppingCreateActions from "./ShoppingCreateActions";
 import UtilCollectionService from "../service/UtilCollectionService";
-import ErrorBoundary from "../error-handlers/ErrorBoundaryComponent";
+import CommonErrorBoundary from "../error-handlers/CommonErrorBoundary";
 import { ShoppingListUtilService } from "./ShoppingListUtilService";
 import CloneDeep from "lodash.clonedeep";
 import ShoppingListService from "./ShoppingListService";
@@ -136,7 +136,7 @@ class ShoppingListPage extends React.Component {
   render() {
     return (
       <div>
-        <ErrorBoundary>
+        <CommonErrorBoundary>
           <AppWeekBar title={this.state.title}></AppWeekBar>
           <ShoppingCreateActions
             onSaveShoppingList={this.saveShoppingList}
@@ -151,7 +151,7 @@ class ShoppingListPage extends React.Component {
             onSelectedProd={this.selectedProd}
             onSelectAllProd={this.selectAllProd}
           ></ProductBox>
-        </ErrorBoundary>
+        </CommonErrorBoundary>
       </div>
     );
   }

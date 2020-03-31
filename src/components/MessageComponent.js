@@ -4,8 +4,13 @@ import SnackMessage from "./SnackMessage";
 import { closeMessage } from "app-redux/actions/AlertHandlerAction";
 import { useDispatch } from "react-redux";
 import { stylesAlert } from "./styles";
+import { requiredParameter } from "common/Util";
 
-function MessageComponent({ message, isOpen, type }) {
+function MessageComponent({
+  message,
+  isOpen,
+  type = requiredParameter("Alert type")
+}) {
   const dispatch = useDispatch();
   if (!message) {
     return null;

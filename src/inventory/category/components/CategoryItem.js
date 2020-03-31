@@ -16,8 +16,6 @@ function CategoryItem(props) {
 }
 CategoryItem.propTypes = {
   category: PropTypes.object,
-  onHandleMessage: PropTypes.func,
-  onRefresh: PropTypes.func,
-  parentComponent: PropTypes.string
+  onRefresh: PropTypes.func
 };
 export default CategoryItem;

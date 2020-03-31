@@ -3,16 +3,13 @@ import PropTypes from "prop-types";
 import Search from "@material-ui/icons/Clear";
 import { TextField, InputAdornment } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
-import { inventoryFilter } from "app-redux/actions/InventoryFilterAction";
+import { listFilterAction } from "app-redux/actions/ListFilterAction";
 
-export default function SearchName({
-  searchTitle = "Search Product",
-  displayList = []
-}) {
+export default function SearchName({ searchTitle = "Search Product", listDB }) {
   const dispatch = useDispatch();
-  const textFilter = useSelector(state => state.textFilter);
-  const handleSearchProduct = (value, displayList) => {
-    dispatch(inventoryFilter(value, displayList));
+  const { textFilter } = useSelector(state => state.listFilter);
+  const handleSearchProduct = value => {
+    dispatch(listFilterAction(value, listDB));
   };
   return (
     <div className="searchName">
@@ -24,14 +21,12 @@ export default function SearchName({
         variant="outlined"
         value={textFilter}
         onChange={({ target }) => {
-          handleSearchProduct(target.value, displayList);
+          handleSearchProduct(target.value);
         }}
         InputProps={{
           startAdornment: (
             <InputAdornment position="end">
-              <Search
-                onClick={() => dispatch(inventoryFilter("", displayList))}
-              />
+              <Search onClick={() => dispatch(listFilterAction("", listDB))} />
             </InputAdornment>
           )
         }}
