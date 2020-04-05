@@ -1,4 +1,8 @@
-import { RECIPE_CREATE, FETCH_RECIPES } from "app-redux/actions/RecipesActions";
+import {
+  RECIPE_CREATE,
+  FETCH_RECIPES,
+  RECIPE_UPDATE,
+} from "app-redux/actions/RecipesActions";
 
 const initialState = [];
 
@@ -12,10 +16,14 @@ export default function RecipesReducer(state = initialState, action) {
       const recipe = {
         name,
         id,
-        products
+        products,
       };
       result.push(recipe);
       return result;
+    case RECIPE_UPDATE:
+      const tempRecipes = state.filter((rec) => rec.id !== payload.id);
+      tempRecipes.push(payload);
+      return tempRecipes;
     case FETCH_RECIPES:
       return [...recipes];
     default:

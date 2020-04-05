@@ -12,14 +12,16 @@ import { Link } from "react-router-dom";
 import { AppConstant } from "../common/AppConstant";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { formSelectionAction } from "app-redux/actions/ProductFormAction";
-import { listFilterAction } from "app-redux/actions/ListFilterAction";
+import { setDisplatList } from "app-redux/actions/ListFilterAction";
 
 function RecipeListPage(props) {
   const recipes = useSelector(state => state.recipes, shallowEqual);
+
   const dispatch = useDispatch();
   //Initial sets to the children
   dispatch(formSelectionAction());
-  dispatch(listFilterAction("", recipes));
+  dispatch(setDisplatList(recipes));
+  console.log("Recipe List");
   const { classes } = props;
   const onSelectRecipe = selected => {
     // TODO replace this here with localApi

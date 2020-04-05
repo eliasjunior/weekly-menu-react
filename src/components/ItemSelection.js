@@ -3,18 +3,19 @@ import Checkbox from "@material-ui/core/Checkbox";
 import { useDispatch, useSelector } from "react-redux";
 import { getChecked, handleOnChange } from "./ItemSelectionPresenter";
 
-export default function ItemSelection({ name, prodId }) {
+export default function ItemSelection({ product }) {
   const dispatch = useDispatch();
   const recipeProds = useSelector(state => state.currentRecipe.products);
-  const checked = getChecked(recipeProds, prodId);
+
+  const checked = getChecked(recipeProds, product.id);
   return (
     <div>
       <Checkbox
         onChange={() => {
-          handleOnChange({ dispatch, name, id: prodId });
+          handleOnChange({ dispatch, product });
         }}
         checked={checked}
-        value={name}
+        value={product.name}
       ></Checkbox>
     </div>
   );

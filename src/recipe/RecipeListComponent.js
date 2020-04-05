@@ -9,7 +9,8 @@ function RecipeListComponent(props) {
   const { displayList } = useSelector(state => state.listFilter);
   const { onSelectRecipe, recipes } = props;
 
-  console.log(props);
+  console.log("recipes", recipes);
+  console.log("displayList", displayList);
 
   const buildRecipeList = () => {
     if (!displayList.length) {

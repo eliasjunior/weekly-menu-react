@@ -15,11 +15,6 @@ function Weekly() {
   useEffect(() => {
     async function asyncFetch() {
       dispatch(fetchCategoryAsync());
-    }
-    asyncFetch();
-  }, []);
-  useEffect(() => {
-    async function asyncFetch() {
       dispatch(fetchRecipesAsync());
     }
     asyncFetch();

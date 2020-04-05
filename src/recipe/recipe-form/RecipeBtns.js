@@ -3,33 +3,44 @@ import React from "react";
 import CommmonStyles from "../../styles/CommonStyles";
 import { withStyles } from "@material-ui/core";
 import SaveIcon from "@material-ui/icons/Save";
+import EditIcon from "@material-ui/icons/Edit";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { infoMessage } from "app-redux/actions/AlertHandlerAction";
-import { createRecipeAsync } from "app-redux/actions/RecipesActions";
+import {
+  createRecipeAsync,
+  updateRecipeAsync
+} from "app-redux/actions/RecipesActions";
 
-function RecipeBtns({ name, classes, isToUpdate }) {
+function RecipeBtns({ classes, isToUpdate }) {
   const dispatch = useDispatch();
-  const currentRecipe = useSelector(
-    state => state.currentRecipe.products,
-    shallowEqual
-  );
+  const currentRecipe = useSelector(state => state.currentRecipe, shallowEqual);
   const combinedClasses = `${classes.floatingBtn}`;
+  const { name, products, id } = currentRecipe;
   const handleSave = async () => {
-    if (validateRecipe({ name, dispatch, currentRecipe })) {
+    if (isRecipeFormValid({ name, dispatch, products })) {
       const recipe = {
         name,
-        products: currentRecipe
+        products
       };
-      console.log(recipe);
       await dispatch(createRecipeAsync(recipe));
       console.log(" ---- DONE! ---- ");
     }
   };
-  const handleUpdate = () => {};
+  const handleUpdate = async () => {
+    if (isRecipeFormValid({ name, dispatch, products })) {
+      const recipe = {
+        name,
+        id,
+        products
+      };
+      await dispatch(updateRecipeAsync(recipe));
+      console.log(" ---- LORD VADER! DONE ---- ");
+    }
+  };
   const actionButton = () => {
     return isToUpdate ? (
       <Button color="secondary" variant="fab" onClick={handleUpdate}>
-        <SaveIcon />
+        <EditIcon />
       </Button>
     ) : (
       <Button color="secondary" variant="fab" onClick={handleSave}>
@@ -40,14 +51,14 @@ function RecipeBtns({ name, classes, isToUpdate }) {
   return <div className={combinedClasses}>{actionButton()}</div>;
 }
 
-//TODO move to a validation file or something else
-function validateRecipe({ name, dispatch, currentRecipe }) {
-  if (currentRecipe.length === 0) {
-    dispatch(infoMessage("oops blanco no products, are you nuts ?"));
+//TODO move to a form validation file or something else
+function isRecipeFormValid({ name, dispatch, products }) {
+  if (products.length === 0) {
+    dispatch(infoMessage("oops you have to check at least one product"));
     return false;
   }
   if (!name) {
-    dispatch(infoMessage("no name, noooooooo"));
+    dispatch(infoMessage("You cannot save a recipe without a name!"));
     return false;
   }
 

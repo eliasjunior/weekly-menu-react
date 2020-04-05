@@ -5,12 +5,13 @@
 ### Sprint 31/03 - 07/04
 
 0 - FIX display list --> DONE
-1 - Update Recipe List - (3)
-2 - Search name - (1)
-On the top page (Inventory, Recipe)
+1 - Update Recipe List - (3) - DONE
+2 - Search name - (1) DONE
+    On the top page (Inventory, Recipe)
    dispatch(listFilterAction("", recipes));
-I need a action and reducer to CREATE_DISPLAY_LIST, that copies from the DB   
+   I need a action and reducer to CREATE_DISPLAY_LIST, that copies from the DB   
 3 - **SPIKE** convert the data to DB format, see https://github.com/eliasjunior/normalize/blob/master/normalization/normalization-instructions.txt (TIME-BOXED 1)
+
 
 
 ## Mock server

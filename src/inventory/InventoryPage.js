@@ -12,7 +12,7 @@ import { createCategoryAsync } from "app-redux/actions/InventoryActions";
 import CategoryDisplayHelper from "inventory/category/services/CategoryDisplayService";
 import { formViewAction } from "app-redux/actions/ProductFormAction";
 import CommonErrorBoundary from "error-handlers/CommonErrorBoundary";
-import { listFilterAction } from "app-redux/actions/ListFilterAction";
+import { setDisplatList } from "app-redux/actions/ListFilterAction";
 
 //TODO need to change searchInput(display the component or not) and CategoryDisplayService names are misleading
 const { filterInputVisibility } = CategoryDisplayHelper;
@@ -24,7 +24,7 @@ function InventoryPage(props) {
   const categories = useSelector(state => state.categories, shallowEqual);
 
   const dispatch = useDispatch();
-  dispatch(listFilterAction("", categories));
+  dispatch(setDisplatList(categories));
   dispatch(formViewAction());
 
   const { classes } = props;

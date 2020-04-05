@@ -1,4 +1,7 @@
-import { SET_FILTER_NAME } from "app-redux/actions/ListFilterAction";
+import {
+  SET_FILTER_NAME,
+  SET_DISPLAY_LIST
+} from "app-redux/actions/ListFilterAction";
 import CloneDeep from "lodash.clonedeep";
 const initialState = {
   displayList: [],
@@ -17,6 +20,8 @@ export default function ListFilterReducer(state = initialState, action) {
         return parentList.products.length > 0;
       });
       return { textFilter, displayList: result };
+    case SET_DISPLAY_LIST:
+      return { textFilter: "", displayList: CloneDeep(listDB) };
     default:
       return state;
   }

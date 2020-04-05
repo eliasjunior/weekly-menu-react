@@ -1,14 +1,14 @@
 export const RECIPE_CHECK_CLICK = "RECIPE_CHECK_CLICK";
 export const RECIPE_CHECK_ALL_CLICK = "RECIPE_CHECK_ALL_CLICK";
-export const RECIPE_CURRENT_UPDATE = "RECIPE_CURRENT_UPDATE";
+export const RECIPE_UPDATE_CURRENT = "RECIPE_UPDATE_CURRENT";
 export const RECIPE_UPDATE_NAME = "RECIPE_UPDATE_NAME";
+export const RECIPE_UPDATE_ID = "RECIPE_UPDATE_ID";
 
-export function recipeClickAction({ id, name }) {
+export function recipeClickAction({ product }) {
   return {
     type: RECIPE_CHECK_CLICK,
     payload: {
-      id,
-      name
+      product
     }
   };
 }
@@ -32,9 +32,18 @@ export function recipeUpdateName({ name }) {
   };
 }
 
-export function recipeCurrentUpdate({ name, id, products }) {
+export function recipeUpdateId({ id }) {
   return {
-    type: RECIPE_CURRENT_UPDATE,
+    type: RECIPE_UPDATE_ID,
+    payload: {
+      id
+    }
+  };
+}
+
+export function recipeUpdateCurrent({ name = "", id, products } = {}) {
+  return {
+    type: RECIPE_UPDATE_CURRENT,
     payload: {
       id,
       name,

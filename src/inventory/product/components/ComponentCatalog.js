@@ -48,8 +48,7 @@ export default function({ category, product }) {
           <ItemSelection
             key="ItemSelection"
             checked={"false"}
-            name={product.name}
-            prodId={product.id}
+            product={product}
           ></ItemSelection>
         );
       case FORM_VIEW_EDIT:

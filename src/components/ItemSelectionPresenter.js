@@ -4,6 +4,6 @@ export function getChecked(products, prodId) {
     products.filter(recProd => recProd.id && recProd.id === prodId).length > 0
   );
 }
-export function handleOnChange({ dispatch, id, name }) {
-  dispatch(recipeClickAction({ id, name }));
+export function handleOnChange({ dispatch, product }) {
+  dispatch(recipeClickAction({ product }));
 }

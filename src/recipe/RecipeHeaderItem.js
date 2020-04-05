@@ -12,7 +12,7 @@ import {
 import IconRecipe from "@material-ui/icons/Receipt";
 import PropTypes from "prop-types";
 import { purple } from "@material-ui/core/colors";
-import { recipeCurrentUpdate } from "app-redux/actions/RecipeAction";
+import { recipeUpdateCurrent } from "app-redux/actions/RecipeAction";
 import { useDispatch } from "react-redux";
 
 export const RecipeHeaderItem = ({ recipe, onSelectRecipe }) => {
@@ -45,7 +45,7 @@ export const RecipeHeaderItem = ({ recipe, onSelectRecipe }) => {
             to={`${AppConstant.LOCATION.newRecipe.path}/${recipe.id}`}
             onClick={() => {
               dispatch(
-                recipeCurrentUpdate({
+                recipeUpdateCurrent({
                   name: recipe.name,
                   id: recipe.id,
                   products: recipe.products

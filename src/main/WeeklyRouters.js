@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import RecipePage from "recipe/recipe-form/RecipePage";
+import RecipeUpdatePage from "recipe/recipe-form/RecipeUpdatePage";
 import RecipeListPage from "recipe/RecipeListPage";
 import ShoppingListPage from "shopping-list/ShoppingListPage";
 import InventoryPage from "inventory/InventoryPage";
@@ -45,7 +46,7 @@ export default function() {
       <Switch>
         <Route
           path={`${AppConstant.LOCATION.newRecipe.path}/:id`}
-          render={props => <RecipePage {...props}></RecipePage>}
+          render={props => <RecipeUpdatePage {...props}></RecipeUpdatePage>}
         ></Route>
         <Route
           path={AppConstant.LOCATION.newRecipe.path}
