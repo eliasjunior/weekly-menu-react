@@ -1,18 +1,11 @@
-import { getBaseUrl, getProducts } from "./TemporaryAPI";
+import { getBaseUrl } from "./TemporaryAPI";
 import axios from "axios";
 
 export async function get(resourceName) {
   try {
     const response = await axios.get(getBaseUrl() + resourceName);
-    const allProducts = await getProducts();
-
     const recipes = response.data;
-    const res = recipes.reduce((prev, rec) => {
-      rec.products = rec.recProds.map(prodId => allProducts.byId[prodId]);
-      prev.push(rec);
-      return prev;
-    }, []);
-    return res;
+    return recipes;
   } catch ({ response }) {
     throw response;
   }
@@ -21,10 +14,10 @@ export async function post(resourceName, object) {
   try {
     //remove products from recipe
     const { name, products } = object;
-    const recProds = products.map(prod => prod._id);
+    const recProds = products.map((prod) => prod._id);
     const requestRec = {
       name,
-      recProds
+      recProds,
     };
     //save recipe
     const response = await axios.post(getBaseUrl() + resourceName, requestRec);
@@ -34,7 +27,7 @@ export async function post(resourceName, object) {
       _id: response.data._id,
       name: response.data.name,
       recProds,
-      products // with _id
+      products, // with _id
     };
 
     return result;
@@ -45,11 +38,11 @@ export async function post(resourceName, object) {
 export async function put(resourceName, object) {
   try {
     const { name, products, _id } = object;
-    const recProds = products.map(prod => prod._id);
+    const recProds = products.map((prod) => prod._id);
     const requestRec = {
       name,
       _id,
-      recProds
+      recProds,
     };
     const response = await axios.put(getBaseUrl() + resourceName, requestRec);
     // simulating back-end
@@ -57,7 +50,7 @@ export async function put(resourceName, object) {
       _id,
       name,
       recProds,
-      products // with _id
+      products, // with _id
     };
     return response.status;
   } catch ({ response }) {

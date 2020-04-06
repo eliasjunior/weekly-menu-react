@@ -9,6 +9,7 @@ import WeeklyRouters from "./WeeklyRouters";
 import { useDispatch } from "react-redux";
 import { fetchCategoryAsync } from "app-redux/actions/InventoryActions";
 import { fetchRecipesAsync } from "app-redux/actions/RecipesActions";
+import { fetchProductsAsync } from "app-redux/actions/ProductAction";
 
 function Weekly() {
   const dispatch = useDispatch();
@@ -16,6 +17,7 @@ function Weekly() {
     async function asyncFetch() {
       dispatch(fetchCategoryAsync());
       dispatch(fetchRecipesAsync());
+      dispatch(fetchProductsAsync());
     }
     asyncFetch();
   }, []);
@@ -31,11 +33,11 @@ function Weekly() {
 const theme = createMuiTheme({
   palette: {
     primary: blue,
-    secondary: teal
+    secondary: teal,
   },
   typography: {
-    useNextVariants: true
-  }
+    useNextVariants: true,
+  },
 });
 
 export default Weekly;

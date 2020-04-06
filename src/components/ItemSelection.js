@@ -5,7 +5,7 @@ import { getChecked, handleOnChange } from "./ItemSelectionPresenter";
 
 export default function ItemSelection({ product }) {
   const dispatch = useDispatch();
-  const recipeProds = useSelector(state => state.currentRecipe.products);
+  const recipeProds = useSelector((state) => state.currentRecipe.products);
 
   const checked = getChecked(recipeProds, product.id);
   return (

@@ -3,158 +3,59 @@
     {
       "_id": "5b9d1d7bed2ee113002f7038",
       "name": "Baking",
-      "insertDate": "2018-09-15T14:55:55.532Z"
+      "catProds": ["5b9d1d7bed2ee113002f7040", "5b9d1d7bed2ee113002f703f"]
     },
     {
       "_id": "5b9d1d7bed2ee113002f7004",
       "name": "Beverage",
-      "insertDate": "2018-09-15T14:55:55.510Z",
-      "__v": 2
+      "catProds": []
     }
   ],
   "products": [
     {
       "_id": "5b9d1d7bed2ee113002f7040",
-      "name": "Flour ",
-      "catId": "5b9d1d7bed2ee113002f7038"
+      "name": "Flour "
     },
     {
       "_id": "5b9d1d7bed2ee113002f703f",
-      "name": "Prunes",
-      "catId": "5b9d1d7bed2ee113002f7038"
+      "name": "Prunes"
     },
     {
       "_id": "5b9d1d7bed2ee113002f703e",
-      "name": "Sugar",
-      "catId": "5b9d1d7bed2ee113002f7038"
+      "name": "Sugar"
     },
     {
       "_id": "5b9d1d7bed2ee113002f703d",
-      "name": "Vanilla",
-      "catId": "5b9d1d7bed2ee113002f7038"
+      "name": "Vanilla"
     },
     {
       "_id": "5b9d1d7bed2ee113002f703c",
-      "name": "Sesame seeds",
-      "catId": "5b9d1d7bed2ee113002f7038"
+      "name": "Sesame seeds"
     },
     {
       "_id": "5b9d1d7bed2ee113002f703b",
-      "name": "Bicarbonate",
-      "catId": "5b9d1d7bed2ee113002f7038"
+      "name": "Bicarbonate"
     },
     {
       "_id": "5b9d1d7bed2ee113002f703a",
-      "name": "Raisins",
-      "catId": "5b9d1d7bed2ee113002f7038"
+      "name": "Raisins"
     },
     {
       "name": "Chocolate chips",
-      "_id": "5b9d1d7bed2ee113002f7039",
-      "catId": "5b9d1d7bed2ee113002f7038"
+      "_id": "5b9d1d7bed2ee113002f7039"
     },
     {
       "_id": "5b9e350fb3af7100133650fa",
-      "name": "Plain flour",
-      "catId": "5b9d1d7bed2ee113002f7038"
+      "name": "Plain flour"
     },
     {
       "_id": "5b9d1d7bed2ee113002f7009",
-      "name": "Beer",
-      "catId": "5b9d1d7bed2ee113002f7004"
+      "name": "Beer"
     },
     {
       "_id": "5b9d1d7bed2ee113002f7008",
-      "name": "Juice",
-      "catId": "5b9d1d7bed2ee113002f7004"
-    },
-    {
-      "_id": "5b9d1d7bed2ee113002f7007",
-      "name": "Soya milk",
-      "catId": "5b9d1d7bed2ee113002f7004"
-    },
-    {
-      "name": "Pale ale",
-      "_id": "5b9d1d7bed2ee113002f7005",
-      "catId": "5b9d1d7bed2ee113002f7004"
-    },
-    {
-      "_id": "5b9e2e5cb3af71001336508a",
-      "name": "Milk",
-      "catId": "5b9d1d7bed2ee113002f7004"
+      "name": "Juice"
     }
   ],
-  "recipes": [
-    {
-      "name": "cool",
-      "recProds": [
-        "5b9d1d7bed2ee113002f703f",
-        "5b9d1d7bed2ee113002f703e",
-        "5b9d1d7bed2ee113002f7009"
-      ],
-      "_id": 1
-    },
-    {
-      "name": "banho",
-      "recProds": [
-        "5b9d1d7bed2ee113002f703e",
-        "5b9d1d7bed2ee113002f703d",
-        "5b9d1d7bed2ee113002f7009"
-      ],
-      "_id": 2
-    },
-    {
-      "name": "vaivai",
-      "recProds": [
-        "5b9d1d7bed2ee113002f703f",
-        "5b9d1d7bed2ee113002f7009"
-      ],
-      "_id": 3
-    },
-    {
-      "name": "weirdo",
-      "recProds": [
-        "5b9d1d7bed2ee113002f7005",
-        "5b9e2e5cb3af71001336508a"
-      ],
-      "_id": 4
-    },
-    {
-      "name": "cerveja loca",
-      "recProds": [
-        "5b9e350fb3af7100133650fa",
-        "5b9d1d7bed2ee113002f7005"
-      ],
-      "_id": 5
-    },
-    {
-      "name": "feijoada",
-      "recProds": [
-        "5b9d1d7bed2ee113002f7005",
-        "5b9d1d7bed2ee113002f7009"
-      ],
-      "_id": 6
-    },
-    {
-      "name": "novopra ir",
-      "recProds": [
-        "5b9d1d7bed2ee113002f703a"
-      ],
-      "_id": 7
-    },
-    {
-      "name": "vamosmuchacho",
-      "recProds": [
-        "5b9d1d7bed2ee113002f703f"
-      ],
-      "_id": 8
-    },
-    {
-      "name": "crazy",
-      "_id": 9,
-      "recProds": [
-        "5b9d1d7bed2ee113002f7039"
-      ]
-    }
-  ]
+  "recipes": []
 }

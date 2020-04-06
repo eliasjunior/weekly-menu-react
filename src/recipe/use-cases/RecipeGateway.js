@@ -1,7 +1,7 @@
 import {
   recipeConverter,
   recipeListMapper,
-  recipeMapper
+  recipeMapper,
 } from "./RecipeMapper";
 
 export default function RecipeGateway({ httpAPI }) {
@@ -14,7 +14,7 @@ export default function RecipeGateway({ httpAPI }) {
         throw error;
       }
     },
-    saveRecipeAsync: async recipe => {
+    saveRecipeAsync: async (recipe) => {
       try {
         const data = await httpAPI.post(
           "recipes",
@@ -25,7 +25,7 @@ export default function RecipeGateway({ httpAPI }) {
         throw error;
       }
     },
-    updateRecipeAsync: async recipe => {
+    updateRecipeAsync: async (recipe) => {
       try {
         const data = await httpAPI.put(
           "recipes/" + recipe.id,
@@ -36,13 +36,13 @@ export default function RecipeGateway({ httpAPI }) {
         throw error;
       }
     },
-    getRecipeAsync: async id => {
+    getRecipeAsync: async (id) => {
       try {
         const data = await httpAPI.get("recipes/" + id);
         return recipeMapper(data);
       } catch (error) {
         throw error;
       }
-    }
+    },
   };
 }

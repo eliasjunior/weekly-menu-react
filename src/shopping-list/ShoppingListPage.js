@@ -19,7 +19,7 @@ class ShoppingListPage extends React.Component {
       categories: [],
       selectedProducts: [],
       recipesToInclude: CloneDeep(props.recipesToInclude),
-      title: id ? updateTitle : "New Shopping list"
+      title: id ? updateTitle : "New Shopping list",
     };
     this.saveShoppingList = this.saveShoppingList.bind(this);
     this.selectedProd = this.selectedProd.bind(this);
@@ -28,7 +28,7 @@ class ShoppingListPage extends React.Component {
   }
   componentDidMount() {
     CategoryService.get()
-      .then(categories => {
+      .then((categories) => {
         // TODO for update list I can't add another recipe at the moment
         // I need to merge this.props.shoppingList.recipes with this.props.recipesToInclude
         if (this.props.shoppingList) {
@@ -42,17 +42,17 @@ class ShoppingListPage extends React.Component {
 
           this.setState({
             recipesToInclude: shoppingList.recipes,
-            categories: requestedCats
+            categories: requestedCats,
           });
         } else {
           // edit items recipesToInclude
           this.setState({
             categories,
-            recipesToInclude: this.props.recipesToInclude
+            recipesToInclude: this.props.recipesToInclude,
           });
         }
       })
-      .catch(reason => {
+      .catch((reason) => {
         this.props.onHandleMessage({ message: reason.message });
       });
   }
@@ -71,10 +71,10 @@ class ShoppingListPage extends React.Component {
         .then(() => {
           this.props.onHandleMessage({
             message: "Uhhuu Shopping list updated",
-            type: "success"
+            type: "success",
           });
         })
-        .catch(reason =>
+        .catch((reason) =>
           this.props.onHandleMessage({ message: reason.message })
         );
     } else {
@@ -84,17 +84,17 @@ class ShoppingListPage extends React.Component {
       );
 
       ShoppingListService.save(shoppintList)
-        .then(response => {
+        .then((response) => {
           this.setState({
             id: response._id,
-            title: updateTitle
+            title: updateTitle,
           });
           this.props.onHandleMessage({
             message: "Uhhuu Shopping list saved",
-            type: "success"
+            type: "success",
           });
         })
-        .catch(reason =>
+        .catch((reason) =>
           this.props.onHandleMessage({ message: reason.message })
         );
     }
@@ -109,7 +109,7 @@ class ShoppingListPage extends React.Component {
   }
   selectAllProdOfCatRec(selected) {
     const recipesToInclude = CloneDeep(this.state.recipesToInclude);
-    const recipeIn = recipesToInclude.find(rec => rec._id === selected.recId);
+    const recipeIn = recipesToInclude.find((rec) => rec._id === selected.recId);
 
     recipeIn.categories = UtilCollectionService.updateProductsSelection(
       recipeIn.categories,
@@ -166,12 +166,12 @@ function buildObjectToSend(categories, recipesToInclude, id) {
     return {
       categories: categories,
       recipes,
-      _id: id
+      _id: id,
     };
   } else {
     return {
       categories: categories,
-      recipes
+      recipes,
     };
   }
 }

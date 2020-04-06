@@ -1,11 +1,10 @@
-import { getBaseUrl, linkProds } from "./TemporaryAPI";
+import { getBaseUrl } from "./TemporaryAPI";
 import axios from "axios";
 
 export async function get(resourceName) {
   try {
     const response = await axios.get(getBaseUrl() + resourceName);
-    const result = response.data;
-    return linkProds(result, "catId");
+    return response.data;
   } catch ({ response }) {
     throw response;
   }
@@ -28,4 +27,14 @@ export async function post(resourceName, object) {
   } catch ({ response }) {
     throw response;
   }
+}
+
+export async function linkProds(parentList, idName) {
+  const prodResponse = await axios.get(getBaseUrl() + "products");
+  const prods = prodResponse.data;
+
+  return parentList.map((parent) => {
+    parent.products = prods.filter((prod) => prod[idName] === parent._id);
+    return parent;
+  });
 }

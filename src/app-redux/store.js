@@ -9,6 +9,7 @@ import componentFormNames from "app-redux/reducers/ProductFormReducer";
 import loading from "app-redux/reducers/LoadingReducer";
 import currentRecipe from "app-redux/reducers/RecipeReducer";
 import recipes from "app-redux/reducers/RecipesReducer";
+import products from "app-redux/reducers/ProductsReducer";
 
 const rootReducer = combineReducers({
   categories,
@@ -17,7 +18,8 @@ const rootReducer = combineReducers({
   loading,
   componentFormNames,
   currentRecipe,
-  recipes
+  recipes,
+  products,
 });
 
 const store = createStore(

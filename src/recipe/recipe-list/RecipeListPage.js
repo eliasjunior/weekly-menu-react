@@ -1,37 +1,31 @@
 import React from "react";
-import { AppWeekBar } from "../header/AppWeekBar";
-import { Button, Fab } from "@material-ui/core";
-import PropTypes from "prop-types";
-import UtilCollectionService from "../service/UtilCollectionService";
-import RecipeListComponent from "./RecipeListComponent";
-import IncludeRecipe from "@material-ui/icons/PlaylistAdd";
-import AddIcon from "@material-ui/icons/Add";
+import { Fab } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
-import CommonStyles from "../styles/CommonStyles";
-import { Link } from "react-router-dom";
-import { AppConstant } from "../common/AppConstant";
+import AddIcon from "@material-ui/icons/Add";
+import IncludeRecipe from "@material-ui/icons/PlaylistAdd";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+
+import { AppWeekBar } from "header/AppWeekBar";
+import RecipeListComponent from "./RecipeListComponent";
+import CommonStyles from "styles/CommonStyles";
+import { AppConstant } from "common/AppConstant";
 import { formSelectionAction } from "app-redux/actions/ProductFormAction";
 import { setDisplatList } from "app-redux/actions/ListFilterAction";
+import { loadProductsToRecipe } from "../RecipeHelper";
 
 function RecipeListPage(props) {
-  const recipes = useSelector(state => state.recipes, shallowEqual);
+  const recipes = useSelector((state) => state.recipes, shallowEqual);
+  const products = useSelector((state) => state.products, shallowEqual);
+  const recipesWithProducts = loadProductsToRecipe(recipes, products);
 
   const dispatch = useDispatch();
   //Initial sets to the children
   dispatch(formSelectionAction());
-  dispatch(setDisplatList(recipes));
-  console.log("Recipe List");
+  dispatch(setDisplatList(recipesWithProducts));
+
   const { classes } = props;
-  const onSelectRecipe = selected => {
-    // TODO replace this here with localApi
-    // const item = {
-    //   recipe: UtilCollectionService.recipeToAdd(selected.recipe),
-    //   checked: selected.checked
-    // };
-    //  props.callbackIncludeRecipe(item);
-    console.log("rebuild");
-  };
 
   const addButton = () => {
     return props.location.search ? (
@@ -55,19 +49,17 @@ function RecipeListPage(props) {
       </Fab>
     );
   };
+  console.log("Recipe List");
   return (
     <div>
       <AppWeekBar title="Recipe List"></AppWeekBar>
       {addButton()}
-      <RecipeListComponent
-        onSelectRecipe={onSelectRecipe}
-        recipes={recipes}
-      ></RecipeListComponent>
+      <RecipeListComponent recipes={recipesWithProducts}></RecipeListComponent>
     </div>
   );
 }
 RecipeListPage.propTypes = {
-  callbackIncludeRecipe: PropTypes.func
+  callbackIncludeRecipe: PropTypes.func,
 };
 
 export default withStyles(CommonStyles)(RecipeListPage);

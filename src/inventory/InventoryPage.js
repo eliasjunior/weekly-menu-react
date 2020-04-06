@@ -13,6 +13,7 @@ import CategoryDisplayHelper from "inventory/category/services/CategoryDisplaySe
 import { formViewAction } from "app-redux/actions/ProductFormAction";
 import CommonErrorBoundary from "error-handlers/CommonErrorBoundary";
 import { setDisplatList } from "app-redux/actions/ListFilterAction";
+import { loadProductsToCategory } from "./helpers/InventoryHelper";
 
 //TODO need to change searchInput(display the component or not) and CategoryDisplayService names are misleading
 const { filterInputVisibility } = CategoryDisplayHelper;
@@ -21,19 +22,21 @@ function InventoryPage(props) {
   const [catName, setCatName] = useState("");
   const [openModal, setOpenModal] = useState(false);
   //TODO review here categotyList also subscribes
-  const categories = useSelector(state => state.categories, shallowEqual);
+  const tempCats = useSelector((state) => state.categories, shallowEqual);
+  const products = useSelector((state) => state.products, shallowEqual);
+  const catsWithProducts = loadProductsToCategory(tempCats, products);
 
   const dispatch = useDispatch();
-  dispatch(setDisplatList(categories));
+  dispatch(setDisplatList(catsWithProducts));
   dispatch(formViewAction());
 
   const { classes } = props;
-  const handleChangeName = ev => {
+  const handleChangeName = (ev) => {
     setCatName(ev.target.value);
   };
   const saveCategory = () => {
     const category = {
-      name: catName
+      name: catName,
     };
     dispatch(createCategoryAsync(category));
     setOpenModal(false);
@@ -45,13 +48,13 @@ function InventoryPage(props) {
     form: {
       placeHolder: "Category name",
       value: "",
-      onActionMethod: saveCategory
-    }
+      onActionMethod: saveCategory,
+    },
   };
 
   const displayFilterInput = () => {
     return filterInputVisibility("InventoryPage").display ? (
-      <SearchName listDB={categories}></SearchName>
+      <SearchName listDB={catsWithProducts}></SearchName>
     ) : (
       ""
     );
