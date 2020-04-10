@@ -3,12 +3,27 @@
     {
       "_id": "5b9d1d7bed2ee113002f7038",
       "name": "Baking",
-      "catProds": ["5b9d1d7bed2ee113002f7040", "5b9d1d7bed2ee113002f703f"]
+      "catProds": [
+        "5b9d1d7bed2ee113002f7040",
+        "5b9d1d7bed2ee113002f703f"
+      ]
     },
     {
       "_id": "5b9d1d7bed2ee113002f7004",
       "name": "Beverage",
-      "catProds": []
+      "catProds": [
+        "H4GiPKF",
+        "JeEk5Po",
+        "DkCvhzj"
+      ]
+    },
+    {
+      "_id": "tFT-Zmw",
+      "name": "Goods",
+      "catProds": [
+        "mLtkhgN",
+        "Belhp1R"
+      ]
     }
   ],
   "products": [
@@ -55,7 +70,104 @@
     {
       "_id": "5b9d1d7bed2ee113002f7008",
       "name": "Juice"
+    },
+    {
+      "_id": "H4GiPKF",
+      "name": "Pale Ale"
+    },
+    {
+      "_id": "JeEk5Po",
+      "name": "Guiness"
+    },
+    {
+      "_id": "DkCvhzj",
+      "name": "Coconut water"
+    },
+    {
+      "name": "Sweets",
+      "_id": "mLtkhgN"
+    },
+    {
+      "name": "Cakes",
+      "_id": "Belhp1R"
     }
   ],
-  "recipes": []
+  "recipes": [
+    {
+      "_id": 1,
+      "name": "NewGuy",
+      "recProds": [
+        "H4GiPKF"
+      ]
+    },
+    {
+      "_id": 2,
+      "name": "Feijoad",
+      "recProds": [
+        "5b9d1d7bed2ee113002f7040"
+      ]
+    },
+    {
+      "name": "pica",
+      "recProds": [
+        "5b9d1d7bed2ee113002f703f"
+      ],
+      "_id": 3
+    },
+    {
+      "name": "porra",
+      "recProds": [
+        "H4GiPKF"
+      ],
+      "_id": 4
+    },
+    {
+      "name": "saco",
+      "recProds": [
+        "5b9d1d7bed2ee113002f7040"
+      ],
+      "_id": 5
+    },
+    {
+      "name": "shit ",
+      "recProds": [
+        "5b9d1d7bed2ee113002f7040"
+      ],
+      "_id": 6
+    },
+    {
+      "name": "ola",
+      "recProds": [
+        "5b9d1d7bed2ee113002f7040",
+        "5b9d1d7bed2ee113002f703f",
+        "H4GiPKF",
+        "JeEk5Po",
+        "DkCvhzj"
+      ],
+      "_id": 7
+    },
+    {
+      "name": "colacola",
+      "recProds": [
+        "5b9d1d7bed2ee113002f7040",
+        "5b9d1d7bed2ee113002f703f"
+      ],
+      "_id": 8
+    },
+    {
+      "name": "Gorou",
+      "recProds": [
+        "5b9d1d7bed2ee113002f7040",
+        "H4GiPKF"
+      ],
+      "_id": 9
+    },
+    {
+      "_id": 10,
+      "name": "Pizza",
+      "recProds": [
+        "5b9d1d7bed2ee113002f7040"
+      ]
+    }
+  ]
 }

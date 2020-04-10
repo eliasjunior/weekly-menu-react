@@ -1,15 +1,19 @@
 import Inventory from "../use-cases";
+import { get, post, put } from "service/TemporaryAPI";
 
-const {
-  getCategories,
-  updateCategoryAsync,
-  saveCategoryAsync,
-  updateProductInCategory
-} = Inventory;
+import ProductGateway from "inventory/use-cases/ProductGateway";
+
+const { getProducts, saveProduct, updateProduct } = ProductGateway({
+  httpAPI: { get, post, put },
+});
+
+const { getCategories, updateCategoryAsync, saveCategoryAsync } = Inventory;
 
 export default {
   getCategories,
   putCategory: updateCategoryAsync,
   postCategory: saveCategoryAsync,
-  updateProductInCategory
+  getProducts,
+  postProduct: saveProduct,
+  putProduct: updateProduct,
 };

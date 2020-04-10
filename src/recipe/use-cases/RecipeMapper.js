@@ -8,7 +8,7 @@ export function recipeListMapper(list) {
 export function recipeMapper({
   _id = requiredParameter("_id recipe"),
   name = requiredParameter("name recipe"),
-  recProds = requiredParameter("recProds"),
+  recProds = [],
 }) {
   return {
     id: _id,
@@ -18,10 +18,16 @@ export function recipeMapper({
 }
 
 export function recipeConverter(recipe, isNew = false) {
-  const { id, name = requiredParameter("name recipe"), recProds } = recipe;
+  const {
+    id,
+    name = requiredParameter("name recipe"),
+    recProds = requiredParameter("recProds recipe"),
+  } = recipe;
   //isNew is to guarantee that the id was sent, on the update case
-  if (!isNew && !id) {
-    throw new Error("id recipe is required");
+  if (!isNew) {
+    if (!id) {
+      requiredParameter("id recipe");
+    }
   }
 
   return {

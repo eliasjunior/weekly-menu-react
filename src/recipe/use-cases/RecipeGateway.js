@@ -16,6 +16,7 @@ export default function RecipeGateway({ httpAPI }) {
     },
     saveRecipeAsync: async (recipe) => {
       try {
+        recipe.recProds = recipe.products.map((prod) => prod.id);
         const data = await httpAPI.post(
           "recipes",
           recipeConverter(recipe, true)
@@ -27,10 +28,8 @@ export default function RecipeGateway({ httpAPI }) {
     },
     updateRecipeAsync: async (recipe) => {
       try {
-        const data = await httpAPI.put(
-          "recipes/" + recipe.id,
-          recipeConverter(recipe)
-        );
+        recipe.recProds = recipe.products.map((prod) => prod.id);
+        const data = await httpAPI.put("recipes", recipeConverter(recipe));
         return data;
       } catch (error) {
         throw error;

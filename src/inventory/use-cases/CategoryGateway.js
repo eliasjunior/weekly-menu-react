@@ -2,7 +2,7 @@ import { requiredParameter } from "common/Util";
 import {
   categoryMapper,
   categoryConverter,
-  categoryListMapper
+  categoryListMapper,
 } from "./CategoryMapper";
 
 export default function CategoryGateway({ httpAPI }) {
@@ -16,18 +16,18 @@ export default function CategoryGateway({ httpAPI }) {
         throw error;
       }
     },
-    saveCategoryAsync: async category => {
+    saveCategoryAsync: async (category) => {
       try {
         const data = await httpAPI.post(
           "categories",
-          categoryConverter(category)
+          categoryConverter(category, true)
         );
         return categoryMapper(data);
       } catch (error) {
         throw error;
       }
     },
-    updateCategoryAsync: async category => {
+    updateCategoryAsync: async (category) => {
       try {
         const data = await httpAPI.put(
           "categories",
@@ -38,7 +38,7 @@ export default function CategoryGateway({ httpAPI }) {
         throw error;
       }
     },
-    getCategoryAsync: async id => {
+    getCategoryAsync: async (id) => {
       try {
         const data = await httpAPI.get("categories/" + id);
         return categoryMapper(data);
@@ -46,7 +46,7 @@ export default function CategoryGateway({ httpAPI }) {
         throw error;
       }
     },
-    updateProductInCategory
+    updateProductInCategory,
   };
 }
 

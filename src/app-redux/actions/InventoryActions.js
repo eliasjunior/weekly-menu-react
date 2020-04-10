@@ -1,6 +1,7 @@
 import Presenter from "inventory/presenter";
 import { loadingSomething } from "./LoadingAction";
 import { afterResquest, afterRequestError } from "./common";
+import { requiredParameter } from "common/Util";
 const { getCategories, putCategory, postCategory } = Presenter;
 
 export const UPDATE_CAT = "UPDATE_CAT";
@@ -12,26 +13,26 @@ export const ERROR_REQUEST = "ERROR_REQUEST";
 export function updateCategory(category) {
   return {
     type: UPDATE_CAT,
-    category
+    category,
   };
 }
 
 export function createCategory(category) {
   return {
     type: CREATE_CAT,
-    category
+    category,
   };
 }
 
 export function fetchCategory(data) {
   return {
     type: FETCH_CATS,
-    categories: data
+    categories: data,
   };
 }
 
 export function fetchCategoryAsync() {
-  return async dispatch => {
+  return async (dispatch) => {
     dispatch(loadingSomething(true));
     try {
       const data = await getCategories();
@@ -43,8 +44,8 @@ export function fetchCategoryAsync() {
   };
 }
 
-export function updateCategoryAsync(category) {
-  return async dispatch => {
+export function updateCategoryAsync(category = requiredParameter("category")) {
+  return async (dispatch) => {
     dispatch(loadingSomething(true));
     try {
       const data = await putCategory(category);
@@ -57,7 +58,7 @@ export function updateCategoryAsync(category) {
 }
 
 export function createCategoryAsync(category) {
-  return async dispatch => {
+  return async (dispatch) => {
     dispatch(loadingSomething(true));
     try {
       const data = await postCategory(category);

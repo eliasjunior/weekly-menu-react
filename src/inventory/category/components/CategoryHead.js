@@ -4,10 +4,12 @@ import ListItemText from "@material-ui/core/ListItemText";
 import { grey } from "@material-ui/core/colors";
 import CategoryActions from "./CategoryBtnActions";
 import DisplayService from "../services/CategoryDisplayService";
+import { useSelector } from "react-redux";
 
 export default function CategoryHead(props) {
+  const parentLocation = useSelector((state) => state.pageData.location);
   const categoryButtons = () => {
-    return DisplayService.categoryBtns(props.parentComponent).display ? (
+    return DisplayService.categoryBtns(parentLocation).display ? (
       <CategoryActions
         name={props.category.name}
         id={props.category.id}

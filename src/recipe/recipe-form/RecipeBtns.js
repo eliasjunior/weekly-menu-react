@@ -1,26 +1,30 @@
-import Button from "@material-ui/core/Button";
 import React from "react";
 import CommmonStyles from "../../styles/CommonStyles";
-import { withStyles } from "@material-ui/core";
+import { withStyles, Fab } from "@material-ui/core";
 import SaveIcon from "@material-ui/icons/Save";
 import EditIcon from "@material-ui/icons/Edit";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
-import { infoMessage } from "app-redux/actions/AlertHandlerAction";
 import {
   createRecipeAsync,
-  updateRecipeAsync
+  updateRecipeAsync,
 } from "app-redux/actions/RecipesActions";
+import { isRecipeFormValid } from "./FormValidation";
 
-function RecipeBtns({ classes, isToUpdate }) {
+// classes from commonSytles below! withStyles(CommmonStyles)
+function RecipeBtns({ classes }) {
   const dispatch = useDispatch();
-  const currentRecipe = useSelector(state => state.currentRecipe, shallowEqual);
-  const combinedClasses = `${classes.floatingBtn}`;
+  const currentRecipe = useSelector(
+    (state) => state.currentRecipe,
+    shallowEqual
+  );
   const { name, products, id } = currentRecipe;
+  const combinedClasses = `${classes.floatingBtn}`;
+
   const handleSave = async () => {
     if (isRecipeFormValid({ name, dispatch, products })) {
       const recipe = {
         name,
-        products
+        products,
       };
       await dispatch(createRecipeAsync(recipe));
       console.log(" ---- DONE! ---- ");
@@ -31,38 +35,23 @@ function RecipeBtns({ classes, isToUpdate }) {
       const recipe = {
         name,
         id,
-        products
+        products,
       };
       await dispatch(updateRecipeAsync(recipe));
       console.log(" ---- LORD VADER! DONE ---- ");
     }
   };
   const actionButton = () => {
-    return isToUpdate ? (
-      <Button color="secondary" variant="fab" onClick={handleUpdate}>
+    return currentRecipe.id ? (
+      <Fab color="secondary" onClick={handleUpdate}>
         <EditIcon />
-      </Button>
+      </Fab>
     ) : (
-      <Button color="secondary" variant="fab" onClick={handleSave}>
+      <Fab color="secondary" onClick={handleSave}>
         <SaveIcon />
-      </Button>
+      </Fab>
     );
   };
   return <div className={combinedClasses}>{actionButton()}</div>;
 }
-
-//TODO move to a form validation file or something else
-function isRecipeFormValid({ name, dispatch, products }) {
-  if (products.length === 0) {
-    dispatch(infoMessage("oops you have to check at least one product"));
-    return false;
-  }
-  if (!name) {
-    dispatch(infoMessage("You cannot save a recipe without a name!"));
-    return false;
-  }
-
-  return true;
-}
-
 export default withStyles(CommmonStyles)(RecipeBtns);

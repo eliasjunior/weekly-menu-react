@@ -2,6 +2,15 @@
 
 ## 2020 Fenix Program
 
+### Sprint 07/04 - 14/04
+0 - Product CRUD (2)
+  Create TempAPI 
+  Save, update delete, remove from cat 
+1 - Select Recipe   (1)
+2- shoppings refactoring (3)
+   
+
+
 ### Sprint 31/03 - 07/04
 
 0 - FIX display list --> DONE

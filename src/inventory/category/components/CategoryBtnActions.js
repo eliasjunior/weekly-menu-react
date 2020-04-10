@@ -3,7 +3,10 @@ import { Button } from "@material-ui/core";
 import FormDialog from "../../FormDialog";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import { useDispatch } from "react-redux";
+import { createProductAsync } from "app-redux/actions/ProductAction";
 import { updateCategoryAsync } from "app-redux/actions/InventoryActions";
+
+//TODO Reminder, need to add saveProduct to ProductAction or InventoryAction ? second one is getting bigger,
 
 function CategoryActions({ category }) {
   const [catName, setCatName] = useState("");
@@ -22,13 +25,9 @@ function CategoryActions({ category }) {
   };
   const handleSaveProduct = async () => {
     const newProduct = {
-      completed: false,
-      quantity: 1,
       name: prodName,
-      checked: false
     };
-    category.products.push(newProduct);
-    await dispatch(updateCategoryAsync(category));
+    await dispatch(createProductAsync(newProduct, category));
     setProdDisplay(false);
   };
   const handleUpdateCategory = async () => {
@@ -41,21 +40,22 @@ function CategoryActions({ category }) {
       <FormDialog
         form={{
           placeHolder: "Category name",
-          value: category.name
+          value: category.name,
         }}
         title={"Update Category"}
+        isToUpdate={true}
         onDisplay={displayCat}
-        onChangeName={e => setCatName(e.target.value)}
+        onChangeName={(e) => setCatName(e.target.value)}
         onClose={() => setCatDisplay(false)}
         onActionMethod={handleUpdateCategory}
       ></FormDialog>
       <FormDialog
         form={{
-          placeHolder: "Product name"
+          placeHolder: "Product name",
         }}
         title={"New Product"}
         onDisplay={displayProd}
-        onChangeName={e => setProdName(e.target.value)}
+        onChangeName={(e) => setProdName(e.target.value)}
         onClose={() => setProdDisplay(false)}
         onActionMethod={handleSaveProduct}
       ></FormDialog>

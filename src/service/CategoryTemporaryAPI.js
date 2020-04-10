@@ -1,5 +1,6 @@
 import { getBaseUrl } from "./TemporaryAPI";
 import axios from "axios";
+import { requiredParameter } from "common/Util";
 
 export async function get(resourceName) {
   try {
@@ -10,9 +11,10 @@ export async function get(resourceName) {
   }
 }
 export async function put(resourceName, object) {
+  const { _id = requiredParameter("_id") } = object;
   try {
     const response = await axios.put(
-      getBaseUrl() + resourceName + "/" + object.id,
+      getBaseUrl() + resourceName + "/" + _id,
       object
     );
     return response.data;

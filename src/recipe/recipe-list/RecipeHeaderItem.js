@@ -45,7 +45,6 @@ export const RecipeHeaderItem = ({ recipe, onSelectRecipe }) => {
           <Link
             to={`${AppConstant.LOCATION.newRecipe.path}/${recipe.id}`}
             onClick={() => {
-              console.log(">>", recipe.products);
               dispatch(
                 recipeUpdateCurrent({
                   name: recipe.name,

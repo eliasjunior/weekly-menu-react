@@ -10,6 +10,7 @@ import loading from "app-redux/reducers/LoadingReducer";
 import currentRecipe from "app-redux/reducers/RecipeReducer";
 import recipes from "app-redux/reducers/RecipesReducer";
 import products from "app-redux/reducers/ProductsReducer";
+import pageData from "app-redux/reducers/PageReducer";
 
 const rootReducer = combineReducers({
   categories,
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   currentRecipe,
   recipes,
   products,
+  pageData,
 });
 
 const store = createStore(

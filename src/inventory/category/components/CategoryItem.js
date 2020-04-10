@@ -16,6 +16,6 @@ function CategoryItem(props) {
 }
 CategoryItem.propTypes = {
   category: PropTypes.object,
-  onRefresh: PropTypes.func
+  onRefresh: PropTypes.func,
 };
 export default CategoryItem;

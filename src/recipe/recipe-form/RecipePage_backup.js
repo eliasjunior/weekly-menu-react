@@ -1,51 +1,42 @@
 import React from "react";
 import { AppWeekBar } from "header/AppWeekBar";
 import CategoryList from "inventory/category/components";
+import { TextField } from "@material-ui/core";
 import RecipeBtns from "./RecipeBtns";
+import { styles } from "./styles";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { formSelectionAction } from "app-redux/actions/ProductFormAction";
 import { setDisplatList } from "app-redux/actions/ListFilterAction";
 import CommonErrorBoundary from "error-handlers/CommonErrorBoundary";
-import { recipeUpdateCurrent } from "app-redux/actions/RecipeAction";
-import { loadProductsToRecipe } from "../RecipeHelper";
+import { recipeUpdateName } from "app-redux/actions/RecipeAction";
 import { loadProductsToCategory } from "inventory/helpers/InventoryHelper";
-import RecipeForm from "./RecipeForm";
-import { setPageTitle } from "app-redux/actions/PageAction";
 
-function RecipePage({ match }) {
+function RecipePage() {
   const dispatch = useDispatch();
-  //TODO improve performance
+
   const tempCategories = useSelector((state) => state.categories, shallowEqual);
-  const recipes = useSelector((state) => state.recipes, shallowEqual);
   const products = useSelector((state) => state.products, shallowEqual);
-
   const categories = loadProductsToCategory(tempCategories, products);
-  const recipesWithProducts = loadProductsToRecipe(recipes, products);
-  const recipe = getRecipeFromUrl(match, recipesWithProducts);
-
-  dispatch(recipeUpdateCurrent(recipe));
-
-  dispatch(setPageTitle(recipe.id ? "Update Recipe" : "New Recipe"));
 
   //Initial sets to the children
   dispatch(formSelectionAction());
   dispatch(setDisplatList(categories));
 
+  const onChangeName = (e) =>
+    dispatch(recipeUpdateName({ name: e.target.value }));
+
   return (
     <CommonErrorBoundary>
-      <AppWeekBar></AppWeekBar>
-      <RecipeForm prevName={recipe.name}></RecipeForm>
+      <AppWeekBar title={"Recipe"}></AppWeekBar>
+      <TextField
+        style={styles.input}
+        label="Recipe name"
+        onChange={onChangeName}
+      ></TextField>
       <RecipeBtns></RecipeBtns>
       <CategoryList></CategoryList>
     </CommonErrorBoundary>
   );
 }
+
 export default RecipePage;
-
-function getRecipeFromUrl(match = {}, recipes) {
-  const { params = {} } = match;
-  const { id } = params;
-
-  const rec = recipes.find((rec) => parseInt(rec.id, 10) === parseInt(id, 10));
-  return rec ? rec : { name: "" };
-}

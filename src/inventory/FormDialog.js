@@ -5,18 +5,19 @@ import {
   DialogTitle,
   DialogContent,
   TextField,
-  DialogActions
+  DialogActions,
 } from "@material-ui/core";
 import FormChildAction from "../common/FormChildAction";
 import { requiredParameter } from "common/Util";
 
 function FormDialog({
   onDisplay = requiredParameter("onDisplay"),
-  title,
+  title = requiredParameter("title"),
   form = requiredParameter("form"),
+  isToUpdate,
   onClose,
   onChangeName,
-  onActionMethod
+  onActionMethod,
 }) {
   return (
     <div>
@@ -37,6 +38,7 @@ function FormDialog({
           <FormChildAction
             onActionMethod={onActionMethod}
             onCloseDialog={onClose}
+            isToUpdate={isToUpdate}
           ></FormChildAction>
         </DialogActions>
       </Dialog>
@@ -44,8 +46,13 @@ function FormDialog({
   );
 }
 FormDialog.propTypes = {
+  onChangeName: PropTypes.func,
+  isToUpdate: PropTypes.bool,
   onActionMethod: PropTypes.func,
-  title: PropTypes.string
+  onClose: PropTypes.func,
+  title: PropTypes.string.isRequired,
+  onDisplay: PropTypes.bool.isRequired,
+  form: PropTypes.object,
 };
 
 export default FormDialog;

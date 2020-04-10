@@ -12,7 +12,6 @@ export default {
 };
 
 export function loadProductsToCategory(categories, allProducts) {
-  console.log(categories, allProducts);
   if (!allProducts.byId) {
     return [];
   }

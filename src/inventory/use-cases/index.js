@@ -6,9 +6,9 @@ const {
   saveCategoryAsync,
   updateCategoryAsync,
   getCategoryAsync,
-  updateProductInCategory
+  updateProductInCategory,
 } = CategoryGateway({
-  httpAPI: { get, post, put }
+  httpAPI: { get, post, put },
 });
 
 export default {
@@ -16,5 +16,5 @@ export default {
   saveCategoryAsync,
   updateCategoryAsync,
   getCategoryAsync,
-  updateProductInCategory
+  updateProductInCategory,
 };

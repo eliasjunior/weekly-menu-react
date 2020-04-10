@@ -47,15 +47,9 @@ export default function RecipeReducer(state = initialState, action) {
         products: payload.products ? payload.products : [],
       };
     case RECIPE_UPDATE_NAME:
-      console.log("payload.name", payload.name);
       return {
         ...state,
         name: payload.name,
-      };
-    case RECIPE_UPDATE_ID:
-      return {
-        ...state,
-        id: payload.id,
       };
     default:
       return state;

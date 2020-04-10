@@ -1,47 +1,46 @@
-import { AppConstant } from "common/AppConstant";
+import { parentComponent } from "common/AppConstant";
 
 const CategoryDisplayHelper = {
-  recipeSelectionBtn(parentComponent) {
+  recipeSelectionBtn(parent) {
+    return {
+      display: parent === parentComponent.SHOPPING_LIST_PAGE,
+    };
+  },
+  categoryBtns(parentLocation) {
     return {
       display:
-        parentComponent === AppConstant.PARENT_COMPONENT.SHOPPING_LIST_PAGE
+        parentLocation === parentComponent.INVENTORY_PAGE ||
+        parentLocation === parentComponent.RECIPE_PAGE,
     };
   },
-  categoryBtns(parentComponent) {
+  categoryLineHide(parent) {
+    return {
+      display: parent === parentComponent.RECIPE_LIST_PAGE,
+    };
+  },
+  productCheckboxBtn(parent) {
     return {
       display:
-        parentComponent === AppConstant.PARENT_COMPONENT.INVENTORY_PAGE ||
-        parentComponent === AppConstant.PARENT_COMPONENT.RECIPE_PAGE
+        parent === parentComponent.SHOPPING_LIST_PAGE ||
+        parent === parentComponent.RECIPE_PAGE,
     };
   },
-  categoryLineHide(parentComponent) {
+  crudActions(parent) {
     return {
-      display: parentComponent === AppConstant.PARENT_COMPONENT.RECIPE_LIST_PAGE
+      display: parent === parentComponent.INVENTORY_PAGE,
     };
   },
-  productCheckboxBtn(parentComponent) {
-    return {
-      display:
-        parentComponent === AppConstant.PARENT_COMPONENT.SHOPPING_LIST_PAGE ||
-        parentComponent === AppConstant.PARENT_COMPONENT.RECIPE_PAGE
-    };
-  },
-  crudActions(parentComponent) {
-    return {
-      display: parentComponent === AppConstant.PARENT_COMPONENT.INVENTORY_PAGE
-    };
-  },
-  selectAllBtn(parentComponent) {
+  selectAllBtn(parent) {
     return {
       display:
-        parentComponent === AppConstant.PARENT_COMPONENT.RECIPE_PAGE ||
-        parentComponent === AppConstant.PARENT_COMPONENT.SHOPPING_LIST_PAGE
+        parent === parentComponent.RECIPE_PAGE ||
+        parent === parentComponent.SHOPPING_LIST_PAGE,
     };
   },
-  filterInputVisibility(parentComponent) {
+  filterInputVisibility(parent) {
     return {
-      display: parentComponent !== AppConstant.PARENT_COMPONENT.RECIPE_LIST_PAGE
+      display: parent !== parentComponent.RECIPE_LIST_PAGE,
     };
-  }
+  },
 };
 export default CategoryDisplayHelper;

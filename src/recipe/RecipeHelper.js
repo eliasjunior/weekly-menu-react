@@ -3,7 +3,8 @@ export function loadProductsToRecipe(recipes, allProducts) {
     return [];
   }
   return recipes.reduce((prev, item) => {
-    item.products = item.recProds.map((prodId) => allProducts.byId[prodId]);
+    const { recProds = [] } = item;
+    item.products = recProds.map((prodId) => allProducts.byId[prodId]);
     prev.push(item);
     return prev;
   }, []);

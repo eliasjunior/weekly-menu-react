@@ -15,25 +15,25 @@ import { formSelectionAction } from "app-redux/actions/ProductFormAction";
 import { setDisplatList } from "app-redux/actions/ListFilterAction";
 import { loadProductsToRecipe } from "../RecipeHelper";
 
-function RecipeListPage(props) {
+function RecipeListPage({ classes, location, history }) {
   const recipes = useSelector((state) => state.recipes, shallowEqual);
   const products = useSelector((state) => state.products, shallowEqual);
   const recipesWithProducts = loadProductsToRecipe(recipes, products);
+
+  console.log("SHOULD UPDATE", recipes.length);
 
   const dispatch = useDispatch();
   //Initial sets to the children
   dispatch(formSelectionAction());
   dispatch(setDisplatList(recipesWithProducts));
 
-  const { classes } = props;
-
   const addButton = () => {
-    return props.location.search ? (
+    return location.search ? (
       <Fab
         color="secondary"
         className={classes.floatingBtn}
         aria-label="include Recipe"
-        onClick={() => props.history.goBack()}
+        onClick={() => history.goBack()}
       >
         <IncludeRecipe />
       </Fab>

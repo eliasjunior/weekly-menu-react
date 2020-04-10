@@ -6,17 +6,13 @@ import FormComponents from "./ComponentCatalog";
 
 export default function ProductForm({
   product = requiredParameter("product"),
-  category = requiredParameter("category"),
-  onSelectedProd
+  onSelectedProd,
 }) {
-  const {
-    componentFormNames = requiredParameter("componentFormNames")
-  } = useSelector(state => state);
+  const componentFormNames = useSelector((state) => state.componentFormNames);
 
   const formComponents = FormComponents({
     product,
-    category,
-    onSelectedProd
+    onSelectedProd,
   });
 
   const componentKeys = [...componentFormNames];
@@ -24,7 +20,7 @@ export default function ProductForm({
   const buildForm = () => {
     const result = [];
 
-    while (componentKeys.length) {
+    while (componentKeys.length > 0) {
       const currentKey = componentKeys.shift();
       const component = formComponents(currentKey); // search in the catalog
       if (component) {

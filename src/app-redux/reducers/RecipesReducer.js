@@ -12,11 +12,10 @@ export default function RecipesReducer(state = initialState, action) {
     case RECIPE_CREATE:
       const result = [...state];
       //TODO test error here like this const [name, id, products] = payload;
-      const { name, id, products } = payload;
+      const { name, id } = payload;
       const recipe = {
         name,
         id,
-        products,
       };
       result.push(recipe);
       return result;

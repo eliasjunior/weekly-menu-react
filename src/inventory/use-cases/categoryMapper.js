@@ -6,8 +6,8 @@ export function categoryListMapper(list) {
 
 export function categoryMapper({
   _id = requiredParameter("_id category"),
-  name,
-  catProds = requiredParameter("catProds"),
+  name = requiredParameter("name"),
+  catProds = [],
 }) {
   return {
     id: _id,
@@ -16,11 +16,17 @@ export function categoryMapper({
   };
 }
 
-export function categoryConverter({
-  id = requiredParameter("id category"),
-  name = requiredParameter("name category"),
-  catProds = requiredParameter("catProds"),
-}) {
+export function categoryConverter(category, isNew = false) {
+  const { name = requiredParameter("name category"), catProds, id } = category;
+
+  if (!isNew) {
+    if (!id) {
+      requiredParameter("id category");
+    }
+    if (!catProds) {
+      requiredParameter("catProds");
+    }
+  }
   return {
     _id: id,
     name,

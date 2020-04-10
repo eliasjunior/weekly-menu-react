@@ -7,7 +7,7 @@ import ProductForm from "./ProductForm";
 
 export default function ProductList({ category }) {
   const listProducts = () => {
-    const products = category.products;
+    const { products = [] } = category;
     if (!products.length) {
       return "";
     }
