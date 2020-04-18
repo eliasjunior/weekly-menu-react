@@ -1,24 +1,21 @@
-export const AppConstant = {
-  LOCATION: {
-    dashboard: { path: "/", label: "Dashboard", menu: false },
-    products: { path: "/products", label: "Products", menu: true },
-    newShoppingList: {
-      path: "/newshopping",
-      label: "New Shopping List",
-      menu: true,
-    },
-    editShoppingList: { path: "/editshopping", label: "", menu: false },
-    shoppingHistory: {
-      path: "/shoppinghistory",
-      label: "Shopping history",
-      menu: true,
-    },
-    recipeList: { path: "/recipe", label: "Recipe List", menu: true },
-    newRecipe: { path: "/recipeCreate/new", label: "New Recipe", menu: true },
-    category: { path: "/category", label: "", menu: false },
-    ProductFormPage: { path: "/product", label: "", menu: false },
-    shopping: { path: "/shopping", label: "Shopping List", menu: false },
+export const LOCATION = {
+  dashboard: { path: "/", label: "Dashboard", menu: false },
+  products: { path: "/products", label: "Products", menu: true },
+  newShoppingList: {
+    path: "/newshopping",
+    label: "New Shopping List",
+    menu: true,
   },
+  editShoppingList: { path: "/editshopping", label: "", menu: false },
+  shoppingHistory: {
+    path: "/shoppinghistory",
+    label: "Shopping history",
+    menu: true,
+  },
+  recipeList: { path: "/recipe", label: "Recipe List", menu: true },
+  newRecipe: { path: "/recipeCreate/new", label: "New Recipe", menu: true },
+  shopping: { path: "/shopping", label: "Shopping List", menu: false },
+  pickProducts: { path: "/pick-products", label: "Pick", menu: false },
 };
 
 export const parentComponent = {

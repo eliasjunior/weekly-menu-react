@@ -1,22 +1,20 @@
-export default {
-  compareListsSize: (listA, listB) => {
-    const reducerCount = (acc, item) => {
-      const totalSelected = item.products.filter((prod) => prod.checked).length;
-      return acc + totalSelected;
-    };
-    const totalP = listA.reduce(reducerCount, 0);
-    const totalC = listB.reduce(reducerCount, 0);
-
-    return listA.length !== listB.length || totalC !== totalP;
-  },
-};
-
-export function loadProductsToCategory(categories, allProducts) {
-  if (!allProducts.byId) {
+export function loadProductsToCategory(categories, products) {
+  if (!products.byId) {
     return [];
   }
   return categories.reduce((prev, item) => {
-    item.products = item.catProds.map((prodId) => allProducts.byId[prodId]);
+    item.products = item.catProds.map((prodId) => products.byId[prodId]);
+    prev.push(item);
+    return prev;
+  }, []);
+}
+
+export function loadCategoryWithProducts(categories, products) {
+  if (!products.byId) {
+    return [];
+  }
+  return categories.reduce((prev, item) => {
+    item.products = item.catProds.map((prodId) => products.byId[prodId]);
     prev.push(item);
     return prev;
   }, []);

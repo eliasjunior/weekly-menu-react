@@ -1,30 +1,34 @@
-import Button from "@material-ui/core/Button";
 import React from "react";
-import { AppConstant } from "../common/AppConstant";
+import { LOCATION } from "common/AppConstant";
 import { Link } from "react-router-dom";
 import CommmonStyles from "../styles/CommonStyles";
-import { withStyles } from "@material-ui/core";
+import { withStyles, Fab } from "@material-ui/core";
 import IncludeIcon from "@material-ui/icons/Receipt";
 import SaveIcon from "@material-ui/icons/Save";
+import Shop from "@material-ui/icons/ShoppingCart";
+import { useDispatch } from "react-redux";
 
-function ShoppingCreateActions(props) {
-  const { classes } = props;
+function ShoppingCreateActions({ classes }) {
+  const dispatch = useDispatch();
+  const { recipeList, pickProducts } = LOCATION;
   const combinedClasses = `${classes.floatingPadding} ${classes.floatingBtn} gridFloatingBtn`;
-
+  const { path: linkRecipe } = recipeList;
+  const { path: linkProds } = pickProducts;
   return (
     <div className={combinedClasses}>
-      <Button color="primary" variant="fab">
-        <Link to={`${AppConstant.LOCATION.recipeList.path}?include=true`}>
+      <Fab color="primary">
+        <Link to={linkRecipe}>
           <IncludeIcon />
         </Link>
-      </Button>
-      <Button
-        color="secondary"
-        variant="fab"
-        onClick={() => props.onSaveShoppingList()}
-      >
+      </Fab>
+      <Fab color="primary">
+        <Link to={linkProds}>
+          <Shop />
+        </Link>
+      </Fab>
+      <Fab color="secondary" onClick={() => console.log("not yet")}>
         <SaveIcon />
-      </Button>
+      </Fab>
     </div>
   );
 }

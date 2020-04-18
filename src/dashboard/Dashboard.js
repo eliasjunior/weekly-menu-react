@@ -1,19 +1,14 @@
 import React from "react";
 import { List, ListItem, Button } from "@material-ui/core";
-import { AppConstant } from "../common/AppConstant";
+import { LOCATION } from "common/AppConstant";
 import { Link } from "react-router-dom";
-import { AppWeekBar } from "../header/AppWeekBar";
+import AppWeekBar from "header/AppWeekBar";
 
 function Dashboard() {
-  return (
-    <div>
-      <AppWeekBar title="Dashboard"></AppWeekBar>
-      <List>{getItems()}</List>
-    </div>
-  );
+  return <List>{getItems()}</List>;
 }
 function getItems() {
-  return Object.entries(AppConstant.LOCATION)
+  return Object.entries(LOCATION)
     .filter(([key, location]) => location.menu)
     .map(([key, location]) => {
       return (

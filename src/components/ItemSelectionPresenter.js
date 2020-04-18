@@ -1,9 +1,10 @@
-import { recipeClickAction } from "app-redux/actions/RecipeAction";
-export function getChecked(products, prodId) {
-  return (
-    products.filter(recProd => recProd.id && recProd.id === prodId).length > 0
-  );
+import { addSelectedProduct } from "app-redux/actions/ProductSelectionAction";
+
+export function getChecked(ids, currentId) {
+  return ids.filter((id) => id === currentId).length > 0;
 }
-export function handleOnChange({ dispatch, product }) {
-  dispatch(recipeClickAction({ product }));
+export function handleOnChange({ dispatch, prodId }) {
+  //dispatch(recipeClickAction({ product }));
+  // is sending undefined
+  dispatch(addSelectedProduct(prodId));
 }

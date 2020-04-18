@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { styles } from "./styles";
 import { useDispatch } from "react-redux";
 import ItemSelection from "components/ItemSelection";
+import Quantity from "components/Quantity";
+import QuantityBtnInfo from "components/QuantityBtnInfo";
 import CreateIcon from "@material-ui/icons/Create";
 import SaveIcon from "@material-ui/icons/Save";
 import Restore from "@material-ui/icons/Restore";
@@ -21,18 +23,20 @@ import {
   BTN_EDIT_MODE,
   BTN_VIEW_MODE,
   BTN_SELECTION,
+  BTN_PICK_PROD,
+  BTN_QDT_INFO,
 } from "app-redux/actions/ProductFormAction";
-
 import { updateProductAsync } from "app-redux/actions/ProductAction";
 
 export default function ComponentCatalog({ product }) {
+  const dispatch = useDispatch();
+
   const [name, setName] = useState(product.name);
 
   const handleChangeName = (e) => {
     setName(e.target.value);
   };
 
-  const dispatch = useDispatch();
   const restoreButton = () => {
     return (
       <IconButton
@@ -106,6 +110,15 @@ export default function ComponentCatalog({ product }) {
             {restoreButton()}
             {deleteButton()}
           </ListItemSecondaryAction>
+        );
+      case BTN_PICK_PROD:
+        return <Quantity key={"Quantity"} prodId={product.id}></Quantity>;
+      case BTN_QDT_INFO:
+        return (
+          <QuantityBtnInfo
+            key={"QuantityBtnInfo"}
+            {...product}
+          ></QuantityBtnInfo>
         );
     }
   };

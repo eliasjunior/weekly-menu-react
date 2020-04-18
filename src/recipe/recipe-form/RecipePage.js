@@ -1,5 +1,5 @@
 import React from "react";
-import { AppWeekBar } from "header/AppWeekBar";
+import AppWeekBar from "header/AppWeekBar";
 import CategoryList from "inventory/category/components";
 import RecipeBtns from "./RecipeBtns";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
@@ -10,7 +10,8 @@ import { recipeUpdateCurrent } from "app-redux/actions/RecipeAction";
 import { loadProductsToRecipe } from "../RecipeHelper";
 import { loadProductsToCategory } from "inventory/helpers/InventoryHelper";
 import RecipeForm from "./RecipeForm";
-import { setPageTitle } from "app-redux/actions/PageAction";
+import { setPageTitle, setPageLocation } from "app-redux/actions/PageAction";
+import { parentComponent } from "common/AppConstant";
 
 function RecipePage({ match }) {
   const dispatch = useDispatch();
@@ -24,16 +25,14 @@ function RecipePage({ match }) {
   const recipe = getRecipeFromUrl(match, recipesWithProducts);
 
   dispatch(recipeUpdateCurrent(recipe));
-
-  dispatch(setPageTitle(recipe.id ? "Update Recipe" : "New Recipe"));
-
+  dispatch(setPageTitle(recipe.id ? "Edit Recipe" : "New Recipe"));
+  dispatch(setPageLocation(parentComponent.RECIPE_PAGE));
   //Initial sets to the children
   dispatch(formSelectionAction());
   dispatch(setDisplatList(categories));
 
   return (
     <CommonErrorBoundary>
-      <AppWeekBar></AppWeekBar>
       <RecipeForm prevName={recipe.name}></RecipeForm>
       <RecipeBtns></RecipeBtns>
       <CategoryList></CategoryList>

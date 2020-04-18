@@ -10,8 +10,8 @@ export default function productsReducer(state = initialState, action) {
   const { payload, type } = action;
   switch (type) {
     case FETCH_PRODUCTS:
-      return normalize(payload.products);
-
+      // return normalize(payload.products);
+      return { ...payload.products };
     case CREATE_PRODUCT:
       const newProduct = payload.product;
       state.byId[newProduct.id] = newProduct;

@@ -4,9 +4,12 @@ import List from "@material-ui/core/List";
 import DisplayService from "inventory/category/services/CategoryDisplayService";
 import SelectAllNone from "components/SelectAllNone";
 import ProductForm from "./ProductForm";
+import { useSelector } from "react-redux";
 
 export default function ProductList({ category }) {
+  const location = useSelector((state) => state.pageData.location);
   const listProducts = () => {
+    //TODO review here, products are not in cat anymore, also still having catId on prod
     const { products = [] } = category;
     if (!products.length) {
       return "";
@@ -21,7 +24,7 @@ export default function ProductList({ category }) {
   };
   const displaySelectedAll = () => {
     //TODO move to redux parentComponent
-    return DisplayService.selectAllBtn("RecipePage").display ? (
+    return DisplayService.selectAllBtn(location).display ? (
       <SelectAllNone products={category.products}></SelectAllNone>
     ) : (
       ""

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import MenuItem from "@material-ui/core/MenuItem";
 import IconButton from "@material-ui/core/IconButton";
-import { AppConstant } from "../common/AppConstant";
+import { LOCATION } from "common/AppConstant";
 import { Menu } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import { Link } from "react-router-dom";
@@ -11,7 +11,7 @@ import { recipeUpdateCurrent } from "app-redux/actions/RecipeAction";
 function MenuIconComponent() {
   const [anchorEl, setAnchorEl] = useState(null);
   const dispatch = useDispatch();
-  const displayMenuOption = event => {
+  const displayMenuOption = (event) => {
     setAnchorEl(event.currentTarget);
   };
   const closeMenu = () => {
@@ -19,13 +19,13 @@ function MenuIconComponent() {
     setAnchorEl(null);
   };
 
-  const handleMenuClick = menuItem => {
-    if (menuItem === AppConstant.LOCATION.newRecipe.label) {
+  const handleMenuClick = (menuItem) => {
+    if (menuItem === LOCATION.newRecipe.label) {
       dispatch(recipeUpdateCurrent());
     }
   };
   const getItemsForSideMenu = () => {
-    return Object.entries(AppConstant.LOCATION)
+    return Object.entries(LOCATION)
       .filter(([_, location]) => location.menu)
       .map(([key, location]) => {
         return (
@@ -44,11 +44,12 @@ function MenuIconComponent() {
   return (
     <div>
       <IconButton
-        aria-owns={anchorEl ? "menu-appbar" : null}
         onClick={displayMenuOption}
+        edge="start"
+        color="inherit"
+        aria-owns={anchorEl ? "menu-appbar" : null}
         aria-label="Menu"
         aria-haspopup="true"
-        color="inherit"
       >
         <MenuIcon />
       </IconButton>
@@ -58,11 +59,11 @@ function MenuIconComponent() {
         open={Boolean(anchorEl)}
         anchorOrigin={{
           vertical: "top",
-          horizontal: "left"
+          horizontal: "left",
         }}
         transformOrigin={{
           vertical: "top",
-          horizontal: "left"
+          horizontal: "left",
         }}
         onClose={() => console.log("was doing nothing before")}
       >

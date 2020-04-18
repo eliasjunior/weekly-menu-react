@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { AppConstant } from "common/AppConstant";
+import { LOCATION } from "common/AppConstant";
 import {
   Button,
   ListItem,
@@ -43,7 +43,7 @@ export const RecipeHeaderItem = ({ recipe, onSelectRecipe }) => {
       <ListItemSecondaryAction>
         <Button variant="outlined" color="primary">
           <Link
-            to={`${AppConstant.LOCATION.newRecipe.path}/${recipe.id}`}
+            to={`${LOCATION.newRecipe.path}/${recipe.id}`}
             onClick={() => {
               dispatch(
                 recipeUpdateCurrent({

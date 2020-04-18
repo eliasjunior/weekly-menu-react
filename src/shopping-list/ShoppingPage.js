@@ -1,6 +1,6 @@
 import React from "react";
 import { List, ListItem, ListItemText, Collapse } from "@material-ui/core";
-import { AppWeekBar } from "../header/AppWeekBar";
+import AppWeekBar from "header/AppWeekBar";
 import { ShoppingListUtilService } from "./ShoppingListUtilService";
 import { grey } from "@material-ui/core/colors";
 import ProductText from "./ProductText";
@@ -11,14 +11,16 @@ class ShoppingPage extends React.Component {
     super(props);
     this.state = {
       shoppingList: [],
-      completed: false
+      completed: false,
     };
     this.buildShoppingList = this.buildShoppingList.bind(this);
   }
   componentDidMount() {
     ShoppingListService.getOne(this.props.match.params.id)
-      .then(response => this.setState({ shoppingList: response }))
-      .catch(reason => this.props.onHandleMessage({ message: reason.message }));
+      .then((response) => this.setState({ shoppingList: response }))
+      .catch((reason) =>
+        this.props.onHandleMessage({ message: reason.message })
+      );
   }
   buildShoppingList() {
     if (this.state.shoppingList.length === 0) {

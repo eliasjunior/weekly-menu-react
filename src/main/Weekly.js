@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import AppWeekBar from "header/AppWeekBar";
 import { createMuiTheme } from "@material-ui/core/styles";
 import blue from "@material-ui/core/colors/blue";
 import teal from "@material-ui/core/colors/orange";
@@ -25,6 +26,7 @@ function Weekly() {
     <MuiThemeProvider theme={theme}>
       <AlertMessage></AlertMessage>
       <Loading></Loading>
+      <AppWeekBar></AppWeekBar>
       <WeeklyRouters></WeeklyRouters>
     </MuiThemeProvider>
   );

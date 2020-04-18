@@ -4,51 +4,57 @@ import RecipePage from "recipe/recipe-form/RecipePage";
 import RecipeListPage from "recipe/recipe-list/RecipeListPage";
 import ShoppingListPage from "shopping-list/ShoppingListPage";
 import InventoryPage from "inventory/InventoryPage";
-import { AppConstant } from "common/AppConstant";
+import { LOCATION } from "common/AppConstant";
 import ShoppingListHistoryPage from "shopping-list/ShoppingListHistoryPage";
 import ShoppingPage from "shopping-list/ShoppingPage";
 import Dashboard from "dashboard/Dashboard";
+import PickUpProducts from "shopping-list/PickUpProducts";
 
 export default function () {
   return (
     <React.Fragment>
       <Route
         exact
-        path={AppConstant.LOCATION.products.path}
+        path={LOCATION.products.path}
         render={(props) => <InventoryPage {...props}></InventoryPage>}
       ></Route>
       <Route
         exact
-        path={AppConstant.LOCATION.dashboard.path}
+        path={LOCATION.pickProducts.path}
+        render={(props) => <PickUpProducts {...props}></PickUpProducts>}
+      ></Route>
+      <Route
+        exact
+        path={LOCATION.dashboard.path}
         render={(props) => <Dashboard {...props}></Dashboard>}
       ></Route>
       <Route
-        path={AppConstant.LOCATION.shoppingHistory.path}
+        path={LOCATION.shoppingHistory.path}
         render={(props) => <ShoppingListHistoryPage {...props} />}
       ></Route>
       <Route
-        path={`${AppConstant.LOCATION.shopping.path}/:id`}
+        path={`${LOCATION.shopping.path}/:id`}
         render={(props) => <ShoppingPage {...props} />}
       ></Route>
       <Route
-        path={AppConstant.LOCATION.recipeList.path}
+        path={LOCATION.recipeList.path}
         render={(props) => <RecipeListPage {...props} />}
       ></Route>
       <Route
-        path={`${AppConstant.LOCATION.newShoppingList.path}`}
+        path={`${LOCATION.newShoppingList.path}`}
         render={(props) => <ShoppingListPage {...props} />}
       ></Route>
       <Route
-        path={`${AppConstant.LOCATION.editShoppingList.path}/:id`}
+        path={`${LOCATION.editShoppingList.path}/:id`}
         render={(props) => <ShoppingListPage {...props} />}
       ></Route>
       <Switch>
         <Route
-          path={`${AppConstant.LOCATION.newRecipe.path}/:id`}
+          path={`${LOCATION.newRecipe.path}/:id`}
           render={(props) => <RecipePage {...props}></RecipePage>}
         ></Route>
         <Route
-          path={AppConstant.LOCATION.newRecipe.path}
+          path={LOCATION.newRecipe.path}
           render={(props) => <RecipePage {...props}></RecipePage>}
         ></Route>
       </Switch>

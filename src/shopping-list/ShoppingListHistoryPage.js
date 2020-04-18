@@ -3,46 +3,46 @@ import {
   List,
   ListItem,
   Button,
-  ListItemSecondaryAction
+  ListItemSecondaryAction,
 } from "@material-ui/core";
 import ShoppingListService from "./ShoppingListService";
-import { AppWeekBar } from "../header/AppWeekBar";
-import { AppConstant } from "../common/AppConstant";
+import AppWeekBar from "header/AppWeekBar";
+import { LOCATION } from "common/AppConstant";
 import { Link } from "react-router-dom";
 
 class ShoppingListHistoryPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      list: []
+      list: [],
     };
   }
   componentDidMount() {
     ShoppingListService.get()
-      .then(response => {
+      .then((response) => {
         this.setState({ list: response });
       })
-      .catch(reason => this.props.onHandleMessage({ message: reason.message }));
+      .catch((reason) =>
+        this.props.onHandleMessage({ message: reason.message })
+      );
   }
   render() {
     return (
       <div>
         <AppWeekBar title="Shopping history"></AppWeekBar>
         <List>
-          {this.state.list.map(item => {
+          {this.state.list.map((item) => {
             return (
               <ListItem key={item._id}>
                 <Button color="primary" variant="outlined">
-                  <Link
-                    to={`${AppConstant.LOCATION.shopping.path}/${item._id}`}
-                  >
+                  <Link to={`${LOCATION.shopping.path}/${item._id}`}>
                     {item.name}
                   </Link>
                 </Button>
                 <ListItemSecondaryAction>
                   <Button color="secondary" variant="outlined">
                     <Link
-                      to={`${AppConstant.LOCATION.editShoppingList.path}/${item._id}`}
+                      to={`${LOCATION.editShoppingList.path}/${item._id}`}
                       onClick={() => this.props.editShoppingList(item)}
                     >
                       EDIT

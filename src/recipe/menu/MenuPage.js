@@ -1,5 +1,5 @@
 import React from "react";
-import { AppWeekBar } from "../../header/AppWeekBar";
+import AppWeekBar from "header/AppWeekBar";
 import ApiService from "../../service/ApiService";
 
 class MenuPage extends React.Component {
@@ -7,15 +7,15 @@ class MenuPage extends React.Component {
     super(props);
 
     this.state = {
-      recipeItemList: []
+      recipeItemList: [],
     };
   }
   componentDidMount() {
     ApiService.get("recipe/week")
-      .then(docs => {
+      .then((docs) => {
         this.setState({ recipeItemList: docs });
       })
-      .catch(reason => {
+      .catch((reason) => {
         console.error(reason);
       });
   }

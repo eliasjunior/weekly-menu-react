@@ -6,11 +6,10 @@ import IncludeRecipe from "@material-ui/icons/PlaylistAdd";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-
-import { AppWeekBar } from "header/AppWeekBar";
+import AppWeekBar from "header/AppWeekBar";
 import RecipeListComponent from "./RecipeListComponent";
 import CommonStyles from "styles/CommonStyles";
-import { AppConstant } from "common/AppConstant";
+import { LOCATION } from "common/AppConstant";
 import { formSelectionAction } from "app-redux/actions/ProductFormAction";
 import { setDisplatList } from "app-redux/actions/ListFilterAction";
 import { loadProductsToRecipe } from "../RecipeHelper";
@@ -19,8 +18,6 @@ function RecipeListPage({ classes, location, history }) {
   const recipes = useSelector((state) => state.recipes, shallowEqual);
   const products = useSelector((state) => state.products, shallowEqual);
   const recipesWithProducts = loadProductsToRecipe(recipes, products);
-
-  console.log("SHOULD UPDATE", recipes.length);
 
   const dispatch = useDispatch();
   //Initial sets to the children
@@ -43,7 +40,7 @@ function RecipeListPage({ classes, location, history }) {
         className={classes.floatingBtn}
         aria-label="new Recipe"
       >
-        <Link to={AppConstant.LOCATION.newRecipe.path}>
+        <Link to={LOCATION.newRecipe.path}>
           <AddIcon />
         </Link>
       </Fab>
@@ -52,7 +49,6 @@ function RecipeListPage({ classes, location, history }) {
   console.log("Recipe List");
   return (
     <div>
-      <AppWeekBar title="Recipe List"></AppWeekBar>
       {addButton()}
       <RecipeListComponent recipes={recipesWithProducts}></RecipeListComponent>
     </div>

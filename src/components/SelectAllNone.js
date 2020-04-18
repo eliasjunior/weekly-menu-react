@@ -3,11 +3,12 @@ import { FormGroup, FormControlLabel, Switch } from "@material-ui/core";
 import PropTypes from "prop-types";
 import { stylesSelect } from "./styles";
 import { useDispatch } from "react-redux";
-import { recipeClickAllAction } from "app-redux/actions/RecipeAction";
+import { addAllSelectedProduct } from "app-redux/actions/ProductSelectionAction";
 
 function SelectAllNone({ products }) {
   const [checkedAll, setCheckedAll] = useState(false);
   const dispatch = useDispatch();
+  const allProdsFromCat = products.map((prod) => prod.id);
 
   const label = checkedAll ? "Unselect All" : "Select All";
   return (
@@ -20,7 +21,10 @@ function SelectAllNone({ products }) {
               onChange={() => {
                 setCheckedAll(!checkedAll);
                 dispatch(
-                  recipeClickAllAction({ checkedAll: !checkedAll, products })
+                  addAllSelectedProduct({
+                    toggled: !checkedAll,
+                    prodIds: allProdsFromCat,
+                  })
                 );
               }}
               value={label}
@@ -35,6 +39,6 @@ function SelectAllNone({ products }) {
 
 SelectAllNone.propTypes = {
   checked: PropTypes.bool,
-  onSelectAllNone: PropTypes.func
+  onSelectAllNone: PropTypes.func,
 };
 export default SelectAllNone;

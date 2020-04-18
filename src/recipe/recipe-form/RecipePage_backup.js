@@ -1,5 +1,5 @@
 import React from "react";
-import { AppWeekBar } from "header/AppWeekBar";
+import AppWeekBar from "header/AppWeekBar";
 import CategoryList from "inventory/category/components";
 import { TextField } from "@material-ui/core";
 import RecipeBtns from "./RecipeBtns";
