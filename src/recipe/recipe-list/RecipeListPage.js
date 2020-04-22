@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import RecipeListComponent from "./RecipeListComponent";
 import CommonStyles from "styles/CommonStyles";
 import { LOCATION } from "common/AppConstant";
-import { formSelectionAction } from "app-redux/actions/ProductFormAction";
+import { formViewAction } from "app-redux/actions/ProductFormAction";
 import { setDisplatList } from "app-redux/actions/ListFilterAction";
 import { loadProductsToRecipe } from "../RecipeHelper";
 import { setPageTitle } from "app-redux/actions/PageAction";
@@ -24,6 +24,7 @@ function RecipeListPage({ classes }) {
 
   dispatch(setDisplatList(recipesWithProducts));
   dispatch(setPageTitle("Recipes"));
+  dispatch(formViewAction());
 
   const addButton = () => {
     return (

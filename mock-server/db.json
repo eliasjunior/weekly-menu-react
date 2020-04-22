@@ -1,28 +1,21 @@
 {
   "categories": [
     {
-      "_id": "5b9d1d7bed2ee113002f7038",
+      "_id": "1",
       "name": "Baking",
       "catProds": [
         "5b9d1d7bed2ee113002f7040",
-        "5b9d1d7bed2ee113002f703f"
+        "5b9d1d7bed2ee113002f703f",
+        "WLhwHwg"
       ]
     },
     {
-      "_id": "5b9d1d7bed2ee113002f7004",
+      "_id": "2",
       "name": "Beverage",
       "catProds": [
         "H4GiPKF",
         "JeEk5Po",
         "DkCvhzj"
-      ]
-    },
-    {
-      "_id": "tFT-Zmw",
-      "name": "Goods",
-      "catProds": [
-        "mLtkhgN",
-        "Belhp1R"
       ]
     }
   ],
@@ -30,68 +23,37 @@
     {
       "_id": "5b9d1d7bed2ee113002f7040",
       "name": "Flour",
-      "quantityType": "UNIT"
+      "quantityType": "UNIT",
+      "catId": "1"
     },
     {
       "_id": "5b9d1d7bed2ee113002f703f",
-      "name": "Prunes",
-      "quantityType": "WEIGHT"
-    },
-    {
-      "_id": "5b9d1d7bed2ee113002f703e",
-      "name": "Sugar"
-    },
-    {
-      "_id": "5b9d1d7bed2ee113002f703d",
-      "name": "Vanilla"
-    },
-    {
-      "_id": "5b9d1d7bed2ee113002f703c",
-      "name": "Sesame seeds"
-    },
-    {
-      "_id": "5b9d1d7bed2ee113002f703b",
-      "name": "Bicarbonate"
-    },
-    {
-      "_id": "5b9d1d7bed2ee113002f703a",
-      "name": "Raisins"
-    },
-    {
-      "name": "Chocolate chips",
-      "_id": "5b9d1d7bed2ee113002f7039"
-    },
-    {
-      "_id": "5b9e350fb3af7100133650fa",
-      "name": "Plain flour"
-    },
-    {
-      "_id": "5b9d1d7bed2ee113002f7009",
-      "name": "Beer"
-    },
-    {
-      "_id": "5b9d1d7bed2ee113002f7008",
-      "name": "Juice"
+      "name": "Raising Flour",
+      "quantityType": "WEIGHT",
+      "catId": "1"
     },
     {
       "_id": "H4GiPKF",
-      "name": "Pale Ale"
+      "name": "Pale Ale",
+      "quantityType": "UNIT",
+      "catId": "2"
     },
     {
       "_id": "JeEk5Po",
-      "name": "Guiness"
+      "name": "Guiness",
+      "quantityType": "UNIT",
+      "catId": "2"
     },
     {
       "_id": "DkCvhzj",
-      "name": "Coconut water"
+      "name": "Coconut water",
+      "quantityType": "UNIT",
+      "catId": "2"
     },
     {
-      "name": "Sweets",
-      "_id": "mLtkhgN"
-    },
-    {
-      "name": "Cakes",
-      "_id": "Belhp1R"
+      "name": "Sugar",
+      "catId": "1",
+      "_id": "WLhwHwg"
     }
   ],
   "recipes": [

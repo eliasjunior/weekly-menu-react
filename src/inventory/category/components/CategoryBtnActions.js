@@ -26,6 +26,7 @@ function CategoryActions({ category }) {
   const handleSaveProduct = async () => {
     const newProduct = {
       name: prodName,
+      catId: category.id,
     };
     await dispatch(createProductAsync(newProduct, category));
     setProdDisplay(false);

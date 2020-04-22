@@ -14,6 +14,7 @@ import {
   productMapSelector,
   categoriesSelector,
   loadProductsChosenRecipes,
+  addRecipeProductsToCategory,
 } from "./ShoppingHelper";
 import { formShoppingAction } from "app-redux/actions/ProductFormAction";
 
@@ -38,19 +39,25 @@ function ShoppingListPage() {
     productMap,
   });
 
-  const productsChosenRecipes = loadProductsChosenRecipes({
+  const productSetChosenRecipes = loadProductsChosenRecipes({
     productMap,
     categories,
     selectedRecipes,
   });
 
-  const categoriesDisplay = loadChosenCategories({
+  const catsWithProdsSelected = loadChosenCategories({
     categories: CloneDeep(categories),
-    productsChosenRecipes,
+    productSetChosenRecipes,
     chosenProducts,
   });
 
-  dispatch(setDisplatList(categoriesDisplay));
+  const mergedCategories = addRecipeProductsToCategory({
+    catsWithProdsSelected,
+    productSetChosenRecipes,
+    categoriesDB: CloneDeep(categories),
+  });
+
+  dispatch(setDisplatList(mergedCategories));
   dispatch(formShoppingAction());
   dispatch(setPageTitle("New Shopping list"));
 
