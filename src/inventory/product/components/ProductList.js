@@ -6,18 +6,16 @@ import SelectAllNone from "components/SelectAllNone";
 import ProductForm from "./ProductForm";
 import { useSelector } from "react-redux";
 
-export default function ProductList({ category }) {
+export default function ProductList({ products = [] }) {
   const location = useSelector((state) => state.pageData.location);
   const listProducts = () => {
-    //TODO review here, products are not in cat anymore, also still having catId on prod
-    const { products = [] } = category;
     if (!products.length) {
       return "";
     }
     return products.map((product, index) => {
       return (
         <div key={index}>
-          <ProductForm category={category} product={product}></ProductForm>
+          <ProductForm product={product}></ProductForm>
         </div>
       );
     });
@@ -25,7 +23,7 @@ export default function ProductList({ category }) {
   const displaySelectedAll = () => {
     //TODO move to redux parentComponent
     return DisplayService.selectAllBtn(location).display ? (
-      <SelectAllNone products={category.products}></SelectAllNone>
+      <SelectAllNone products={products}></SelectAllNone>
     ) : (
       ""
     );

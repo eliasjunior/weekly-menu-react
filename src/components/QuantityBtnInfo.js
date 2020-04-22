@@ -7,7 +7,7 @@ import Tooltip from "@material-ui/core/Tooltip";
 //TODO need to check type unit or grams
 export default function QuantityBtnInfo({ quantityType, quantity }) {
   // const dispatch = useDispatch();
-  // const quantity = useSelector((state) => state.quantityPick[prodId]);
+  // const quantity = useSelector((state) => state.quantityMap[prodId]);
   const reciCount = "2";
   const picked = "1";
   return (

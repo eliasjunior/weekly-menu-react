@@ -112,7 +112,14 @@ export default function ComponentCatalog({ product }) {
           </ListItemSecondaryAction>
         );
       case BTN_PICK_PROD:
-        return <Quantity key={"Quantity"} prodId={product.id}></Quantity>;
+        return (
+          <Quantity
+            key={"Quantity"}
+            prodId={product.id}
+            type={product.quantityType}
+            quantityDefault={product.quantityDefault}
+          ></Quantity>
+        );
       case BTN_QDT_INFO:
         return (
           <QuantityBtnInfo

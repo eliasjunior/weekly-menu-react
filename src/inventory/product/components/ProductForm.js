@@ -6,13 +6,11 @@ import FormComponents from "./ComponentCatalog";
 
 export default function ProductForm({
   product = requiredParameter("product"),
-  onSelectedProd,
 }) {
   const componentFormNames = useSelector((state) => state.componentFormNames);
 
   const formComponents = FormComponents({
     product,
-    onSelectedProd,
   });
 
   const componentKeys = [...componentFormNames];

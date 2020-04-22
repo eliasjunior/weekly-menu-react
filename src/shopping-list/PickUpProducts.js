@@ -2,10 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch, shallowEqual } from "react-redux";
 import CategoryList from "inventory/category/components/CategoryList";
 import CommonErrorBoundary from "error-handlers/CommonErrorBoundary";
-import {
-  formSelectionAction,
-  formPickAction,
-} from "app-redux/actions/ProductFormAction";
+import { formPickAction } from "app-redux/actions/ProductFormAction";
 import { loadProductsToCategory } from "inventory/helpers/InventoryHelper";
 import { setPageTitle } from "app-redux/actions/PageAction";
 import { setDisplatList } from "app-redux/actions/ListFilterAction";

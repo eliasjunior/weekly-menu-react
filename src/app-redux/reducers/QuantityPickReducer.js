@@ -1,4 +1,7 @@
-import { PLUS_ONE, MINUS_ONE } from "app-redux/actions/QuantityPickAction";
+import {
+  PLUS_ONE as INCREASE_VALUE,
+  MINUS_ONE as DECREASE_VALUE,
+} from "app-redux/actions/QuantityPickAction";
 import { requiredParameter } from "common/Util";
 
 const initialState = {};
@@ -6,28 +9,28 @@ const initialState = {};
 export default function QuantityPickReducer(state = initialState, action) {
   const { type, payload } = action;
   switch (type) {
-    case PLUS_ONE:
+    case INCREASE_VALUE:
       if (!payload.prodId) {
         requiredParameter("prodId plus");
       }
-      const value = state[payload.prodId];
-      if (value) {
-        state[payload.prodId] = value + 1;
+      const currentValue = state[payload.prodId];
+      if (currentValue) {
+        state[payload.prodId] = currentValue + payload.value;
       } else {
-        state[payload.prodId] = 2;
+        state[payload.prodId] = payload.value * 2;
       }
-      return state;
-    case MINUS_ONE:
+      return { ...state };
+    case DECREASE_VALUE:
       if (!payload.prodId) {
         requiredParameter("prodId minus");
       }
       const value2 = state[payload.prodId];
-      if (value2 && value2 > 1) {
-        state[payload.prodId] = value2 - 1;
+      if (value2 && value2 > payload.value) {
+        state[payload.prodId] = value2 - payload.value;
       } else {
-        state[payload.prodId] = 1;
+        state[payload.prodId] = payload.value;
       }
-      return state;
+      return { ...state };
     default:
       return state;
   }

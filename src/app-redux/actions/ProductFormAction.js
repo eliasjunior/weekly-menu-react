@@ -30,7 +30,7 @@ export function formSelectionAction() {
     type: PRODUCT_SELECTION,
   };
 }
-
+//REVIEW if need it and formSelectionAction
 export function formPickAction() {
   return {
     type: PROD_PICKING_VIEW,

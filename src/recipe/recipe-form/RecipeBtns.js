@@ -17,25 +17,47 @@ function RecipeBtns({ classes }) {
     (state) => state.currentRecipe,
     shallowEqual
   );
-  const { name, products, id } = currentRecipe;
+  const selectedProducts = useSelector((state) => state.selectedProducts);
+  const quantityMap = useSelector((state) => state.quantityMap);
+  const productMap = useSelector((state) => state.products);
+
+  console.log("FUCKING ", productMap);
+
+  const { name, id } = currentRecipe;
   const combinedClasses = `${classes.floatingBtn}`;
 
+  //TODO review here
+  const prodDetails = selectedProducts.reduce((prev, id) => {
+    const quantity = quantityMap[id]
+      ? quantityMap[id]
+      : productMap.byId[id].quantityDefault;
+
+    const prodDetails = {
+      id,
+      quantity,
+    };
+    console.log("prodDetails", prodDetails);
+    prev.push(prodDetails);
+    return prev;
+  }, []);
+
   const handleSave = async () => {
-    if (isRecipeFormValid({ name, dispatch, products })) {
+    if (isRecipeFormValid({ name, dispatch, selectedProducts })) {
       const recipe = {
         name,
-        products,
+        prodDetails,
       };
+      console.log(prodDetails);
       await dispatch(createRecipeAsync(recipe));
       console.log(" ---- DONE! ---- ");
     }
   };
   const handleUpdate = async () => {
-    if (isRecipeFormValid({ name, dispatch, products })) {
+    if (isRecipeFormValid({ name, dispatch, selectedProducts })) {
       const recipe = {
         name,
         id,
-        products,
+        prodDetails,
       };
       await dispatch(updateRecipeAsync(recipe));
       console.log(" ---- LORD VADER! DONE ---- ");

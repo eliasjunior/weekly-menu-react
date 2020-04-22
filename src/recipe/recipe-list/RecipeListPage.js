@@ -6,47 +6,38 @@ import IncludeRecipe from "@material-ui/icons/PlaylistAdd";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import AppWeekBar from "header/AppWeekBar";
 import RecipeListComponent from "./RecipeListComponent";
 import CommonStyles from "styles/CommonStyles";
 import { LOCATION } from "common/AppConstant";
 import { formSelectionAction } from "app-redux/actions/ProductFormAction";
 import { setDisplatList } from "app-redux/actions/ListFilterAction";
 import { loadProductsToRecipe } from "../RecipeHelper";
+import { setPageTitle } from "app-redux/actions/PageAction";
 
-function RecipeListPage({ classes, location, history }) {
+function RecipeListPage({ classes }) {
   const recipes = useSelector((state) => state.recipes, shallowEqual);
   const products = useSelector((state) => state.products, shallowEqual);
   const recipesWithProducts = loadProductsToRecipe(recipes, products);
 
   const dispatch = useDispatch();
   //Initial sets to the children
-  dispatch(formSelectionAction());
+
   dispatch(setDisplatList(recipesWithProducts));
+  dispatch(setPageTitle("Recipes"));
 
   const addButton = () => {
-    return location.search ? (
-      <Fab
-        color="secondary"
-        className={classes.floatingBtn}
-        aria-label="include Recipe"
-        onClick={() => history.goBack()}
-      >
-        <IncludeRecipe />
-      </Fab>
-    ) : (
+    return (
       <Fab
         color="secondary"
         className={classes.floatingBtn}
         aria-label="new Recipe"
       >
-        <Link to={LOCATION.newRecipe.path}>
+        <Link to={LOCATION.newShoppingList.path}>
           <AddIcon />
         </Link>
       </Fab>
     );
   };
-  console.log("Recipe List");
   return (
     <div>
       {addButton()}
@@ -54,8 +45,5 @@ function RecipeListPage({ classes, location, history }) {
     </div>
   );
 }
-RecipeListPage.propTypes = {
-  callbackIncludeRecipe: PropTypes.func,
-};
 
 export default withStyles(CommonStyles)(RecipeListPage);

@@ -3,7 +3,6 @@ import {
   CREATE_PRODUCT,
   UPDATE_PRODUCT,
 } from "app-redux/actions/ProductAction";
-import { normalize } from "common/Util";
 
 const initialState = {};
 export default function productsReducer(state = initialState, action) {

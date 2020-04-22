@@ -1,7 +1,7 @@
 import { loadingSomething } from "./LoadingAction";
 import { afterResquest, afterRequestError } from "./common";
 import Presenter from "recipe/presenter";
-import { recipeUpdateId, recipeUpdateCurrent } from "./RecipeAction";
+import { recipeUpdateCurrent } from "./RecipeAction";
 import { setPageTitle } from "./PageAction";
 export const RECIPE_CREATE = "RECIPE_CREATE";
 export const RECIPE_UPDATE = "RECIPE_UPDATE";
@@ -9,22 +9,24 @@ export const FETCH_RECIPES = "FETCH_RECIPES";
 const { postRecipe, getRecipes, putRecipe } = Presenter;
 
 //TODO test redux here { recipe = requiredParameter("recipe"), products }
-function createRecipe({ id, name }) {
+function createRecipe({ id, name, prodDetails }) {
   return {
     type: RECIPE_CREATE,
     payload: {
       name,
       id,
+      prodDetails,
     },
   };
 }
 
-function updateRecipe({ id, name }) {
+function updateRecipe({ id, name, prodDetails }) {
   return {
     type: RECIPE_UPDATE,
     payload: {
       name,
       id,
+      prodDetails,
     },
   };
 }
@@ -33,7 +35,6 @@ export function createRecipeAsync(recipe) {
   return async (dispatch) => {
     dispatch(loadingSomething(true));
     try {
-      recipe.recProds = recipe.products.map((prod) => prod.id);
       const data = await postRecipe(recipe);
       recipe.id = data.id;
       dispatch(createRecipe(data));
@@ -50,7 +51,6 @@ export function updateRecipeAsync(recipe) {
   return async (dispatch) => {
     dispatch(loadingSomething(true));
     try {
-      recipe.recProds = recipe.products.map((prod) => prod.id);
       await putRecipe(recipe);
       dispatch(updateRecipe(recipe));
       dispatch(recipeUpdateCurrent(recipe));
@@ -62,10 +62,10 @@ export function updateRecipeAsync(recipe) {
   };
 }
 
-export function fetchRecipes(data) {
+export function fetchRecipes(recipes) {
   return {
     type: FETCH_RECIPES,
-    recipes: data,
+    payload: { recipes },
   };
 }
 export function fetchRecipesAsync() {

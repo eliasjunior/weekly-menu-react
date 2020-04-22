@@ -4,27 +4,20 @@ import {
   RECIPE_UPDATE,
 } from "app-redux/actions/RecipesActions";
 
-const initialState = [];
+const initialState = {};
 
 export default function RecipesReducer(state = initialState, action) {
-  const { type, payload, recipes } = action;
+  const { type, payload } = action;
   switch (type) {
     case RECIPE_CREATE:
-      const result = [...state];
-      //TODO test error here like this const [name, id, products] = payload;
-      const { name, id } = payload;
-      const recipe = {
-        name,
-        id,
-      };
-      result.push(recipe);
-      return result;
+      state.byId[payload.id] = payload;
+      state.allIds.push(payload.id);
+      return state;
     case RECIPE_UPDATE:
-      const tempRecipes = state.filter((rec) => rec.id !== payload.id);
-      tempRecipes.push(payload);
-      return tempRecipes;
+      state.byId[payload.id] = payload;
+      return state;
     case FETCH_RECIPES:
-      return [...recipes];
+      return { ...payload.recipes };
     default:
       return state;
   }

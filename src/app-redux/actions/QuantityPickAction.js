@@ -1,20 +1,22 @@
 export const PLUS_ONE = "PLUS_ONE";
 export const MINUS_ONE = "MINUS_ONE";
 
-export function plusOne(prodId) {
+export function increaseQdy(prodId, value) {
   return {
     type: PLUS_ONE,
     payload: {
       prodId,
+      value,
     },
   };
 }
 
-export function minusOne(prodId) {
+export function decreaseQty(prodId, value) {
   return {
     type: MINUS_ONE,
     payload: {
       prodId,
+      value,
     },
   };
 }

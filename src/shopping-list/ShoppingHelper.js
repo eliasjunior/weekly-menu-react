@@ -16,35 +16,71 @@ export function loadChosenProducts({
       }
       return prod;
     });
-
-  console.log("chosenOnes", pickedProds);
   return pickedProds;
 }
 
-export function loadChosenCategories({ categoriesDB, chosenProducts }) {
-  const chosenCategories = categoriesDB.reduce((prev, category) => {
-    const doIHaveProdsInThisCat = chosenProducts.filter(({ id }) =>
-      category.catProds.includes(id)
+export function loadChosenCategories({
+  categories,
+  chosenProducts,
+  productsChosenRecipes,
+}) {
+  const chosenCategories = categories.reduce((prev, category) => {
+    const prodsCurrentCat = loadProdsFromCategory(
+      chosenProducts,
+      category.catProds
     );
-    if (doIHaveProdsInThisCat.length > 0) {
-      category.products = doIHaveProdsInThisCat;
+    if (prodsCurrentCat.length > 0) {
+      category.products = prodsCurrentCat;
       prev.push(category);
     }
     return prev;
   }, []);
 
-  console.log("final fantasy", chosenCategories);
+  // within recipes
+  chosenCategories.forEach((category) => {
+    // current category
+    // check if the recs products is already in there
+    productsChosenRecipes.forEach((prodRec) => {
+      // yes add the recipes reference
+
+      const prodsInThere = category.products.filter(
+        // on going
+        (prodCat) => prodCat.id === prodRec.id
+      );
+
+      // no add the product to category
+    });
+  });
+
+  console.log("final categories", chosenCategories);
   return chosenCategories;
 }
 
-// experiment ---
+export function loadProductsChosenRecipes({ selectedRecipes, productMap }) {
+  let products = new Set();
+  selectedRecipes.forEach(({ prodDetails, name, id }) => {
+    prodDetails.forEach((details) => {
+      const prodLoaded = productMap.byId[details.id];
+      if (!prodLoaded.recipes) {
+        prodLoaded.recipes = new Set();
+      }
+      prodLoaded.recipes.add({ name, id });
+      products.add(prodLoaded);
+    });
+  });
+  return products;
+}
+
+export function mergeCategories() {}
+
+// experiment --- move to app-redux if is good
 export const pickedProdsSelector = createSelector(
   (state) => state.selectedProducts,
   (ids) => ids
 );
 
 export const quantitiesSelector = createSelector(
-  (state) => state.quantityPick,
+  (state) => state.quantityMap,
   (qtd) => qtd
 );
 
@@ -57,3 +93,8 @@ export const categoriesSelector = createSelector(
   (state) => state.categories,
   (categories) => categories
 );
+
+// private
+function loadProdsFromCategory(products, catIdProds) {
+  return products.filter(({ id }) => catIdProds.includes(id));
+}

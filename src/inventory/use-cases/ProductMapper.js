@@ -1,9 +1,5 @@
 import { requiredParameter } from "common/Util";
 
-// export function productListMapper(list) {
-//   return list.map((prod) => productMapper(prod));
-// }
-//TODO now I need to add the keys in 2 places, normalized as well, review this
 export function productMapper({
   _id = requiredParameter("_id"),
   name,
@@ -13,6 +9,7 @@ export function productMapper({
     id: _id,
     name,
     quantityType,
+    quantityDefault: quantityType === "UNIT" ? 1 : 100,
   };
 }
 
@@ -34,6 +31,7 @@ export function productListMapper(list) {
       id,
       name,
       quantityType,
+      quantityDefault: quantityType === "UNIT" ? 1 : 100,
     };
     prev.allIds.push(id);
     return prev;

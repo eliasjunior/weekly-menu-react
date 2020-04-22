@@ -13,27 +13,22 @@ import IconRecipe from "@material-ui/icons/Receipt";
 import PropTypes from "prop-types";
 import { purple } from "@material-ui/core/colors";
 import { recipeUpdateCurrent } from "app-redux/actions/RecipeAction";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { recipeSelectionAction } from "app-redux/actions/RecipeSelectionAction";
 
-export const RecipeHeaderItem = ({ recipe, onSelectRecipe }) => {
+export const RecipeHeaderItem = ({ recipe }) => {
   const dispatch = useDispatch();
 
-  const onCheckAction = (e) => {
-    recipe.checked = e.target.checked;
-    const itemProps = {
-      checked: recipe.checked,
-      recipe,
-    };
-    onSelectRecipe(itemProps);
-  };
+  const RecipeSelection = () => {
+    const { id: recId } = recipe;
+    const recIdsSelected = useSelector((state) => state.selectedRecIds);
 
-  //TODO do like in category, add to a service
-  const isCheckboxDisplay = () => {
+    const checked = recIdsSelected.filter((id) => id === recId).length > 0;
     return (
       <Checkbox
-        checked={recipe.checked}
-        onClick={onCheckAction}
-        value={recipe.id ? recipe.id.toString() : ""}
+        onChange={() => dispatch(recipeSelectionAction(recId))}
+        checked={checked}
+        value={recipe.name}
       ></Checkbox>
     );
   };
@@ -63,7 +58,7 @@ export const RecipeHeaderItem = ({ recipe, onSelectRecipe }) => {
 
   return (
     <ListItem style={{ backgroundColor: purple[300] }}>
-      {isCheckboxDisplay()}
+      <RecipeSelection></RecipeSelection>
       <ListItemIcon>
         <IconRecipe />
       </ListItemIcon>

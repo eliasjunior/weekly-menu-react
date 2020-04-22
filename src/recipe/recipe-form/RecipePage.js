@@ -1,5 +1,4 @@
 import React from "react";
-import AppWeekBar from "header/AppWeekBar";
 import CategoryList from "inventory/category/components";
 import RecipeBtns from "./RecipeBtns";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";

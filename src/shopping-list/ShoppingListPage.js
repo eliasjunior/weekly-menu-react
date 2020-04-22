@@ -2,7 +2,7 @@ import React from "react";
 import CloneDeep from "lodash.clonedeep";
 import ShoppingCreateActions from "./ShoppingCreateActions";
 import CommonErrorBoundary from "../error-handlers/CommonErrorBoundary";
-import { useSelector, useDispatch, shallowEqual } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { setPageTitle } from "app-redux/actions/PageAction";
 import { setDisplatList } from "app-redux/actions/ListFilterAction";
 import CategoryList from "inventory/category/components";
@@ -13,6 +13,7 @@ import {
   quantitiesSelector,
   productMapSelector,
   categoriesSelector,
+  loadProductsChosenRecipes,
 } from "./ShoppingHelper";
 import { formShoppingAction } from "app-redux/actions/ProductFormAction";
 
@@ -20,9 +21,15 @@ function ShoppingListPage() {
   const dispatch = useDispatch();
 
   const selectedProducts = useSelector(pickedProdsSelector);
+  const selectedRecIds = useSelector((state) => state.selectedRecIds);
+
   const quantities = useSelector(quantitiesSelector);
   const productMap = useSelector(productMapSelector);
-  const categoriesDB = useSelector(categoriesSelector);
+  const categories = useSelector(categoriesSelector);
+
+  //TODO review this
+  const recipes = useSelector((state) => state.recipes);
+  const selectedRecipes = selectedRecIds.map((id) => recipes.byId[id]);
 
   //filter products based on the select
   const chosenProducts = loadChosenProducts({
@@ -30,15 +37,21 @@ function ShoppingListPage() {
     quantities,
     productMap,
   });
-  const categories = loadChosenCategories({
-    categoriesDB: CloneDeep(categoriesDB),
+
+  const productsChosenRecipes = loadProductsChosenRecipes({
+    productMap,
+    categories,
+    selectedRecipes,
+  });
+
+  const categoriesDisplay = loadChosenCategories({
+    categories: CloneDeep(categories),
+    productsChosenRecipes,
     chosenProducts,
   });
 
-  dispatch(setDisplatList(categories));
-
+  dispatch(setDisplatList(categoriesDisplay));
   dispatch(formShoppingAction());
-
   dispatch(setPageTitle("New Shopping list"));
 
   return (

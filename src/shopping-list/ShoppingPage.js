@@ -63,12 +63,7 @@ class ShoppingPage extends React.Component {
     });
   }
   render() {
-    return (
-      <div>
-        <AppWeekBar title="Shopping list"></AppWeekBar>
-        <List>{this.buildShoppingList()}</List>
-      </div>
-    );
+    return <List>{this.buildShoppingList()}</List>;
   }
 }
 
