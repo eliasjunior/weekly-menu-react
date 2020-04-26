@@ -6,60 +6,39 @@ import { useSelector, useDispatch } from "react-redux";
 import { setPageTitle } from "app-redux/actions/PageAction";
 import { setDisplatList } from "app-redux/actions/ListFilterAction";
 import CategoryList from "inventory/category/components";
+import { buildShoppingListDisplay } from "./ShoppingHelper";
 import {
-  loadChosenProducts,
-  loadChosenCategories,
-  loadProductsChosenRecipes,
-  addRecipeProductsToCategory,
-} from "./ShoppingHelper";
-import {
-  pickedProdsSelector,
   quantitiesSelector,
   productMapSelector,
   categoriesSelector,
 } from "app-redux/selectors/ShoppingSelector";
 import { formShoppingAction } from "app-redux/actions/ProductFormAction";
+import { normalizeCategory } from "inventory/helpers/InventoryHelper";
 
 function ShoppingListPage() {
   const dispatch = useDispatch();
 
+  //TODO delete both ?
   //const selectedProducts = useSelector(pickedProdsSelector);
   // const selectedRecIds = useSelector((state) => state.selectedRecIds);
 
   const quantities = useSelector(quantitiesSelector);
   const productMap = CloneDeep(useSelector(productMapSelector));
   const categories = CloneDeep(useSelector(categoriesSelector));
-
-  //TODO review this
   const recipeMap = useSelector((state) => state.recipes);
-  //const selectedRecipes = selectedRecIds.map((id) => recipes.byId[id]);
+  const shoppingListMap = useSelector((state) => state.shoppingList);
 
-  //filter products based on the select
-  // const chosenProducts = loadChosenProducts({
-  //   selectedProducts,
-  //   quantities,
-  //   productMap,
-  // });
+  const listDisplay = buildShoppingListDisplay({
+    quantities,
+    productMap: CloneDeep(productMap),
+    categoryMap: CloneDeep(normalizeCategory(categories)),
+    recipeMap,
+    shoppingListMap,
+  });
 
-  // const productSetChosenRecipes = loadProductsChosenRecipes({
-  //   productMap,
-  //   categories,
-  //   selectedRecipes,
-  // });
+  console.log(">", listDisplay);
 
-  // const catsWithProdsSelected = loadChosenCategories({
-  //   categories,
-  //   productSetChosenRecipes,
-  //   chosenProducts,
-  // });
-
-  // const mergedCategories = addRecipeProductsToCategory({
-  //   catsWithProdsSelected,
-  //   productSetChosenRecipes,
-  //   categoriesDB: categories,
-  // });
-
-  // dispatch(setDisplatList(mergedCategories));
+  dispatch(setDisplatList(listDisplay));
   dispatch(formShoppingAction());
   dispatch(setPageTitle("New Shopping list"));
 

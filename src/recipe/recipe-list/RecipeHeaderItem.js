@@ -29,13 +29,7 @@ export const RecipeHeaderItem = ({ recipe }) => {
 
     const checked = recipeSelected !== undefined;
 
-    // const checked = recIdsSelected.filter((id) => id === recId).length > 0;
     return (
-      // prods: [
-      //   { id: "p_01", catId: "c_02" },
-      //   { id: "p_03", catId: "c_04" },
-      // ],
-      // recId: "r_01",
       <Checkbox
         onChange={() =>
           dispatch(

@@ -8,8 +8,6 @@ export default function ShoppingItemSelection({ product }) {
   const selected = useSelector((state) => state.shoppingList.products.selected);
   const checked = selected.includes(product.id);
 
-  console.log("checked", checked, selected);
-
   const handleOnChange = () => {
     dispatch(
       addSimpleProduct({
