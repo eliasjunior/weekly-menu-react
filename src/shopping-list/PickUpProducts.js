@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector, useDispatch, shallowEqual } from "react-redux";
 import CategoryList from "inventory/category/components/CategoryList";
 import CommonErrorBoundary from "error-handlers/CommonErrorBoundary";
 import { formPickAction } from "app-redux/actions/ProductFormAction";
 import { loadProductsToCategory } from "inventory/helpers/InventoryHelper";
-import { setPageTitle } from "app-redux/actions/PageAction";
+import { setPageTitle, setPageLocation } from "app-redux/actions/PageAction";
 import { setDisplatList } from "app-redux/actions/ListFilterAction";
 import SearchName from "components/SearchName";
 import Done from "@material-ui/icons/Done";
@@ -16,7 +16,7 @@ import { Link } from "react-router-dom";
 function PickUpProducts({ classes }) {
   const dispatch = useDispatch();
   const combinedClasses = `${classes.floatingBtn}`;
-  const { newShoppingList } = LOCATION;
+  const { newShoppingList, pickProducts } = LOCATION;
 
   const tempCategories = useSelector((state) => state.categories, shallowEqual);
   const products = useSelector((state) => state.products, shallowEqual);
@@ -25,8 +25,8 @@ function PickUpProducts({ classes }) {
   dispatch(setDisplatList(catsWithProducts));
 
   dispatch(setPageTitle("Pick products"));
+  dispatch(setPageLocation(pickProducts.label));
   dispatch(formPickAction());
-  // TODO here Im going to set product view with product quantity, also recipe page
 
   return (
     <CommonErrorBoundary>

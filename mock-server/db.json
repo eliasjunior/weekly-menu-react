@@ -12,11 +12,7 @@
     {
       "_id": "2",
       "name": "Beverage",
-      "catProds": [
-        "H4GiPKF",
-        "JeEk5Po",
-        "DkCvhzj"
-      ]
+      "catProds": ["H4GiPKF", "JeEk5Po", "DkCvhzj"]
     }
   ],
   "products": [
@@ -59,7 +55,7 @@
   "recipes": [
     {
       "name": "Coola",
-      "prodDetails": [
+      "prodsDetail": [
         {
           "id": "5b9d1d7bed2ee113002f7040",
           "quantity": 2
@@ -73,7 +69,7 @@
     },
     {
       "name": "Cake Selva",
-      "prodDetails": [
+      "prodsDetail": [
         {
           "id": "5b9d1d7bed2ee113002f7040",
           "quantity": 1

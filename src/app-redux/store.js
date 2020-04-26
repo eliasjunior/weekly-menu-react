@@ -11,9 +11,10 @@ import currentRecipe from "app-redux/reducers/RecipeReducer";
 import recipes from "app-redux/reducers/RecipesReducer";
 import products from "app-redux/reducers/ProductsReducer";
 import pageData from "app-redux/reducers/PageReducer";
-import selectedProducts from "app-redux/reducers/ProductSelectionReducer";
 import quantityMap from "app-redux/reducers/QuantityPickReducer";
-import selectedRecIds from "app-redux/reducers/RecipeSelectionReducer";
+import selectedProducts from "app-redux/reducers/ProductSelectionReducer";
+import selectedRecIds from "app-redux/reducers/RecipeSelectionReducer"; //TODO will go away
+import shoppingList from "app-redux/reducers/ShoppingListReducer";
 
 const rootReducer = combineReducers({
   categories,
@@ -28,6 +29,7 @@ const rootReducer = combineReducers({
   selectedProducts,
   quantityMap,
   selectedRecIds,
+  shoppingList,
 });
 
 const store = createStore(

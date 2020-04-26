@@ -13,7 +13,6 @@ export default function RecipeReducer(state = initialState, action) {
       return {
         name: payload.name,
         id: payload.id,
-        //products: payload.products ? payload.products : [],
       };
     case RECIPE_UPDATE_NAME:
       return {

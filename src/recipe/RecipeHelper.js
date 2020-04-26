@@ -5,7 +5,7 @@ export function loadProductsToRecipe(recipes, allProducts) {
   const { byId, allIds = [] } = recipes;
   return allIds.reduce((prev, recId) => {
     const recipe = byId[recId];
-    recipe.products = recipe.prodDetails.map(({ id }) => allProducts.byId[id]);
+    recipe.products = recipe.prodsDetail.map(({ id }) => allProducts.byId[id]);
     prev.push(recipe);
     return prev;
   }, []);

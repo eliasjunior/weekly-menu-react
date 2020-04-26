@@ -9,24 +9,24 @@ export const FETCH_RECIPES = "FETCH_RECIPES";
 const { postRecipe, getRecipes, putRecipe } = Presenter;
 
 //TODO test redux here { recipe = requiredParameter("recipe"), products }
-function createRecipe({ id, name, prodDetails }) {
+function createRecipe({ id, name, prodsDetail }) {
   return {
     type: RECIPE_CREATE,
     payload: {
       name,
       id,
-      prodDetails,
+      prodsDetail,
     },
   };
 }
 
-function updateRecipe({ id, name, prodDetails }) {
+function updateRecipe({ id, name, prodsDetail }) {
   return {
     type: RECIPE_UPDATE,
     payload: {
       name,
       id,
-      prodDetails,
+      prodsDetail,
     },
   };
 }

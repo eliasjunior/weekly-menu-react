@@ -4,12 +4,12 @@ export function recipeListMapper(list) {
   // normalize
   const makeByIdTable = (
     prev,
-    { _id: id = requiredParameter("id recipe"), name, prodDetails = [] }
+    { _id: id = requiredParameter("id recipe"), name, prodsDetail = [] }
   ) => {
     prev.byId[id] = {
       id,
       name,
-      prodDetails,
+      prodsDetail,
     };
     prev.allIds.push(id);
     return prev;
@@ -21,12 +21,12 @@ export function recipeListMapper(list) {
 export function recipeMapper({
   _id = requiredParameter("_id recipe"),
   name = requiredParameter("name recipe"),
-  prodDetails = [],
+  prodsDetail = [],
 }) {
   return {
     id: _id,
     name,
-    prodDetails,
+    prodsDetail,
   };
 }
 
@@ -34,7 +34,7 @@ export function recipeConverter(recipe, isNew = false) {
   const {
     id,
     name = requiredParameter("name recipe"),
-    prodDetails = requiredParameter("prodDetails recipe"),
+    prodsDetail = requiredParameter("prodsDetail recipe"),
   } = recipe;
   //isNew is to guarantee that the id was sent, on the update case
   if (!isNew) {
@@ -46,6 +46,6 @@ export function recipeConverter(recipe, isNew = false) {
   return {
     _id: id,
     name,
-    prodDetails,
+    prodsDetail,
   };
 }

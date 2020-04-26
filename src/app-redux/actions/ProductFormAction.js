@@ -10,6 +10,7 @@ export const FORM_VIEW_LABEL = "FORM_VIEW_LABEL";
 export const BTN_EDIT_MODE = "BTN_EDIT_MODE";
 export const BTN_VIEW_MODE = "BTN_VIEW_MODE";
 export const BTN_SELECTION = "BTN_SELECTION";
+export const BTN_SHOPPING_SELECTION = "BTN_SHOPPING_SELECTION";
 export const BTN_PICK_PROD = "BTN_PICK_PROD";
 export const BTN_QDT_INFO = "BTN_QDT_INFO";
 

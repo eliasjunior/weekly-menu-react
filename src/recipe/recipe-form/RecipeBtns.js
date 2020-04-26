@@ -27,17 +27,17 @@ function RecipeBtns({ classes }) {
   const combinedClasses = `${classes.floatingBtn}`;
 
   //TODO review here
-  const prodDetails = selectedProducts.reduce((prev, id) => {
+  const prodsDetail = selectedProducts.reduce((prev, id) => {
     const quantity = quantityMap[id]
       ? quantityMap[id]
       : productMap.byId[id].quantityDefault;
 
-    const prodDetails = {
+    const prodsDetail = {
       id,
       quantity,
     };
-    console.log("prodDetails", prodDetails);
-    prev.push(prodDetails);
+    console.log("prodsDetail", prodsDetail);
+    prev.push(prodsDetail);
     return prev;
   }, []);
 
@@ -45,9 +45,9 @@ function RecipeBtns({ classes }) {
     if (isRecipeFormValid({ name, dispatch, selectedProducts })) {
       const recipe = {
         name,
-        prodDetails,
+        prodsDetail,
       };
-      console.log(prodDetails);
+      console.log(prodsDetail);
       await dispatch(createRecipeAsync(recipe));
       console.log(" ---- DONE! ---- ");
     }
@@ -57,7 +57,7 @@ function RecipeBtns({ classes }) {
       const recipe = {
         name,
         id,
-        prodDetails,
+        prodsDetail,
       };
       await dispatch(updateRecipeAsync(recipe));
       console.log(" ---- LORD VADER! DONE ---- ");

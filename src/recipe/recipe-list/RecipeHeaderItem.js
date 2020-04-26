@@ -15,18 +15,39 @@ import { purple } from "@material-ui/core/colors";
 import { recipeUpdateCurrent } from "app-redux/actions/RecipeAction";
 import { useDispatch, useSelector } from "react-redux";
 import { recipeSelectionAction } from "app-redux/actions/RecipeSelectionAction";
+import { addProdsRecipe } from "app-redux/actions/ShoppingListAction";
 
 export const RecipeHeaderItem = ({ recipe }) => {
   const dispatch = useDispatch();
 
   const RecipeSelection = () => {
-    const { id: recId } = recipe;
-    const recIdsSelected = useSelector((state) => state.selectedRecIds);
+    // const recIdsSelected = useSelector((state) => state.selectedRecIds); TODO delete
+    const productMap = useSelector((state) => state.products);
+    const recipeSelected = useSelector(
+      (state) => state.shoppingList.recipes.byId[recipe.id]
+    );
 
-    const checked = recIdsSelected.filter((id) => id === recId).length > 0;
+    const checked = recipeSelected !== undefined;
+
+    // const checked = recIdsSelected.filter((id) => id === recId).length > 0;
     return (
+      // prods: [
+      //   { id: "p_01", catId: "c_02" },
+      //   { id: "p_03", catId: "c_04" },
+      // ],
+      // recId: "r_01",
       <Checkbox
-        onChange={() => dispatch(recipeSelectionAction(recId))}
+        onChange={() =>
+          dispatch(
+            addProdsRecipe({
+              recId: recipe.id,
+              prods: recipe.prodsDetail.map((detail) => ({
+                id: detail.id,
+                catId: productMap.byId[detail.id].catId,
+              })),
+            })
+          )
+        }
         checked={checked}
         value={recipe.name}
       ></Checkbox>

@@ -16,6 +16,7 @@ import { successMessage } from "app-redux/actions/AlertHandlerAction";
 import {
   formEditAction,
   formViewAction,
+  BTN_SHOPPING_SELECTION,
 } from "app-redux/actions/ProductFormAction";
 import {
   FORM_VIEW_EDIT,
@@ -27,6 +28,7 @@ import {
   BTN_QDT_INFO,
 } from "app-redux/actions/ProductFormAction";
 import { updateProductAsync } from "app-redux/actions/ProductAction";
+import ShoppingItemSelection from "components/ShoppingItemSelection";
 
 export default function ComponentCatalog({ product }) {
   const dispatch = useDispatch();
@@ -63,11 +65,7 @@ export default function ComponentCatalog({ product }) {
     switch (key) {
       case BTN_SELECTION:
         return (
-          <ItemSelection
-            key="ItemSelection"
-            checked={"false"}
-            product={product}
-          ></ItemSelection>
+          <ItemSelection key="ItemSelection" product={product}></ItemSelection>
         );
       case FORM_VIEW_EDIT:
         return (
@@ -126,6 +124,13 @@ export default function ComponentCatalog({ product }) {
             key={"QuantityBtnInfo"}
             {...product}
           ></QuantityBtnInfo>
+        );
+      case BTN_SHOPPING_SELECTION:
+        return (
+          <ShoppingItemSelection
+            key="ShoppingItemSelection"
+            product={product}
+          ></ShoppingItemSelection>
         );
     }
   };

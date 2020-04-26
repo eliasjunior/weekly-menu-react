@@ -1,6 +1,6 @@
-import { createSelector } from "reselect";
 import { normalizeCategory } from "inventory/helpers/InventoryHelper";
-
+import { requiredParameter } from "common/Util";
+//TODO create factory to all these function
 //TODO TEST TEST TEST, very easy to made mistake here,
 // REFACTOR as it goes
 export function loadChosenProducts({
@@ -26,7 +26,6 @@ export function loadChosenProducts({
 // to change this, need a good test case
 export function loadChosenCategories({ categories, chosenProducts }) {
   const { byId } = normalizeCategory(categories);
-  // catId : [prods]
 
   let result = new Map();
   chosenProducts.forEach((prod) => {
@@ -46,6 +45,87 @@ export function loadChosenCategories({ categories, chosenProducts }) {
   return Array.from(result.values());
 }
 
+export function loadProductsChosenRecipes({ selectedRecipes, productMap }) {
+  let products = new Set();
+  selectedRecipes.forEach(({ prodsDetail, name, id }) => {
+    prodsDetail.forEach((details) => {
+      const prodLoaded = productMap.byId[details.id];
+      if (!prodLoaded.recipes) {
+        prodLoaded.recipes = [];
+      }
+      prodLoaded.recipes.push({ name, id, quantity: details.quantity });
+      products.add(prodLoaded);
+    });
+  });
+  console.log("prods from recipe NOT SET", Array.from(products));
+  return Array.from(products);
+}
+
+//TODO if it works delete above, improve here
+// export function wrapProdsToCats(products, categoryMap) {
+//   const categories = new Map();
+
+//   const { byId = requiredParameter("byId") } = categoryMap;
+
+//   products.forEach((prod) => {
+//     const category = byId[prod.catId];
+
+//     const tempCat = categories.get(prod.catId);
+//     if (tempCat) {
+//       // Prods wont repeat even for the recipe because has been validated
+//       prodTemp.recipes.push(prod);
+//     } else {
+//       category.products = [];
+//       category.products.push(prod);
+//       categories.set(prod.catId, category);
+//     }
+//   });
+//   console.log("SELECTED categories", Array.from(categories.values()));
+//   return Array.from(categories.values());
+// }
+
+// export function mergeProducts({ prodsRecipe, prodsSelected }) {
+//   const prodsResult = prodsRecipe.reduce((prodsPrev, prodRecipe) => {
+//     const prodIn = prodsPrev.find((prod) => prod.id === prodRecipe.id);
+
+//     // if (prodIn) {
+
+//     // } else {
+//     //   prodsPrev.push(prodRecipe);
+//     // }
+//     prodsPrev.push(prodRecipe);
+//     return prodsPrev;
+//   }, prodsSelected);
+//   return prodsRecipe;
+// }
+
+// export function mergeCategories(categoriesRec, categories) {
+//   const catsResult = categoriesRec
+//     .concat(categories)
+//     .reduce((prev, current) => {
+//       // add to map
+//       // if is in Map found conflict
+//       // merge produtscs in
+//       // no conflich add
+//       const catIn = prev.get(current.id);
+
+//       if (catIn) {
+//         const result = mergeProducts({
+//           prodsRecipe: current.products,
+//           prods: catIn.products,
+//         });
+//       } else {
+//         prev.set(current.id, current);
+//       }
+
+//       return prev;
+//     }, new Map());
+
+//   console.log("result", catsResult);
+
+//   return Array.from(catsResult.values());
+// }
+
 //tremendous amount of test
 export function addRecipeProductsToCategory({
   categoriesDB,
@@ -54,8 +134,7 @@ export function addRecipeProductsToCategory({
 }) {
   const categoriesMap = normalizeCategory(categoriesDB);
   let catSelectedMap = normalizeCategory(catsWithProdsSelected);
-  // current category
-  // check if the recs products are already in there
+
   productSetChosenRecipes.forEach((prodRecipe) => {
     // check if prod is in cat
     console.log("searching " + prodRecipe.name + " in chosen cats");
@@ -92,40 +171,3 @@ export function addRecipeProductsToCategory({
   console.log("merged", catsWithProdsSelected);
   return catsWithProdsSelected; // need to be pure
 }
-
-export function loadProductsChosenRecipes({ selectedRecipes, productMap }) {
-  let products = new Set();
-  selectedRecipes.forEach(({ prodDetails, name, id }) => {
-    prodDetails.forEach((details) => {
-      const prodLoaded = productMap.byId[details.id];
-      if (!prodLoaded.recipes) {
-        prodLoaded.recipes = [];
-      }
-      prodLoaded.recipes.push({ name, id, quantity: details.quantity });
-      products.add(prodLoaded);
-    });
-  });
-  console.log("prods from recipe NOT SET", Array.from(products));
-  return Array.from(products);
-}
-
-// experiment --- move to app-redux if is good
-export const pickedProdsSelector = createSelector(
-  (state) => state.selectedProducts,
-  (ids) => ids
-);
-
-export const quantitiesSelector = createSelector(
-  (state) => state.quantityMap,
-  (qtd) => qtd
-);
-
-export const productMapSelector = createSelector(
-  (state) => state.products,
-  (prodMap) => prodMap
-);
-
-export const categoriesSelector = createSelector(
-  (state) => state.categories,
-  (categories) => categories
-);

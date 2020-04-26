@@ -1,8 +1,9 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import DeleteIcon from "@material-ui/icons/Delete";
+import React from "react";
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
+
+//TODO move
+const UNIT = "UNIT";
 
 //TODO need to check type unit or grams
 export default function QuantityBtnInfo({
@@ -11,11 +12,10 @@ export default function QuantityBtnInfo({
   recipes = [],
 }) {
   // TODO review here,
-  const labelType = quantityType === "UNIT" ? "qty" : "g";
+  const labelType = quantityType === UNIT ? "qty" : "g";
   let quantityDisplay = quantity;
   const title = recipes
     .map((rec) => {
-      console.log("----------", rec);
       quantityDisplay = quantityDisplay + rec.quantity;
       return rec.name;
     })
