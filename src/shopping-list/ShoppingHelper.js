@@ -43,7 +43,6 @@ export function buildShoppingListDisplay({
     const addRecipeProds = (prod) => {
       //TODO getting undefined here where uncheck recipe,
       const prodWithRec = shoppingListMap.products.byId[prod.id];
-      console.log("Recipes from prod " + prod.name, prodWithRec.recipes);
       if (prodWithRec.recipes) {
         const { recTotal, recDisplay } = prodWithRec.recipes.reduce(
           (prev, recId) => {
@@ -63,7 +62,6 @@ export function buildShoppingListDisplay({
           },
           { recTotal: 0, recDisplay: "" }
         );
-        console.log("recDisplay", recDisplay);
         prod.quantity = prod.quantity + recTotal;
         prod.recDisplay = recDisplay;
 

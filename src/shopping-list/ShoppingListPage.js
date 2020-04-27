@@ -36,8 +36,6 @@ function ShoppingListPage() {
     shoppingListMap,
   });
 
-  console.log(">", listDisplay);
-
   dispatch(setDisplatList(listDisplay));
   dispatch(formShoppingAction());
   dispatch(setPageTitle("New Shopping list"));

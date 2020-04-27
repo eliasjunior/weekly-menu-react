@@ -19,14 +19,11 @@ export default function ShoppingListReducer(state = initialState, action) {
       const { recId, prods } = payload;
 
       return prods.reduce((prev, prod) => {
-        const isSelected = state.products.selected.includes(prod.id);
-        const isRecipe = true;
-        // when isSelected=false (false && true = false), means was'nt selected and I can remove
         prev = normalizeCatProd({
           state: prev,
           catId: prod.catId,
           prodId: prod.id,
-          isRecipe: isSelected && isRecipe,
+          recId,
         });
         prev = normalizeProdRecipe(prev, recId, prod.id);
         return prev;
@@ -37,7 +34,7 @@ export default function ShoppingListReducer(state = initialState, action) {
   }
 }
 
-function normalizeCatProd({ state, catId, prodId, isRecipe = false }) {
+function normalizeCatProd({ state, catId, prodId, recId }) {
   const cat = state.categories.byId[catId];
   const { products, categories } = state;
 
@@ -46,17 +43,24 @@ function normalizeCatProd({ state, catId, prodId, isRecipe = false }) {
       id: catId,
       prods: [prodId],
     };
-    products.selected = [prodId];
+    // only add if its not on selected
+    // MARK here rules that apply only to recipe
+    if (!recId) {
+      products.selected = [prodId];
+    }
   } else {
     const hasProd = cat.prods.includes(prodId);
 
     if (!hasProd) {
       cat.prods = [...cat.prods, prodId];
       products.selected = [...products.selected, prodId];
-    } else if (!isRecipe) {
+      // MAKE, rule apply for both, see function, bit different
+    } else if (canRemoveProduct({ products, recId, prodId })) {
       cat.prods = cat.prods.filter((pId) => pId !== prodId);
+
       products.selected = products.selected.filter((pId) => pId !== prodId);
-      // remove cat if there is not prods
+
+      // remove cat if there is no prods
       if (cat.prods.length === 0) {
         delete categories.byId[catId];
       }
@@ -87,7 +91,30 @@ function normalizeProdRecipe(state, recId, prodId) {
     if (hasRec) {
       delete products.byId[prodId];
       delete recipes.byId[recId];
+    } else {
+      prodRec.recipes = [...prodRec.recipes, recId];
     }
   }
   return { ...state, products: { ...products }, recipes: { ...state.recipes } };
+}
+
+// selected is like the product it's into another recipe,
+// I can only remove the prod from category if there is no recipe or selected product
+// however its mixed up the rules, recipe x selected, I need to review and refactor it
+// I can't remove the prod from cat if prod is in another recipe
+function canRemoveProduct({ products, prodId, recId }) {
+  if (recId) {
+    const prodOnlyOnCurrentRecipe =
+      products.byId[prodId] &&
+      products.byId[prodId].recipes.filter((rid) => rid !== recId).length === 0;
+    const isProdNotOnSelectedList = !products.selected.includes(prodId);
+
+    return prodOnlyOnCurrentRecipe && isProdNotOnSelectedList;
+  } else {
+    // from selected, need to check if the prod is in any recipe
+    const prodOnlyOnCurrentRecipe =
+      products.byId[prodId] && products.byId[prodId].recipes.length === 0;
+
+    return prodOnlyOnCurrentRecipe;
+  }
 }

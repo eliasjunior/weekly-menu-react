@@ -50,7 +50,7 @@
   ],
   "recipes": [
     {
-      "name": "Coola",
+      "name": "Coca Cola",
       "prodsDetail": [
         {
           "id": "prod_1",
@@ -68,11 +68,11 @@
       "prodsDetail": [
         {
           "id": "prod_1",
-          "quantity": 1
+          "quantity": 20
         },
         {
           "id": "prod_5",
-          "quantity": 100
+          "quantity": 1000
         }
       ],
       "_id": 14
