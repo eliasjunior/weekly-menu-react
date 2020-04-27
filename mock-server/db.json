@@ -1,55 +1,51 @@
 {
   "categories": [
     {
-      "_id": "1",
+      "_id": "cat_1",
       "name": "Baking",
-      "catProds": [
-        "5b9d1d7bed2ee113002f7040",
-        "5b9d1d7bed2ee113002f703f",
-        "WLhwHwg"
-      ]
+      "catProds": ["prod_1", "prod_2", "prod_3"]
     },
     {
-      "_id": "2",
+      "_id": "cat_2",
       "name": "Beverage",
-      "catProds": ["H4GiPKF", "JeEk5Po", "DkCvhzj"]
+      "catProds": ["prod_5", "prod_6", "prod_4"]
     }
   ],
   "products": [
     {
-      "_id": "5b9d1d7bed2ee113002f7040",
+      "_id": "prod_1",
       "name": "Flour",
       "quantityType": "UNIT",
-      "catId": "1"
+      "catId": "cat_1"
     },
     {
-      "_id": "5b9d1d7bed2ee113002f703f",
+      "_id": "prod_2",
       "name": "Raising Flour",
       "quantityType": "WEIGHT",
-      "catId": "1"
+      "catId": "cat_1"
     },
     {
-      "_id": "H4GiPKF",
+      "_id": "prod_5",
       "name": "Pale Ale",
       "quantityType": "UNIT",
-      "catId": "2"
+      "catId": "cat_2"
     },
     {
-      "_id": "JeEk5Po",
+      "_id": "prod_6",
       "name": "Guiness",
       "quantityType": "UNIT",
-      "catId": "2"
+      "catId": "cat_2"
     },
     {
-      "_id": "DkCvhzj",
+      "_id": "prod_4",
       "name": "Coconut water",
       "quantityType": "UNIT",
-      "catId": "2"
+      "catId": "cat_2"
     },
     {
       "name": "Sugar",
-      "catId": "1",
-      "_id": "WLhwHwg"
+      "catId": "cat_1",
+      "_id": "prod_3"
     }
   ],
   "recipes": [
@@ -57,11 +53,11 @@
       "name": "Coola",
       "prodsDetail": [
         {
-          "id": "5b9d1d7bed2ee113002f7040",
+          "id": "prod_1",
           "quantity": 2
         },
         {
-          "id": "5b9d1d7bed2ee113002f703f",
+          "id": "prod_2",
           "quantity": 500
         }
       ],
@@ -71,11 +67,11 @@
       "name": "Cake Selva",
       "prodsDetail": [
         {
-          "id": "5b9d1d7bed2ee113002f7040",
+          "id": "prod_1",
           "quantity": 1
         },
         {
-          "id": "H4GiPKF",
+          "id": "prod_5",
           "quantity": 100
         }
       ],

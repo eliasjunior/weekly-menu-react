@@ -9,7 +9,7 @@ export function buildShoppingListDisplay({
 }) {
   const { categories } = shoppingListMap;
   return Object.keys(categories.byId).reduce((prev, catId) => {
-    const catValue = categories.byId[catId];
+    const catShopList = categories.byId[catId];
     const { name, id } = categoryMap.byId[catId];
 
     const buildProduct = (prodId) => {
@@ -41,8 +41,9 @@ export function buildShoppingListDisplay({
     };
 
     const addRecipeProds = (prod) => {
+      //TODO getting undefined here where uncheck recipe,
       const prodWithRec = shoppingListMap.products.byId[prod.id];
-
+      console.log("Recipes from prod " + prod.name, prodWithRec.recipes);
       if (prodWithRec.recipes) {
         const { recTotal, recDisplay } = prodWithRec.recipes.reduce(
           (prev, recId) => {
@@ -74,7 +75,7 @@ export function buildShoppingListDisplay({
       return prod;
     };
 
-    const products = catValue.prods
+    const products = catShopList.prods
       .map(buildProduct)
       .map(setProductQty)
       .map(addRecipeProds);
