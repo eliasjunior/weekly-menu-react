@@ -6,10 +6,8 @@ import { withStyles, Fab } from "@material-ui/core";
 import IncludeIcon from "@material-ui/icons/Receipt";
 import SaveIcon from "@material-ui/icons/Save";
 import Shop from "@material-ui/icons/ShoppingCart";
-import { useDispatch } from "react-redux";
 
 function ShoppingCreateActions({ classes }) {
-  const dispatch = useDispatch();
   const { recipeList, pickProducts } = LOCATION;
   const combinedClasses = `${classes.floatingPadding} ${classes.floatingBtn} gridFloatingBtn`;
   const { path: linkRecipe } = recipeList;

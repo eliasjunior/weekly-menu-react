@@ -31,8 +31,11 @@ export function buildShoppingListDisplay({
 
     const setProductQty = (prodQty) => {
       const { quantityDefault, quantityType } = prodQty;
-      const result = getQuantity({
-        quantity: quantities[prodQty.id],
+      const value = quantities[prodQty.id];
+      console.log("quantityDefault", quantityDefault);
+
+      const result = getQuantityLabel({
+        quantity: value ? value : quantityDefault,
         quantityDefault,
         quantityType,
       });
@@ -69,6 +72,7 @@ export function buildShoppingListDisplay({
           quantity: recTotal,
           quantityType: prodWithRec.quantityType,
         });
+      } else {
       }
       return prod;
     };
@@ -88,7 +92,7 @@ export function buildShoppingListDisplay({
   }, []);
 }
 
-function getQuantity({ quantity, quantityType, quantityDefault }) {
+function getQuantityLabel({ quantity, quantityType, quantityDefault }) {
   const label = quantityType === "UNIT" ? "u" : "g";
   if (!quantity) {
     return quantityDefault + " " + label;

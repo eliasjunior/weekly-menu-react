@@ -26,7 +26,6 @@ export const RecipeHeaderItem = ({ recipe }) => {
     const recipeSelected = useSelector(
       (state) => state.shoppingList.recipes.byId[recipe.id]
     );
-
     const checked = recipeSelected !== undefined;
 
     return (
