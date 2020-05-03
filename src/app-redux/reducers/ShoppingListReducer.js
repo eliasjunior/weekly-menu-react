@@ -11,10 +11,11 @@ const initialState = {
 
 export default function ShoppingListReducer(state = initialState, action) {
   const { type, payload } = action;
+  const { checked = false } = payload;
   switch (type) {
     case ADD_SIMPLE_PRODUCT:
       const { catId, prodId } = payload;
-      return normalizeCatProd({ state, catId, prodId });
+      return normalizeCatProd({ state, catId, prodId, checked });
     case ADD_PRODS_RECIPE:
       const { recId, prods } = payload;
 
@@ -24,6 +25,7 @@ export default function ShoppingListReducer(state = initialState, action) {
           recId,
           catId,
           prodId: id,
+          checked,
         });
         return prev;
       }, state);
@@ -32,49 +34,45 @@ export default function ShoppingListReducer(state = initialState, action) {
   }
 }
 
-function normalizeCatProd({ state, catId, prodId }) {
-  const cat = state.categories.byId[catId];
+// TODO move to use case or helper
+
+function normalizeCatProd({ state, catId, prodId, checked }) {
   const { products, categories } = state;
+  const category = categories.byId[catId];
   const addSimpleProduct = () => {
+    const product = products.byId[prodId];
     products.selected = [...products.selected, prodId];
-    if (!products.byId[prodId]) {
+    if (!product) {
       products.byId[prodId] = {
         id: prodId,
       };
     }
   };
-  if (!cat) {
+  if (!category) {
     categories.byId[catId] = {
       id: catId,
       prods: [prodId],
     };
     addSimpleProduct();
   } else {
-    const hasProd = cat.prods.includes(prodId);
-
-    // selected is like the product it's into another recipe,
-    // I can only remove the prod from category if there is no recipe or selected product
-    // however its mixed up the rules, recipe x selected, I need to review and refactor it
-    // I can't remove the prod from cat if prod is in another recipe
-    const prodOnlyOnCurrentRecipe =
-      products.byId[prodId] && products.byId[prodId].recipes.length === 0;
-
-    if (!hasProd) {
-      cat.prods = [...cat.prods, prodId];
+    if (!checked) {
+      category.prods = [...category.prods, prodId];
       addSimpleProduct();
-    } else if (prodOnlyOnCurrentRecipe) {
-      cat.prods = cat.prods.filter((pId) => pId !== prodId);
+    } else {
+      const product = products.byId[prodId];
+      const isProdInRecipe =
+        product && product.recipes && product.recipes.length > 0;
 
+      // remove from selected
       products.selected = products.selected.filter((pId) => pId !== prodId);
 
-      // remove cat if there is no prods
-      if (cat.prods.length === 0) {
-        delete categories.byId[catId];
-      }
-    } else {
-      const fromSelected = products.selected.includes(prodId);
-      if (!fromSelected) {
-        addSimpleProduct();
+      if (!isProdInRecipe) {
+        category.prods = category.prods.filter((pId) => pId !== prodId);
+        delete products.byId[prodId];
+        // remove cat if there is no prods
+        if (category.prods.length === 0) {
+          delete categories.byId[catId];
+        }
       }
     }
   }
@@ -85,74 +83,60 @@ function normalizeCatProd({ state, catId, prodId }) {
   };
 }
 
-function normalizeProdRecipe({ state, recId, catId, prodId }) {
+function normalizeProdRecipe({ state, recId, catId, prodId, checked }) {
   const { products, categories, recipes } = state;
-  const addProdAndRecipe = () => {
+
+  const product = products.byId[prodId];
+
+  const addProduct = () => {
+    const category = categories.byId[catId];
+    category.prods = [...category.prods, prodId];
     products.byId[prodId] = {
       id: prodId,
       recipes: [recId],
     };
+  };
+
+  //State has recipe
+  if (checked) {
+    delete recipes.byId[recId];
+    product.recipes = product.recipes.filter((rid) => rid !== recId);
+    const isProdNotOnSelectedList = !products.selected.includes(prodId);
+
+    // delete product if its not in another rec or in the selected list
+    if (product.recipes.length === 0 && isProdNotOnSelectedList) {
+      const category = categories.byId[catId];
+      category.prods = category.prods.filter((pId) => pId !== prodId);
+
+      // remove cat if there is no prods
+      if (category.prods.length === 0) {
+        delete categories.byId[catId];
+      }
+      // if prod is not in another recipe
+      delete products.byId[prodId];
+    }
+  } else {
     recipes.byId[recId] = {
       id: recId,
     };
-  };
-
-  const recipe = recipes.byId[recId];
-  if (recipe) {
-    delete recipes.byId[recId];
-  }
-
-  const cat = categories.byId[catId];
-
-  if (!cat) {
-    categories.byId[catId] = {
-      id: catId,
-      prods: [prodId],
-    };
-    addProdAndRecipe();
-  } else {
-    const curProd = products.byId[prodId];
-
-    // tenho a cat nao add
-    // nao tenho cat, tenho o PROD ? nao add
-    // tenho o prod
-
-    if (!curProd) {
-      cat.prods = [...cat.prods, prodId];
-      //TODO test can I have the recipe already IN ??
-      addProdAndRecipe();
+    //State has no category yet
+    const category = categories.byId[catId];
+    if (!category) {
+      categories.byId[catId] = {
+        id: catId,
+        prods: [],
+      };
+      addProduct();
+      //State has no product
+    } else if (!product) {
+      addProduct();
     } else {
-      // selected is like the product it's into another recipe,
-      // I can only remove the prod from category if there is no recipe or selected product
-      // however its mixed up the rules, recipe x selected, I need to review and refactor it
-      // I can't remove the prod from cat if prod is in another recipe
-
-      const prodOnlyOnCurrentRecipe =
-        curProd.recipes &&
-        curProd.recipes.filter((rid) => rid !== recId).length === 0;
-
-      const isProdNotOnSelectedList = !products.selected.includes(prodId);
-
-      console.log(prodOnlyOnCurrentRecipe, isProdNotOnSelectedList, curProd.id);
-
-      if (prodOnlyOnCurrentRecipe && isProdNotOnSelectedList) {
-        cat.prods = cat.prods.filter((pId) => pId !== prodId);
-
-        // remove cat if there is no prods
-        if (cat.prods.length === 0) {
-          delete categories.byId[catId];
-        }
-        // if prod is not in another recipe
-        delete products.byId[prodId];
-      } else if (curProd.recipes) {
-        // should add recipe
-        const hasNotRecipe =
-          curProd.recipes.filter((rid) => rid === recId).length === 0;
-        if (hasNotRecipe) {
-          curProd.recipes = [...curProd.recipes, recId];
-        } else {
-          curProd.recipes = curProd.recipes.filter((rid) => rid !== recId);
-        }
+      //State has product and is also selected
+      if (!product.recipes) {
+        product.recipes = [recId];
+      } else {
+        //State has product and is also into another recipe
+        product.recipes = [...product.recipes, recId];
       }
     }
   }
@@ -160,6 +144,6 @@ function normalizeProdRecipe({ state, recId, catId, prodId }) {
     ...state,
     categories: { ...categories },
     products: { ...products },
-    recipes: { ...state.recipes },
+    recipes: { ...recipes },
   };
 }

@@ -38,6 +38,7 @@ export const RecipeHeaderItem = ({ recipe }) => {
                 id: detail.id,
                 catId: productMap.byId[detail.id].catId,
               })),
+              checked,
             })
           )
         }

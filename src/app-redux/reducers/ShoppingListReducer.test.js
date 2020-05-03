@@ -1,5 +1,13 @@
 import reducer from "./ShoppingListReducer";
 import {
+  test1,
+  test2,
+  test3,
+  test4,
+  test5,
+  test6,
+} from "./mock-data/ShoppingListData";
+import {
   ADD_SIMPLE_PRODUCT,
   ADD_PRODS_RECIPE,
 } from "app-redux/actions/ShoppingListAction";
@@ -12,6 +20,7 @@ describe("Shopping list reducer", () => {
     initialState = {
       categories: { byId: {} },
       products: { byId: {}, selected: [] },
+      recipes: { byId: {} },
     };
   });
 
@@ -20,90 +29,38 @@ describe("Shopping list reducer", () => {
       type: ADD_SIMPLE_PRODUCT,
       payload: {
         catId: "c_02",
-        prod: { id: "p_01" },
+        prodId: "p_01",
       },
     };
-
-    const expected = {
-      categories: {
-        byId: {
-          c_02: {
-            id: "c_02",
-            prods: ["p_01"],
-          },
-        },
-      },
-      products: { byId: {}, selected: [] },
-    };
+    const expected = test1.expected;
     const result = reducer(initialState, action);
     expect(result).toEqual(expected);
   });
 
   it("add second product", () => {
-    const state = {
-      categories: {
-        byId: {
-          c_02: {
-            id: "c_02",
-            prods: ["p_01"],
-          },
-        },
-      },
-      products: { byId: {}, selected: ["p_01"] },
-    };
     const action = {
       type: ADD_SIMPLE_PRODUCT,
       payload: {
         catId: "c_02",
-        prod: { id: "p_02" },
+        prodId: "p_02",
       },
     };
 
-    const expected = {
-      categories: {
-        byId: {
-          c_02: {
-            id: "c_02",
-            prods: ["p_01", "p_02"],
-          },
-        },
-      },
-      products: { byId: {}, selected: ["p_01", "p_02"] },
-    };
+    const { state, expected } = test2;
+
     expect(reducer(state, action)).toEqual(expected);
   });
 
   it("remove first product", () => {
-    const state = {
-      categories: {
-        byId: {
-          c_02: {
-            id: "c_02",
-            prods: ["p_01", "p_02"],
-          },
-        },
-      },
-      products: { byId: {}, selected: ["p_01", "p_02"] },
-    };
     const action = {
       type: ADD_SIMPLE_PRODUCT,
       payload: {
         catId: "c_02",
-        prod: { id: "p_01" },
+        prodId: "p_01",
+        checked: true,
       },
     };
-
-    const expected = {
-      categories: {
-        byId: {
-          c_02: {
-            id: "c_02",
-            prods: ["p_02"],
-          },
-        },
-      },
-      products: { byId: {}, selected: ["p_02"] },
-    };
+    const { expected, state } = test3;
     expect(reducer(state, action)).toEqual(expected);
   });
 
@@ -119,54 +76,10 @@ describe("Shopping list reducer", () => {
       },
     };
 
-    const expected = {
-      categories: {
-        byId: {
-          c_02: {
-            id: "c_02",
-            prods: ["p_01"],
-          },
-          c_04: {
-            id: "c_04",
-            prods: ["p_03"],
-          },
-        },
-      },
-      products: {
-        byId: {
-          p_01: {
-            id: "p_01",
-            recipes: ["r_01"],
-          },
-          p_03: {
-            id: "p_03",
-            recipes: ["r_01"],
-          },
-        },
-        selected: [],
-      },
-      recipes: {
-        byId: {
-          r_01: { id: "r_01" },
-        },
-      },
-    };
-    expect(reducer(undefined, action)).toEqual(expected);
+    expect(reducer(undefined, action)).toEqual(test4.expected);
   });
 
-  //TODO need to fix here, have to pass selected
   it("Add special products from recipe with existing selected products", () => {
-    const state = {
-      categories: {
-        byId: {
-          c_02: {
-            id: "c_02",
-            prods: ["p_01", "p_02"],
-          },
-        },
-      },
-      products: { byId: {}, selected: ["p_01", "p_02"] },
-    };
     const action = {
       type: ADD_PRODS_RECIPE,
       payload: {
@@ -178,64 +91,12 @@ describe("Shopping list reducer", () => {
       },
     };
 
-    const expected = {
-      categories: {
-        byId: {
-          c_02: {
-            id: "c_02",
-            prods: ["p_01", "p_02"],
-          },
-          c_04: {
-            id: "c_04",
-            prods: ["p_03"],
-          },
-        },
-      },
-      products: {
-        byId: {
-          p_01: {
-            id: "p_01",
-            recipes: ["r_01"],
-          },
-          p_03: {
-            id: "p_03",
-            recipes: ["r_01"],
-          },
-        },
-        selected: ["p_01", "p_02"],
-      },
-    };
+    const { expected, state } = test5;
+
     expect(reducer(state, action)).toEqual(expected);
   });
 
   it("Remove recipe with existing selected products", () => {
-    const state = {
-      categories: {
-        byId: {
-          c_02: {
-            id: "c_02",
-            prods: ["p_01", "p_02"],
-          },
-          c_04: {
-            id: "c_04",
-            prods: ["p_03"],
-          },
-        },
-      },
-      products: {
-        byId: {
-          p_01: {
-            id: "p_01",
-            recipes: ["r_01"],
-          },
-          p_03: {
-            id: "p_03",
-            recipes: ["r_01"],
-          },
-        },
-        selected: ["p_01", "p_02"],
-      },
-    };
     const action = {
       type: ADD_PRODS_RECIPE,
       payload: {
@@ -244,23 +105,10 @@ describe("Shopping list reducer", () => {
           { id: "p_03", catId: "c_04" },
         ],
         recId: "r_01",
+        checked: true,
       },
     };
-
-    const expected = {
-      categories: {
-        byId: {
-          c_02: {
-            id: "c_02",
-            prods: ["p_01", "p_02"],
-          },
-        },
-      },
-      products: {
-        byId: {},
-        selected: ["p_01", "p_02"],
-      },
-    };
+    const { expected, state } = test6;
     expect(reducer(state, action)).toEqual(expected);
   });
 });

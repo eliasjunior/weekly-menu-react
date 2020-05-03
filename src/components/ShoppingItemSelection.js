@@ -13,6 +13,7 @@ export default function ShoppingItemSelection({ product }) {
       addSimpleProduct({
         catId: product.catId,
         prodId: product.id,
+        checked,
       })
     );
   };

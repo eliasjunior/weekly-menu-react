@@ -25,7 +25,6 @@
    I need a action and reducer to CREATE_DISPLAY_LIST, that copies from the DB   
 3 - **SPIKE** convert the data to DB format, see https://github.com/eliasjunior/normalize/blob/master/normalization/normalization-instructions.txt (TIME-BOXED 1)
 
-
 ## Tests
 
 ```bash
@@ -35,12 +34,11 @@ npm run test
 Single test
 
 ```bash
-npm tun test 'testfileName'
+npm run test 'testfileName'
 ```
 
 Single task add 'fit'
 Skip test 'xit'
-
 
 ## Mock server
 
