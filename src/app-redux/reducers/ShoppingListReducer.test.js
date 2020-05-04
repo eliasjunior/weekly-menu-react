@@ -6,6 +6,7 @@ import {
   test4,
   test5,
   test6,
+  prodInSelectedAndRecipe,
 } from "./mock-data/ShoppingListData";
 import {
   ADD_SIMPLE_PRODUCT,
@@ -109,6 +110,19 @@ describe("Shopping list reducer", () => {
       },
     };
     const { expected, state } = test6;
+    expect(reducer(state, action)).toEqual(expected);
+  });
+
+  it("Add simple p rod when the same belongs to a recipe", () => {
+    const action = {
+      type: ADD_SIMPLE_PRODUCT,
+      payload: {
+        catId: "drink",
+        prodId: "beer",
+        checked: false,
+      },
+    };
+    const { expected, state } = prodInSelectedAndRecipe;
     expect(reducer(state, action)).toEqual(expected);
   });
 });

@@ -12,8 +12,6 @@ import recipes from "app-redux/reducers/RecipesReducer";
 import products from "app-redux/reducers/ProductsReducer";
 import pageData from "app-redux/reducers/PageReducer";
 import quantityMap from "app-redux/reducers/QuantityPickReducer";
-import selectedProducts from "app-redux/reducers/ProductSelectionReducer";
-import selectedRecIds from "app-redux/reducers/RecipeSelectionReducer"; //TODO will go away
 import shoppingList from "app-redux/reducers/ShoppingListReducer";
 
 const rootReducer = combineReducers({
@@ -26,9 +24,7 @@ const rootReducer = combineReducers({
   recipes,
   products,
   pageData,
-  selectedProducts,
   quantityMap,
-  selectedRecIds,
   shoppingList,
 });
 

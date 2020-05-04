@@ -14,7 +14,6 @@ import PropTypes from "prop-types";
 import { purple } from "@material-ui/core/colors";
 import { recipeUpdateCurrent } from "app-redux/actions/RecipeAction";
 import { useDispatch, useSelector } from "react-redux";
-import { recipeSelectionAction } from "app-redux/actions/RecipeSelectionAction";
 import { addProdsRecipe } from "app-redux/actions/ShoppingListAction";
 
 export const RecipeHeaderItem = ({ recipe }) => {

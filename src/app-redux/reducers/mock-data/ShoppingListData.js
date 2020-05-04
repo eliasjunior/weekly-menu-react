@@ -269,3 +269,54 @@ export const test6 = {
     },
   },
 };
+
+export const prodInSelectedAndRecipe = {
+  state: {
+    categories: {
+      byId: {
+        drink: {
+          id: "drink",
+          prods: ["beer"],
+        },
+      },
+    },
+    products: {
+      byId: {
+        beer: {
+          id: "beer",
+          recipes: ["caseira"],
+        },
+      },
+      selected: [],
+    },
+    recipes: {
+      byId: {
+        caseira: { id: "caseira" },
+      },
+    },
+  },
+  expected: {
+    categories: {
+      byId: {
+        drink: {
+          id: "drink",
+          prods: ["beer"],
+        },
+      },
+    },
+    products: {
+      byId: {
+        beer: {
+          id: "beer",
+          recipes: ["caseira"],
+        },
+      },
+      selected: ["beer"],
+    },
+    recipes: {
+      byId: {
+        caseira: { id: "caseira" },
+      },
+    },
+  },
+};

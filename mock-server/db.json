@@ -3,12 +3,20 @@
     {
       "_id": "cat_1",
       "name": "Baking",
-      "catProds": ["prod_1", "prod_2", "prod_3"]
+      "catProds": [
+        "prod_1",
+        "prod_2",
+        "RYnOOLf"
+      ]
     },
     {
       "_id": "cat_2",
       "name": "Beverage",
-      "catProds": ["prod_5", "prod_6", "prod_4"]
+      "catProds": [
+        "prod_5",
+        "prod_6",
+        "prod_4"
+      ]
     }
   ],
   "products": [
@@ -43,9 +51,9 @@
       "catId": "cat_2"
     },
     {
-      "name": "Sugar",
+      "name": "Sugar Granular",
       "catId": "cat_1",
-      "_id": "prod_3"
+      "_id": "RYnOOLf"
     }
   ],
   "recipes": [

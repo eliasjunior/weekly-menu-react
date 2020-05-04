@@ -6,7 +6,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { setPageTitle } from "app-redux/actions/PageAction";
 import { setDisplatList } from "app-redux/actions/ListFilterAction";
 import CategoryList from "inventory/category/components";
-import { buildShoppingListDisplay } from "./ShoppingHelper";
+import {
+  buildShoppingListDisplay,
+  buildProduct,
+  mergeRecipeProducts,
+} from "./ShoppingHelper";
 import {
   quantitiesSelector,
   productMapSelector,
@@ -18,23 +22,22 @@ import { normalizeCategory } from "inventory/helpers/InventoryHelper";
 function ShoppingListPage() {
   const dispatch = useDispatch();
 
-  //TODO delete both ?
-  //const selectedProducts = useSelector(pickedProdsSelector);
-  // const selectedRecIds = useSelector((state) => state.selectedRecIds);
-
   const quantities = useSelector(quantitiesSelector);
   const productMap = CloneDeep(useSelector(productMapSelector));
   const categories = CloneDeep(useSelector(categoriesSelector));
   const recipeMap = useSelector((state) => state.recipes);
   const shoppingListMap = useSelector((state) => state.shoppingList);
 
-  const listDisplay = buildShoppingListDisplay({
+  const tempShops = buildShoppingListDisplay({
     quantities,
     productMap: CloneDeep(productMap),
     categoryMap: CloneDeep(normalizeCategory(categories)),
-    recipeMap,
     shoppingListMap,
   });
+
+  const listDisplay = mergeRecipeProducts(recipeMap, tempShops);
+
+  console.log("---", listDisplay);
 
   dispatch(setDisplatList(listDisplay));
   dispatch(formShoppingAction());

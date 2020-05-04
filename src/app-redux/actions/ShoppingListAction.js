@@ -5,11 +5,12 @@ export const ADD_PRODS_RECIPE = "ADD_PRODS_RECIPE";
 
 export function addSimpleProduct({
   prodId = requiredParameter("prodId"),
-  catId = requiredParameter("catId "),
+  catId = requiredParameter("catId"),
+  checked = requiredParameter("checked"),
 }) {
   return {
     type: ADD_SIMPLE_PRODUCT,
-    payload: { prodId, catId },
+    payload: { prodId, catId, checked },
   };
 }
 

@@ -1,66 +1,77 @@
-import { mergeProducts } from "./ShoppingHelper";
+import { setProductQty, mergeRecipeProducts } from "./ShoppingHelper";
+import {
+  UNIT_TYPE,
+  UNIT_LABEL,
+  WEIGHT_TYPE,
+  WEIGHT_LABEL,
+} from "inventory/product/Constant";
 
-// describe("ShoppingHelper", () => {
-//   it("merge products recipes and prods selected", () => {
-//     //name, id, quantity: details.quantity
-//     const prodsRecipe = [
-//       {
-//         name: "Pasta",
-//         id: "prod_1",
-//         recipes: [
-//           { name: "Recieta Italiana", id: "rec_1", quantity: 2 },
-//           { name: "Chinese Pasta", id: "rec_3", quantity: 1 },
-//         ],
-//       },
-//       {
-//         name: "Sugar",
-//         id: "prod_2",
-//         recipes: [
-//           { name: "Cake", id: "rec_22", quantity: 100 },
-//           { name: "Icecream", id: "rec_10", quantity: 200 },
-//         ],
-//       },
-//     ];
+describe("ShoppingHelper", () => {
+  it("Set the product quantity", () => {
+    const product = {
+      id: "beer",
+      quantityDefault: 1,
+      quantityType: UNIT_TYPE,
+    };
+    const quantities = {
+      beer: 10,
+    };
+    const productDisplay = setProductQty(product, quantities);
+    expect(productDisplay.quantityDisplay).toEqual("10" + " " + UNIT_LABEL);
+  });
+  it("Set the product quantity default", () => {
+    const product = {
+      id: "beer",
+      quantityDefault: 1,
+      quantityType: UNIT_TYPE,
+    };
+    const quantities = {
+      water: 10,
+    };
+    const productDisplay = setProductQty(product, quantities);
+    expect(productDisplay.quantityDisplay).toEqual("1" + " " + UNIT_LABEL);
+  });
+  it("Merge Recipe Products", () => {
+    const catsDiplay = [
+      {
+        name: "catme",
+        products: [
+          {
+            name: "Sugar",
+            id: "sugar",
+            recipes: [],
+            quantity: 10,
+            quantityDisplay: "10" + " " + WEIGHT_LABEL,
+            quantityType: WEIGHT_TYPE,
+          },
+          {
+            name: "Flour",
+            id: "flour",
+            recipes: ["cake"],
+            quantity: 2,
+            quantityType: WEIGHT_TYPE,
+          },
+        ],
+      },
+    ];
+    const recipes = {
+      byId: {
+        cake: {
+          id: "cake",
+          prodsDetail: [{ id: "flour", quantity: 200 }],
+        },
+      },
+    };
 
-//     const prodsSelected = [
-//       {
-//         name: "Pasta",
-//         id: "prod_1",
-//         quantity: 1,
-//       },
-//       {
-//         name: "Beer",
-//         id: "prod_9",
-//         quantity: 10,
-//       },
-//     ];
+    const newCats = mergeRecipeProducts(recipes, catsDiplay);
 
-//     const expected = [
-//       {
-//         name: "Beer",
-//         id: "prod_9",
-//         quantity: 10,
-//       },
-//       {
-//         name: "Pasta",
-//         id: "prod_1",
-//         quantity: 1,
-//         recipes: [
-//           { name: "Recieta Italiana", id: "rec_1", quantity: 2 },
-//           { name: "Chinese Pasta", id: "rec_3", quantity: 1 },
-//         ],
-//       },
-//       {
-//         name: "Sugar",
-//         id: "prod_2",
-//         recipes: [
-//           { name: "Cake", id: "rec_22", quantity: 100 },
-//           { name: "Icecream", id: "rec_10", quantity: 200 },
-//         ],
-//       },
-//     ];
-//     const received = mergeProducts({ prodsRecipe, prodsSelected });
-//     console.log(">>>", received);
-//     expect(received).toEqual(expected);
-//   });
-// });
+    expect(newCats.length).toBe(1);
+    expect(newCats[0].products.length).toBe(2);
+
+    const sugar = newCats[0].products.filter((p) => p.name === "Sugar").pop();
+    const flour = newCats[0].products.filter((p) => p.name === "Flour").pop();
+    expect(sugar.quantityDisplay).toEqual("10" + " " + WEIGHT_LABEL);
+    expect(sugar.quantity).toEqual(10);
+    expect(flour.quantityDisplay).toEqual("202" + " " + WEIGHT_LABEL);
+  });
+});

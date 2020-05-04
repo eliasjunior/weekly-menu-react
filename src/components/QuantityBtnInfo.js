@@ -4,7 +4,7 @@ import Tooltip from "@material-ui/core/Tooltip";
 
 export default function QuantityBtnInfo({ quantityDisplay, recDisplay }) {
   return (
-    <Tooltip title={recDisplay}>
+    <Tooltip title={recDisplay ? recDisplay : "-"}>
       <IconButton aria-label="delete">{quantityDisplay}</IconButton>
     </Tooltip>
   );

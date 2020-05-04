@@ -1,107 +1,117 @@
 import { requiredParameter } from "common/Util";
+import {
+  UNIT_TYPE,
+  UNIT_LABEL,
+  WEIGHT_LABEL,
+} from "inventory/product/Constant";
+
+export function setProductQty(product, quantities) {
+  const {
+    quantityDefault = requiredParameter("quantityDefault"),
+    quantityType = requiredParameter("quantity type"),
+    id = requiredParameter("prod id"),
+  } = product;
+  const value = quantities[id];
+  const quantity = value ? value : quantityDefault;
+  const result = getQuantityLabel({
+    quantity,
+    quantityType,
+  });
+  const quantityDisplay = result;
+  return { ...product, quantity, quantityDisplay };
+}
+
+export function mergeRecipeProducts(recipeMap, categoriesDisplay) {
+  return categoriesDisplay.map((category) => {
+    category.products = rebuildProducts(category.products, recipeMap);
+    return category;
+  });
+}
 
 export function buildShoppingListDisplay({
-  quantities,
   shoppingListMap,
   categoryMap,
   productMap,
-  recipeMap,
+  quantities,
 }) {
-  const { categories } = shoppingListMap;
-  return Object.keys(categories.byId).reduce((prev, catId) => {
+  const { categories, products } = shoppingListMap;
+  const categoryIds = Object.keys(categories.byId);
+  return categoryIds.reduce((prev, catId) => {
     const catShopList = categories.byId[catId];
+    const productList = catShopList.prods
+      .map((prodId) => buildProduct(prodId, productMap, products))
+      .map((prod) => setProductQty(prod, quantities));
+
     const { name, id } = categoryMap.byId[catId];
-
-    const buildProduct = (prodId) => {
-      const {
-        name,
-        id,
-        catId,
-        quantityDefault,
-        quantityType,
-      } = productMap.byId[prodId];
-      return {
-        name,
-        id,
-        catId,
-        quantityDefault,
-        quantityType,
-      };
-    };
-
-    const setProductQty = (prodQty) => {
-      const { quantityDefault, quantityType } = prodQty;
-      const value = quantities[prodQty.id];
-      console.log("quantityDefault", quantityDefault);
-
-      const result = getQuantityLabel({
-        quantity: value ? value : quantityDefault,
-        quantityDefault,
-        quantityType,
-      });
-      prodQty.quantityDisplay = result;
-      return prodQty;
-    };
-
-    const addRecipeProds = (prod) => {
-      //TODO getting undefined here where uncheck recipe,
-      const prodWithRec = shoppingListMap.products.byId[prod.id];
-      if (prodWithRec.recipes) {
-        const { recTotal, recDisplay } = prodWithRec.recipes.reduce(
-          (prev, recId) => {
-            const { prodsDetail, name } = recipeMap.byId[recId];
-
-            const detail = prodsDetail
-              .filter((detail) => detail.id === prod.id)
-              .pop();
-
-            if (!detail) {
-              requiredParameter("detail");
-            }
-            prev.recTotal += detail.quantity;
-            prev.recDisplay += name + ", ";
-
-            return prev;
-          },
-          { recTotal: 0, recDisplay: "" }
-        );
-        prod.quantity = prod.quantity + recTotal;
-        prod.recDisplay = recDisplay;
-
-        prod.quantityDisplay = getRecipeQuantity({
-          quantity: recTotal,
-          quantityType: prodWithRec.quantityType,
-        });
-      } else {
-      }
-      return prod;
-    };
-
-    const products = catShopList.prods
-      .map(buildProduct)
-      .map(setProductQty)
-      .map(addRecipeProds);
-
     prev.push({
       name,
       id,
-      products,
+      products: productList,
     });
-
     return prev;
   }, []);
 }
 
-function getQuantityLabel({ quantity, quantityType, quantityDefault }) {
-  const label = quantityType === "UNIT" ? "u" : "g";
-  if (!quantity) {
-    return quantityDefault + " " + label;
-  } else {
-    return quantity + " " + label;
-  }
+function rebuildProducts(products, recipeMap) {
+  return products.map((product) => {
+    const { recipes } = product;
+    const getRecipeData = (prev, recId) => {
+      const { prodsDetail, name } = recipeMap.byId[recId];
+
+      const detail = prodsDetail
+        .filter((detail) => detail.id === product.id)
+        .pop();
+
+      if (!detail) {
+        requiredParameter("detail");
+      }
+
+      prev.push({
+        name,
+        quantity: detail.quantity,
+      });
+      return prev;
+    };
+    const sumQuantitiesAndLabel = ({ totalRecipes, recipesLabel }, recipe) => {
+      totalRecipes = totalRecipes + recipe.quantity;
+      recipesLabel = recipesLabel + recipe.name + ", ";
+      return { totalRecipes, recipesLabel };
+    };
+    const { totalRecipes, recipesLabel } = recipes
+      .reduce(getRecipeData, [])
+      .reduce(sumQuantitiesAndLabel, {
+        totalRecipes: 0,
+        recipesLabel: "",
+      });
+    if (recipesLabel !== "") {
+      product.recDisplay = recipesLabel;
+      product.quantity = product.quantity + totalRecipes;
+      product.quantityDisplay = getQuantityLabel({
+        quantity: product.quantity,
+        quantityType: product.quantityType,
+      });
+    }
+
+    return product;
+  });
 }
 
-function getRecipeQuantity({ quantity, quantityType }) {
-  const label = quantityType === "UNIT" ? "u" : "g";
+function getQuantityLabel({ quantity, quantityType }) {
+  const label = quantityType === UNIT_TYPE ? UNIT_LABEL : WEIGHT_LABEL;
   return quantity + " " + label;
+}
+
+function buildProduct(prodId, productMap, products) {
+  const { name, id, catId, quantityDefault, quantityType } = productMap.byId[
+    prodId
+  ];
+  const { recipes } = products.byId[prodId];
+  return {
+    name,
+    id,
+    catId,
+    quantityDefault,
+    quantityType,
+    recipes,
+  };
 }

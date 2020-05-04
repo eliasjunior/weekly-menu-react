@@ -11,11 +11,15 @@ const initialState = {
 
 export default function ShoppingListReducer(state = initialState, action) {
   const { type, payload } = action;
-  const { checked = false } = payload;
   switch (type) {
     case ADD_SIMPLE_PRODUCT:
       const { catId, prodId } = payload;
-      return normalizeCatProd({ state, catId, prodId, checked });
+      return normalizeCatProd({
+        state,
+        catId,
+        prodId,
+        checked: payload.checked,
+      });
     case ADD_PRODS_RECIPE:
       const { recId, prods } = payload;
 
@@ -25,7 +29,7 @@ export default function ShoppingListReducer(state = initialState, action) {
           recId,
           catId,
           prodId: id,
-          checked,
+          checked: payload.checked,
         });
         return prev;
       }, state);
@@ -41,23 +45,31 @@ function normalizeCatProd({ state, catId, prodId, checked }) {
   const category = categories.byId[catId];
   const addSimpleProduct = () => {
     const product = products.byId[prodId];
-    products.selected = [...products.selected, prodId];
     if (!product) {
       products.byId[prodId] = {
         id: prodId,
+        recipes: [],
       };
     }
   };
   if (!category) {
+    // no category, means no prod as weel, state 0
     categories.byId[catId] = {
       id: catId,
       prods: [prodId],
     };
     addSimpleProduct();
+    products.selected = [...products.selected, prodId];
   } else {
     if (!checked) {
-      category.prods = [...category.prods, prodId];
-      addSimpleProduct();
+      // there is prod in the category, recipe add previously, state 1
+      if (!category.prods.includes(prodId)) {
+        category.prods = [...category.prods, prodId];
+        addSimpleProduct();
+      }
+      // state 2
+      // selected only belong to simple product and products.byId doesn't
+      products.selected = [...products.selected, prodId];
     } else {
       const product = products.byId[prodId];
       const isProdInRecipe =
@@ -66,10 +78,12 @@ function normalizeCatProd({ state, catId, prodId, checked }) {
       // remove from selected
       products.selected = products.selected.filter((pId) => pId !== prodId);
 
+      // state 3
       if (!isProdInRecipe) {
         category.prods = category.prods.filter((pId) => pId !== prodId);
         delete products.byId[prodId];
         // remove cat if there is no prods
+        // state 4
         if (category.prods.length === 0) {
           delete categories.byId[catId];
         }

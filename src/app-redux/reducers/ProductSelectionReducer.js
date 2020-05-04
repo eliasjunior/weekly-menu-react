@@ -6,7 +6,7 @@ import { requiredParameter } from "common/Util";
 
 const initialState = [];
 
-export default function ShopptingListReducer(state = initialState, action) {
+export default function ProductSelectionReducer(state = initialState, action) {
   const { type, payload } = action;
   switch (type) {
     case ADD_SELECTED_PROD:
