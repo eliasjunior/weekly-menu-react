@@ -6,9 +6,11 @@ import {
   DialogContent,
   TextField,
   DialogActions,
+  Select,
 } from "@material-ui/core";
 import FormChildAction from "../common/FormChildAction";
 import { requiredParameter } from "common/Util";
+import { UNIT_TYPE, WEIGHT_TYPE } from "./product/Constant";
 
 function FormDialog({
   onDisplay = requiredParameter("onDisplay"),
@@ -33,6 +35,13 @@ function FormDialog({
             defaultValue={form.value}
             onChange={onChangeName}
           ></TextField>
+          <div>
+            <label>Type</label>
+            <select onChange={(e) => console.log(e.target.value)}>
+              <option value={UNIT_TYPE}>Unit</option>
+              <option value={WEIGHT_TYPE}>Weight</option>
+            </select>
+          </div>
         </DialogContent>
         <DialogActions>
           <FormChildAction
