@@ -35,13 +35,6 @@ function FormDialog({
             defaultValue={form.value}
             onChange={onChangeName}
           ></TextField>
-          <div>
-            <label>Type</label>
-            <select onChange={(e) => console.log(e.target.value)}>
-              <option value={UNIT_TYPE}>Unit</option>
-              <option value={WEIGHT_TYPE}>Weight</option>
-            </select>
-          </div>
         </DialogContent>
         <DialogActions>
           <FormChildAction
