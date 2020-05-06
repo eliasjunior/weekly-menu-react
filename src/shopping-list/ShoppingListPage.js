@@ -8,7 +8,6 @@ import { setDisplatList } from "app-redux/actions/ListFilterAction";
 import CategoryList from "inventory/category/components";
 import {
   buildShoppingListDisplay,
-  buildProduct,
   mergeRecipeProducts,
 } from "./ShoppingHelper";
 import {
