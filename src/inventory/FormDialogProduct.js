@@ -6,7 +6,6 @@ import {
   DialogContent,
   TextField,
   DialogActions,
-  Select,
 } from "@material-ui/core";
 import FormChildAction from "../common/FormChildAction";
 import { requiredParameter } from "common/Util";
@@ -48,7 +47,6 @@ function FormDialogProduct({
         <DialogActions>
           <FormChildAction
             onActionMethod={async () => {
-              console.log("sending", name, quantityType);
               onActionMethod({ name, quantityType });
             }}
             onCloseDialog={onClose}
