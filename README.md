@@ -2,6 +2,9 @@
 
 ## 2020 Fenix Program
 
+### Sprint 07/05 - 14/05
+- shopping list update
+- Start shopping list history/list
 
 ### Sprint 07/04 - 14/04
 
