@@ -6,11 +6,11 @@ import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { Link } from "react-router-dom";
 import RecipeListComponent from "./RecipeListComponent";
 import CommonStyles from "styles/CommonStyles";
-import { LOCATION } from "common/AppConstant";
+import { LOCATION, parentComponent } from "common/AppConstant";
 import { formViewAction } from "app-redux/actions/ProductFormAction";
 import { setDisplatList } from "app-redux/actions/ListFilterAction";
 import { loadProductsToRecipe } from "../RecipeHelper";
-import { setPageTitle } from "app-redux/actions/PageAction";
+import { setPageTitle, setPageLocation } from "app-redux/actions/PageAction";
 
 function RecipeListPage({ classes }) {
   const recipes = useSelector((state) => state.recipes, shallowEqual);
@@ -21,6 +21,7 @@ function RecipeListPage({ classes }) {
   //Initial sets to the children
 
   dispatch(setDisplatList(recipesWithProducts));
+  dispatch(setPageLocation(parentComponent.RECIPE_LIST_PAGE));
   dispatch(setPageTitle("Recipes"));
   dispatch(formViewAction());
 
