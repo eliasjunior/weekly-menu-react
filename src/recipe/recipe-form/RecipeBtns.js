@@ -10,7 +10,6 @@ import {
 } from "app-redux/actions/RecipesActions";
 import { isRecipeFormValid } from "./FormValidation";
 
-// classes from commonSytles below! withStyles(CommmonStyles)
 function RecipeBtns({ classes }) {
   const dispatch = useDispatch();
   const currentRecipe = useSelector(
@@ -21,23 +20,18 @@ function RecipeBtns({ classes }) {
   const quantityMap = useSelector((state) => state.quantityMap);
   const productMap = useSelector((state) => state.products);
 
-  console.log("FUCKING ", productMap);
-
   const { name, id } = currentRecipe;
   const combinedClasses = `${classes.floatingBtn}`;
 
-  //TODO review here
   const prodsDetail = selectedProducts.reduce((prev, id) => {
     const quantity = quantityMap[id]
       ? quantityMap[id]
       : productMap.byId[id].quantityDefault;
 
-    const prodsDetail = {
+    prev.push({
       id,
       quantity,
-    };
-    console.log("prodsDetail", prodsDetail);
-    prev.push(prodsDetail);
+    });
     return prev;
   }, []);
 
@@ -47,9 +41,7 @@ function RecipeBtns({ classes }) {
         name,
         prodsDetail,
       };
-      console.log(prodsDetail);
       await dispatch(createRecipeAsync(recipe));
-      console.log(" ---- DONE! ---- ");
     }
   };
   const handleUpdate = async () => {
@@ -60,7 +52,6 @@ function RecipeBtns({ classes }) {
         prodsDetail,
       };
       await dispatch(updateRecipeAsync(recipe));
-      console.log(" ---- LORD VADER! DONE ---- ");
     }
   };
   const actionButton = () => {
