@@ -32,9 +32,7 @@ const CategoryDisplayHelper = {
   },
   selectAllBtn(parent) {
     return {
-      display:
-        parent === parentComponent.RECIPE_PAGE ||
-        parent === parentComponent.SHOPPING_LIST_PAGE,
+      display: parent === parentComponent.RECIPE_PAGE,
     };
   },
   filterInputVisibility(parent) {
