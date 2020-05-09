@@ -1,6 +1,6 @@
 import React from "react";
 import CloneDeep from "lodash.clonedeep";
-import ShoppingCreateActions from "./ShoppingCreateActions";
+import ShoppingCreateBtns from "./ShoppingCreateBtns";
 import CommonErrorBoundary from "../error-handlers/CommonErrorBoundary";
 import { useSelector, useDispatch } from "react-redux";
 import { setPageTitle, setPageLocation } from "app-redux/actions/PageAction";
@@ -47,7 +47,7 @@ function ShoppingListPage() {
   return (
     <div>
       <CommonErrorBoundary>
-        <ShoppingCreateActions></ShoppingCreateActions>
+        <ShoppingCreateBtns></ShoppingCreateBtns>
         <CategoryList></CategoryList>
       </CommonErrorBoundary>
     </div>
