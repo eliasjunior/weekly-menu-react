@@ -6,8 +6,13 @@ import { withStyles, Fab } from "@material-ui/core";
 import IncludeIcon from "@material-ui/icons/Receipt";
 import SaveIcon from "@material-ui/icons/Save";
 import Shop from "@material-ui/icons/ShoppingCart";
+import { useDispatch, useSelector } from "react-redux";
+import { buildShopListPayload } from "./ShoppingListPagePresenter";
 
-function ShoppingCreateActions({ classes }) {
+function ShoppingCreateBtns({ classes }) {
+  const dispatch = useDispatch();
+  const shoppingList = useSelector((state) => state.shoppingList);
+
   const { recipeList, pickProducts } = LOCATION;
   const combinedClasses = `${classes.floatingPadding} ${classes.floatingBtn} gridFloatingBtn`;
   const { path: linkRecipe } = recipeList;
@@ -24,11 +29,19 @@ function ShoppingCreateActions({ classes }) {
           <Shop />
         </Link>
       </Fab>
-      <Fab color="secondary" onClick={() => console.log("not yet")}>
+      <Fab
+        color="secondary"
+        onClick={() => {
+          //get products
+          const payload = buildShopListPayload(shoppingList.products);
+
+          console.log("save ----", payload);
+        }}
+      >
         <SaveIcon />
       </Fab>
     </div>
   );
 }
 
-export default withStyles(CommmonStyles)(ShoppingCreateActions);
+export default withStyles(CommmonStyles)(ShoppingCreateBtns);
