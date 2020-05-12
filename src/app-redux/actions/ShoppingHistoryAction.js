@@ -1,6 +1,7 @@
 import { loadingSomething } from "./LoadingAction";
 import { putShoppingList, postShoppingList } from "shopping-list/presenter";
 import { afterResquest, afterRequestError } from "./common";
+import { requiredParameter } from "common/Util";
 export const UPDATE_SHOPPING_LIST = "UPDATE_SHOPPING_LIST";
 export const CREATE_SHOPPING_LIST = "CREATE_SHOPPING_LIST";
 
