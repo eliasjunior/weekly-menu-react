@@ -7,7 +7,8 @@ import IncludeIcon from "@material-ui/icons/Receipt";
 import SaveIcon from "@material-ui/icons/Save";
 import Shop from "@material-ui/icons/ShoppingCart";
 import { useDispatch, useSelector } from "react-redux";
-import { buildShopListPayload } from "./ShoppingListPagePresenter";
+import { createShoppingListAsync } from "app-redux/actions/ShoppingListAction";
+import { buildShopListPayload } from "./presenter";
 
 function ShoppingCreateBtns({ classes }) {
   const dispatch = useDispatch();
@@ -31,9 +32,11 @@ function ShoppingCreateBtns({ classes }) {
       </Fab>
       <Fab
         color="secondary"
-        onClick={() => {
+        onClick={async () => {
           //get products
           const payload = buildShopListPayload(shoppingList.products);
+
+          dispatch(createShoppingListAsync(payload));
 
           console.log("save ----", payload);
         }}
