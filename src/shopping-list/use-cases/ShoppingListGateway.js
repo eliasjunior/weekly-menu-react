@@ -1,4 +1,4 @@
-import { shoppingListConverter, shoppingMapper } from "./ShoppingListMapper";
+import { shoppingListConverter, shoppingMapper } from "./shoppingListMapper";
 
 export default function ShoppingListGateway({ httpAPI }) {
   return {
