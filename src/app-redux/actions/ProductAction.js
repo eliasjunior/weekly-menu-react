@@ -65,7 +65,7 @@ export function createProductAsync(
     try {
       const data = await postProduct(product);
       product.id = data.id;
-      dispatch(createProduct(product));
+      dispatch(createProduct(data));
       // Category is connect with product, it make sense to update cat here as well
       category.catProds.push(product.id);
       dispatch(updateCategoryAsync(category));
