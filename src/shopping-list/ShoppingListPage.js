@@ -9,7 +9,7 @@ import CategoryList from "inventory/category/components";
 import {
   buildShoppingListDisplay,
   mergeRecipeProducts,
-} from "./ShoppingHelper";
+} from "shopping-list/helpers/ShoppingHelper";;
 import {
   quantitiesSelector,
   productMapSelector,
