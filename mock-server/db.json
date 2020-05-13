@@ -6,7 +6,7 @@
       "catProds": [
         "prod_1",
         "prod_2",
-        "RYnOOLf"
+        "R0V05bS"
       ]
     },
     {
@@ -51,9 +51,10 @@
       "catId": "cat_2"
     },
     {
-      "name": "Sugar Granular",
-      "catId": "cat_1",
-      "_id": "RYnOOLf"
+      "_id": "R0V05bS",
+      "name": "Sugar",
+      "quantityType": "UNIT",
+      "catId": "cat_1"
     }
   ],
   "recipes": [
@@ -86,5 +87,30 @@
       "_id": 14
     }
   ],
-  "shoppingList": []
+  "shoppingList": [
+    {
+      "products": [
+        {
+          "id": "R0V05bS",
+          "recipes": [],
+          "selected": true
+        },
+        {
+          "id": "prod_5",
+          "recipes": [
+            14
+          ],
+          "selected": true
+        },
+        {
+          "id": "prod_1",
+          "recipes": [
+            14
+          ],
+          "selected": false
+        }
+      ],
+      "_id": 1
+    }
+  ]
 }
