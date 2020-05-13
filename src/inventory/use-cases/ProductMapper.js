@@ -2,9 +2,9 @@ import { requiredParameter } from "common/Util";
 
 export function productMapper({
   _id = requiredParameter("_id"),
-  name,
-  quantityType,
-  catId,
+  name = requiredParameter("name product"),
+  quantityType = requiredParameter("quantityType"),
+  catId = requiredParameter("catId product"),
 }) {
   return {
     id: _id,
@@ -15,7 +15,18 @@ export function productMapper({
   };
 }
 
-export function productConverter({ id, name, quantityType, catId }) {
+export function productConverter(
+  {
+    id,
+    name = requiredParameter("name product"),
+    quantityType = requiredParameter("quantityType"),
+    catId = requiredParameter("catId product"),
+  },
+  isUpdate = false
+) {
+  if (isUpdate && !id) {
+    requiredParameter("id product");
+  }
   return {
     _id: id,
     name,
@@ -31,8 +42,8 @@ export function productListMapper(list) {
     {
       _id: id = requiredParameter("id product"),
       name = requiredParameter("name product"),
-      quantityType,
-      catId,
+      quantityType = requiredParameter("name product"),
+      catId = requiredParameter("name product"),
     }
   ) => {
     prev.byId[id] = {
