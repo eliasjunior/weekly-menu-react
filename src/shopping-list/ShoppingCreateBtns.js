@@ -33,12 +33,8 @@ function ShoppingCreateBtns({ classes }) {
       <Fab
         color="secondary"
         onClick={async () => {
-          //get products
           const payload = buildShopListPayload(shoppingList.products);
-
           dispatch(createShoppingListAsync(payload));
-
-          console.log("save ----", payload);
         }}
       >
         <SaveIcon />
