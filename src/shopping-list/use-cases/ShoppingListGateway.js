@@ -1,7 +1,19 @@
-import { shoppingListConverter, shoppingMapper } from "./shoppingListMapper";
+import {
+  shoppingListConverter,
+  shoppingMapper,
+  shoppingListMapper,
+} from "./shoppingListMapper";
 
 export default function ShoppingListGateway({ httpAPI }) {
   return {
+    getShoppingList: async () => {
+      try {
+        const data = await httpAPI.get("shoppingList");
+        return shoppingListMapper(data);
+      } catch (error) {
+        throw error;
+      }
+    },
     saveShoppingListAsync: async (shoppingList) => {
       try {
         const data = await httpAPI.post(
