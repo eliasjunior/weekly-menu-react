@@ -1,16 +1,21 @@
-
 import ShoppingListUseCase from "../use-cases";
 import { requiredParameter } from "common/Util";
 
-const { saveShoppingListAsync, updateShoppingListAsync } = ShoppingListUseCase;
+const {
+  saveShoppingListAsync,
+  updateShoppingListAsync,
+  getShoppingList,
+} = ShoppingListUseCase;
 
 export const postShoppingList = saveShoppingListAsync;
 export const putShoppingList = updateShoppingListAsync;
+export const getShoppingHistory = getShoppingList;
 
-export function buildShopListPayload({
-  byId = requiredParameter("byId"),
-  selected = requiredParameter("byId"),
-}) {
+//TODO move this to helpers folder
+export function buildShopListPayload(
+  { byId = requiredParameter("byId"), selected = requiredParameter("byId") },
+  APIs = {}
+) {
   const result = Object.entries(byId).reduce((prev, [_, prod]) => {
     prev.push({
       id: prod.id,
@@ -20,8 +25,8 @@ export function buildShopListPayload({
 
     return prev;
   }, []);
-
-  return { products: result };
+  const { timeAPI = { getTimeLabel: getTimeLabel() } } = APIs;
+  return { products: result, name: timeAPI.getTimeLabel };
 }
 
 export function normalizeCatProd({ state, catId, prodId, checked }) {
@@ -144,4 +149,90 @@ export function normalizeProdRecipe({ state, recId, catId, prodId, checked }) {
     products: { ...products },
     recipes: { ...recipes },
   };
+}
+
+export function buildFromShopHistory({ productMap, shoppingHistory }) {
+  const { categories } = normalizeCatShopHistory({
+    productMap,
+    shoppingHistory,
+  });
+  const { products } = normalizeProdShopHistory(shoppingHistory);
+  const { recipes } = normalizeRecipeShopHistory(shoppingHistory);
+  console.log("categories", categories);
+  console.log("products", products);
+  console.log("recipes", recipes);
+
+  return {
+    categories,
+    products,
+    recipes,
+  };
+}
+
+export function normalizeCatShopHistory({
+  productMap = requiredParameter("productMap"),
+  shoppingHistory = requiredParameter("shoppingHistory"),
+}) {
+  const { products } = shoppingHistory;
+  const byId = products.reduce((prev, prod) => {
+    const { byId = requiredParameter("byId") } = productMap;
+    if (!byId[prod.id]) {
+      requiredParameter("product map");
+    }
+    const catId = byId[prod.id].catId;
+
+    if (!prev[catId]) {
+      prev[catId] = { id: catId, prods: [prod.id] };
+    } else {
+      prev[catId].prods.push(prod.id);
+    }
+    return prev;
+  }, {});
+  return { categories: { byId } };
+}
+
+export function normalizeProdShopHistory({
+  products = requiredParameter("products"),
+}) {
+  const result = products.reduce(
+    (prev, { id, recipes, selected }) => {
+      prev.byId[id] = { id, recipes };
+      if (selected) {
+        prev.selected.push(id);
+      }
+      return prev;
+    },
+    { byId: {}, selected: [] }
+  );
+  return { products: result };
+}
+
+export function normalizeRecipeShopHistory({
+  products = requiredParameter("products"),
+}) {
+  const recSet = products.reduce((prev, { recipes }) => {
+    recipes.forEach((recId) => {
+      prev.add(recId);
+    });
+    return prev;
+  }, new Set());
+
+  const byId = Array.from(recSet).reduce((prev, id) => {
+    prev[id] = { id };
+    return prev;
+  }, {});
+
+  return { recipes: { byId } };
+}
+
+function getTimeLabel() {
+  const now = new Date();
+  return now
+    .toDateString()
+    .concat(" ")
+    .concat(now.getHours())
+    .concat(":")
+    .concat(now.getMinutes())
+    .concat(":")
+    .concat(now.getSeconds());
 }
