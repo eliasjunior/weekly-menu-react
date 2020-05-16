@@ -2,6 +2,10 @@
 
 ## 2020 Fenix Program
 
+### Spring 16/05 - 23/05
+- Bugs shopping list, add + 1 on label
+- test create all, fix bugs
+
 ### Sprint 07/05 - 14/05
 - shopping list update
 - Start shopping list history/list
