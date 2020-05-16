@@ -89,6 +89,7 @@
   ],
   "shoppingList": [
     {
+      "name": "Today",
       "products": [
         {
           "id": "R0V05bS",
@@ -111,6 +112,58 @@
         }
       ],
       "_id": 1
+    },
+    {
+      "name": "Thu May 14 2020",
+      "products": [
+        {
+          "id": "prod_5",
+          "recipes": [],
+          "selected": true
+        }
+      ],
+      "_id": 2
+    },
+    {
+      "name": "Thu May 14 2020",
+      "products": [
+        {
+          "id": "R0V05bS",
+          "recipes": [],
+          "selected": true
+        },
+        {
+          "id": "prod_5",
+          "recipes": [],
+          "selected": true
+        }
+      ],
+      "_id": 3
+    },
+    {
+      "name": "Thu May 14 2020 23:20:49",
+      "products": [
+        {
+          "id": "R0V05bS",
+          "recipes": [],
+          "selected": true
+        },
+        {
+          "id": "prod_1",
+          "recipes": [
+            13
+          ],
+          "selected": false
+        },
+        {
+          "id": "prod_2",
+          "recipes": [
+            13
+          ],
+          "selected": false
+        }
+      ],
+      "_id": 4
     }
   ]
 }
