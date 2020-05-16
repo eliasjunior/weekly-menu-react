@@ -6,11 +6,33 @@ export function shoppingListMapper(list) {
 
 export function shoppingMapper({
   _id = requiredParameter("_id shoppingList"),
+  name = requiredParameter("name date"),
   products = requiredParameter("products"),
 }) {
   return {
     id: _id,
+    name,
     products: products.map((prod) => productMap(prod)),
+  };
+}
+
+export function shoppingListConverter(shoppingList, isNew = false) {
+  const {
+    id,
+    products = requiredParameter("products"),
+    name = requiredParameter("name date"),
+  } = shoppingList;
+  //isNew is to guarantee that the id was sent, on the update case
+  if (!isNew) {
+    if (!id) {
+      requiredParameter("id shoppingList");
+    }
+  }
+
+  return {
+    _id: id,
+    name,
+    products: products.map((prod) => productConverter(prod)),
   };
 }
 
@@ -35,20 +57,5 @@ function productConverter({
     id,
     recipes,
     selected,
-  };
-}
-
-export function shoppingListConverter(shoppingList, isNew = false) {
-  const { id, products = requiredParameter("products") } = shoppingList;
-  //isNew is to guarantee that the id was sent, on the update case
-  if (!isNew) {
-    if (!id) {
-      requiredParameter("id shoppingList");
-    }
-  }
-
-  return {
-    _id: id,
-    products: products.map((prod) => productConverter(prod)),
   };
 }
