@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux";
 import { fetchCategoryAsync } from "app-redux/actions/InventoryActions";
 import { fetchRecipesAsync } from "app-redux/actions/RecipesActions";
 import { fetchProductsAsync } from "app-redux/actions/ProductAction";
+import { fetchShoppingHistoryAsync } from "app-redux/actions/ShoppingHistoryAction";
 
 function Weekly() {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ function Weekly() {
       dispatch(fetchCategoryAsync());
       dispatch(fetchRecipesAsync());
       dispatch(fetchProductsAsync());
+      dispatch(fetchShoppingHistoryAsync());
     }
     asyncFetch();
   }, []);
