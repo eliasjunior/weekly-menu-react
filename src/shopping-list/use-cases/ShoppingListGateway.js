@@ -2,7 +2,7 @@ import {
   shoppingListConverter,
   shoppingMapper,
   shoppingListMapper,
-} from "./shoppingListMapper";
+} from "./ShoppingListMapper";
 
 export default function ShoppingListGateway({ httpAPI }) {
   return {
