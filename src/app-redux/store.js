@@ -14,6 +14,7 @@ import pageData from "app-redux/reducers/PageReducer";
 import quantityMap from "app-redux/reducers/QuantityPickReducer";
 import shoppingList from "app-redux/reducers/ShoppingListReducer";
 import selectedProducts from "app-redux/reducers/ProductSelectionReducer";
+import shoppingHistory from "app-redux/reducers/ShoppingHistoryReducer";
 
 const rootReducer = combineReducers({
   categories,
@@ -28,6 +29,7 @@ const rootReducer = combineReducers({
   quantityMap,
   shoppingList,
   selectedProducts,
+  shoppingHistory,
 });
 
 const store = createStore(
