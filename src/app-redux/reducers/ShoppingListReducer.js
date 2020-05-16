@@ -1,9 +1,14 @@
 import {
   ADD_SIMPLE_PRODUCT,
   ADD_PRODS_RECIPE,
+  EDIT_SHOPPING_LIST,
 } from "app-redux/actions/ShoppingListAction";
 
-import { normalizeCatProd, normalizeProdRecipe } from "shopping-list/presenter";
+import {
+  normalizeCatProd,
+  normalizeProdRecipe,
+  buildFromShopHistory,
+} from "shopping-list/presenter";
 
 const initialState = {
   categories: { byId: {} },
@@ -11,8 +16,10 @@ const initialState = {
   recipes: { byId: {} },
 };
 
-export default function ShoppingListReducer(state = initialState, action) {
-  const { type, payload } = action;
+export default function ShoppingListReducer(
+  state = initialState,
+  { type, payload }
+) {
   switch (type) {
     case ADD_SIMPLE_PRODUCT:
       const { catId, prodId } = payload;
@@ -35,7 +42,20 @@ export default function ShoppingListReducer(state = initialState, action) {
         });
         return prev;
       }, state);
+    case EDIT_SHOPPING_LIST:
+      const { productMap, shoppingHistory } = payload;
 
+      try {
+        const result = buildFromShopHistory({
+          productMap,
+          shoppingHistory,
+        });
+
+        return result;
+      } catch (error) {
+        console.error(error);
+        return state;
+      }
     default:
       return state;
   }
