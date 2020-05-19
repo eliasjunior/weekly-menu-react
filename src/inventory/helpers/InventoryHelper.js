@@ -51,7 +51,7 @@ export function normalizeCategory(categories) {
 }
 
 function validateProd(prodId, products) {
-  const product = products.byId[prodId];
+  const product = { ...products.byId[prodId] };
   if (!product) {
     requiredParameter("ProdId in cat");
   }
