@@ -3,33 +3,36 @@
 ## 2020 Fenix Program
 
 ### Spring 16/05 - 23/05
-- Bugs shopping list, add + 1 on label
+
+- ~~Bugs shopping list, add + 1 on label~~
 - test create all, fix bugs
+- New Category -> refresh after save
+- Product Update -> Update unit missing
+- ~~New Shopping listadd --> Name shopping list after save~~
 
 ### Sprint 07/05 - 14/05
+
 - shopping list update
 - Start shopping list history/list
 
 ### Sprint 07/04 - 14/04
 
 0 - Product CRUD (2)
-  Create TempAPI 
+Create TempAPI
 
-  Save, update delete, remove from cat 
+Save, update delete, remove from cat
 
-1 - Select Recipe   (1)
+1 - Select Recipe (1)
 2- shoppings refactoring (3)
-   
-
 
 ### Sprint 31/03 - 07/04
 
 0 - FIX display list --> DONE
 1 - Update Recipe List - (3) - DONE
 2 - Search name - (1) DONE
-    On the top page (Inventory, Recipe)
-   dispatch(listFilterAction("", recipes));
-   I need a action and reducer to CREATE_DISPLAY_LIST, that copies from the DB   
+On the top page (Inventory, Recipe)
+dispatch(listFilterAction("", recipes));
+I need a action and reducer to CREATE_DISPLAY_LIST, that copies from the DB  
 3 - **SPIKE** convert the data to DB format, see https://github.com/eliasjunior/normalize/blob/master/normalization/normalization-instructions.txt (TIME-BOXED 1)
 
 ## Tests
