@@ -17,6 +17,24 @@
         "prod_6",
         "prod_4"
       ]
+    },
+    {
+      "_id": "5z3fXUc",
+      "name": "Meet",
+      "catProds": [
+        "v1ZoxZk",
+        "goEApFn",
+        "gk9UYvG",
+        "BRdS3go"
+      ]
+    },
+    {
+      "_id": "Im46Ri8",
+      "name": "Frozens",
+      "catProds": [
+        "r1UhGrT",
+        "8BT6btA"
+      ]
     }
   ],
   "products": [
@@ -55,6 +73,42 @@
       "name": "Sugar",
       "quantityType": "UNIT",
       "catId": "cat_1"
+    },
+    {
+      "name": "Chicken breast",
+      "quantityType": "WEIGHT",
+      "catId": "5z3fXUc",
+      "_id": "v1ZoxZk"
+    },
+    {
+      "name": "Mince ",
+      "quantityType": "WEIGHT",
+      "catId": "5z3fXUc",
+      "_id": "goEApFn"
+    },
+    {
+      "name": "Pork Chops",
+      "quantityType": "WEIGHT",
+      "catId": "5z3fXUc",
+      "_id": "gk9UYvG"
+    },
+    {
+      "_id": "r1UhGrT",
+      "name": "Peass",
+      "quantityType": "WEIGHT",
+      "catId": "Im46Ri8"
+    },
+    {
+      "name": "Pizza",
+      "quantityType": "UNIT",
+      "catId": "Im46Ri8",
+      "_id": "8BT6btA"
+    },
+    {
+      "name": "Whole Chichen",
+      "quantityType": "UNIT",
+      "catId": "5z3fXUc",
+      "_id": "BRdS3go"
     }
   ],
   "recipes": [
@@ -85,6 +139,28 @@
         }
       ],
       "_id": 14
+    },
+    {
+      "_id": 15,
+      "name": "Chicken special",
+      "prodsDetail": [
+        {
+          "id": "r1UhGrT",
+          "quantity": 200
+        },
+        {
+          "id": "v1ZoxZk",
+          "quantity": 200
+        },
+        {
+          "id": "gk9UYvG",
+          "quantity": 200
+        },
+        {
+          "id": "BRdS3go",
+          "quantity": 1
+        }
+      ]
     }
   ],
   "shoppingList": [
@@ -164,6 +240,123 @@
         }
       ],
       "_id": 4
+    },
+    {
+      "name": "Sun May 17 2020 16:56:5",
+      "products": [
+        {
+          "id": "r1UhGrT",
+          "recipes": [
+            15
+          ],
+          "selected": true
+        },
+        {
+          "id": "v1ZoxZk",
+          "recipes": [
+            15
+          ],
+          "selected": false
+        },
+        {
+          "id": "gk9UYvG",
+          "recipes": [
+            15
+          ],
+          "selected": false
+        },
+        {
+          "id": "BRdS3go",
+          "recipes": [
+            15
+          ],
+          "selected": false
+        }
+      ],
+      "_id": 5
+    },
+    {
+      "name": "Tue May 19 2020 23:16:34",
+      "products": [
+        {
+          "id": "prod_1",
+          "recipes": [],
+          "selected": true
+        },
+        {
+          "id": "prod_2",
+          "recipes": [],
+          "selected": true
+        },
+        {
+          "id": "prod_5",
+          "recipes": [],
+          "selected": true
+        }
+      ],
+      "_id": 6
+    },
+    {
+      "name": "Tue May 19 2020 23:16:56",
+      "products": [
+        {
+          "id": "prod_1",
+          "recipes": [],
+          "selected": true
+        },
+        {
+          "id": "prod_2",
+          "recipes": [],
+          "selected": true
+        },
+        {
+          "id": "prod_5",
+          "recipes": [],
+          "selected": true
+        },
+        {
+          "id": "prod_6",
+          "recipes": [],
+          "selected": true
+        },
+        {
+          "id": "prod_4",
+          "recipes": [],
+          "selected": true
+        }
+      ],
+      "_id": 7
+    },
+    {
+      "name": "Tue May 19 2020 23:17:14",
+      "products": [
+        {
+          "id": "prod_1",
+          "recipes": [],
+          "selected": true
+        },
+        {
+          "id": "prod_2",
+          "recipes": [],
+          "selected": true
+        },
+        {
+          "id": "prod_5",
+          "recipes": [],
+          "selected": true
+        },
+        {
+          "id": "prod_6",
+          "recipes": [],
+          "selected": true
+        },
+        {
+          "id": "prod_4",
+          "recipes": [],
+          "selected": true
+        }
+      ],
+      "_id": 8
     }
   ]
 }
