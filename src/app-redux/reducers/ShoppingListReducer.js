@@ -2,6 +2,7 @@ import {
   ADD_SIMPLE_PRODUCT,
   ADD_PRODS_RECIPE,
   EDIT_SHOPPING_LIST,
+  CLEAR_SHOPPING_LIST,
 } from "app-redux/actions/ShoppingListAction";
 
 import {
@@ -56,6 +57,9 @@ export default function ShoppingListReducer(
         console.error(error);
         return state;
       }
+    case CLEAR_SHOPPING_LIST: {
+      return initialState;
+    }
     default:
       return state;
   }
