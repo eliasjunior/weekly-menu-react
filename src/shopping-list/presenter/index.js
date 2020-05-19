@@ -158,11 +158,10 @@ export function buildFromShopHistory({ productMap, shoppingHistory }) {
   });
   const { products } = normalizeProdShopHistory(shoppingHistory);
   const { recipes } = normalizeRecipeShopHistory(shoppingHistory);
-  console.log("categories", categories);
-  console.log("products", products);
-  console.log("recipes", recipes);
 
   return {
+    id: shoppingHistory.id,
+    name: shoppingHistory.name,
     categories,
     products,
     recipes,
