@@ -1,27 +1,40 @@
 import {
   SET_FILTER_NAME,
-  SET_DISPLAY_LIST
+  SET_DISPLAY_LIST,
+  FLAG_PICKED_SHOP_PROD,
 } from "app-redux/actions/ListFilterAction";
-import CloneDeep from "lodash.clonedeep";
 const initialState = {
   displayList: [],
-  textFilter: ""
+  textFilter: "",
 };
-export default function ListFilterReducer(state = initialState, action) {
-  const { type, textFilter, listDB } = action;
+export default function ListFilterReducer(
+  state = initialState,
+  { type, payload }
+) {
   switch (type) {
     case SET_FILTER_NAME:
-      //TODO remove CloneDeep from here, pass as a copy instead, no dependency
-      const tempList = CloneDeep(listDB);
-      const result = tempList.filter(parentList => {
-        parentList.products = parentList.products.filter(prod =>
-          compareIgnoreCase(prod.name, textFilter)
+      const tempList = payload.listDB;
+      const result = tempList.filter((parentList) => {
+        parentList.products = parentList.products.filter((prod) =>
+          compareIgnoreCase(prod.name, payload.textFilter)
         );
         return parentList.products.length > 0;
       });
-      return { textFilter, displayList: result };
+      return { textFilter: payload.textFilter, displayList: result };
     case SET_DISPLAY_LIST:
-      return { textFilter: "", displayList: CloneDeep(listDB) };
+      return { textFilter: "", displayList: payload.listDB };
+    case FLAG_PICKED_SHOP_PROD:
+      const newList = state.displayList.map((cat) => {
+        const prods = [...cat.products];
+        prods.forEach((prod) => {
+          if (prod.id === payload.id) {
+            prod.picked = payload.picked;
+          }
+        });
+        cat.products = prods;
+        return cat;
+      });
+      return { textFilter: state.textFilter, displayList: newList };
     default:
       return state;
   }
