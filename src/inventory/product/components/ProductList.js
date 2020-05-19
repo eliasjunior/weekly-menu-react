@@ -9,9 +9,6 @@ import { useSelector } from "react-redux";
 export default function ProductList({ products = [] }) {
   const location = useSelector((state) => state.pageData.location);
   const listProducts = () => {
-    if (!products.length) {
-      return "";
-    }
     return products.map((product, index) => {
       return (
         <div key={index}>
