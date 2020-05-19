@@ -4,6 +4,7 @@ import {
   ListItem,
   Button,
   ListItemSecondaryAction,
+  ListItemText,
 } from "@material-ui/core";
 import { LOCATION, parentComponent } from "common/AppConstant";
 import { Link } from "react-router-dom";
@@ -18,18 +19,27 @@ function ShoppingListHistoryPage() {
 
   dispatch(setPageLocation(parentComponent.SHOPPING_LIST_PAGE));
   dispatch(setPageTitle("Shopping history"));
-  console.log(">>", shoppingHistory);
+
+  const getProductsCount = (id) => {
+    const count = shoppingHistory
+      .filter((shop) => shop.id === id)
+      .reduce((prev, shop) => {
+        prev = prev + shop.products.length;
+        return prev;
+      }, 0);
+
+    return `${count} products`;
+  };
 
   return (
     <List>
       {shoppingHistory.map((item) => {
         return (
           <ListItem key={item.id}>
-            <Button color="primary" variant="outlined">
-              <Link to={`${LOCATION.shopping.path}/${item.id}`}>
-                {item.name}
-              </Link>
-            </Button>
+            <ListItemText
+              primary={item.name}
+              secondary={getProductsCount(item.id)}
+            ></ListItemText>
             <ListItemSecondaryAction>
               <Button color="secondary" variant="outlined">
                 <Link
