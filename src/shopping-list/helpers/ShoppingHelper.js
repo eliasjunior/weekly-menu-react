@@ -63,7 +63,7 @@ function rebuildProducts(products, recipeMap) {
         .pop();
 
       if (!detail) {
-        requiredParameter("detail");
+        requiredParameter("prod detail");
       }
 
       prev.push({
@@ -83,9 +83,13 @@ function rebuildProducts(products, recipeMap) {
         totalRecipes: 0,
         recipesLabel: "",
       });
+
+    //TODO review these rules later
     if (recipesLabel !== "") {
       product.recDisplay = recipesLabel;
-      product.quantity = product.quantity + totalRecipes;
+      product.quantity = product.selected
+        ? product.quantity + totalRecipes
+        : totalRecipes;
       product.quantityDisplay = getQuantityLabel({
         quantity: product.quantity,
         quantityType: product.quantityType,
@@ -113,5 +117,6 @@ function buildProduct(prodId, productMap, products) {
     quantityDefault,
     quantityType,
     recipes,
+    selected: products.selected.filter((prodId) => prodId === id).length > 0,
   };
 }
