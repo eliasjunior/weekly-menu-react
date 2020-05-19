@@ -16,7 +16,7 @@ import {
 
 const initialState = [FORM_VIEW_LABEL];
 
-export default function (state = initialState, action) {
+export default function ProductFormReducer(state = initialState, action) {
   const { type } = action;
 
   switch (type) {
@@ -29,7 +29,7 @@ export default function (state = initialState, action) {
     case PROD_PICKING_VIEW:
       return [BTN_SHOPPING_SELECTION, FORM_VIEW_LABEL, BTN_PICK_PROD];
     case PROD_SHOPPING_LIST_VIEW:
-      return [FORM_VIEW_LABEL, BTN_QDT_INFO];
+      return [BTN_QDT_INFO];
     default:
       return state;
   }
