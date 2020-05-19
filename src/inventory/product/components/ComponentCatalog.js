@@ -17,11 +17,9 @@ import {
   formEditAction,
   formViewAction,
   BTN_SHOPPING_SELECTION,
-} from "app-redux/actions/ProductFormAction";
-import {
-  FORM_VIEW_EDIT,
+  FORM_VIEW_EDIT, // form_view refer to the primary text field from the ListItem
   FORM_VIEW_LABEL,
-  BTN_EDIT_MODE,
+  BTN_EDIT_MODE, // secondary btns
   BTN_VIEW_MODE,
   BTN_SELECTION,
   BTN_PICK_PROD,
@@ -30,7 +28,7 @@ import {
 import { updateProductAsync } from "app-redux/actions/ProductAction";
 import ShoppingItemSelection from "components/ShoppingItemSelection";
 
-export default function ComponentCatalog({ product }) {
+function ComponentCatalog({ product }) {
   const dispatch = useDispatch();
 
   const [name, setName] = useState(product.name);
@@ -60,7 +58,6 @@ export default function ComponentCatalog({ product }) {
       </IconButton>
     );
   };
-
   return function (key) {
     switch (key) {
       case BTN_SELECTION:
@@ -72,7 +69,7 @@ export default function ComponentCatalog({ product }) {
           <TextField
             key={"TextField"}
             onChange={handleChangeName}
-            defaultValue={product.name}
+            defaultValue={name}
           ></TextField>
         );
       case FORM_VIEW_LABEL:
@@ -118,12 +115,18 @@ export default function ComponentCatalog({ product }) {
             quantityDefault={product.quantityDefault}
           ></Quantity>
         );
-      case BTN_QDT_INFO:
+      case BTN_QDT_INFO: //TODO change name
         return (
-          <QuantityBtnInfo
-            key={"QuantityBtnInfo"}
-            {...product}
-          ></QuantityBtnInfo>
+          <div key={"ListItemText"}>
+            <ListItemText
+              primary={name}
+              style={product.picked ? styles.textItemListTicked : {}}
+            ></ListItemText>
+            <QuantityBtnInfo
+              key={"QuantityBtnInfo"}
+              {...product}
+            ></QuantityBtnInfo>
+          </div>
         );
       case BTN_SHOPPING_SELECTION:
         return (
@@ -132,6 +135,10 @@ export default function ComponentCatalog({ product }) {
             product={product}
           ></ShoppingItemSelection>
         );
+      default:
+        return "";
     }
   };
 }
+
+export default ComponentCatalog;
