@@ -6,6 +6,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { setPageTitle, setPageLocation } from "app-redux/actions/PageAction";
 import { setDisplatList } from "app-redux/actions/ListFilterAction";
 import CategoryList from "inventory/category/components";
+import TickedShopList from "shopping-list/TickedShopList";
+import { Divider } from "@material-ui/core";
+import TopBtns from "./TopBtns";
 import {
   buildShoppingListDisplay,
   mergeRecipeProducts,
@@ -27,6 +30,9 @@ function ShoppingListPage() {
   const categories = CloneDeep(useSelector(categoriesSelector));
   const recipeMap = useSelector((state) => state.recipes);
   const shoppingListMap = useSelector((state) => state.shoppingList);
+  const title = shoppingListMap.name
+    ? shoppingListMap.name
+    : "New Shopping list";
 
   const tempShops = buildShoppingListDisplay({
     quantities,
@@ -37,20 +43,21 @@ function ShoppingListPage() {
 
   const listDisplay = mergeRecipeProducts(recipeMap, tempShops);
 
-  console.log("---", listDisplay);
+  console.log("---*", listDisplay);
 
   dispatch(setDisplatList(listDisplay));
   dispatch(setPageLocation(parentComponent.SHOPPING_LIST_PAGE));
   dispatch(formShoppingAction());
-  dispatch(setPageTitle("New Shopping list"));
+  dispatch(setPageTitle(title));
 
   return (
-    <div>
-      <CommonErrorBoundary>
-        <ShoppingCreateBtns></ShoppingCreateBtns>
-        <CategoryList></CategoryList>
-      </CommonErrorBoundary>
-    </div>
+    <CommonErrorBoundary>
+      <TopBtns list={listDisplay}></TopBtns>
+      <ShoppingCreateBtns></ShoppingCreateBtns>
+      <CategoryList></CategoryList>
+      <Divider></Divider>
+      <TickedShopList></TickedShopList>
+    </CommonErrorBoundary>
   );
 }
 
