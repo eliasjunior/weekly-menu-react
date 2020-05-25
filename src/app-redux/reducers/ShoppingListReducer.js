@@ -24,16 +24,18 @@ export default function ShoppingListReducer(
   switch (type) {
     case ADD_SIMPLE_PRODUCT:
       const { catId, prodId } = payload;
-      return normalizeCatProd({
+      const shopWithNewProd = normalizeCatProd({
         state,
         catId,
         prodId,
         checked: payload.checked,
       });
+      shopWithNewProd.id = state.id;
+      shopWithNewProd.name = state.name;
+      return shopWithNewProd;
     case ADD_PRODS_RECIPE:
       const { recId, prods } = payload;
-
-      return prods.reduce((prev, { id, catId }) => {
+      const shopWithNewRecipe = prods.reduce((prev, { id, catId }) => {
         prev = normalizeProdRecipe({
           state: prev,
           recId,
@@ -43,15 +45,16 @@ export default function ShoppingListReducer(
         });
         return prev;
       }, state);
+      shopWithNewRecipe.id = state.id;
+      shopWithNewRecipe.name = state.name;
+      return shopWithNewRecipe;
     case EDIT_SHOPPING_LIST:
       const { productMap, shoppingHistory } = payload;
-
       try {
         const result = buildFromShopHistory({
           productMap,
           shoppingHistory,
         });
-
         return result;
       } catch (error) {
         console.error(error);
