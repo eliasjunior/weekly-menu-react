@@ -23,10 +23,8 @@ export function shoppingListConverter(shoppingList, isNew = false) {
     name = requiredParameter("name date"),
   } = shoppingList;
   //isNew is to guarantee that the id was sent, on the update case
-  if (!isNew) {
-    if (!id) {
-      requiredParameter("id shoppingList");
-    }
+  if (!isNew && !id) {
+    requiredParameter("id shoppingList");
   }
 
   return {
