@@ -12,10 +12,11 @@ export const putShoppingList = updateShoppingListAsync;
 export const getShoppingHistory = getShoppingList;
 
 //TODO move this to helpers folder
-export function buildShopListPayload(
-  { byId = requiredParameter("byId"), selected = requiredParameter("byId") },
-  APIs = {}
-) {
+export function buildShopListPayload({ products, id }, APIs = {}) {
+  const {
+    byId = requiredParameter("byId"),
+    selected = requiredParameter("byId"),
+  } = products;
   const result = Object.entries(byId).reduce((prev, [_, prod]) => {
     prev.push({
       id: prod.id,
@@ -26,7 +27,7 @@ export function buildShopListPayload(
     return prev;
   }, []);
   const { timeAPI = { getTimeLabel: getTimeLabel() } } = APIs;
-  return { products: result, name: timeAPI.getTimeLabel };
+  return { products: result, name: timeAPI.getTimeLabel, id };
 }
 
 export function normalizeCatProd({ state, catId, prodId, checked }) {
