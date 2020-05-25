@@ -5,25 +5,20 @@ import ItemSelection from "components/ItemSelection";
 import Quantity from "components/Quantity";
 import QuantityBtnInfo from "components/QuantityBtnInfo";
 import CreateIcon from "@material-ui/icons/Create";
-import SaveIcon from "@material-ui/icons/Save";
-import Restore from "@material-ui/icons/Restore";
-import TextField from "@material-ui/core/TextField";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
 import DeleteIcon from "@material-ui/icons/Delete";
 import IconButton from "@material-ui/core/IconButton";
 import { successMessage } from "app-redux/actions/AlertHandlerAction";
+import FormDialogProduct from "inventory/FormDialogProduct";
+import { isProdFormValid } from "inventory/product/FormValidation";
 import {
-  formEditAction,
-  formViewAction,
   BTN_SHOPPING_SELECTION,
-  FORM_VIEW_EDIT, // form_view refer to the primary text field from the ListItem
-  FORM_VIEW_LABEL,
-  BTN_EDIT_MODE, // secondary btns
-  BTN_VIEW_MODE,
+  PROD_LABEL,
   BTN_SELECTION,
   BTN_PICK_PROD,
   BTN_QDT_INFO,
+  BTN_CRUD,
 } from "app-redux/actions/ProductFormAction";
 import { updateProductAsync } from "app-redux/actions/ProductAction";
 import ShoppingItemSelection from "components/ShoppingItemSelection";
@@ -31,80 +26,65 @@ import ShoppingItemSelection from "components/ShoppingItemSelection";
 function ComponentCatalog({ product }) {
   const dispatch = useDispatch();
 
-  const [name, setName] = useState(product.name);
+  const [displayProdDialog, setProdDialog] = useState(false);
 
-  const handleChangeName = (e) => {
-    setName(e.target.value);
-  };
-
-  const restoreButton = () => {
+  const renderModal = () => {
     return (
-      <IconButton
-        aria-label="Comments"
-        onClick={() => dispatch(formViewAction())}
-      >
-        <Restore></Restore>
-      </IconButton>
+      <FormDialogProduct
+        form={{
+          placeHolder: "Product name",
+          name: product.name,
+          quantityType: product.quantityType,
+        }}
+        title={"Update Product"}
+        onDisplay={displayProdDialog}
+        onClose={() => setProdDialog(false)}
+        onActionMethod={({ name, quantityType }) => {
+          if (isProdFormValid({ name, dispatch })) {
+            product.name = name;
+            product.quantityType = quantityType;
+            dispatch(updateProductAsync(product));
+            setProdDialog(false);
+          }
+        }}
+      ></FormDialogProduct>
     );
   };
 
-  const deleteButton = () => {
-    return (
-      <IconButton
-        aria-label="Comments"
-        onClick={() => dispatch(successMessage("not ready!"))}
-      >
-        <DeleteIcon style={styles.deleteIcon}></DeleteIcon>
-      </IconButton>
-    );
-  };
   return function (key) {
     switch (key) {
       case BTN_SELECTION:
         return (
           <ItemSelection key="ItemSelection" product={product}></ItemSelection>
         );
-      case FORM_VIEW_EDIT:
+      case PROD_LABEL:
         return (
-          <TextField
-            key={"TextField"}
-            onChange={handleChangeName}
-            defaultValue={name}
-          ></TextField>
+          <ListItemText
+            key={"ListItemText"}
+            primary={product.name}
+          ></ListItemText>
         );
-      case FORM_VIEW_LABEL:
+      case BTN_CRUD:
         return (
-          <ListItemText key={"ListItemText"} primary={name}></ListItemText>
-        );
-      case BTN_EDIT_MODE:
-        return (
-          <ListItemSecondaryAction key={"ListItemSecondaryAction_1"}>
-            <IconButton
-              aria-label="Comments"
-              onClick={() => {
-                product.name = name;
-                dispatch(updateProductAsync(product));
-                dispatch(formViewAction());
-              }}
-            >
-              <SaveIcon style={styles.saveIcon} />
-            </IconButton>
-            {restoreButton()}
-            {deleteButton()}
-          </ListItemSecondaryAction>
-        );
-      case BTN_VIEW_MODE:
-        return (
-          <ListItemSecondaryAction key={"ListItemSecondaryAction_2"}>
-            <IconButton
-              aria-label="Comments"
-              onClick={() => dispatch(formEditAction())}
-            >
-              <CreateIcon style={styles.editIcon} />
-            </IconButton>
-            {restoreButton()}
-            {deleteButton()}
-          </ListItemSecondaryAction>
+          <div key="crud">
+            <ListItemSecondaryAction key={"ListItemSecondaryAction_1"}>
+              <IconButton
+                aria-label="Comments"
+                onClick={() => {
+                  setProdDialog(true);
+                }}
+              >
+                <CreateIcon style={styles.saveIcon} />
+              </IconButton>
+              <IconButton
+                aria-label="Comments"
+                onClick={() => dispatch(successMessage("not ready!"))}
+              >
+                <DeleteIcon style={styles.deleteIcon}></DeleteIcon>
+              </IconButton>
+            </ListItemSecondaryAction>
+            {renderModal()}
+          </div>
         );
       case BTN_PICK_PROD:
         return (
@@ -115,11 +95,11 @@ function ComponentCatalog({ product }) {
             quantityDefault={product.quantityDefault}
           ></Quantity>
         );
-      case BTN_QDT_INFO: //TODO change name
+      case BTN_QDT_INFO:
         return (
           <div key={"ListItemText"}>
             <ListItemText
-              primary={name}
+              primary={product.name}
               style={product.picked ? styles.textItemListTicked : {}}
             ></ListItemText>
             <QuantityBtnInfo
