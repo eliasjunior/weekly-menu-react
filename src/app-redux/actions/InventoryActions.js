@@ -62,7 +62,7 @@ export function createCategoryAsync(category) {
     dispatch(loadingSomething(true));
     try {
       const data = await postCategory(category);
-      dispatch(updateCategory(data));
+      dispatch(createCategory(data));
       afterResquest(dispatch);
     } catch (error) {
       afterRequestError(dispatch, error);
