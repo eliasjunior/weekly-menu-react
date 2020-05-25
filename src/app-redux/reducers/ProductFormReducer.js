@@ -1,11 +1,8 @@
 import {
-  PRODUCT_EDIT,
-  PRODUCT_VIEW,
-  PRODUCT_SELECTION,
-  FORM_VIEW_EDIT,
-  FORM_VIEW_LABEL,
-  BTN_EDIT_MODE,
-  BTN_VIEW_MODE,
+  PRODUCT_EDIT_VIEW,
+  PRODUCT_SELECTION_VIEW,
+  PROD_LABEL,
+  BTN_CRUD,
   BTN_SELECTION,
   BTN_PICK_PROD,
   BTN_QDT_INFO,
@@ -14,20 +11,18 @@ import {
   BTN_SHOPPING_SELECTION,
 } from "app-redux/actions/ProductFormAction";
 
-const initialState = [FORM_VIEW_LABEL];
+const initialState = [PROD_LABEL];
 
 export default function ProductFormReducer(state = initialState, action) {
   const { type } = action;
 
   switch (type) {
-    case PRODUCT_VIEW:
-      return [FORM_VIEW_LABEL, BTN_VIEW_MODE];
-    case PRODUCT_EDIT:
-      return [FORM_VIEW_EDIT, BTN_EDIT_MODE];
-    case PRODUCT_SELECTION:
-      return [BTN_SELECTION, FORM_VIEW_LABEL, BTN_PICK_PROD];
+    case PRODUCT_EDIT_VIEW:
+      return [PROD_LABEL, BTN_CRUD];
+    case PRODUCT_SELECTION_VIEW:
+      return [BTN_SELECTION, PROD_LABEL, BTN_PICK_PROD];
     case PROD_PICKING_VIEW:
-      return [BTN_SHOPPING_SELECTION, FORM_VIEW_LABEL, BTN_PICK_PROD];
+      return [BTN_SHOPPING_SELECTION, PROD_LABEL, BTN_PICK_PROD];
     case PROD_SHOPPING_LIST_VIEW:
       return [BTN_QDT_INFO];
     default:
