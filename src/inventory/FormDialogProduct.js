@@ -7,6 +7,12 @@ import {
   TextField,
   DialogActions,
 } from "@material-ui/core";
+import Radio from "@material-ui/core/Radio";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormControl from "@material-ui/core/FormControl";
+import FormLabel from "@material-ui/core/FormLabel";
+
 import FormChildAction from "../common/FormChildAction";
 import { requiredParameter } from "common/Util";
 import { UNIT_TYPE, WEIGHT_TYPE } from "./product/Constant";
@@ -19,8 +25,8 @@ function FormDialogProduct({
   onClose,
   onActionMethod,
 }) {
-  const [name, setName] = useState("");
-  const [quantityType, setQuantityType] = useState(UNIT_TYPE);
+  const [name, setName] = useState(form.name);
+  const [quantityType, setQuantityType] = useState(form.quantityType);
 
   return (
     <div>
@@ -33,15 +39,30 @@ function FormDialogProduct({
         <DialogContent>
           <TextField
             label={form.placeHolder}
-            defaultValue={form.value}
+            defaultValue={form.name}
             onChange={(e) => setName(e.target.value)}
           ></TextField>
-          <div>
-            <label>Type</label>
-            <select onChange={(e) => setQuantityType(e.target.value)}>
-              <option value={UNIT_TYPE}>Unit</option>
-              <option value={WEIGHT_TYPE}>Weight</option>
-            </select>
+          <div style={{ paddingTop: "20px" }}>
+            <FormControl component="fieldset">
+              <FormLabel component="legend">Type</FormLabel>
+              <RadioGroup
+                aria-label="quantityType"
+                name="quantityType"
+                value={quantityType}
+                onChange={(e) => setQuantityType(e.target.value)}
+              >
+                <FormControlLabel
+                  value={UNIT_TYPE}
+                  control={<Radio />}
+                  label="Unit"
+                />
+                <FormControlLabel
+                  value={WEIGHT_TYPE}
+                  control={<Radio />}
+                  label="Weight"
+                />
+              </RadioGroup>
+            </FormControl>
           </div>
         </DialogContent>
         <DialogActions>
