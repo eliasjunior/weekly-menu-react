@@ -19,17 +19,17 @@ export function fetchShoppingHistory(shoppingHistory = []) {
   };
 }
 
-export function createShoppingList(shopping) {
+export function createShoppingList(shoppingList) {
   return {
     type: CREATE_SHOPPING_LIST,
-    payload: shopping,
+    payload: shoppingList,
   };
 }
 
-export function updateShoppingList(shoppingListId) {
+export function updateShoppingList(shoppingList) {
   return {
     type: UPDATE_SHOPPING_LIST,
-    payload: { shoppingListId },
+    payload: shoppingList,
   };
 }
 
