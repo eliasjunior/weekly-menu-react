@@ -7,7 +7,10 @@ import IncludeIcon from "@material-ui/icons/Receipt";
 import SaveIcon from "@material-ui/icons/Save";
 import Shop from "@material-ui/icons/ShoppingCart";
 import { useDispatch, useSelector } from "react-redux";
-import { createShoppingListAsync } from "app-redux/actions/ShoppingHistoryAction";
+import {
+  createShoppingListAsync,
+  updateShoppingListAsync,
+} from "app-redux/actions/ShoppingHistoryAction";
 import { buildShopListPayload } from "./presenter";
 
 function ShoppingCreateBtns({ classes }) {
@@ -33,8 +36,12 @@ function ShoppingCreateBtns({ classes }) {
       <Fab
         color="secondary"
         onClick={async () => {
-          const payload = buildShopListPayload(shoppingList.products);
-          dispatch(createShoppingListAsync(payload));
+          const payload = buildShopListPayload(shoppingList);
+          if (!payload.id) {
+            dispatch(createShoppingListAsync(payload));
+          } else {
+            dispatch(updateShoppingListAsync(payload));
+          }
         }}
       >
         <SaveIcon />
