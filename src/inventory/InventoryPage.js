@@ -10,7 +10,7 @@ import AddIcon from "@material-ui/icons/Add";
 import SearchName from "components/SearchName";
 import { createCategoryAsync } from "app-redux/actions/InventoryActions";
 import CategoryDisplayHelper from "inventory/category/services/CategoryDisplayService";
-import { formViewAction } from "app-redux/actions/ProductFormAction";
+import { formEditAction } from "app-redux/actions/ProductFormAction";
 import CommonErrorBoundary from "error-handlers/CommonErrorBoundary";
 import { setDisplatList } from "app-redux/actions/ListFilterAction";
 import { loadProductsToCategory } from "./helpers/InventoryHelper";
@@ -30,7 +30,7 @@ function InventoryPage({ classes, history }) {
   const catsWithProducts = loadProductsToCategory(tempCats, products);
 
   dispatch(setDisplatList(catsWithProducts));
-  dispatch(formViewAction());
+  dispatch(formEditAction());
   dispatch(setPageLocation(parentComponent.INVENTORY_PAGE));
   dispatch(setPageTitle("Products"));
 
