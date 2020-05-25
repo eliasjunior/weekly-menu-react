@@ -31,7 +31,7 @@ export default function ShoppingListGateway({ httpAPI }) {
           "shoppingList",
           shoppingListConverter(shoppingList)
         );
-        return data;
+        return shoppingMapper(data);
       } catch (error) {
         throw error;
       }
