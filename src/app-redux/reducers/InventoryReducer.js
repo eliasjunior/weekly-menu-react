@@ -18,11 +18,9 @@ export default function InventoryReducer(state = [], action) {
         return acc;
       }, []);
     case CREATE_CAT:
-      state.push(category);
-      return state;
+      return [...state, category];
     case FETCH_CATS:
       return [...categories];
-
     default:
       return state;
   }
