@@ -2,12 +2,16 @@
 
 ## 2020 Fenix Program
 
-### Spring 16/05 - 23/05
+### Sprint 25/05 - 31/05
+
+- Fix all tests
+- Check CI/CD 
+
+### Sprint 16/05 - 23/05 delayed(25/05)
 
 - ~~Bugs shopping list, add + 1 on label~~
-- test create all, fix bugs
-- New Category -> refresh after save
-- Product Update -> Update unit missing
+- ~~New Category -> refresh after save~~
+- ~~Product Update -> Update unit missing~~
 - ~~New Shopping listadd --> Name shopping list after save~~
 
 ### Sprint 07/05 - 14/05
