@@ -20,7 +20,7 @@ export default function productsReducer(state = initialState, action) {
     case UPDATE_PRODUCT:
       const updateProd = payload.product;
       state.byId[updateProd.id] = updateProd;
-      return state;
+      return { ...state };
 
     default:
       return state;
