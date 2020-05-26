@@ -12,13 +12,12 @@ export function recipeUpdateName({ name }) {
   };
 }
 
-export function recipeUpdateCurrent({ name = "", id, products } = {}) {
+export function recipeUpdateCurrent({ name = "", id } = {}) {
   return {
     type: RECIPE_UPDATE_CURRENT,
     payload: {
       id,
       name,
-      products,
     },
   };
 }
