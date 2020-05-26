@@ -5,7 +5,7 @@ import {
 } from "app-redux/actions/ListFilterAction";
 const initialState = {
   displayList: [],
-  textFilter: "",
+  payload: { textFilter: "", listDB: [] },
 };
 export default function ListFilterReducer(
   state = initialState,
