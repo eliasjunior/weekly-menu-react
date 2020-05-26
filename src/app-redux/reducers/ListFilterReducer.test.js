@@ -2,25 +2,25 @@ import reducer from "./ListFilterReducer";
 import { SET_FILTER_NAME } from "../actions/ListFilterAction";
 
 describe("Visibility filter", () => {
-  it("should not throw an error", () => {
-    expect(reducer(undefined, {})).toEqual([]);
+  it("should return the initial state", () => {
+    expect(reducer(undefined, {})).toEqual({ displayList: [], textFilter: "" });
   });
   it("should filter base on the text filter passed", () => {
     const categories = [
       {
         name: "Baking",
-        products: [{ name: "flour" }]
+        products: [{ name: "flour" }],
       },
       {
         name: "Fruits",
-        products: [{ name: "Oranges" }, { name: "Berries" }]
-      }
+        products: [{ name: "Oranges" }, { name: "Berries" }],
+      },
     ];
 
     const resultState = reducer([], {
       type: SET_FILTER_NAME,
       categories,
-      textFilter: "Or"
+      textFilter: "Or",
     });
     const catsFilter = resultState;
     expect(categories.length).toEqual(2);
