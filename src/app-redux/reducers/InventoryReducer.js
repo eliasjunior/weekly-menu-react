@@ -11,7 +11,6 @@ export default function InventoryReducer(state = [], action) {
     case UPDATE_CAT:
       return state.reduce((acc, item) => {
         if (item.id === category.id) {
-          console.log("category to be update", item);
           item = category;
         }
         acc.push(item);
