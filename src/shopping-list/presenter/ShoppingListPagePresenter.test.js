@@ -24,7 +24,7 @@ describe("ShoppingListPagePresenter", () => {
         getTimeLabel: "Today",
       },
     };
-    const payload = buildShopListPayload(products, APIs);
+    const payload = buildShopListPayload({ products }, APIs);
 
     const expected = {
       name: "Today",
