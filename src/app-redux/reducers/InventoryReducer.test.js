@@ -11,33 +11,33 @@ describe("Inventory reducers", () => {
       type: UPDATE_CAT,
       category: {
         name: "Baking",
-        _id: 1
-      }
+        id: 1,
+      },
     };
     const categories = [
       {
         name: "Baking Pownder",
-        _id: 1,
+        id: 1,
         products: [
           {
-            name: "Sugar"
-          }
-        ]
+            name: "Sugar",
+          },
+        ],
       },
       {
         name: "Drinks",
-        _id: 2
-      }
+        id: 2,
+      },
     ];
     expect(InventoryReducer(categories, action)).toEqual([
       {
         name: "Baking",
-        _id: 1
+        id: 1,
       },
       {
         name: "Drinks",
-        _id: 2
-      }
+        id: 2,
+      },
     ]);
   });
 });
