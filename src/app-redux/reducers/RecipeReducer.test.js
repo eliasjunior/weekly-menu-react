@@ -1,15 +1,17 @@
 import reducer from "./RecipeReducer";
-import { RECIPE_CHECK_CLICK } from "app-redux/actions/RecipeAction";
+import { RECIPE_UPDATE_CURRENT } from "app-redux/actions/RecipeAction";
 describe("Recipe Reducer", () => {
-  it("return recipe prod list ", () => {
-    const payload = {
-      checked: true,
-      prodId: "1"
-    };
+  it("should update current recipe", () => {
     const action = {
-      type: RECIPE_CHECK_CLICK,
-      payload
+      type: RECIPE_UPDATE_CURRENT,
+      payload: {
+        id: "1",
+        name: "Carrot Cake",
+      },
     };
-    expect(reducer([], action)).toEqual([payload]);
+    expect(reducer(undefined, action)).toEqual({
+      id: "1",
+      name: "Carrot Cake",
+    });
   });
 });
