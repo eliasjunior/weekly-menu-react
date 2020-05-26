@@ -12,10 +12,13 @@ export const putShoppingList = updateShoppingListAsync;
 export const getShoppingHistory = getShoppingList;
 
 //TODO move this to helpers folder
-export function buildShopListPayload({ products, id }, APIs = {}) {
+export function buildShopListPayload(
+  { products = requiredParameter("products"), id },
+  APIs = {}
+) {
   const {
     byId = requiredParameter("byId"),
-    selected = requiredParameter("byId"),
+    selected = requiredParameter("selected"),
   } = products;
   const result = Object.entries(byId).reduce((prev, [_, prod]) => {
     prev.push({
@@ -91,6 +94,10 @@ export function normalizeProdRecipe({ state, recId, catId, prodId, checked }) {
   const { products, categories, recipes } = state;
 
   const product = products.byId[prodId];
+
+  if (!product) {
+    requiredParameter("product db");
+  }
 
   const addProduct = () => {
     const category = categories.byId[catId];
