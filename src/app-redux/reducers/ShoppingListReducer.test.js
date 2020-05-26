@@ -13,29 +13,19 @@ import {
   ADD_PRODS_RECIPE,
 } from "app-redux/actions/ShoppingListAction";
 
-//TODO add quantity ?, not sure
-
 describe("Shopping list reducer", () => {
-  let initialState;
-  beforeEach(() => {
-    initialState = {
-      categories: { byId: {} },
-      products: { byId: {}, selected: [] },
-      recipes: { byId: {} },
-    };
-  });
-
   it("add first product", () => {
     const action = {
       type: ADD_SIMPLE_PRODUCT,
       payload: {
         catId: "c_02",
         prodId: "p_01",
+        checked: false,
       },
     };
     const expected = test1.expected;
-    const result = reducer(initialState, action);
-    expect(result).toEqual(expected);
+    const result = reducer(test1.state, action);
+    expect(result.products).toEqual(expected.products);
   });
 
   it("add second product", () => {
@@ -77,7 +67,7 @@ describe("Shopping list reducer", () => {
       },
     };
 
-    expect(reducer(undefined, action)).toEqual(test4.expected);
+    expect(reducer(test4.state, action)).toEqual(test4.expected);
   });
 
   it("Add special products from recipe with existing selected products", () => {
@@ -94,7 +84,9 @@ describe("Shopping list reducer", () => {
 
     const { expected, state } = test5;
 
-    expect(reducer(state, action)).toEqual(expected);
+    const newShopList = reducer(state, action);
+
+    expect(newShopList.products).toEqual(expected.products);
   });
 
   it("Remove recipe with existing selected products", () => {
