@@ -6,7 +6,6 @@ import ShoppingListPage from "shopping-list/ShoppingListPage";
 import InventoryPage from "inventory/InventoryPage";
 import { LOCATION } from "common/AppConstant";
 import ShoppingListHistoryPage from "shopping-list/ShoppingListHistoryPage";
-import ShoppingPage from "shopping-list/ShoppingPage";
 import Dashboard from "dashboard/Dashboard";
 import PickUpProducts from "shopping-list/PickUpProducts";
 
@@ -31,10 +30,6 @@ export default function () {
       <Route
         path={LOCATION.shoppingHistory.path}
         render={(props) => <ShoppingListHistoryPage {...props} />}
-      ></Route>
-      <Route
-        path={`${LOCATION.shopping.path}/:id`}
-        render={(props) => <ShoppingPage {...props} />}
       ></Route>
       <Route
         path={LOCATION.recipeList.path}
