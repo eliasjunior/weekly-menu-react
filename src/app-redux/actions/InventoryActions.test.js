@@ -3,7 +3,7 @@ import {
   UPDATE_CAT,
   FETCH_CATS,
   fetchCategory
-} from "./inventoryActions";
+} from "./InventoryActions";
 
 describe("actions", () => {
   it("should create an action to update a category", () => {
