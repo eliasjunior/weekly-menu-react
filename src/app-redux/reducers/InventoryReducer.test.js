@@ -1,5 +1,5 @@
-import InventoryReducer from "./inventoryReducer";
-import { UPDATE_CAT } from "../actions/inventoryActions";
+import InventoryReducer from "./InventoryReducer";
+import { UPDATE_CAT } from "../actions/InventoryActions";
 
 describe("Inventory reducers", () => {
   it("should return the initial state", () => {
