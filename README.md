@@ -1,5 +1,8 @@
 # TODO
-
+`
+rename for gmail
+find . -name "*.js" -exec bash -c 'mv "$1" "${1%.js}".aaa' - '{}' \;
+`
 ## 2020 Fenix Program
 
 ### Sprint 25/05 - 31/05
