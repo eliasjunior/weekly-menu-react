@@ -8,9 +8,9 @@ export function addSelectedProduct(prodId) {
   };
 }
 
-export function addAllSelectedProduct({ prodIds, toggled }) {
+export function addAllSelectedProduct({ prodIds, toggled, reset = false }) {
   return {
     type: ADD_ALL_SELECTED_PROD,
-    payload: { prodIds, toggled },
+    payload: { prodIds, toggled, reset },
   };
 }

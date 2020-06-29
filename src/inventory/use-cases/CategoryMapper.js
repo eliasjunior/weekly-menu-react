@@ -5,17 +5,19 @@ export function categoryListMapper(list) {
 }
 
 export function categoryMapper({
-  _id = requiredParameter("_id category"),
+  id = requiredParameter("id category"),
   name = requiredParameter("name"),
-  catProds = [],
+  products,
 }) {
   return {
-    id: _id,
+    id,
     name,
-    catProds,
+    catProds: products ? products.map((prod) => prod.id) : [],
+    products,
   };
 }
 
+//TODO review here, update not sending catProds that does not exist
 export function categoryConverter(category, isNew = false) {
   const { name = requiredParameter("name category"), catProds, id } = category;
 
@@ -28,7 +30,7 @@ export function categoryConverter(category, isNew = false) {
     }
   }
   return {
-    _id: id,
+    id,
     name,
     catProds,
   };

@@ -27,8 +27,7 @@ export default function RecipeGateway({ httpAPI }) {
     },
     updateRecipeAsync: async (recipe) => {
       try {
-        const data = await httpAPI.put("recipes", recipeConverter(recipe));
-        return data;
+        httpAPI.put("recipes", recipeConverter(recipe));
       } catch (error) {
         throw error;
       }

@@ -9,13 +9,13 @@ import CommonStyles from "styles/CommonStyles";
 import { LOCATION, parentComponent } from "common/AppConstant";
 import { formEditAction } from "app-redux/actions/ProductFormAction";
 import { setDisplatList } from "app-redux/actions/ListFilterAction";
-import { loadProductsToRecipe } from "../RecipeHelper";
+import { fillRecipesProducts } from "../RecipeHelper";
 import { setPageTitle, setPageLocation } from "app-redux/actions/PageAction";
 
 function RecipeListPage({ classes }) {
   const recipes = useSelector((state) => state.recipes, shallowEqual);
   const products = useSelector((state) => state.products, shallowEqual);
-  const recipesWithProducts = loadProductsToRecipe(recipes, products);
+  const recipesWithProducts = fillRecipesProducts(recipes, products);
 
   const dispatch = useDispatch();
   //Initial sets to the children

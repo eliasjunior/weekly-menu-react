@@ -1,4 +1,4 @@
-export function loadProductsToRecipe(recipes, allProducts) {
+export function fillRecipesProducts(recipes, allProducts) {
   if (!allProducts.byId) {
     return [];
   }

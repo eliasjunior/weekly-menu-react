@@ -26,8 +26,7 @@ export default function ProductGateway({ httpAPI }) {
     },
     updateProduct: async (product) => {
       try {
-        const data = await httpAPI.put("products", productConverter(product));
-        return productMapper(data);
+        await httpAPI.put("products", productConverter(product));
       } catch (error) {
         throw error;
       }

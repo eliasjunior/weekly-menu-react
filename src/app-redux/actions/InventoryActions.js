@@ -48,8 +48,8 @@ export function updateCategoryAsync(category = requiredParameter("category")) {
   return async (dispatch) => {
     dispatch(loadingSomething(true));
     try {
-      const data = await putCategory(category);
-      dispatch(updateCategory(data));
+      await putCategory(category);
+      dispatch(updateCategory(category));
       afterResquest(dispatch);
     } catch (error) {
       afterRequestError(dispatch, error);

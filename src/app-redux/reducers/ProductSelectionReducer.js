@@ -18,8 +18,15 @@ export default function ProductSelectionReducer(state = initialState, action) {
       }
       return [...filteredIds];
     case ADD_ALL_SELECTED_PROD:
-      const { prodIds = requiredParameter("allProds"), toggled } = payload;
+      const {
+        prodIds = requiredParameter("allProds"),
+        toggled,
+        reset,
+      } = payload;
       if (toggled) {
+        if (reset) {
+          return [...prodIds];
+        }
         return [...state, ...prodIds];
       } else {
         return state.reduce((prev, id) => {

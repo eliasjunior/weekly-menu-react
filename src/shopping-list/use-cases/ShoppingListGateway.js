@@ -8,7 +8,7 @@ export default function ShoppingListGateway({ httpAPI }) {
   return {
     getShoppingList: async () => {
       try {
-        const data = await httpAPI.get("shoppingList");
+        const data = await httpAPI.get("carts");
         return shoppingListMapper(data);
       } catch (error) {
         throw error;
@@ -17,7 +17,7 @@ export default function ShoppingListGateway({ httpAPI }) {
     saveShoppingListAsync: async (shoppingList) => {
       try {
         const data = await httpAPI.post(
-          "shoppingList",
+          "carts",
           shoppingListConverter(shoppingList, true)
         );
         return shoppingMapper(data);
@@ -27,11 +27,7 @@ export default function ShoppingListGateway({ httpAPI }) {
     },
     updateShoppingListAsync: async (shoppingList) => {
       try {
-        const data = await httpAPI.put(
-          "shoppingList",
-          shoppingListConverter(shoppingList)
-        );
-        return shoppingMapper(data);
+        await httpAPI.put("carts", shoppingListConverter(shoppingList));
       } catch (error) {
         throw error;
       }

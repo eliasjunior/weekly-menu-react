@@ -1,7 +1,6 @@
 import React from "react";
-import { List, ListItem, ListItemText } from "@material-ui/core";
+import { List } from "@material-ui/core";
 import { RecipeHeaderItem } from "./RecipeHeaderItem";
-import PropTypes from "prop-types";
 import SearchName from "components/SearchName";
 import { useSelector } from "react-redux";
 import ProductList from "inventory/product/components/ProductList";

@@ -5,21 +5,21 @@ export function shoppingListMapper(list) {
 }
 
 export function shoppingMapper({
-  _id = requiredParameter("_id shoppingList"),
+  id = requiredParameter("id shoppingList"),
   name = requiredParameter("name date"),
-  products = requiredParameter("products"),
+  productItems = requiredParameter("productItems"),
 }) {
   return {
-    id: _id,
+    id,
     name,
-    products: products.map((prod) => productMap(prod)),
+    products: productItems.map((prod) => productMap(prod)),
   };
 }
 
 export function shoppingListConverter(shoppingList, isNew = false) {
   const {
     id,
-    products = requiredParameter("products"),
+    products = requiredParameter("productItems"),
     name = requiredParameter("name date"),
   } = shoppingList;
   //isNew is to guarantee that the id was sent, on the update case
@@ -28,19 +28,19 @@ export function shoppingListConverter(shoppingList, isNew = false) {
   }
 
   return {
-    _id: id,
+    id,
     name,
-    products: products.map((prod) => productConverter(prod)),
+    productItems: products.map((prod) => productConverter(prod)),
   };
 }
 
 function productMap({
-  id = requiredParameter("prod id"),
+  prodId = requiredParameter("prod id"),
   recipes = requiredParameter("prod id"),
   selected = requiredParameter("selected"),
 }) {
   return {
-    id,
+    id: prodId,
     recipes,
     selected,
   };
@@ -52,7 +52,7 @@ function productConverter({
   selected = requiredParameter("selected"),
 }) {
   return {
-    id,
+    prodId: id,
     recipes,
     selected,
   };

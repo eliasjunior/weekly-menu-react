@@ -1,6 +1,5 @@
 import { getBaseUrl } from "./TemporaryAPI";
 import axios from "axios";
-import { requiredParameter } from "common/Util";
 
 export async function get(resourceName) {
   try {
@@ -11,12 +10,8 @@ export async function get(resourceName) {
   }
 }
 export async function put(resourceName, object) {
-  const { _id = requiredParameter("_id") } = object;
   try {
-    const response = await axios.put(
-      getBaseUrl() + resourceName + "/" + _id,
-      object
-    );
+    const response = await axios.put(getBaseUrl() + resourceName, object);
     return response.data;
   } catch ({ response }) {
     throw response;
@@ -36,7 +31,7 @@ export async function linkProds(parentList, idName) {
   const prods = prodResponse.data;
 
   return parentList.map((parent) => {
-    parent.products = prods.filter((prod) => prod[idName] === parent._id);
+    parent.products = prods.filter((prod) => prod[idName] === parent.id);
     return parent;
   });
 }

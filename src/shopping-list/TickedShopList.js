@@ -20,7 +20,9 @@ export default function TickedShopList() {
       <div style={tickedTitle}>Ticked</div>
       <List></List>
       {pickedList.map((cat) => {
-        return cat.products.map((prod) => <ListItem>{prod.name}</ListItem>);
+        return cat.products.map((prod) => (
+          <ListItem key={prod.id}>{prod.name}</ListItem>
+        ));
       })}
     </>
   );

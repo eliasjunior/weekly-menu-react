@@ -5,8 +5,7 @@ import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { formSelectionAction } from "app-redux/actions/ProductFormAction";
 import { setDisplatList } from "app-redux/actions/ListFilterAction";
 import CommonErrorBoundary from "error-handlers/CommonErrorBoundary";
-import { recipeUpdateCurrent } from "app-redux/actions/RecipeAction";
-import { loadProductsToRecipe } from "../RecipeHelper";
+import { fillRecipesProducts } from "../RecipeHelper";
 import { loadProductsToCategory } from "inventory/helpers/InventoryHelper";
 import RecipeForm from "./RecipeForm";
 import { setPageTitle, setPageLocation } from "app-redux/actions/PageAction";
@@ -20,11 +19,14 @@ function RecipePage({ match }) {
   const products = useSelector((state) => state.products, shallowEqual);
 
   const categories = loadProductsToCategory(tempCategories, products);
-  const recipesWithProducts = loadProductsToRecipe(recipes, products);
+  const recipesWithProducts = fillRecipesProducts(recipes, products);
   const recipe = getRecipeFromUrl(match, recipesWithProducts);
+  if (recipe.id) {
+    dispatch(setPageTitle("Edit Recipe"));
+  } else {
+    dispatch(setPageTitle("New Recipe"));
+  }
 
-  dispatch(recipeUpdateCurrent(recipe));
-  dispatch(setPageTitle(recipe.id ? "Edit Recipe" : "New Recipe"));
   dispatch(setPageLocation(parentComponent.RECIPE_PAGE));
   //Initial sets to the children
   dispatch(formSelectionAction());
@@ -43,7 +45,11 @@ export default RecipePage;
 function getRecipeFromUrl(match = {}, recipes) {
   const { params = {} } = match;
   const { id } = params;
-
-  const rec = recipes.find((rec) => parseInt(rec.id, 10) === parseInt(id, 10));
+  const rec = recipes.find((rec) => {
+    if (rec.id && id) {
+      return rec.id.toString() === id.toString();
+    }
+    return false;
+  });
   return rec ? rec : { name: "" };
 }

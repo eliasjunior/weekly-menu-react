@@ -6,8 +6,8 @@ import { getChecked, handleOnChange } from "./ItemSelectionPresenter";
 export default function ItemSelection({ product }) {
   const dispatch = useDispatch();
   const checkedIds = useSelector((state) => state.selectedProducts);
-
   const checked = getChecked(checkedIds, product.id);
+
   return (
     <div>
       <Checkbox

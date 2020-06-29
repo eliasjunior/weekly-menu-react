@@ -6,8 +6,10 @@ import {
 
 const initialState = {};
 
-export default function RecipesReducer(state = initialState, action) {
-  const { type, payload } = action;
+export default function RecipesReducer(
+  state = initialState,
+  { type, payload }
+) {
   switch (type) {
     case RECIPE_CREATE:
       state.byId[payload.id] = payload;

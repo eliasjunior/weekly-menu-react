@@ -5,14 +5,13 @@ import {
 
 const initialState = { name: "", id: null };
 
-export default function RecipeReducer(state = initialState, action) {
-  const { type, payload } = action;
-
+export default function RecipeReducer(state = initialState, { type, payload }) {
   switch (type) {
     case RECIPE_UPDATE_CURRENT:
       return {
         name: payload.name,
         id: payload.id,
+        products: payload.products,
       };
     case RECIPE_UPDATE_NAME:
       return {

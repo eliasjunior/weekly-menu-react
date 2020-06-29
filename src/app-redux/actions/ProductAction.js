@@ -48,8 +48,8 @@ export function updateProductAsync(product = requiredParameter("product")) {
   return async (dispatch) => {
     dispatch(loadingSomething(true));
     try {
-      const data = await putProduct(product);
-      dispatch(updateProduct(data));
+      await putProduct(product);
+      dispatch(updateProduct(product));
       afterResquest(dispatch);
     } catch (error) {
       afterRequestError(dispatch, error);

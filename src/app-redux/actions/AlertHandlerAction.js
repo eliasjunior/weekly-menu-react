@@ -15,8 +15,8 @@ export function successMessage(message = "Congratulations! you made it!") {
     type: SUCCESS_MESSAGE,
     payload: {
       message,
-      type: MESSAGE_TYPE_SUCCESS
-    }
+      type: MESSAGE_TYPE_SUCCESS,
+    },
   };
 }
 
@@ -25,14 +25,14 @@ export function infoMessage(message = "Hey Hey!") {
     type: INFO_MESSAGE,
     payload: {
       message,
-      type: MESSAGE_TYPE_INFO
-    }
+      type: MESSAGE_TYPE_INFO,
+    },
   };
 }
 
 export function closeMessage() {
   return {
-    type: CLOSE_MESSAGE
+    type: CLOSE_MESSAGE,
   };
 }
 
@@ -40,6 +40,6 @@ export function httpError(response) {
   const validResponse = ErrorMapper(response);
   return {
     type: HTTP_ERROR,
-    payload: validResponse
+    payload: validResponse,
   };
 }

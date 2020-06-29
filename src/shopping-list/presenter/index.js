@@ -11,6 +11,7 @@ export const postShoppingList = saveShoppingListAsync;
 export const putShoppingList = updateShoppingListAsync;
 export const getShoppingHistory = getShoppingList;
 
+//TODO need test priority
 //TODO move this to helpers folder
 export function buildShopListPayload(
   { products = requiredParameter("products"), id },
@@ -95,10 +96,6 @@ export function normalizeProdRecipe({ state, recId, catId, prodId, checked }) {
 
   const product = products.byId[prodId];
 
-  if (!product) {
-    requiredParameter("product db");
-  }
-
   const addProduct = () => {
     const category = categories.byId[catId];
     category.prods = [...category.prods, prodId];
@@ -109,7 +106,7 @@ export function normalizeProdRecipe({ state, recId, catId, prodId, checked }) {
   };
 
   //State has recipe
-  if (checked) {
+  if (checked && product) {
     delete recipes.byId[recId];
     product.recipes = product.recipes.filter((rid) => rid !== recId);
     const isProdNotOnSelectedList = !products.selected.includes(prodId);

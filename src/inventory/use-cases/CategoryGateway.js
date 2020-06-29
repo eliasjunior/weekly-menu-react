@@ -29,11 +29,7 @@ export default function CategoryGateway({ httpAPI }) {
     },
     updateCategoryAsync: async (category) => {
       try {
-        const data = await httpAPI.put(
-          "categories",
-          categoryConverter(category)
-        );
-        return categoryMapper(data);
+        await httpAPI.put("categories", categoryConverter(category));
       } catch (error) {
         throw error;
       }

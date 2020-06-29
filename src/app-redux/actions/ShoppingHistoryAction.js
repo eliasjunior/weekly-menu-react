@@ -50,8 +50,8 @@ export function updateShoppingListAsync(
   return async (dispatch) => {
     dispatch(loadingSomething(true));
     try {
-      const data = await putShoppingList(shoppingList);
-      dispatch(updateShoppingList(data));
+      await putShoppingList(shoppingList);
+      dispatch(updateShoppingList(shoppingList));
       afterResquest(dispatch);
     } catch (error) {
       afterRequestError(dispatch, error);

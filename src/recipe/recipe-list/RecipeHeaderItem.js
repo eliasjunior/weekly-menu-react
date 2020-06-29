@@ -15,12 +15,12 @@ import { purple } from "@material-ui/core/colors";
 import { recipeUpdateCurrent } from "app-redux/actions/RecipeAction";
 import { useDispatch, useSelector } from "react-redux";
 import { addProdsRecipe } from "app-redux/actions/ShoppingListAction";
+import { addAllSelectedProduct } from "app-redux/actions/ProductSelectionAction";
 
 export const RecipeHeaderItem = ({ recipe }) => {
   const dispatch = useDispatch();
 
   const RecipeSelection = () => {
-    // const recIdsSelected = useSelector((state) => state.selectedRecIds); TODO delete
     const productMap = useSelector((state) => state.products);
     const recipeSelected = useSelector(
       (state) => state.shoppingList.recipes.byId[recipe.id]
@@ -46,7 +46,6 @@ export const RecipeHeaderItem = ({ recipe }) => {
       ></Checkbox>
     );
   };
-  // TODO do like in category, add to a service
   const isEditBtnDisplay = () => {
     return (
       <ListItemSecondaryAction>
@@ -54,6 +53,13 @@ export const RecipeHeaderItem = ({ recipe }) => {
           <Link
             to={`${LOCATION.newRecipe.path}/${recipe.id}`}
             onClick={() => {
+              dispatch(
+                addAllSelectedProduct({
+                  toggled: true,
+                  reset: true,
+                  prodIds: recipe.products.map((prod) => prod.id),
+                })
+              );
               dispatch(
                 recipeUpdateCurrent({
                   name: recipe.name,

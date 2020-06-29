@@ -4,12 +4,12 @@ export function recipeListMapper(list) {
   // normalize
   const makeByIdTable = (
     prev,
-    { _id: id = requiredParameter("id recipe"), name, prodsDetail = [] }
+    { id = requiredParameter("id recipe"), name, prodsDetail = [] }
   ) => {
     prev.byId[id] = {
       id,
       name,
-      prodsDetail,
+      prodsDetail: prodsDetail.map((detail) => prodDetailMapper(detail)),
     };
     prev.allIds.push(id);
     return prev;
@@ -19,14 +19,14 @@ export function recipeListMapper(list) {
 
 //TODO move to mapper file ?
 export function recipeMapper({
-  _id = requiredParameter("_id recipe"),
+  id = requiredParameter("id recipe"),
   name = requiredParameter("name recipe"),
   prodsDetail = [],
 }) {
   return {
-    id: _id,
+    id,
     name,
-    prodsDetail,
+    prodsDetail: prodsDetail.map((detail) => prodDetailMapper(detail)),
   };
 }
 
@@ -42,10 +42,23 @@ export function recipeConverter(recipe, isNew = false) {
       requiredParameter("id recipe");
     }
   }
-
   return {
-    _id: id,
+    id,
     name,
-    prodsDetail,
+    prodsDetail: prodsDetail.map((detail) => prodDetailConverter(detail)),
+  };
+}
+
+function prodDetailConverter({ id, quantity }) {
+  return {
+    prodId: id,
+    quantity,
+  };
+}
+
+function prodDetailMapper({ prodId, quantity }) {
+  return {
+    id: prodId,
+    quantity,
   };
 }

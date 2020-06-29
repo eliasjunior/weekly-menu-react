@@ -16,10 +16,14 @@ export function addSimpleProduct({
   };
 }
 
-export function addProdsRecipe(item) {
+export function addProdsRecipe({
+  recId = requiredParameter("Recipe id"),
+  prods = requiredParameter("ProdDetails"),
+  checked = requiredParameter("checked"),
+}) {
   return {
     type: ADD_PRODS_RECIPE,
-    payload: { ...item },
+    payload: { recId, prods, checked },
   };
 }
 
