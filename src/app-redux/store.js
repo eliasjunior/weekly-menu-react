@@ -7,8 +7,8 @@ import listFilter from "app-redux/reducers/ListFilterReducer";
 import alertHandler from "app-redux/reducers/AlertHandlerReducer";
 import componentFormNames from "app-redux/reducers/ProductFormReducer";
 import loading from "app-redux/reducers/LoadingReducer";
-import currentRecipe from "app-redux/reducers/RecipeReducer";
-import recipes from "app-redux/reducers/RecipesReducer";
+import currentRecipeRed from "app-redux/reducers/RecipeReducer";
+import recipes from "app-redux/reducers/RecipeCrudReducer";
 import products from "app-redux/reducers/ProductsReducer";
 import pageData from "app-redux/reducers/PageReducer";
 import quantityMap from "app-redux/reducers/QuantityPickReducer";
@@ -22,7 +22,7 @@ const rootReducer = combineReducers({
   alertHandler,
   loading,
   componentFormNames,
-  currentRecipe,
+  currentRecipeRed,
   recipes,
   products,
   pageData,

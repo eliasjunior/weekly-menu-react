@@ -1,7 +1,7 @@
 import { loadingSomething } from "./LoadingAction";
 import { afterResquest, afterRequestError } from "./common";
 import Presenter from "recipe/presenter";
-import { recipeUpdateCurrent } from "./RecipeAction";
+import { UpdateCurrentRecipe } from "./RecipeAction";
 import { setPageTitle } from "./PageAction";
 export const RECIPE_CREATE = "RECIPE_CREATE";
 export const RECIPE_UPDATE = "RECIPE_UPDATE";
@@ -38,7 +38,7 @@ export function createRecipeAsync(recipe) {
       const data = await postRecipe(recipe);
       recipe.id = data.id;
       dispatch(createRecipe(data));
-      dispatch(recipeUpdateCurrent(recipe));
+      dispatch(UpdateCurrentRecipe(recipe));
       dispatch(setPageTitle("Update Recipe"));
       afterResquest(dispatch);
     } catch (error) {
@@ -53,7 +53,7 @@ export function updateRecipeAsync(recipe) {
     try {
       await putRecipe(recipe);
       dispatch(updateRecipe(recipe));
-      dispatch(recipeUpdateCurrent(recipe));
+      dispatch(UpdateCurrentRecipe(recipe));
 
       afterResquest(dispatch);
     } catch (error) {

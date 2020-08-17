@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Weekly Menu",
+  "name": "Weekly Menu and shopping cart",
   "icons": [
     {
       "src": "favicon.ico",

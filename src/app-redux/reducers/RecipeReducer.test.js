@@ -1,9 +1,9 @@
 import reducer from "./RecipeReducer";
-import { RECIPE_UPDATE_CURRENT } from "app-redux/actions/RecipeAction";
+import { LOAD_RECIPE_SELECTED } from "app-redux/actions/RecipeAction";
 describe("Recipe Reducer", () => {
   it("should update current recipe", () => {
     const action = {
-      type: RECIPE_UPDATE_CURRENT,
+      type: LOAD_RECIPE_SELECTED,
       payload: {
         id: "1",
         name: "Carrot Cake",

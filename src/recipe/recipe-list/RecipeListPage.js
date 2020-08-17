@@ -11,11 +11,12 @@ import { formEditAction } from "app-redux/actions/ProductFormAction";
 import { setDisplatList } from "app-redux/actions/ListFilterAction";
 import { fillRecipesProducts } from "../RecipeHelper";
 import { setPageTitle, setPageLocation } from "app-redux/actions/PageAction";
+import cloneDeep from "lodash.clonedeep";
 
 function RecipeListPage({ classes }) {
   const recipes = useSelector((state) => state.recipes, shallowEqual);
   const products = useSelector((state) => state.products, shallowEqual);
-  const recipesWithProducts = fillRecipesProducts(recipes, products);
+  const recipesWithProducts = fillRecipesProducts(cloneDeep(recipes), products);
 
   const dispatch = useDispatch();
   //Initial sets to the children

@@ -1,26 +1,32 @@
+import { requiredParameter, logService } from "common/Util";
+
 export const RECIPE_CHECK_CLICK = "RECIPE_CHECK_CLICK";
 export const RECIPE_CHECK_ALL_CLICK = "RECIPE_CHECK_ALL_CLICK";
-export const RECIPE_UPDATE_CURRENT = "RECIPE_UPDATE_CURRENT";
+export const LOAD_RECIPE_SELECTED = "LOAD_RECIPE_SELECTED";
 export const RECIPE_UPDATE_NAME = "RECIPE_UPDATE_NAME";
 
-//TODO review this action and reducer just being subscribed at one place ??
+export function UpdateCurrentRecipe({
+  name = "",
+  id,
+  products = [],
+  prodsDetail = requiredParameter("prodsDetail"),
+} = {}) {
+  if (!Array.isArray(prodsDetail)) {
+    logService("prodsDetail has to be an array");
+    return;
+  }
+  if (!Array.isArray(products)) {
+    logService("products has to be an array");
+    return;
+  }
 
-export function recipeUpdateName({ name }) {
   return {
-    type: RECIPE_UPDATE_NAME,
-    payload: {
-      name,
-    },
-  };
-}
-
-export function recipeUpdateCurrent({ name = "", id, products } = {}) {
-  return {
-    type: RECIPE_UPDATE_CURRENT,
+    type: LOAD_RECIPE_SELECTED,
     payload: {
       id,
       name,
       products,
+      prodsDetail,
     },
   };
 }

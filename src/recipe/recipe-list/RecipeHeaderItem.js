@@ -12,7 +12,7 @@ import {
 import IconRecipe from "@material-ui/icons/Receipt";
 import PropTypes from "prop-types";
 import { purple } from "@material-ui/core/colors";
-import { recipeUpdateCurrent } from "app-redux/actions/RecipeAction";
+import { UpdateCurrentRecipe } from "app-redux/actions/RecipeAction";
 import { useDispatch, useSelector } from "react-redux";
 import { addProdsRecipe } from "app-redux/actions/ShoppingListAction";
 import { addAllSelectedProduct } from "app-redux/actions/ProductSelectionAction";
@@ -61,10 +61,11 @@ export const RecipeHeaderItem = ({ recipe }) => {
                 })
               );
               dispatch(
-                recipeUpdateCurrent({
+                UpdateCurrentRecipe({
                   name: recipe.name,
                   id: recipe.id,
                   products: recipe.products,
+                  prodsDetail: recipe.prodsDetail,
                 })
               );
             }}

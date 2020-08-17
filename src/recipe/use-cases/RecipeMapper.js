@@ -17,7 +17,6 @@ export function recipeListMapper(list) {
   return list.reduce(makeByIdTable, { byId: {}, allIds: [] });
 }
 
-//TODO move to mapper file ?
 export function recipeMapper({
   id = requiredParameter("id recipe"),
   name = requiredParameter("name recipe"),
@@ -48,17 +47,27 @@ export function recipeConverter(recipe, isNew = false) {
     prodsDetail: prodsDetail.map((detail) => prodDetailConverter(detail)),
   };
 }
-
-function prodDetailConverter({ id, quantity }) {
+//TODO need to pass id or can it just pass prodiD????
+function prodDetailConverter({
+  id,
+  quantity,
+  detailId = requiredParameter("ProdDetails id"),
+}) {
   return {
     prodId: id,
     quantity,
+    id: detailId,
   };
 }
 
-function prodDetailMapper({ prodId, quantity }) {
+function prodDetailMapper({
+  prodId,
+  quantity,
+  id = requiredParameter("ProdDetails id"),
+}) {
   return {
     id: prodId,
     quantity,
+    detailId: id,
   };
 }

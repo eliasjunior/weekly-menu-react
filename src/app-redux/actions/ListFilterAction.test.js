@@ -1,6 +1,6 @@
 import { SET_FILTER_NAME, listFilterAction } from "./ListFilterAction";
 
-describe("actions visibility filter", () => {
+describe("ListFilterAction", () => {
   it("should filter the display category", () => {
     const expectedAction = {
       type: SET_FILTER_NAME,

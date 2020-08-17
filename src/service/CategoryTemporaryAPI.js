@@ -1,9 +1,9 @@
-import { getBaseUrl } from "./TemporaryAPI";
+import { getServerUrl } from "common/Util";
 import axios from "axios";
 
 export async function get(resourceName) {
   try {
-    const response = await axios.get(getBaseUrl() + resourceName);
+    const response = await axios.get(getServerUrl() + resourceName);
     return response.data;
   } catch ({ response }) {
     throw response;
@@ -11,7 +11,7 @@ export async function get(resourceName) {
 }
 export async function put(resourceName, object) {
   try {
-    const response = await axios.put(getBaseUrl() + resourceName, object);
+    const response = await axios.put(getServerUrl() + resourceName, object);
     return response.data;
   } catch ({ response }) {
     throw response;
@@ -19,7 +19,7 @@ export async function put(resourceName, object) {
 }
 export async function post(resourceName, object) {
   try {
-    const response = await axios.post(getBaseUrl() + resourceName, object);
+    const response = await axios.post(getServerUrl() + resourceName, object);
     return response.data;
   } catch ({ response }) {
     throw response;
@@ -27,7 +27,7 @@ export async function post(resourceName, object) {
 }
 
 export async function linkProds(parentList, idName) {
-  const prodResponse = await axios.get(getBaseUrl() + "products");
+  const prodResponse = await axios.get(getServerUrl() + "products");
   const prods = prodResponse.data;
 
   return parentList.map((parent) => {

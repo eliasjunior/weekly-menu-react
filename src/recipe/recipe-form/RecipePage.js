@@ -10,6 +10,8 @@ import { loadProductsToCategory } from "inventory/helpers/InventoryHelper";
 import RecipeForm from "./RecipeForm";
 import { setPageTitle, setPageLocation } from "app-redux/actions/PageAction";
 import { parentComponent } from "common/AppConstant";
+import { UpdateCurrentRecipe } from "app-redux/actions/RecipeAction";
+import { addAllSelectedProduct } from "app-redux/actions/ProductSelectionAction";
 
 function RecipePage({ match }) {
   const dispatch = useDispatch();
@@ -23,6 +25,21 @@ function RecipePage({ match }) {
   const recipe = getRecipeFromUrl(match, recipesWithProducts);
   if (recipe.id) {
     dispatch(setPageTitle("Edit Recipe"));
+    dispatch(
+      addAllSelectedProduct({
+        toggled: true,
+        reset: true,
+        prodIds: recipe.products.map((prod) => prod.id),
+      })
+    );
+    dispatch(
+      UpdateCurrentRecipe({
+        name: recipe.name,
+        id: recipe.id,
+        products: recipe.products,
+        prodsDetail: recipe.prodsDetail,
+      })
+    );
   } else {
     dispatch(setPageTitle("New Recipe"));
   }

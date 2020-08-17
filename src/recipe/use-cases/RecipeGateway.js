@@ -4,6 +4,8 @@ import {
   recipeMapper,
 } from "./RecipeMapper";
 
+//TODO need thread error by CODE
+
 export default function RecipeGateway({ httpAPI }) {
   return {
     getRecipes: async () => {
@@ -27,7 +29,7 @@ export default function RecipeGateway({ httpAPI }) {
     },
     updateRecipeAsync: async (recipe) => {
       try {
-        httpAPI.put("recipes", recipeConverter(recipe));
+        await httpAPI.put("recipes", recipeConverter(recipe));
       } catch (error) {
         throw error;
       }

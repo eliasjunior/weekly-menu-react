@@ -9,7 +9,7 @@ import Loading from "components/Loading";
 import WeeklyRouters from "./WeeklyRouters";
 import { useDispatch } from "react-redux";
 import { fetchCategoryAsync } from "app-redux/actions/InventoryActions";
-import { fetchRecipesAsync } from "app-redux/actions/RecipesActions";
+import { fetchRecipesAsync } from "app-redux/actions/RecipeCrudActions";
 import { fetchProductsAsync } from "app-redux/actions/ProductAction";
 import { fetchShoppingHistoryAsync } from "app-redux/actions/ShoppingHistoryAction";
 

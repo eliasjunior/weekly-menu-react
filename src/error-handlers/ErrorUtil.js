@@ -2,6 +2,9 @@ import { MESSAGE_TYPE_ERROR } from "app-redux/actions/AlertHandlerAction";
 
 export function ErrorMapper(response = {}) {
   if (!response.status) {
+    console.log(
+      "Response object  seems not to have status, check request obj return"
+    );
     return {
       message: "Application view error",
       type: MESSAGE_TYPE_ERROR,
@@ -12,7 +15,6 @@ export function ErrorMapper(response = {}) {
   if (statusText === "" || !statusText) {
     diplayMessage = grapMessage(response);
   }
-
   switch (status) {
     case 404:
       return {

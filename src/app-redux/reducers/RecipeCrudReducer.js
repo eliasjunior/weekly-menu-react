@@ -2,7 +2,7 @@ import {
   RECIPE_CREATE,
   FETCH_RECIPES,
   RECIPE_UPDATE,
-} from "app-redux/actions/RecipesActions";
+} from "app-redux/actions/RecipeCrudActions";
 
 const initialState = {};
 

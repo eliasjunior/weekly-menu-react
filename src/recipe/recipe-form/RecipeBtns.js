@@ -7,33 +7,29 @@ import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import {
   createRecipeAsync,
   updateRecipeAsync,
-} from "app-redux/actions/RecipesActions";
+} from "app-redux/actions/RecipeCrudActions";
 import { isRecipeFormValid } from "./FormValidation";
+import { buildProdDetails } from "./RecipeBtnsActions";
 
 function RecipeBtns({ classes }) {
   const dispatch = useDispatch();
   const currentRecipe = useSelector(
-    (state) => state.currentRecipe,
+    (state) => state.currentRecipeRed,
     shallowEqual
   );
   const selectedProducts = useSelector((state) => state.selectedProducts);
-  const quantityMap = useSelector((state) => state.quantityMap);
   const productMap = useSelector((state) => state.products);
 
   const { name, id } = currentRecipe;
   const combinedClasses = `${classes.floatingBtn}`;
 
-  const prodsDetail = selectedProducts.reduce((prev, id) => {
-    const quantity = quantityMap[id]
-      ? quantityMap[id]
-      : productMap.byId[id].quantityDefault;
+  const prodsDetail = buildProdDetails({
+    selectedProducts,
+    productMap,
+    currentRecipe,
+  });
 
-    prev.push({
-      id,
-      quantity,
-    });
-    return prev;
-  }, []);
+  console.log(">>> >> prodsDetails", prodsDetail);
 
   const handleSave = async () => {
     if (isRecipeFormValid({ name, dispatch, selectedProducts })) {
