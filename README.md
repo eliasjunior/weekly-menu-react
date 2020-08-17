@@ -1,8 +1,13 @@
 # TODO
+
+## rename for gmail aaa to js
 `
-rename for gmail
 find . -name "*.js" -exec bash -c 'mv "$1" "${1%.js}".aaa' - '{}' \;
 `
+## rename back aaa to js
+`find . -name "*.aaa" -exec bash -c 'mv "$1" "${1%.aaa}".js' - '{}' \;`
+
+
 ## 2020 Fenix Program
 
 ### Sprint 25/05 - 31/05
