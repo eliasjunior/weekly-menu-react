@@ -1,6 +1,6 @@
 # TODO
 
-## rename for gmail aaa to js
+## rename for gmail js to aaa
 `
 find . -name "*.js" -exec bash -c 'mv "$1" "${1%.js}".aaa' - '{}' \;
 `
