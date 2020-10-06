@@ -1,4 +1,5 @@
-import { requiredParameter } from "common/Util";
+import { requiredParameter, isEmpty } from "common/Util";
+import { sanitizeRecipe } from "recipe/RecipeHelper";
 
 export function recipeListMapper(list) {
   // normalize
@@ -29,30 +30,19 @@ export function recipeMapper({
   };
 }
 
-export function recipeConverter(recipe, isNew = false) {
-  const {
-    id,
-    name = requiredParameter("name recipe"),
-    prodsDetail = requiredParameter("prodsDetail recipe"),
-  } = recipe;
+export function recipeConverter(recipe = {}, isNew = false) {
+  const { id, name, prodsDetail } = recipe;
+  sanitizeRecipe({ recipe, isNew });
   //isNew is to guarantee that the id was sent, on the update case
-  if (!isNew) {
-    if (!id) {
-      requiredParameter("id recipe");
-    }
-  }
   return {
     id,
     name,
-    prodsDetail: prodsDetail.map((detail) => prodDetailConverter(detail)),
+    prodsDetail: prodsDetail.map((detail) =>
+      prodDetailConverter(detail, isEmpty(id))
+    ),
   };
 }
-//TODO need to pass id or can it just pass prodiD????
-function prodDetailConverter({
-  id,
-  quantity,
-  detailId = requiredParameter("ProdDetails id"),
-}) {
+function prodDetailConverter({ id, quantity, detailId }) {
   return {
     prodId: id,
     quantity,

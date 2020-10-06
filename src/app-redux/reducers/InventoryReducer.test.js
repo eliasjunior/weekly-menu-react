@@ -9,9 +9,11 @@ describe("Inventory reducers", () => {
   it("should handle update categories ", () => {
     const action = {
       type: UPDATE_CAT,
-      category: {
-        name: "Baking",
-        id: 1,
+      payload: {
+        category: {
+          name: "Baking",
+          id: 1,
+        },
       },
     };
     const categories = [

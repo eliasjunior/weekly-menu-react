@@ -1,6 +1,7 @@
 import {
   ADD_SELECTED_PROD,
   ADD_ALL_SELECTED_PROD,
+  RESET_SELECTED_PROD,
 } from "app-redux/actions/ProductSelectionAction";
 import { requiredParameter } from "common/Util";
 
@@ -36,6 +37,8 @@ export default function ProductSelectionReducer(state = initialState, action) {
           return prev;
         }, []);
       }
+    case RESET_SELECTED_PROD:
+      return [];
     default:
       return state;
   }

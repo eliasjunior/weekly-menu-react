@@ -1,16 +1,20 @@
-import { LOAD_RECIPE_SELECTED } from "app-redux/actions/RecipeAction";
+import {
+  UPDATE_CURRENT_RECIPE,
+  UPDATE_CURRENT_REC_NAME,
+} from "app-redux/actions/RecipeAction";
 
 const initialState = { name: "", id: null };
 
 export default function RecipeReducer(state = initialState, { type, payload }) {
   switch (type) {
-    case LOAD_RECIPE_SELECTED:
+    case UPDATE_CURRENT_RECIPE:
       return {
         name: payload.name,
         id: payload.id,
-        products: payload.products,
         prodsDetail: payload.prodsDetail,
       };
+    case UPDATE_CURRENT_REC_NAME:
+      return { ...state, name: payload.name };
     default:
       return state;
   }

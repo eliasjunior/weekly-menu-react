@@ -1,4 +1,5 @@
 import { requiredParameter } from "common/Util";
+import { getQdyDefault } from "inventory/helpers/InventoryHelper";
 
 export function productMapper({
   id = requiredParameter("id"),
@@ -10,7 +11,7 @@ export function productMapper({
     id,
     name,
     quantityType,
-    quantityDefault: quantityType === "UNIT" ? 1 : 100,
+    quantityDefault: getQdyDefault(quantityType),
     catId,
   };
 }
@@ -50,7 +51,7 @@ export function productListMapper(list) {
       id,
       name,
       quantityType,
-      quantityDefault: quantityType === "UNIT" ? 1 : 100,
+      quantityDefault: getQdyDefault(quantityType),
       catId,
     };
     prev.allIds.push(id);

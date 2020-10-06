@@ -4,9 +4,8 @@ import {
   CREATE_CAT,
 } from "../actions/InventoryActions";
 
-//TODO the name starts to make no sence after create Products onw reducer
-export default function InventoryReducer(state = [], action) {
-  const { type, category, categories } = action;
+export default function InventoryReducer(state = [], { type, payload = {} }) {
+  const { category, categories } = payload;
   switch (type) {
     case UPDATE_CAT:
       return state.reduce((acc, item) => {
@@ -24,6 +23,3 @@ export default function InventoryReducer(state = [], action) {
       return state;
   }
 }
-
-//TODO have a look to create selectors with HOOKS
-//export const getCategories = state => state.categories;

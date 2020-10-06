@@ -10,7 +10,7 @@ import WeeklyRouters from "./WeeklyRouters";
 import { useDispatch } from "react-redux";
 import { fetchCategoryAsync } from "app-redux/actions/InventoryActions";
 import { fetchRecipesAsync } from "app-redux/actions/RecipeCrudActions";
-import { fetchProductsAsync } from "app-redux/actions/ProductAction";
+import { fetchProductsAsync } from "app-redux/actions/ProductCrudAction";
 import { fetchShoppingHistoryAsync } from "app-redux/actions/ShoppingHistoryAction";
 
 function Weekly() {

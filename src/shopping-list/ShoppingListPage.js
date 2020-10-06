@@ -43,8 +43,6 @@ function ShoppingListPage() {
 
   const listDisplay = mergeRecipeProducts(recipeMap, tempShops);
 
-  console.log("---*", listDisplay);
-
   dispatch(setDisplatList(listDisplay));
   dispatch(setPageLocation(parentComponent.SHOPPING_LIST_PAGE));
   dispatch(formShoppingAction());

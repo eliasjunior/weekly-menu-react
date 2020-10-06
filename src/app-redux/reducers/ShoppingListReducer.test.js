@@ -105,7 +105,7 @@ describe("Shopping list reducer", () => {
     expect(reducer(state, action)).toEqual(expected);
   });
 
-  it("Add simple p rod when the same belongs to a recipe", () => {
+  it("Add simple prod when the same belongs to a recipe", () => {
     const action = {
       type: ADD_SIMPLE_PRODUCT,
       payload: {

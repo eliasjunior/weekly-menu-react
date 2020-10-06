@@ -1,32 +1,34 @@
 import { requiredParameter, logService } from "common/Util";
 
-export const RECIPE_CHECK_CLICK = "RECIPE_CHECK_CLICK";
-export const RECIPE_CHECK_ALL_CLICK = "RECIPE_CHECK_ALL_CLICK";
-export const LOAD_RECIPE_SELECTED = "LOAD_RECIPE_SELECTED";
-export const RECIPE_UPDATE_NAME = "RECIPE_UPDATE_NAME";
+export const UPDATE_CURRENT_RECIPE = "UPDATE_CURRENT_RECIPE";
+export const UPDATE_CURRENT_REC_NAME = "RECIPE_UPDATE_NAME";
 
-export function UpdateCurrentRecipe({
-  name = "",
-  id,
-  products = [],
-  prodsDetail = requiredParameter("prodsDetail"),
-} = {}) {
+export function updateCurrentRecipe({ name = "", id, prodsDetail = [] } = {}) {
+  if (id && !prodsDetail) {
+    requiredParameter("prodsDetail");
+  }
+
   if (!Array.isArray(prodsDetail)) {
     logService("prodsDetail has to be an array");
     return;
   }
-  if (!Array.isArray(products)) {
-    logService("products has to be an array");
-    return;
-  }
 
   return {
-    type: LOAD_RECIPE_SELECTED,
+    type: UPDATE_CURRENT_RECIPE,
     payload: {
       id,
       name,
-      products,
       prodsDetail,
+    },
+  };
+}
+
+// DO not use only the above I want just update the name
+export function updateCurrentRecipeName({ name = "" }) {
+  return {
+    type: UPDATE_CURRENT_REC_NAME,
+    payload: {
+      name,
     },
   };
 }

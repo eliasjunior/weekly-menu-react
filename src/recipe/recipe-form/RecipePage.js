@@ -1,6 +1,6 @@
 import React from "react";
 import CategoryList from "inventory/category/components";
-import RecipeBtns from "./RecipeBtns";
+import RecipeFabBtns from "./RecipeFabBtns";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { formSelectionAction } from "app-redux/actions/ProductFormAction";
 import { setDisplatList } from "app-redux/actions/ListFilterAction";
@@ -8,10 +8,13 @@ import CommonErrorBoundary from "error-handlers/CommonErrorBoundary";
 import { fillRecipesProducts } from "../RecipeHelper";
 import { loadProductsToCategory } from "inventory/helpers/InventoryHelper";
 import RecipeForm from "./RecipeForm";
-import { setPageTitle, setPageLocation } from "app-redux/actions/PageAction";
+import { setPageLocation } from "app-redux/actions/PageAction";
 import { parentComponent } from "common/AppConstant";
-import { UpdateCurrentRecipe } from "app-redux/actions/RecipeAction";
-import { addAllSelectedProduct } from "app-redux/actions/ProductSelectionAction";
+import {
+  initEditDispatch,
+  initNewDispatch,
+  getRecipeFromUrl,
+} from "./RecipePage.presenter";
 
 function RecipePage({ match }) {
   const dispatch = useDispatch();
@@ -23,25 +26,12 @@ function RecipePage({ match }) {
   const categories = loadProductsToCategory(tempCategories, products);
   const recipesWithProducts = fillRecipesProducts(recipes, products);
   const recipe = getRecipeFromUrl(match, recipesWithProducts);
+
+  // When refresh the page some reducers are called multiples times with different values given unexpected values
   if (recipe.id) {
-    dispatch(setPageTitle("Edit Recipe"));
-    dispatch(
-      addAllSelectedProduct({
-        toggled: true,
-        reset: true,
-        prodIds: recipe.products.map((prod) => prod.id),
-      })
-    );
-    dispatch(
-      UpdateCurrentRecipe({
-        name: recipe.name,
-        id: recipe.id,
-        products: recipe.products,
-        prodsDetail: recipe.prodsDetail,
-      })
-    );
+    initEditDispatch({ dispatch, recipe });
   } else {
-    dispatch(setPageTitle("New Recipe"));
+    initNewDispatch({ dispatch, productMap: products });
   }
 
   dispatch(setPageLocation(parentComponent.RECIPE_PAGE));
@@ -52,21 +42,9 @@ function RecipePage({ match }) {
   return (
     <CommonErrorBoundary>
       <RecipeForm prevName={recipe.name}></RecipeForm>
-      <RecipeBtns></RecipeBtns>
+      <RecipeFabBtns></RecipeFabBtns>
       <CategoryList></CategoryList>
     </CommonErrorBoundary>
   );
 }
 export default RecipePage;
-
-function getRecipeFromUrl(match = {}, recipes) {
-  const { params = {} } = match;
-  const { id } = params;
-  const rec = recipes.find((rec) => {
-    if (rec.id && id) {
-      return rec.id.toString() === id.toString();
-    }
-    return false;
-  });
-  return rec ? rec : { name: "" };
-}

@@ -50,6 +50,13 @@ export function normalizeCategory(categories) {
   return categories.reduce(makeByIdTable, { byId: {}, allIds: [] });
 }
 
+export function getQdyDefault(quantityType) {
+  const UNIT_DEFAULT = 1;
+  const WEIGTH_DEFAULT = 100;
+  return quantityType === "UNIT" ? UNIT_DEFAULT : WEIGTH_DEFAULT;
+}
+
+//TODO change to similar recipe sanitize
 function validateProd(prodId, products) {
   const product = { ...products.byId[prodId] };
   if (!product) {

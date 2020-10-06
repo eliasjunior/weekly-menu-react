@@ -6,7 +6,7 @@ import { Menu } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { UpdateCurrentRecipe } from "app-redux/actions/RecipeAction";
+import { updateCurrentRecipe } from "app-redux/actions/RecipeAction";
 
 function MenuIconComponent() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -21,7 +21,7 @@ function MenuIconComponent() {
 
   const handleMenuClick = (menuItem) => {
     if (menuItem === LOCATION.newRecipe.label) {
-      dispatch(UpdateCurrentRecipe());
+      dispatch(updateCurrentRecipe());
     }
   };
   const getItemsForSideMenu = () => {

@@ -4,7 +4,7 @@ import FormDialog from "inventory/FormDialog";
 import FormDialogProduct from "inventory/FormDialogProduct";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import { useDispatch } from "react-redux";
-import { createProductAsync } from "app-redux/actions/ProductAction";
+import { createProductAsync } from "app-redux/actions/ProductCrudAction";
 import { updateCategoryAsync } from "app-redux/actions/InventoryActions";
 
 function CategoryActions({ category }) {

@@ -20,7 +20,7 @@ import {
   BTN_QDT_INFO,
   BTN_CRUD,
 } from "app-redux/actions/ProductFormAction";
-import { updateProductAsync } from "app-redux/actions/ProductAction";
+import { updateProductAsync } from "app-redux/actions/ProductCrudAction";
 import ShoppingItemSelection from "components/ShoppingItemSelection";
 
 function ComponentCatalog({ product }) {

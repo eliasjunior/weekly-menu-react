@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { TextField } from "@material-ui/core";
 import { styles } from "./styles";
+import { updateCurrentRecipeName } from "app-redux/actions/RecipeAction";
+import { useDispatch } from "react-redux";
 
 function RecipeForm({ prevName }) {
+  const dispatch = useDispatch();
   const [name, setName] = useState(prevName);
 
   useEffect(() => {
@@ -12,8 +15,10 @@ function RecipeForm({ prevName }) {
     handleNameChanged(prevName);
   }, [prevName]);
 
-  const handleChangeName = (e) => {
-    setName(e.target.value);
+  const handleChangeName = ({ target }) => {
+    const { value } = target;
+    setName(value);
+    dispatch(updateCurrentRecipeName({ name: value }));
   };
 
   return (

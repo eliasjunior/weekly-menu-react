@@ -13,21 +13,21 @@ export const ERROR_REQUEST = "ERROR_REQUEST";
 export function updateCategory(category) {
   return {
     type: UPDATE_CAT,
-    category,
+    payload: { category },
   };
 }
 
 export function createCategory(category) {
   return {
     type: CREATE_CAT,
-    category,
+    payload: { category },
   };
 }
 
-export function fetchCategory(data) {
+export function fetchCategory(categories) {
   return {
     type: FETCH_CATS,
-    categories: data,
+    payload: { categories },
   };
 }
 

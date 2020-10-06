@@ -9,7 +9,7 @@ import componentFormNames from "app-redux/reducers/ProductFormReducer";
 import loading from "app-redux/reducers/LoadingReducer";
 import currentRecipeRed from "app-redux/reducers/RecipeReducer";
 import recipes from "app-redux/reducers/RecipeCrudReducer";
-import products from "app-redux/reducers/ProductsReducer";
+import products from "app-redux/reducers/ProductCrudReducer";
 import pageData from "app-redux/reducers/PageReducer";
 import quantityMap from "app-redux/reducers/QuantityPickReducer";
 import shoppingList from "app-redux/reducers/ShoppingListReducer";

@@ -1,24 +1,40 @@
 import React from "react";
 import { Fab } from "@material-ui/core";
-import { withStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import AddIcon from "@material-ui/icons/Add";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { Link } from "react-router-dom";
 import RecipeListComponent from "./RecipeListComponent";
-import CommonStyles from "styles/CommonStyles";
 import { LOCATION, parentComponent } from "common/AppConstant";
 import { formEditAction } from "app-redux/actions/ProductFormAction";
 import { setDisplatList } from "app-redux/actions/ListFilterAction";
 import { fillRecipesProducts } from "../RecipeHelper";
 import { setPageTitle, setPageLocation } from "app-redux/actions/PageAction";
+import Shop from "@material-ui/icons/ShoppingCart";
 import cloneDeep from "lodash.clonedeep";
 
-function RecipeListPage({ classes }) {
+const useStyles = makeStyles((theme) => ({
+  margin: {
+    margin: theme.spacing(1),
+  },
+  floatingBtn: {
+    margin: theme.spacing(1),
+    zIndex: 999,
+    position: "fixed",
+    top: "60px",
+    right: 0,
+  },
+}));
+
+function RecipeListPage({ history }) {
   const recipes = useSelector((state) => state.recipes, shallowEqual);
   const products = useSelector((state) => state.products, shallowEqual);
   const recipesWithProducts = fillRecipesProducts(cloneDeep(recipes), products);
-
   const dispatch = useDispatch();
+  const classes = useStyles();
+
+  const { newRecipe, newShoppingList } = LOCATION;
+
   //Initial sets to the children
 
   dispatch(setDisplatList(recipesWithProducts));
@@ -28,23 +44,34 @@ function RecipeListPage({ classes }) {
 
   const addButton = () => {
     return (
-      <Fab
-        color="secondary"
-        className={classes.floatingBtn}
-        aria-label="new Recipe"
-      >
-        <Link to={LOCATION.newShoppingList.path}>
-          <AddIcon />
-        </Link>
-      </Fab>
+      <div className={classes.floatingBtn}>
+        <Fab
+          size="small"
+          color="secondary"
+          aria-label="new Recipe"
+          className={classes.margin}
+        >
+          <Link to={newShoppingList.path}>
+            <Shop />
+          </Link>
+        </Fab>
+        <Fab size="small" color="primary">
+          <Link to={newRecipe.path}>
+            <AddIcon />
+          </Link>
+        </Fab>
+      </div>
     );
   };
   return (
-    <div>
+    <>
       {addButton()}
-      <RecipeListComponent recipes={recipesWithProducts}></RecipeListComponent>
-    </div>
+      <RecipeListComponent
+        recipes={recipesWithProducts}
+        history={history}
+      ></RecipeListComponent>
+    </>
   );
 }
 
-export default withStyles(CommonStyles)(RecipeListPage);
+export default RecipeListPage;

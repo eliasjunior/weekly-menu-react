@@ -20,7 +20,7 @@ import { setPageLocation, setPageTitle } from "app-redux/actions/PageAction";
 //TODO need to change searchInput(display the component or not) and CategoryDisplayService names are misleading
 const { filterInputVisibility } = CategoryDisplayHelper;
 
-function InventoryPage({ classes, history }) {
+function InventoryPage({ classes }) {
   const [catName, setCatName] = useState("");
   const [openModal, setOpenModal] = useState(false);
   const dispatch = useDispatch();

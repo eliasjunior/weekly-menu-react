@@ -7,7 +7,7 @@ const CommmonStyles = (theme) => ({
     right: 0,
   },
   floatingPadding: {
-    padding: theme.spacing.unit,
+    padding: theme.spacing(1),
   },
   // appBar: {
   //   flexGrow: "3",
