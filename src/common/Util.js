@@ -40,7 +40,7 @@ export function getServerUrl() {
   } = process.env;
   switch (NODE_ENV) {
     case "production":
-      return "https://weekly-menu-java.herokuapp.com/";
+      return "https://weekly-menu-java.herokuapp.com/v1/";
     case "test":
     default:
       return (
