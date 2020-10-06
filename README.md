@@ -1,19 +1,63 @@
 # TODO
 
 ## rename for gmail js to aaa
-`
-find . -name "*.js" -exec bash -c 'mv "$1" "${1%.js}".aaa' - '{}' \;
-`
+
+`find . -name "*.js" -exec bash -c 'mv "$1" "${1%.js}".aaa' - '{}' \;`
+
 ## rename back aaa to js
+
 `find . -name "*.aaa" -exec bash -c 'mv "$1" "${1%.aaa}".js' - '{}' \;`
 
-
 ## 2020 Fenix Program
+
+## Task 23/08
+
+New Recipe
+
+- Add test to buildProdDetails
+  - ~~prodDetail or product can't be required because if you can select and deselect~~
+  - ~~prodDetail CAN be null or not --> YES it can, when its new Recipe there is not prodDetail YET~~
+  - ~~Scenarios land in the page and select and deselect new ones~~
+- QuantityMap need to load all quantities, selected and not, need to update the selected values
+  Rules are different for Edit and New, add these rules for tests, RULE\* the rule is if the product has a recipe this value is in prodDetail table otherwise is in prod table
+  - ~~NEW when it load the product list, update all products in QuantityMap - it must has the values~~
+  - ~~EDIT update quantityMap at EDIT click~~
+  - ~~How to update when reload the page for edit recipe~~
+  - ~~redux- select and unselect actions ~~
+- ~~Recipe Page -> move dispatch to presenter and have mapper-view for the actions, need test this payload creations before action and in the actions~~
+- ~~All actions MUST have a payload namespace, known there is NOT InventoryActions~~
+- ~~RENAME ProductsReducer to singular like the other ones.~~
+- Recipe after create recipe redirect to recipe list
+- ~~REcipe list, Create button in recipe list to call new recipe~~
+- EDIT recipe bugs
+  - ~~Save and try to edit the quantity payload is sending the old values~~
+  - ~~payload -> prod detail id is null~~
+- ~~Back end, if prod is deselected will the prodDetail row be deleted ?? prodDetail/quantity should be deleted~~
+- ~~Need clean up back-end code~~
+- ~~Id is not being sent once change the rec name on Update~~
+- ~~Bug create new product in Recipe Edit and get an error~~
+- Manual test first then find the bug add tests
+   ~~Update Product unit to weight affect existing Recipe~~
+- IMPROVE Layoult/View/Design!!! Hooray   
+- Test Recipe Page
+  - ~~Redux recipes~~
+  - Redux products
+  - loadProductsToCategory
+  - fillRecipesProducts
+  - getRecipeFromUrl
+  - all subscritoins in initEditDispatch
+  - all subscritoins in initNewDispatch
+- Test Shopping list to find bugs
+- Add functions to logservice, log, info, error
+- Fix Tests Recipe Actions > All commented tests
+- ProductSelectionReducer and Actions tests, test toggled and reset, maybe the reset action is not needed
+- have a look to create selectors with HOOKS, it was in InventyReducer -->export const getCategories = state => state.categories;
+- There is a known issue, when refresh the page the quantity map is overwriten here in the edit recipe
 
 ### Sprint 25/05 - 31/05
 
 - Fix all tests
-- Check CI/CD 
+- Check CI/CD
 
 ### Sprint 16/05 - 23/05 delayed(25/05)
 
