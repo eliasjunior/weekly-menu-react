@@ -1,21 +1,43 @@
 export const LOCATION = {
   dashboard: { path: "/", label: "Dashboard", menu: false },
-  products: { path: "/products", label: "Products", menu: true },
+  products: {
+    path: "/products",
+    label: "Products",
+    menu: true,
+    img: "/recipe/burgers.jpg",
+  },
   newShoppingList: {
     path: "/newshopping",
     label: "New Shopping List",
     menu: true,
+    img: "/recipe/shopping-foto2.jpg",
   },
   editShoppingList: { path: "/editshopping", label: "", menu: false },
   shoppingHistory: {
     path: "/shoppinghistory",
-    label: "Shopping history",
+    label: "Previous shopping",
     menu: true,
+    img: "/recipe/checklist.jpg",
   },
-  recipeList: { path: "/recipe", label: "Recipe List", menu: true },
-  newRecipe: { path: "/recipeCreate/new", label: "New Recipe", menu: true },
-  shopping: { path: "/shopping", label: "Shopping List", menu: false },
+  recipeList: {
+    path: "/recipe",
+    label: "Recipe List",
+    menu: true,
+    img: "/recipe/recipe-list.jpg",
+  },
+  newRecipe: {
+    path: "/recipeCreate/new",
+    label: "New Recipe",
+    menu: true,
+    img: "/recipe/new-recipe.jpg",
+  },
   pickProducts: { path: "/pick-products", label: "Pick", menu: false },
+  letfOver: {
+    path: "/leftOver",
+    label: "Left Over",
+    menu: true,
+    img: "/recipe/left-over.jpg",
+  },
 };
 
 export const parentComponent = {

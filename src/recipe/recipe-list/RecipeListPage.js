@@ -10,7 +10,7 @@ import { formEditAction } from "app-redux/actions/ProductFormAction";
 import { setDisplatList } from "app-redux/actions/ListFilterAction";
 import { fillRecipesProducts } from "../RecipeHelper";
 import { setPageTitle, setPageLocation } from "app-redux/actions/PageAction";
-import Shop from "@material-ui/icons/ShoppingCart";
+import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import cloneDeep from "lodash.clonedeep";
 
 const useStyles = makeStyles((theme) => ({
@@ -52,7 +52,7 @@ function RecipeListPage({ history }) {
           className={classes.margin}
         >
           <Link to={newShoppingList.path}>
-            <Shop />
+            <AddShoppingCartIcon />
           </Link>
         </Fab>
         <Fab size="small" color="primary">
