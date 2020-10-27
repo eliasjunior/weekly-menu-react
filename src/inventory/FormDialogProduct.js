@@ -41,6 +41,7 @@ function FormDialogProduct({
             label={form.placeHolder}
             defaultValue={form.name}
             onChange={(e) => setName(e.target.value)}
+            autoFocus={true}
           ></TextField>
           <div style={{ paddingTop: "20px" }}>
             <FormControl component="fieldset">
