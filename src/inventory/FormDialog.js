@@ -6,11 +6,9 @@ import {
   DialogContent,
   TextField,
   DialogActions,
-  Select,
 } from "@material-ui/core";
 import FormChildAction from "../common/FormChildAction";
 import { requiredParameter } from "common/Util";
-import { UNIT_TYPE, WEIGHT_TYPE } from "./product/Constant";
 
 function FormDialog({
   onDisplay = requiredParameter("onDisplay"),
