@@ -4,7 +4,7 @@ import { requiredParameter } from "common/Util";
 import { ListItem } from "@material-ui/core";
 import FormComponents from "./ComponentCatalog";
 
-export default function ProductForm({
+export default function ProductRow({
   product = requiredParameter("product"),
 }) {
   const componentFormNames = useSelector((state) => state.componentFormNames);
