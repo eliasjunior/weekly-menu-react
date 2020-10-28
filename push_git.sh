@@ -23,7 +23,7 @@ find ${DESTINATION} -name "*.js" -exec bash -c 'mv "$1" "${1%.js}".aaa' - '{}' \
 # if want to exclude a folder from search
 #find . -path  ./node_modules -prune -false -o -name '*.js' -exec bash -c 'mv "$1" "${1%.js}".aaa' - '{}' \;
 cd ${DESTINATION_PATH}
-echo "zip -- ${PWD}"
+echo "current ${PWD}"
 zip -r ${FOLDER_TARGET} ${FOLDER_TARGET}
 rm -rf ${DESTINATION}
 
