@@ -3,7 +3,7 @@ import Collapse from "@material-ui/core/Collapse";
 import List from "@material-ui/core/List";
 import DisplayService from "inventory/category/services/CategoryDisplayService";
 import SelectAllNone from "components/SelectAllNone";
-import ProductForm from "./ProductForm";
+import ProductRow from "./ProductRow";
 import { useSelector } from "react-redux";
 
 export default function ProductList({ products = [] }) {
@@ -12,7 +12,7 @@ export default function ProductList({ products = [] }) {
     return products.map((product, index) => {
       return (
         <div key={index}>
-          <ProductForm product={product}></ProductForm>
+          <ProductRow product={product}></ProductRow>
         </div>
       );
     });
