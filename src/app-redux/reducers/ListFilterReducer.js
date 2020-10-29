@@ -3,6 +3,7 @@ import {
   SET_DISPLAY_LIST,
   FLAG_PICKED_SHOP_PROD,
 } from "app-redux/actions/ListFilterAction";
+import { upperCaseFirstChar, compareObject } from "common/Util";
 const initialState = {
   displayList: [],
   payload: { textFilter: "", listDB: [] },
@@ -14,26 +15,45 @@ export default function ListFilterReducer(
   switch (type) {
     case SET_FILTER_NAME:
       const tempList = payload.listDB;
-      const result = tempList.filter((parentList) => {
-        parentList.products = parentList.products.filter((prod) =>
-          compareIgnoreCase(prod.name, payload.textFilter)
-        );
-        return parentList.products.length > 0;
-      });
-      return { textFilter: payload.textFilter, displayList: result };
+      const result = tempList
+        .filter((category) => {
+          category.products = category.products
+            .filter((prod) => compareIgnoreCase(prod.name, payload.textFilter))
+            .map((prod) => upperCaseFirstChar(prod));
+          category.products.sort(compareObject);
+          return category.products.length > 0;
+        })
+        .map((cat) => upperCaseFirstChar(cat));
+      return {
+        textFilter: payload.textFilter,
+        displayList: result.sort(compareObject),
+      };
     case SET_DISPLAY_LIST:
-      return { textFilter: "", displayList: payload.listDB };
-    case FLAG_PICKED_SHOP_PROD:
-      const newList = state.displayList.map((cat) => {
-        const prods = [...cat.products];
-        prods.forEach((prod) => {
-          if (prod.id === payload.id) {
-            prod.picked = payload.picked;
-          }
+      const { listDB } = payload;
+      const transformText = listDB
+        .map((cat) => upperCaseFirstChar(cat))
+        .map((cat) => {
+          cat.products = cat.products.map((prod) => upperCaseFirstChar(prod));
+          cat.products.sort(compareObject);
+          return cat;
         });
-        cat.products = prods;
-        return cat;
-      });
+
+      return { textFilter: "", displayList: transformText.sort(compareObject) };
+    case FLAG_PICKED_SHOP_PROD:
+      const newList = state.displayList
+        .map((cat) => {
+          const prods = [...cat.products];
+          prods.forEach((prod) => {
+            if (prod.id === payload.id) {
+              prod.picked = payload.picked;
+            }
+          });
+
+          cat.products = prods.map((prod) => upperCaseFirstChar(prod));
+          cat.products.sort(compareObject);
+          return cat;
+        })
+        .map((cat) => upperCaseFirstChar(cat));
       return { textFilter: state.textFilter, displayList: newList };
     default:
       return state;
