@@ -16,7 +16,7 @@ describe("Visibility filter", () => {
       },
       {
         name: "Fruits",
-        products: [{ name: "Oranges" }, { name: "Berries" }],
+        products: [{ name: "oranges" }, { name: "Berries" }],
       },
     ];
 
