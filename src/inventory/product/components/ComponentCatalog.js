@@ -40,7 +40,7 @@ function ComponentCatalog({ product }) {
         onDisplay={displayProdDialog}
         onClose={() => setProdDialog(false)}
         onActionMethod={({ name, quantityType }) => {
-          if (isProdFormValid({ name, dispatch })) {
+          if (isProdFormValid({ name, dispatch, quantityType })) {
             product.name = name;
             product.quantityType = quantityType;
             dispatch(updateProductAsync(product));
