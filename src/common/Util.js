@@ -72,3 +72,28 @@ export function quantityMapperProdsDetail(prodsDetail) {
     return prev;
   }, {});
 }
+
+export function upperCaseFirstChar(row) {
+  if (!row.name) {
+    return row;
+  }
+  row.name = row.name.charAt(0).toUpperCase().concat(row.name.slice(1));
+  return row;
+}
+
+export function compareObject(valueA, valueB) {
+  if (!valueA.name) {
+    return 0;
+  }
+  var nameA = valueA.name.toUpperCase();
+  var nameB = valueB.name.toUpperCase();
+  if (nameA < nameB) {
+    return -1;
+  }
+  if (nameA > nameB) {
+    return 1;
+  }
+
+  // names must be equal
+  return 0;
+}
