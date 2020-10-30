@@ -2,9 +2,7 @@ import { requiredParameter } from "common/Util";
 
 export default function TicketHelper({ getDeepCopy }) {
   return {
-    filterByPicked: function ({
-      displayList = requiredParameter("displayList"),
-    }) {
+    filterByPicked: function (displayList) {
       const copiedList = getDeepCopy(displayList);
       if (!copiedList) {
         return [];
