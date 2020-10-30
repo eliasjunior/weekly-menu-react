@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { ListItem } from "@material-ui/core";
 import { List, Divider } from "@material-ui/core";
 import { tickedTitle } from "styles/CommonStyles2";
-import { buildPickedList } from "./ticketShopList";
+import { buildPickedList } from "./tickedShopList";
 
 export default function TickedShopList() {
   const { displayList } = useSelector((state) => state.listFilter);
