@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setPageTitle, setPageLocation } from "app-redux/actions/PageAction";
 import { setDisplatList } from "app-redux/actions/ListFilterAction";
 import CategoryList from "inventory/category/components";
-import TickedShopList from "shopping-list/ticketShopList/TickedHelper";
+import TickedShopList from "./TickedShopList";
 
 import TopBtns from "./TopBtns";
 import {
