@@ -6,8 +6,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { setPageTitle, setPageLocation } from "app-redux/actions/PageAction";
 import { setDisplatList } from "app-redux/actions/ListFilterAction";
 import CategoryList from "inventory/category/components";
-import TickedShopList from "shopping-list/TickedShopList";
-import { Divider } from "@material-ui/core";
+import TickedShopList from "shopping-list/ticketShopList/TickedHelper";
+
 import TopBtns from "./TopBtns";
 import {
   buildShoppingListDisplay,
@@ -53,7 +53,6 @@ function ShoppingListPage() {
       <TopBtns list={listDisplay}></TopBtns>
       <ShoppingCreateBtns></ShoppingCreateBtns>
       <CategoryList></CategoryList>
-      <Divider></Divider>
       <TickedShopList></TickedShopList>
     </CommonErrorBoundary>
   );
