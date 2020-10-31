@@ -21,6 +21,7 @@ import {
 import { formShoppingAction } from "app-redux/actions/ProductFormAction";
 import { normalizeCategory } from "inventory/helpers/InventoryHelper";
 import { parentComponent } from "common/AppConstant";
+import Presentation from "./Presentation";
 
 function ShoppingListPage() {
   const dispatch = useDispatch();
@@ -50,6 +51,7 @@ function ShoppingListPage() {
 
   return (
     <CommonErrorBoundary>
+      {listDisplay.length !== 0 ? "" : <Presentation></Presentation>}
       <TopBtns list={listDisplay}></TopBtns>
       <ShoppingCreateBtns></ShoppingCreateBtns>
       <CategoryList></CategoryList>
