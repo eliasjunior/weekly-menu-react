@@ -14,12 +14,13 @@ export default function TickedShopList() {
     <>
       <Divider></Divider>
       <div style={tickedTitle}>Ticked</div>
-      <List></List>
-      {pickedList.map((cat) => {
-        return cat.products.map((prod) => (
-          <ListItem key={prod.id}>{prod.name}</ListItem>
-        ));
-      })}
+      <List>
+        {pickedList.map((cat) => {
+          return cat.products.map((prod) => (
+            <ListItem key={prod.id}>{prod.name}</ListItem>
+          ));
+        })}
+      </List>
     </>
   );
 }
