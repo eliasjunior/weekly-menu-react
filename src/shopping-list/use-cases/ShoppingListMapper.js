@@ -7,12 +7,12 @@ export function shoppingListMapper(list) {
 export function shoppingMapper({
   id = requiredParameter("id shoppingList"),
   name = requiredParameter("name date"),
-  productItems = requiredParameter("productItems"),
+  cartItems = requiredParameter("cartItems", false),
 }) {
   return {
     id,
     name,
-    products: productItems.map((prod) => productMap(prod)),
+    products: cartItems.map((prod) => productMap(prod)),
   };
 }
 
@@ -30,13 +30,13 @@ export function shoppingListConverter(shoppingList, isNew = false) {
   return {
     id,
     name,
-    productItems: products.map((prod) => productConverter(prod)),
+    cartItems: products.map((prod) => productConverter(prod)),
   };
 }
 
 function productMap({
   prodId = requiredParameter("prod id"),
-  recipes = requiredParameter("prod id"),
+  recipes = requiredParameter("recipe ids"),
   selected = requiredParameter("selected"),
 }) {
   return {

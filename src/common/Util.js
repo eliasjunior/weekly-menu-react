@@ -1,8 +1,26 @@
 import RequiredParameterError from "./RequiredParameterError";
 import _ from "lodash";
 
-export function requiredParameter(name) {
-  throw new RequiredParameterError(`${name} is required`);
+// null has to be sanitized and just expected undefined
+export function requiredParameter(name, isThrow = true) {
+  //TODO add log monitoring
+  if (isThrow) {
+    throw new RequiredParameterError(`${name} is required`);
+  } else {
+    console.error(`${name} is required *`);
+  }
+}
+//TODO move to other function/gateways, but test first
+export function cleanFromApi(data) {
+  return data.map((item) => {
+    return Object.keys(item).reduce((acc, key) => {
+      acc[key] = item[key];
+      if (acc[key] === null || acc[key] === "null") {
+        acc[key] = undefined;
+      }
+      return acc;
+    }, {});
+  });
 }
 
 export function isEmpty(value) {

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import AppWeekBar from "header/AppWeekBar";
 import { createMuiTheme } from "@material-ui/core/styles";
-import blue from "@material-ui/core/colors/blue";
+import red from "@material-ui/core/colors/red";
 import teal from "@material-ui/core/colors/orange";
 import { MuiThemeProvider } from "@material-ui/core";
 import AlertMessage from "components/AlertMessage";
@@ -36,7 +36,7 @@ function Weekly() {
 
 const theme = createMuiTheme({
   palette: {
-    primary: blue,
+    primary: red,
     secondary: teal,
   },
   typography: {

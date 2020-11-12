@@ -3,13 +3,14 @@ import {
   shoppingMapper,
   shoppingListMapper,
 } from "./ShoppingListMapper";
+import { cleanFromApi } from "common/Util";
 
 export default function ShoppingListGateway({ httpAPI }) {
   return {
     getShoppingList: async () => {
       try {
         const data = await httpAPI.get("carts");
-        return shoppingListMapper(data);
+        return shoppingListMapper(cleanFromApi(data));
       } catch (error) {
         throw error;
       }
