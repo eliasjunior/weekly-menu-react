@@ -11,10 +11,13 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setPageLocation, setPageTitle } from "app-redux/actions/PageAction";
 import { editShoppingListAction } from "app-redux/actions/ShoppingListAction";
+import { compareObject } from "common/Util";
 
 function ShoppingListHistoryPage() {
   const dispatch = useDispatch();
-  const shoppingHistory = useSelector((state) => state.shoppingHistory);
+  const shoppingHistory = useSelector((state) => state.shoppingHistory).sort(
+    compareObject
+  );
   const productMap = useSelector((state) => state.products);
 
   dispatch(setPageLocation(parentComponent.SHOPPING_LIST_PAGE));

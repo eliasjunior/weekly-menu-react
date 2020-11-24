@@ -42,7 +42,7 @@ function RecipeListPage({ history }) {
   dispatch(setPageTitle("Recipes"));
   dispatch(formEditAction());
 
-  const addButton = () => {
+  const floatButtons = () => {
     return (
       <div className={classes.floatingBtn}>
         <Fab
@@ -65,7 +65,7 @@ function RecipeListPage({ history }) {
   };
   return (
     <>
-      {addButton()}
+      {floatButtons()}
       <RecipeListComponent
         recipes={recipesWithProducts}
         history={history}

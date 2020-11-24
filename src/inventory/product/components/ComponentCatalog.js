@@ -25,8 +25,17 @@ import ShoppingItemSelection from "components/ShoppingItemSelection";
 
 function ComponentCatalog({ product }) {
   const dispatch = useDispatch();
-
   const [displayProdDialog, setProdDialog] = useState(false);
+
+  const handleUpdateProduct = ({ name, quantityType }) => {
+    if (isProdFormValid({ name, dispatch, quantityType })) {
+      //TODO right now when it fails to save still changing the name(redux state) and it should not
+      product.name = name;
+      product.quantityType = quantityType;
+      dispatch(updateProductAsync(product));
+      setProdDialog(false);
+    }
+  };
 
   const renderModal = () => {
     return (
@@ -39,14 +48,7 @@ function ComponentCatalog({ product }) {
         title={"Update Product"}
         onDisplay={displayProdDialog}
         onClose={() => setProdDialog(false)}
-        onActionMethod={({ name, quantityType }) => {
-          if (isProdFormValid({ name, dispatch, quantityType })) {
-            product.name = name;
-            product.quantityType = quantityType;
-            dispatch(updateProductAsync(product));
-            setProdDialog(false);
-          }
-        }}
+        onActionMethod={handleUpdateProduct}
       ></FormDialogProduct>
     );
   };

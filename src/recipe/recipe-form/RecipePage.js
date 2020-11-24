@@ -15,12 +15,13 @@ import {
   initNewDispatch,
   getRecipeFromUrl,
 } from "./RecipePage.presenter";
+import SearchName from "components/SearchName";
 
 function RecipePage({ match }) {
   const dispatch = useDispatch();
   //TODO improve performance
   const tempCategories = useSelector((state) => state.categories, shallowEqual);
-  const recipes = useSelector((state) => state.recipes, shallowEqual);
+  const recipes = useSelector((state) => state.recipes);
   const products = useSelector((state) => state.products, shallowEqual);
 
   const categories = loadProductsToCategory(tempCategories, products);
@@ -41,6 +42,7 @@ function RecipePage({ match }) {
 
   return (
     <CommonErrorBoundary>
+      <SearchName listDB={recipesWithProducts}></SearchName>
       <RecipeForm prevName={recipe.name}></RecipeForm>
       <RecipeFabBtns></RecipeFabBtns>
       <CategoryList></CategoryList>

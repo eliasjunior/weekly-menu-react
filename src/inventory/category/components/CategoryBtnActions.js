@@ -11,7 +11,7 @@ function CategoryBtnActions({ category }) {
   const [catName, setCatName] = useState("");
   const [displayCat, setCatDisplay] = useState(false);
 
-  const [displayProd, setProdDisplay] = useState(false);
+  const [displayProd, setDisplayProd] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -26,11 +26,11 @@ function CategoryBtnActions({ category }) {
       catId: category.id,
     };
     await dispatch(createProductAsync(newProduct, category));
-    setProdDisplay(false);
+    setDisplayProd(false);
   };
 
   const openDialogProduct = () => {
-    setProdDisplay(true);
+    setDisplayProd(true);
   };
   const openDialogCategory = () => {
     setCatDisplay(true);
@@ -61,7 +61,7 @@ function CategoryBtnActions({ category }) {
         }}
         title={"New Product"}
         onDisplay={displayProd}
-        onClose={() => setProdDisplay(false)}
+        onClose={() => setDisplayProd(false)}
         onActionMethod={handleSaveAction}
       ></FormDialogProduct>
       <Button color="primary" onClick={openDialogCategory}>

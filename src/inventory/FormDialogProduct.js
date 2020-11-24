@@ -26,8 +26,12 @@ function FormDialogProduct({
   onActionMethod,
 }) {
   const [name, setName] = useState(form.name);
+  //TODO revise here, its initialize with undefined then get an warning, because it should start with a value controlled vs uncontrolled
   const [quantityType, setQuantityType] = useState(form.quantityType);
-
+  // const [quantityType, setQuantityType] = useState(
+  //   form.quantityType ? form.quantityType : UNIT_TYPE
+  // );
+  // console.log("AT SOME", form.quantityType, form.name, quantityType);
   return (
     <div>
       <Dialog

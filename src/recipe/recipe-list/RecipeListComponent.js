@@ -39,10 +39,10 @@ function RecipeListComponent({ recipes, history }) {
     });
   };
   return (
-    <div>
+    <>
       <SearchName listDB={recipes}></SearchName>
       <List>{buildRecipeList()}</List>
-    </div>
+    </>
   );
 }
 
