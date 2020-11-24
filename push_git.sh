@@ -27,5 +27,5 @@ echo "current ${PWD}"
 zip -r ${FOLDER_TARGET} ${FOLDER_TARGET}
 rm -rf ${DESTINATION}
 
-open https://gmail.com
+#open https://gmail.com
 
