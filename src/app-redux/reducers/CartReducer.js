@@ -62,7 +62,6 @@ export default function CartReducer(
     case CLONE_CART:
       const byId = state.products.byId;
       const allIds = state.products.selected;
-      console.log("byId", byId)
       state.name = getTimeAPI().getTimeLabel();
       state.id = undefined;
       // selected its just like allIds
