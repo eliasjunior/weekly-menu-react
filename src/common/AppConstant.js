@@ -15,7 +15,7 @@ export const LOCATION = {
   editShoppingList: { path: "/editshopping", label: "", menu: false },
   shoppingHistory: {
     path: "/shoppinghistory",
-    label: "Previous shopping",
+    label: "Shopping history",
     menu: true,
     img: "/recipe/checklist.jpg",
   },
@@ -32,7 +32,7 @@ export const LOCATION = {
     img: "/recipe/new-recipe.jpg",
   },
   pickProducts: { path: "/pick-products", label: "Pick", menu: false },
-  letfOver: {
+  leftOver: {
     path: "/leftOver",
     label: "Left Over",
     menu: true,
@@ -45,4 +45,5 @@ export const parentComponent = {
   RECIPE_LIST_PAGE: "RecipeListPage",
   SHOPPING_LIST_PAGE: "ShoppingListPage",
   INVENTORY_PAGE: "InventoryPage",
+  PICKED_UP_PRODUCTS: "Pick",
 };

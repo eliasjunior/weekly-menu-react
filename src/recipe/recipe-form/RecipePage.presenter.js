@@ -21,10 +21,14 @@ export function initEditDispatch({
 export function initNewDispatch({
   dispatch = requiredParameter("dispatch"),
   productMap = requiredParameter("productMap"),
+  justNewProdAdded = false
 }) {
   dispatch(setPageTitle("New Recipe"));
-  dispatch(resetSelectedProduct());
-  dispatch(resetQty(productMap));
+  if(!justNewProdAdded) {
+    console.log("RESET!!")
+    dispatch(resetSelectedProduct());
+    dispatch(resetQty(productMap));
+  }
 }
 
 export function selectedProdViewMapper({

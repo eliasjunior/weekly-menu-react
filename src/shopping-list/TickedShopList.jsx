@@ -1,7 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { ListItem } from "@material-ui/core";
-import { List, Divider } from "@material-ui/core";
+import { List, Divider, ListItem } from "@material-ui/core";
 import { tickedTitle } from "styles/CommonStyles2";
 import { buildPickedList } from "./ticked-shop-list";
 

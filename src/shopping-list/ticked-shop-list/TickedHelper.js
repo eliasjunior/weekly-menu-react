@@ -1,6 +1,6 @@
 import { requiredParameter } from "common/Util";
 
-export default function TicketHelper({ getDeepCopy }) {
+export default function TickedHelper({ getDeepCopy }) {
   return {
     filterByPicked: function (displayList) {
       const copiedList = getDeepCopy(displayList);

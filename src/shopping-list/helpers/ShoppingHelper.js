@@ -28,18 +28,18 @@ export function mergeRecipeProducts(recipeMap, categoriesDisplay) {
   });
 }
 
-export function buildShoppingListDisplay({
+export function buildCartFromIds({
   shoppingListMap,
   categoryMap,
   productMap,
   quantities,
 }) {
-  const { categories, products } = shoppingListMap;
+  const { categories, products: cartItems } = shoppingListMap;
   const categoryIds = Object.keys(categories.byId);
   return categoryIds.reduce((prev, catId) => {
-    const catShopList = categories.byId[catId];
-    const productList = catShopList.prods
-      .map((prodId) => buildProduct(prodId, productMap, products))
+    const categoryCart = categories.byId[catId];
+    const productList = categoryCart.prods
+      .map((prodId) => buildProduct(prodId, productMap, cartItems))
       .map((prod) => setProductQty(prod, quantities));
 
     const { name, id } = categoryMap.byId[catId];

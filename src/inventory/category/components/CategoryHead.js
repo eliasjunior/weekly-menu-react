@@ -3,7 +3,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import { grey } from "@material-ui/core/colors";
 import CategoryBtnActions from "./CategoryBtnActions";
-import DisplayService from "../services/CategoryDisplayService";
+import DisplayService from "../services/CategoryDisplayHelper";
 import { useSelector } from "react-redux";
 
 export default function CategoryHead(props) {

@@ -1,7 +1,7 @@
 import React from "react";
 import Collapse from "@material-ui/core/Collapse";
 import List from "@material-ui/core/List";
-import DisplayService from "inventory/category/services/CategoryDisplayService";
+import DisplayService from "inventory/category/services/CategoryDisplayHelper";
 import SelectAllNone from "components/SelectAllNone";
 import ProductRow from "./ProductRow";
 import { useSelector } from "react-redux";

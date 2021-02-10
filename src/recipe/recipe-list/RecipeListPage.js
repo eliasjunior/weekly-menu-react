@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import RecipeListComponent from "./RecipeListComponent";
 import { LOCATION, parentComponent } from "common/AppConstant";
 import { formEditAction } from "app-redux/actions/ProductFormAction";
-import { setDisplatList } from "app-redux/actions/ListFilterAction";
+import { setDisplayList } from "app-redux/actions/ListFilterAction";
 import { fillRecipesProducts } from "../RecipeHelper";
 import { setPageTitle, setPageLocation } from "app-redux/actions/PageAction";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
@@ -37,7 +37,7 @@ function RecipeListPage({ history }) {
 
   //Initial sets to the children
 
-  dispatch(setDisplatList(recipesWithProducts));
+  dispatch(setDisplayList(recipesWithProducts));
   dispatch(setPageLocation(parentComponent.RECIPE_LIST_PAGE));
   dispatch(setPageTitle("Recipes"));
   dispatch(formEditAction());

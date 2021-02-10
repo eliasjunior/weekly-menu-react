@@ -15,12 +15,20 @@ import { buildShopListPayload } from "./presenter";
 
 function ShoppingCreateBtns({ classes }) {
   const dispatch = useDispatch();
-  const shoppingList = useSelector((state) => state.shoppingList);
+  const shoppingList = useSelector((state) => state.cart);
 
   const { recipeList, pickProducts } = LOCATION;
   const combinedClasses = `${classes.floatingPadding} ${classes.floatingBtn} gridFloatingBtn`;
   const { path: linkRecipe } = recipeList;
   const { path: linkProds } = pickProducts;
+  const saveCart = async () => {
+    const payload = buildShopListPayload(shoppingList);
+    if (!payload.id) {
+        dispatch(createShoppingListAsync(payload));
+    } else {
+        dispatch(updateShoppingListAsync(payload));
+    }
+  }
   return (
     <div className={combinedClasses}>
       <Fab color="primary">
@@ -35,14 +43,7 @@ function ShoppingCreateBtns({ classes }) {
       </Fab>
       <Fab
         color="secondary"
-        onClick={async () => {
-          const payload = buildShopListPayload(shoppingList);
-          if (!payload.id) {
-            dispatch(createShoppingListAsync(payload));
-          } else {
-            dispatch(updateShoppingListAsync(payload));
-          }
-        }}
+        onClick={saveCart}
       >
         <SaveIcon />
       </Fab>

@@ -9,7 +9,7 @@ export function listFilterAction(textFilter, listDB) {
   };
 }
 
-export function setDisplatList(listDB) {
+export function setDisplayList(listDB) {
   return {
     type: SET_DISPLAY_LIST,
     payload: { listDB },

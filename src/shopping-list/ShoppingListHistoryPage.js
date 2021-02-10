@@ -10,7 +10,7 @@ import { LOCATION, parentComponent } from "common/AppConstant";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setPageLocation, setPageTitle } from "app-redux/actions/PageAction";
-import { editShoppingListAction } from "app-redux/actions/ShoppingListAction";
+import { editShoppingListAction } from "app-redux/actions/CartAction";
 import { compareObject } from "common/Util";
 
 function ShoppingListHistoryPage() {

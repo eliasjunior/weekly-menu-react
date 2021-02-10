@@ -12,7 +12,7 @@ import recipes from "app-redux/reducers/RecipeCrudReducer";
 import products from "app-redux/reducers/ProductCrudReducer";
 import pageData from "app-redux/reducers/PageReducer";
 import quantityMap from "app-redux/reducers/QuantityPickReducer";
-import shoppingList from "app-redux/reducers/ShoppingListReducer";
+import cart from "app-redux/reducers/CartReducer";
 import selectedProducts from "app-redux/reducers/ProductSelectionReducer";
 import shoppingHistory from "app-redux/reducers/ShoppingHistoryReducer";
 
@@ -27,7 +27,7 @@ const rootReducer = combineReducers({
   products,
   pageData,
   quantityMap,
-  shoppingList,
+  cart,
   selectedProducts,
   shoppingHistory,
 });

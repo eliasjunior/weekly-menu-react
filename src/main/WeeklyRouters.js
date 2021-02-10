@@ -2,12 +2,14 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 import RecipePage from "recipe/recipe-form/RecipePage";
 import RecipeListPage from "recipe/recipe-list/RecipeListPage";
-import ShoppingListPage from "shopping-list/ShoppingListPage";
+import CartPage from "shopping-list/CartPage";
 import InventoryPage from "inventory/InventoryPage";
 import { LOCATION } from "common/AppConstant";
-import ShoppingListHistoryPage from "shopping-list/ShoppingListHistoryPage";
+import CartHistoryPage from "shopping-list/CartHistoryPage";
 import Dashboard from "dashboard/Dashboard";
 import PickUpProducts from "shopping-list/PickUpProducts";
+import Presentation from "../shopping-list/Presentation";
+import ShoppingCreateBtns from "../shopping-list/ShoppingCreateBtns";
 
 export default function () {
   return (
@@ -28,8 +30,14 @@ export default function () {
         render={(props) => <Dashboard {...props}></Dashboard>}
       ></Route>
       <Route
+        exact
+        path={LOCATION.leftOver.path}
+        render={() =>  <Presentation imgDisplay={"/under-construction.png"} mainText={"Not built just yet!"}
+        ><ShoppingCreateBtns></ShoppingCreateBtns></Presentation>}
+      ></Route>
+      <Route
         path={LOCATION.shoppingHistory.path}
-        render={(props) => <ShoppingListHistoryPage {...props} />}
+        render={(props) => <CartHistoryPage {...props} />}
       ></Route>
       <Route
         path={LOCATION.recipeList.path}
@@ -37,11 +45,11 @@ export default function () {
       ></Route>
       <Route
         path={`${LOCATION.newShoppingList.path}`}
-        render={(props) => <ShoppingListPage {...props} />}
+        render={(props) => <CartPage {...props} />}
       ></Route>
       <Route
         path={`${LOCATION.editShoppingList.path}/:id`}
-        render={(props) => <ShoppingListPage {...props} />}
+        render={(props) => <CartPage {...props} />}
       ></Route>
       <Switch>
         <Route

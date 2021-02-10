@@ -1,10 +1,5 @@
 import { createSelector } from "reselect";
 
-export const pickedProdsSelector = createSelector(
-  (state) => state.selectedProducts,
-  (ids) => ids
-);
-
 export const quantitiesSelector = createSelector(
   (state) => state.quantityMap,
   (qtd) => qtd

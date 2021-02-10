@@ -15,7 +15,6 @@ function MenuIconComponent() {
     setAnchorEl(event.currentTarget);
   };
   const closeMenu = () => {
-    console.log("Close menu");
     setAnchorEl(null);
   };
 
@@ -65,7 +64,7 @@ function MenuIconComponent() {
           vertical: "top",
           horizontal: "left",
         }}
-        onClose={() => console.log("was doing nothing before")}
+        onClose={closeMenu}
       >
         {getItemsForSideMenu()}
       </Menu>

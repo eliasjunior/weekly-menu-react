@@ -5,7 +5,7 @@ import CommonErrorBoundary from "error-handlers/CommonErrorBoundary";
 import { formPickAction } from "app-redux/actions/ProductFormAction";
 import { loadProductsToCategory } from "inventory/helpers/InventoryHelper";
 import { setPageTitle, setPageLocation } from "app-redux/actions/PageAction";
-import { setDisplatList } from "app-redux/actions/ListFilterAction";
+import { setDisplayList } from "app-redux/actions/ListFilterAction";
 import SearchName from "components/SearchName";
 import Done from "@material-ui/icons/Done";
 import { withStyles, Fab } from "@material-ui/core";
@@ -22,7 +22,7 @@ function PickUpProducts({ classes }) {
   const products = useSelector((state) => state.products, shallowEqual);
   const catsWithProducts = loadProductsToCategory(tempCategories, products);
 
-  dispatch(setDisplatList(catsWithProducts));
+  dispatch(setDisplayList(catsWithProducts));
 
   dispatch(setPageTitle("Pick products"));
   dispatch(setPageLocation(pickProducts.label));

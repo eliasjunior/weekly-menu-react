@@ -1,11 +1,11 @@
 import React from "react";
 import Checkbox from "@material-ui/core/Checkbox";
 import { useDispatch, useSelector } from "react-redux";
-import { addSimpleProduct } from "app-redux/actions/ShoppingListAction";
+import { addSimpleProduct } from "app-redux/actions/CartAction";
 
 export default function ShoppingItemSelection({ product }) {
   const dispatch = useDispatch();
-  const selected = useSelector((state) => state.shoppingList.products.selected);
+  const selected = useSelector((state) => state.cart.products.selected);
   const checked = selected.includes(product.id);
 
   const handleOnChange = () => {

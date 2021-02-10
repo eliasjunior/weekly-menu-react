@@ -1,4 +1,4 @@
-import reducer from "./ShoppingListReducer";
+import reducer from "./CartReducer";
 import {
   test1,
   test2,
@@ -11,7 +11,7 @@ import {
 import {
   ADD_SIMPLE_PRODUCT,
   ADD_PRODS_RECIPE,
-} from "app-redux/actions/ShoppingListAction";
+} from "app-redux/actions/CartAction";
 
 describe("Shopping list reducer", () => {
   it("add first product", () => {

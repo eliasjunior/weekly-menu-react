@@ -1,14 +1,14 @@
 import {
   ADD_SIMPLE_PRODUCT,
   ADD_PRODS_RECIPE,
-  EDIT_SHOPPING_LIST,
-  CLEAR_SHOPPING_LIST,
-} from "app-redux/actions/ShoppingListAction";
+  LOAD_CART_SELECTED,
+  CLEAR_SHOPPING_LIST, CLONE_CART,
+} from "app-redux/actions/CartAction";
 
 import {
   normalizeCatProd,
   normalizeProdRecipe,
-  buildFromShopHistory,
+  buildFromShopHistory, getTimeAPI,
 } from "shopping-list/presenter";
 
 const initialState = {
@@ -17,7 +17,7 @@ const initialState = {
   recipes: { byId: {} },
 };
 
-export default function ShoppingListReducer(
+export default function CartReducer(
   state = initialState,
   { type, payload }
 ) {
@@ -48,18 +48,33 @@ export default function ShoppingListReducer(
       shopWithNewRecipe.id = state.id;
       shopWithNewRecipe.name = state.name;
       return shopWithNewRecipe;
-    case EDIT_SHOPPING_LIST:
+    case LOAD_CART_SELECTED:
       const { productMap, shoppingHistory } = payload;
       try {
-        const result = buildFromShopHistory({
+        const cart = buildFromShopHistory({
           productMap,
           shoppingHistory,
         });
-        return result;
+        return cart;
       } catch (error) {
         console.error(error);
         return state;
       }
+    case CLONE_CART:
+      const byId = state.products.byId;
+      const allIds = state.products.selected;
+      console.log("byId", byId)
+      state.name = getTimeAPI().getTimeLabel();
+      state.id = undefined;
+      // selected its just like allIds
+      const byIdNew = allIds.reduce((acc, id)=> {
+        const cartItem = byId[id]
+        cartItem.itemIdOfCart = undefined
+        acc[id] = cartItem;
+        return acc;
+      }, {})
+      state.products.byId = byIdNew;
+      return {...state};
     case CLEAR_SHOPPING_LIST: {
       return initialState;
     }

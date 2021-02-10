@@ -22,14 +22,14 @@ export function fetchShoppingHistory(shoppingHistory = []) {
 export function createShoppingList(shoppingList) {
   return {
     type: CREATE_SHOPPING_LIST,
-    payload: shoppingList,
+    payload: {cart : shoppingList},
   };
 }
 
 export function updateShoppingList(shoppingList) {
   return {
     type: UPDATE_SHOPPING_LIST,
-    payload: shoppingList,
+    payload: {cart : shoppingList},
   };
 }
 

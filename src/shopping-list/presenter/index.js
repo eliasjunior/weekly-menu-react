@@ -24,6 +24,7 @@ export function buildShopListPayload(
   const result = Object.entries(byId).reduce((prev, [_, prod]) => {
     prev.push({
       id: prod.id,
+      itemIdOfCart: prod.itemIdOfCart,
       recipes: prod.recipes ? prod.recipes : [],
       selected: selected.filter((prodId) => prodId === prod.id).length === 1,
     });
@@ -32,6 +33,12 @@ export function buildShopListPayload(
   }, []);
   const { timeAPI = { getTimeLabel: getTimeLabel() } } = APIs;
   return { products: result, name: timeAPI.getTimeLabel, id };
+}
+
+export function getTimeAPI() {
+  return {
+    getTimeLabel
+  }
 }
 
 export function normalizeCatProd({ state, catId, prodId, checked }) {
@@ -181,7 +188,7 @@ export function normalizeCatShopHistory({
   const byId = products.reduce((prev, prod) => {
     const { byId = requiredParameter("byId") } = productMap;
     if (!byId[prod.id]) {
-      requiredParameter("product map");
+      requiredParameter(`product ${prod.id} not found`);
     }
     const catId = byId[prod.id].catId;
 
@@ -199,8 +206,8 @@ export function normalizeProdShopHistory({
   products = requiredParameter("products"),
 }) {
   const result = products.reduce(
-    (prev, { id, recipes, selected }) => {
-      prev.byId[id] = { id, recipes };
+    (prev, { id, recipes, selected, itemIdOfCart }) => {
+      prev.byId[id] = { id, recipes, itemIdOfCart };
       if (selected) {
         prev.selected.push(id);
       }
@@ -234,9 +241,9 @@ function getTimeLabel() {
   return now
     .toDateString()
     .concat(" ")
-    .concat(now.getHours())
+    .concat(now.getHours().toString())
     .concat(":")
-    .concat(now.getMinutes())
+    .concat(now.getMinutes().toString())
     .concat(":")
-    .concat(now.getSeconds());
+    .concat(now.getSeconds().toString());
 }

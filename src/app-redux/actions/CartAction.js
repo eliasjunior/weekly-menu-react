@@ -2,7 +2,8 @@ import { requiredParameter } from "common/Util";
 
 export const ADD_SIMPLE_PRODUCT = "ADD_SIMPLE_PRODUCT";
 export const ADD_PRODS_RECIPE = "ADD_PRODS_RECIPE";
-export const EDIT_SHOPPING_LIST = "EDIT_SHOPPING_LIST";
+export const LOAD_CART_SELECTED = "LOAD_CART_SELECTED";
+export const CLONE_CART = "CLONE_CART";
 export const CLEAR_SHOPPING_LIST = "CLEAR_SHOPPING_LIST";
 
 export function addSimpleProduct({
@@ -27,14 +28,21 @@ export function addProdsRecipe({
   };
 }
 
-export function editShoppingListAction(item, productMap) {
+export function editCartAction(item, productMap) {
   return {
-    type: EDIT_SHOPPING_LIST,
+    type: LOAD_CART_SELECTED,
     payload: { shoppingHistory: item, productMap },
   };
 }
 
-export function clearShoppingListAction() {
+export function cloneCartAction({name, id}) {
+  return {
+    type: CLONE_CART,
+    payload: { cart: {name, id} },
+  };
+}
+
+export function clearCartAction() {
   return {
     type: CLEAR_SHOPPING_LIST,
   };

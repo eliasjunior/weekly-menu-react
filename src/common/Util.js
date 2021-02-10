@@ -10,6 +10,7 @@ export function requiredParameter(name, isThrow = true) {
     console.error(`${name} is required *`);
   }
 }
+
 //TODO move to other function/gateways, but test first
 export function cleanFromApi(data) {
   return data.map((item) => {
@@ -23,6 +24,15 @@ export function cleanFromApi(data) {
   });
 }
 
+export function requiredList(list = requiredParameter("list from required list"),
+                             name = requiredParameter("name from required list")) {
+  if (list.length === 0) {
+    console.warn(`${name} has length 0`);
+  } else {
+    console.debug(`${name} filled up`);
+  }
+}
+
 export function isEmpty(value) {
   return _.isEmpty(value);
 }
@@ -34,9 +44,11 @@ export function isNull(value) {
 export function isUndefined(value) {
   return _.isUndefined(value);
 }
+
 export function isNumber(value) {
   return _.isNumber(value);
 }
+
 export function toNumber(value) {
   return _.toNumber(value);
 }
@@ -85,7 +97,7 @@ export function quantityMapper(productMap) {
 }
 
 export function quantityMapperProdsDetail(prodsDetail) {
-  return prodsDetail.reduce((prev, { id, quantity }) => {
+  return prodsDetail.reduce((prev, {id, quantity}) => {
     prev[id] = quantity;
     return prev;
   }, {});
@@ -99,19 +111,34 @@ export function upperCaseFirstChar(row) {
   return row;
 }
 
-export function compareObject(valueA, valueB) {
-  if (!valueA.name) {
+export function compareObject({nameA = ""}, {nameB = ""}) {
+  if (nameA === "") {
     return 0;
   }
-  var nameA = valueA.name.toUpperCase();
-  var nameB = valueB.name.toUpperCase();
-  if (nameA < nameB) {
+  const tempA = nameA.toUpperCase();
+  const tempB = nameB.toUpperCase();
+  if (tempA < tempB) {
     return -1;
   }
-  if (nameA > nameB) {
+  if (tempA > tempB) {
     return 1;
   }
+  // names must be equal
+  return 0;
+}
 
+export function compareDates({name: dateStrA = ""}, {name: dateStrB = ""}) {
+  if (dateStrA === "") {
+    return 0;
+  }
+  const tempA = new Date(dateStrA);
+  const tempB = new Date(dateStrB);
+  if (tempA.getTime() > tempB.getTime()) {
+    return -1;
+  }
+  if (tempA.getTime() < tempB.getTime()) {
+    return 1;
+  }
   // names must be equal
   return 0;
 }
