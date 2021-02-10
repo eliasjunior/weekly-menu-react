@@ -51,11 +51,10 @@ export default function CartReducer(
     case LOAD_CART_SELECTED:
       const { productMap, shoppingHistory } = payload;
       try {
-        const cart = buildFromShopHistory({
+        return buildFromShopHistory({
           productMap,
           shoppingHistory,
         });
-        return cart;
       } catch (error) {
         console.error(error);
         return state;
