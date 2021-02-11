@@ -1,5 +1,5 @@
 import { loadingSomething } from "./LoadingAction";
-import { afterResquest, afterRequestError } from "./common";
+import { afterRequest, afterRequestError } from "./Common";
 import Presenter from "recipe/presenter";
 import { updateCurrentRecipe } from "./RecipeAction";
 import { setPageTitle } from "./PageAction";
@@ -40,7 +40,7 @@ export function createRecipeAsync(recipe) {
       dispatch(createRecipe(data));
       dispatch(updateCurrentRecipe(data));
       dispatch(setPageTitle("Update Recipe"));
-      afterResquest(dispatch);
+      afterRequest(dispatch);
     } catch (error) {
       afterRequestError(dispatch, error);
     }
@@ -55,7 +55,7 @@ export function updateRecipeAsync(recipe) {
       dispatch(updateRecipe(recipe));
       dispatch(updateCurrentRecipe(recipe));
 
-      afterResquest(dispatch);
+      afterRequest(dispatch);
     } catch (error) {
       afterRequestError(dispatch, error);
     }

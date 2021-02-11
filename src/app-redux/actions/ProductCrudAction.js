@@ -1,6 +1,6 @@
 import Presenter from "inventory/presenter";
 import { loadingSomething } from "./LoadingAction";
-import { afterResquest, afterRequestError } from "./common";
+import { afterRequest, afterRequestError } from "./Common";
 import { updateCategoryAsync } from "app-redux/actions/InventoryActions";
 import { requiredParameter, quantityMapper } from "common/Util";
 import { addAllQtd, increaseQdy } from "./QuantityPickAction";
@@ -53,7 +53,7 @@ export function updateProductAsync(product = requiredParameter("product")) {
     try {
       await putProduct(product);
       dispatch(updateProduct(product));
-      afterResquest(dispatch);
+      afterRequest(dispatch);
     } catch (error) {
       afterRequestError(dispatch, error);
     }
@@ -74,7 +74,7 @@ export function createProductAsync(
       category.catProds.push(product.id);
       dispatch(updateCategoryAsync(category));
       dispatch(increaseQdy(product.id, data.quantityDefault));
-      afterResquest(dispatch);
+      afterRequest(dispatch);
     } catch (error) {
       afterRequestError(dispatch, error);
     }

@@ -1,4 +1,4 @@
-const CommmonStyles = (theme) => ({
+const CommonStyles = (theme) => ({
   floatingBtn: {
     margin: "10px",
     zIndex: 999,
@@ -9,8 +9,5 @@ const CommmonStyles = (theme) => ({
   floatingPadding: {
     padding: theme.spacing(1),
   },
-  // appBar: {
-  //   flexGrow: "3",
-  // },
 });
-export default CommmonStyles;
+export default CommonStyles;

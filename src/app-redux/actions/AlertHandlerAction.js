@@ -8,7 +8,6 @@ export const HTTP_ERROR = "HTTP_ERROR";
 export const MESSAGE_TYPE_SUCCESS = "MESSAGE_TYPE_SUCCESS";
 export const MESSAGE_TYPE_ERROR = "MESSAGE_TYPE_ERROR";
 export const MESSAGE_TYPE_INFO = "MESSAGE_TYPE_INFO";
-export const MESSAGE_TYPE_WARNING = "MESSAGE_TYPE_WARNING";
 
 export function successMessage(message = "Congratulations! you made it!") {
   return {

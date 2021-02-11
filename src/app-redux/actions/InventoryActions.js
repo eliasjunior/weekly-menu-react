@@ -1,6 +1,6 @@
 import Presenter from "inventory/presenter";
 import { loadingSomething } from "./LoadingAction";
-import { afterResquest, afterRequestError } from "./common";
+import { afterRequest, afterRequestError } from "./Common";
 import { requiredParameter } from "common/Util";
 const { getCategories, putCategory, postCategory } = Presenter;
 
@@ -50,7 +50,7 @@ export function updateCategoryAsync(category = requiredParameter("category")) {
     try {
       await putCategory(category);
       dispatch(updateCategory(category));
-      afterResquest(dispatch);
+      afterRequest(dispatch);
     } catch (error) {
       afterRequestError(dispatch, error);
     }
@@ -63,7 +63,7 @@ export function createCategoryAsync(category) {
     try {
       const data = await postCategory(category);
       dispatch(createCategory(data));
-      afterResquest(dispatch);
+      afterRequest(dispatch);
     } catch (error) {
       afterRequestError(dispatch, error);
     }

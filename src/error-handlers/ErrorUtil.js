@@ -1,8 +1,9 @@
 import { MESSAGE_TYPE_ERROR } from "app-redux/actions/AlertHandlerAction";
+import {isEmpty} from "../common/Util";
 
 export function ErrorMapper(response = {}) {
   if (!response.status) {
-    console.log(
+    console.warn(
       "Response object  seems not to have status, check request obj return"
     );
     return {
@@ -11,9 +12,9 @@ export function ErrorMapper(response = {}) {
     };
   }
   const { status, statusText } = response;
-  let diplayMessage = "";
-  if (statusText === "" || !statusText) {
-    diplayMessage = grapMessage(response);
+  let displayMessage = "";
+  if (isEmpty(statusText)) {
+    displayMessage = grabMessage(response);
   }
   switch (status) {
     case 404:
@@ -23,7 +24,7 @@ export function ErrorMapper(response = {}) {
       };
     case 500:
       return {
-        message: diplayMessage,
+        message: displayMessage,
         type: MESSAGE_TYPE_ERROR,
       };
     default:
@@ -34,12 +35,12 @@ export function ErrorMapper(response = {}) {
   }
 }
 
-function grapMessage(response) {
-  const { data } = response;
+function grabMessage(response = {}) {
+  const { data = {}} = response;
 
   if (data.message) {
     return data.message;
   }
 
-  return "Some error ocurrer but app could not read the message from the server";
+  return "Some error occur but app could not read the message from the server";
 }

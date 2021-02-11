@@ -4,7 +4,7 @@ import {
   postShoppingList,
   getShoppingHistory,
 } from "shopping-list/presenter";
-import { afterResquest, afterRequestError } from "./common";
+import { afterRequest, afterRequestError } from "./Common";
 import { requiredParameter } from "common/Util";
 export const UPDATE_SHOPPING_LIST = "UPDATE_SHOPPING_LIST";
 export const CREATE_SHOPPING_LIST = "CREATE_SHOPPING_LIST";
@@ -52,7 +52,7 @@ export function updateShoppingListAsync(
     try {
       await putShoppingList(shoppingList);
       dispatch(updateShoppingList(shoppingList));
-      afterResquest(dispatch);
+      afterRequest(dispatch);
     } catch (error) {
       afterRequestError(dispatch, error);
     }
@@ -66,7 +66,7 @@ export function createShoppingListAsync(shoppingList) {
       shoppingList.id = data.id;
       dispatch(createShoppingList(data));
 
-      afterResquest(dispatch);
+      afterRequest(dispatch);
     } catch (error) {
       afterRequestError(dispatch, error);
     }
