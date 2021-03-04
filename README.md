@@ -1,3 +1,5 @@
+[![CI](https://github.com/eliasjunior/weekly-menu-react/actions/workflows/main.yml/badge.svg)](https://github.com/eliasjunior/weekly-menu-react/actions/workflows/main.yml)
+
 # TODO
 
 ## rename for gmail js to aaa
