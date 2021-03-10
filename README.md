@@ -41,10 +41,40 @@
 
 ## About The Project
 
-<p >
-    <a href="https://github.com/eliasjunior/weekly-menu-react/blob/master/public/recipe/book.png">
-        <img src="public/recipe/book.png" alt="Logo" width="200px" height="225px">
+<p align="center" >
+    <a href="https://github.com/eliasjunior/weekly-menu-react/blob/master/docs/img/dashboard.png">
+        <img src="docs/img/dashboard.png" alt="Logo" width="200px" height="350px">
+    </a>
+     <a href="https://github.com/eliasjunior/weekly-menu-react/blob/master/docs/img/recipes.png">
+        <img src="docs/img/recipes.png" alt="Logo" width="200px" height="350px">
+    </a>
+    <a href="https://github.com/eliasjunior/weekly-menu-react/blob/master/docs/img/shopping-list.png">
+        <img src="docs/img/shopping-list.png" alt="Logo" width="200px" height="350px">
+    </a>
+    <a href="https://github.com/eliasjunior/weekly-menu-react/blob/master/docs/img/pick-list.png">
+        <img src="docs/img/pick-list.png" alt="Logo" width="200px" height="350px">
     </a>
 </p>
 
 </br>
+
+## Getting Started
+
+### Prerequisites
+
+* Download [NodeJS](https://nodejs.org)  and follow the steps.
+
+* Server app [Weekly-menu](https://github.com/eliasjunior/weekly-menu)
+
+### Installation
+
+<li><a href="https://github.com/eliasjunior/weekly-menu-react" target="_blank">Source Code</a></li>
+
+1. Clone the Weekly-menu-react App
+   ```sh
+   git clone https://github.com/eliasjunior/weekly-menu-react.git
+   ```
+2. Install NPM packages, run the command bellow.
+   ```sh
+   npm install
+   ```
