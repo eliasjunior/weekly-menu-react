@@ -19,7 +19,7 @@ export function successMessage(message = "Success!") {
   };
 }
 
-export function infoMessage(message = "Hey Hey!") {
+export function infoMessage(message = "info!") {
   return {
     type: INFO_MESSAGE,
     payload: {
