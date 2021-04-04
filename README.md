@@ -11,7 +11,7 @@
   <h3 align="center">Weekly Menu</h3>
 
   <p align="center">
-    It's a web application to make the shopping list from recipes.
+    It's a web application to help organizing your weekly recipes.
     <br />
     <br />
   </p>
@@ -55,6 +55,10 @@
         <img src="docs/img/pick-list.png" alt="Logo" width="200px" height="350px">
     </a>
 </p>
+
+This app is not just a shoppping list app, it generates a list of products based on your weekly menu, you just need a list of recipes.
+* select the recipes for the week.
+* generates the shopping list from it.
 
 </br>
 
