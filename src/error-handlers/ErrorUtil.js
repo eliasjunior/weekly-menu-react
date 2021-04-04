@@ -42,5 +42,5 @@ function grabMessage(response = {}) {
     return data.message;
   }
 
-  return "Some error occur but app could not read the message from the server";
+  return "An error just occurred but the app could not read the message from the server";
 }
