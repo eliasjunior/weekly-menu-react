@@ -9,7 +9,7 @@ export const MESSAGE_TYPE_SUCCESS = "MESSAGE_TYPE_SUCCESS";
 export const MESSAGE_TYPE_ERROR = "MESSAGE_TYPE_ERROR";
 export const MESSAGE_TYPE_INFO = "MESSAGE_TYPE_INFO";
 
-export function successMessage(message = "Congratulations! you made it!") {
+export function successMessage(message = "Success!") {
   return {
     type: SUCCESS_MESSAGE,
     payload: {
