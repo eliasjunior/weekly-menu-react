@@ -5,7 +5,7 @@ import {
 } from "./ShoppingListMapper";
 import { cleanFromApi } from "common/Util";
 
-export default function ShoppingListGateway({ httpAPI }) {
+export default function ShoppingListDataAPI({ httpAPI }) {
   return {
     getShoppingList: async () => {
       try {

@@ -1,5 +1,5 @@
-import { get, post, put } from "service/CategoryTemporaryAPI";
-import CategoryGateway from "./CategoryGateway";
+import { get, post, put } from "service/HttpAPI";
+import CategoryDataAPI from "./CategoryDataAPI";
 
 const {
   getCategories,
@@ -7,7 +7,7 @@ const {
   updateCategoryAsync,
   getCategoryAsync,
   updateProductInCategory,
-} = CategoryGateway({
+} = CategoryDataAPI({
   httpAPI: { get, post, put },
 });
 

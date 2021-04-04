@@ -1,11 +1,11 @@
-import ShoppingListGateway from "./ShoppingListGateway";
-import { get, post, put } from "service/TemporaryAPI";
+import ShoppingListDataAPI from "./ShoppingListDataAPI";
+import { get, post, put } from "service/HttpAPI";
 
 const {
   saveShoppingListAsync,
   updateShoppingListAsync,
   getShoppingList,
-} = ShoppingListGateway({
+} = ShoppingListDataAPI({
   httpAPI: { get, post, put },
 });
 

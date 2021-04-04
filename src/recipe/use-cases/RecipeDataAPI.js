@@ -4,9 +4,7 @@ import {
   recipeMapper,
 } from "./RecipeMapper";
 
-//TODO need thread error by CODE
-
-export default function RecipeGateway({ httpAPI }) {
+export default function RecipeDataAPI({ httpAPI }) {
   return {
     getRecipes: async () => {
       try {

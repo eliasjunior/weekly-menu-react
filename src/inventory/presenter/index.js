@@ -1,9 +1,9 @@
 import Inventory from "../use-cases";
-import { get, post, put } from "service/TemporaryAPI";
+import { get, post, put } from "service/HttpAPI";
 
-import ProductGateway from "inventory/use-cases/ProductGateway";
+import ProductDataAPI from "inventory/use-cases/ProductDataAPI";
 
-const { getProducts, saveProduct, updateProduct } = ProductGateway({
+const { getProducts, saveProduct, updateProduct } = ProductDataAPI({
   httpAPI: { get, post, put },
 });
 

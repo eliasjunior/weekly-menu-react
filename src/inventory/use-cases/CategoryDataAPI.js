@@ -5,7 +5,7 @@ import {
   categoryListMapper,
 } from "./CategoryMapper";
 
-export default function CategoryGateway({ httpAPI }) {
+export default function CategoryDataAPI({ httpAPI }) {
   return {
     getCategories: async () => {
       try {

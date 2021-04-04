@@ -30,3 +30,13 @@ export async function post(resourceName, object) {
     throw response;
   }
 }
+
+export async function linkProds(parentList, idName) {
+  const prodResponse = await axios.get(getServerUrl() + "products");
+  const prods = prodResponse.data;
+
+  return parentList.map((parent) => {
+    parent.products = prods.filter((prod) => prod[idName] === parent.id);
+    return parent;
+  });
+}

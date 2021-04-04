@@ -1,12 +1,12 @@
-import RecipeGateway from "./RecipeGateway";
-import { get, post, put } from "service/TemporaryAPI";
+import RecipeDataAPI from "./RecipeDataAPI";
+import { get, post, put } from "service/HttpAPI";
 
 const {
   getRecipes,
   saveRecipeAsync,
   updateRecipeAsync,
   getRecipeAsync,
-} = RecipeGateway({ httpAPI: { get, post, put } });
+} = RecipeDataAPI({ httpAPI: { get, post, put } });
 
 export default {
   getRecipes,

@@ -5,7 +5,7 @@ import {
   productListMapper,
 } from "./ProductMapper";
 
-export default function ProductGateway({ httpAPI }) {
+export default function ProductDataAPI({ httpAPI }) {
   return {
     getProducts: async () => {
       try {
