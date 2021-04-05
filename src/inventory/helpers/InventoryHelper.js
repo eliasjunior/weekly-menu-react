@@ -52,8 +52,8 @@ export function normalizeCategory(categories) {
 
 export function getQdyDefault(quantityType) {
   const UNIT_DEFAULT = 1;
-  const WEIGTH_DEFAULT = 100;
-  return quantityType === "UNIT" ? UNIT_DEFAULT : WEIGTH_DEFAULT;
+  const WEIGHT_DEFAULT = 100;
+  return quantityType === "UNIT" ? UNIT_DEFAULT : WEIGHT_DEFAULT;
 }
 export function sanitizeCategory({ category, isThrow = true, isNew = false }) {
   const { id, name, catProds } = category;
