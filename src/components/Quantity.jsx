@@ -2,7 +2,7 @@ import React from "react";
 import Plus from "@material-ui/icons/Add";
 import Minus from "@material-ui/icons/Remove";
 import IconButton from "@material-ui/core/IconButton";
-import { redColor, greenColor } from "styles/CommonStyles2";
+import { redColor, greenColor } from "styles/CommonStyles";
 import { useDispatch, useSelector } from "react-redux";
 import { decreaseQty, increaseQdy } from "app-redux/actions/QuantityPickAction";
 

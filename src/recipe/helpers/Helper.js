@@ -1,11 +1,5 @@
 import { requiredParameter, logService } from "common/Util";
-import {
-  createRecipeAsync,
-  updateRecipeAsync,
-} from "app-redux/actions/RecipeCrudActions";
-import { isRecipeFormValid } from "./FormValidation";
 
-// presenter function from RecipeFabBtns
 export function buildProdDetailsFromSelectedProds({
   selectedProducts = requiredParameter("selectedProducts"),
   productMap = requiredParameter("productMap"),
@@ -22,7 +16,7 @@ export function buildProdDetailsFromSelectedProds({
     );
     const quantity = quantityMap[prodId];
     if (!quantity) {
-      logService("Attemp to read quantity failed");
+      logService("Attempt to read quantity failed");
     }
     //detail CANNOT be null because when updating the prod id is Not in the current Recipe
     prev.push({
@@ -56,46 +50,5 @@ export function buildProdDetailsFromSelectedProds({
     return selectedProducts.reduce(existingRecipe, []);
   } else {
     return selectedProducts.reduce(newRecipe, []);
-  }
-}
-
-export async function handleSave({
-  dispatch,
-  currentRecipe = requiredParameter("currentRecipe"),
-  selectedProducts,
-  prodsDetail,
-}) {
-  const { name } = currentRecipe;
-  if (isRecipeFormValid({ name, dispatch, selectedProducts })) {
-    const recipePayload = mapperRecipeView({ name, prodsDetail });
-    await dispatch(createRecipeAsync(recipePayload));
-  }
-}
-
-export async function handleUpdate({
-  dispatch,
-  currentRecipe = requiredParameter("currentRecipe"),
-  selectedProducts,
-  prodsDetail,
-}) {
-  const { name, id } = currentRecipe;
-  if (isRecipeFormValid({ name, dispatch, selectedProducts })) {
-    const recipePayload = mapperRecipeView({ name, prodsDetail, id });
-    await dispatch(updateRecipeAsync(recipePayload));
-  }
-}
-
-function mapperRecipeView({ name, prodsDetail, id }) {
-  if (id) {
-    return {
-      id,
-      name,
-      prodsDetail,
-    };
-  } else {
-    return {
-      name,
-      prodsDetail,
-    };
   }
 }

@@ -25,7 +25,7 @@ export default function CartHistoryPage({ history }) {
       dispatch(fetchShoppingHistoryAsync());
     }
     asyncFetch();
-  }, [shoppingHistory.length]);
+  }, [dispatch]);
 
   const productMap = useSelector((state) => state.products);
   dispatch(setPageLocation(parentComponent.SHOPPING_LIST_PAGE));

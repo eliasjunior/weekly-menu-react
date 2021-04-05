@@ -1,7 +1,7 @@
-import Inventory from "../use-cases";
+import Inventory from "../data-access";
 import { get, post, put } from "service/HttpAPI";
 
-import ProductDataAPI from "inventory/use-cases/ProductDataAPI";
+import ProductDataAPI from "inventory/data-access/ProductDataAPI";
 
 const { getProducts, saveProduct, updateProduct } = ProductDataAPI({
   httpAPI: { get, post, put },

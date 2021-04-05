@@ -33,10 +33,11 @@ function RecipeListPage({ history }) {
   const recipesWithProducts = fillRecipesProducts(cloneDeep(recipes), products);
   const classes = useStyles();
   const dispatch = useDispatch();
-  async function asyncFetch() {
-    dispatch(fetchRecipesAsync());
-  }
+
   useEffect(() => {
+    async function asyncFetch() {
+      dispatch(fetchRecipesAsync());
+    }
     asyncFetch();
   }, [dispatch]);
 

@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch, shallowEqual } from "react-redux";
-import CategoryList from "./category/components";
-import FormDialog from "../components/FormDialog";
+import CategoryList from "../category/components";
+import FormDialog from "../../components/FormDialog";
 import { Fab } from "@material-ui/core";
 import { withStyles } from "@material-ui/core";
-import CommmonStyles from "../styles/CommonStyles";
+import CommmonStyles from "../../styles/CommonWrapper";
 import AddIcon from "@material-ui/icons/Add";
 import SearchName from "components/SearchName";
-import { createCategoryAsync, fetchCategoryAsync } from "app-redux/actions/InventoryActions";
+import {
+  createCategoryAsync,
+  fetchCategoryAsync,
+} from "app-redux/actions/InventoryActions";
 import { fetchProductsAsync } from "app-redux/actions/ProductCrudAction";
 import CategoryDisplayHelper from "inventory/category/services/CategoryDisplayHelper";
 import { formEditAction } from "app-redux/actions/ProductFormAction";
 import CommonErrorBoundary from "error-handlers/CommonErrorBoundary";
 import { setDisplayList } from "app-redux/actions/ListFilterAction";
-import { loadProductsToCategory } from "./helpers/InventoryHelper";
+import { loadProductsToCategory } from "../helpers/InventoryHelper";
 import { parentComponent } from "common/AppConstant";
 import { setPageLocation, setPageTitle } from "app-redux/actions/PageAction";
 
@@ -24,11 +27,11 @@ function InventoryPage({ classes }) {
   const [catName, setCatName] = useState("");
   const [openModal, setOpenModal] = useState(false);
   const dispatch = useDispatch();
-  async function asyncFetch() {
-    dispatch(fetchCategoryAsync());
-    dispatch(fetchProductsAsync());
-  }
   useEffect(() => {
+    async function asyncFetch() {
+      dispatch(fetchCategoryAsync());
+      dispatch(fetchProductsAsync());
+    }
     asyncFetch();
   }, [dispatch]);
 

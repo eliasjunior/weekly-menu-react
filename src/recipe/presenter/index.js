@@ -1,4 +1,4 @@
-import RecipeUseCase from "../use-cases";
+import RecipeUseCase from "../data-access";
 
 const { getRecipes, updateRecipeAsync, saveRecipeAsync } = RecipeUseCase;
 

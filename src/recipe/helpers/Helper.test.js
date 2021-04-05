@@ -1,4 +1,4 @@
-import { buildProdDetailsFromSelectedProds } from "./Presenter";
+import { buildProdDetailsFromSelectedProds } from "./Helper";
 
 describe("Recipe Form Presenter", () => {
   describe("New Recipe", () => {

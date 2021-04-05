@@ -1,8 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { List, Divider, ListItem } from "@material-ui/core";
-import { tickedTitle } from "styles/CommonStyles2";
-import { buildPickedList } from "./ticked-shop-list";
+import { tickedTitle } from "styles/CommonStyles";
+import { buildPickedList } from "shopping-list/ticked-shop-list";
 
 export default function TickedShopList() {
   const { displayList } = useSelector((state) => state.listFilter);

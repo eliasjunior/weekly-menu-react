@@ -1,15 +1,12 @@
 import React from "react";
-import CommmonStyles from "../../styles/CommonStyles";
+import CommmonStyles from "../../styles/CommonWrapper";
 import { withStyles, Fab } from "@material-ui/core";
 import SaveIcon from "@material-ui/icons/Save";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
-import {
-  buildProdDetailsFromSelectedProds,
-  handleSave,
-  handleUpdate,
-} from "./Presenter";
+import { buildProdDetailsFromSelectedProds } from "../helpers/Helper";
+import { handleUpdate, handleSave } from "recipe/components/RecipePage.actions";
 
-function RecipeFabBtns({ classes }) {
+function RecipeFabBtn({ classes }) {
   const dispatch = useDispatch();
   const currentRecipe = useSelector(
     (state) => state.currentRecipeRed,
@@ -60,4 +57,4 @@ function RecipeFabBtns({ classes }) {
   };
   return <div className={combinedClasses}>{actionButton()}</div>;
 }
-export default withStyles(CommmonStyles)(RecipeFabBtns);
+export default withStyles(CommmonStyles)(RecipeFabBtn);

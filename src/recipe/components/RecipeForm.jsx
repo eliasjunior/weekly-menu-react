@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { TextField } from "@material-ui/core";
-import { styles } from "./styles";
+import { styles } from "../recipe-form/styles";
 import { updateCurrentRecipeName } from "app-redux/actions/RecipeAction";
 import { useDispatch } from "react-redux";
 

@@ -6,6 +6,11 @@ import {
 import { updateCurrentRecipe } from "app-redux/actions/RecipeAction";
 import { addAllQtd, resetQty } from "app-redux/actions/QuantityPickAction";
 import { quantityMapperProdsDetail, requiredParameter } from "common/Util";
+import {
+  createRecipeAsync,
+  updateRecipeAsync,
+} from "app-redux/actions/RecipeCrudActions";
+import { isRecipeFormValid } from "../recipe-form/FormValidation";
 
 export function initEditDispatch({
   dispatch = requiredParameter("dispatch"),
@@ -21,11 +26,10 @@ export function initEditDispatch({
 export function initNewDispatch({
   dispatch = requiredParameter("dispatch"),
   productMap = requiredParameter("productMap"),
-  justNewProdAdded = false
+  justNewProdAdded = false,
 }) {
   dispatch(setPageTitle("New Recipe"));
-  if(!justNewProdAdded) {
-    console.log("RESET!!")
+  if (!justNewProdAdded) {
     dispatch(resetSelectedProduct());
     dispatch(resetQty(productMap));
   }
@@ -61,4 +65,46 @@ export function getRecipeFromUrl(match = {}, recipes) {
     return false;
   });
   return rec ? rec : { name: "" };
+}
+
+export async function handleSave({
+  dispatch,
+  currentRecipe = requiredParameter("currentRecipe"),
+  selectedProducts,
+  prodsDetail,
+}) {
+  const { name } = currentRecipe;
+  if (isRecipeFormValid({ name, dispatch, selectedProducts })) {
+    const recipePayload = mapperRecipeView({ name, prodsDetail });
+    await dispatch(createRecipeAsync(recipePayload));
+  }
+}
+
+export async function handleUpdate({
+  dispatch,
+  currentRecipe = requiredParameter("currentRecipe"),
+  selectedProducts,
+  prodsDetail,
+}) {
+  const { name, id } = currentRecipe;
+  if (isRecipeFormValid({ name, dispatch, selectedProducts })) {
+    const recipePayload = mapperRecipeView({ name, prodsDetail, id });
+    await dispatch(updateRecipeAsync(recipePayload));
+  }
+}
+
+// private
+function mapperRecipeView({ name, prodsDetail, id }) {
+  if (id) {
+    return {
+      id,
+      name,
+      prodsDetail,
+    };
+  } else {
+    return {
+      name,
+      prodsDetail,
+    };
+  }
 }

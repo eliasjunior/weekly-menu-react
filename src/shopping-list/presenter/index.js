@@ -1,4 +1,4 @@
-import ShoppingListUseCase from "../use-cases";
+import ShoppingListUseCase from "../data-access";
 import { requiredParameter } from "common/Util";
 
 const {
@@ -37,8 +37,8 @@ export function buildShopListPayload(
 
 export function getTimeAPI() {
   return {
-    getTimeLabel
-  }
+    getTimeLabel,
+  };
 }
 
 export function normalizeCatProd({ state, catId, prodId, checked }) {
@@ -236,7 +236,7 @@ export function normalizeRecipeShopHistory({
   return { recipes: { byId } };
 }
 
-// private 
+// private
 
 function getTimeLabel() {
   const now = new Date();

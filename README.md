@@ -33,7 +33,7 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
+    <li><a href="#technical-overview">Technical overview</a></li>
   </ol>
 </details>
 
@@ -82,3 +82,31 @@ This app is not just a shoppping list app, it generates a list of products based
    ```sh
    npm install
    ```
+
+## Technical Overview
+
+### Frameworks and Libs
+
+React
+
+* Positive personal experience.
+* Instability
+* It embraces reusability, testability and Javascript native features instead of adding a api layer.
+
+CSS
+
+* React Material
+
+
+### Code Structure
+
+Organized by features
+ 
+root
+- features
+  - components(returns a html/jsx or actions(functions from the component))
+  - presenter (layer between view and the access-data)
+  - data-access (access external API)
+  - helpers
+
+

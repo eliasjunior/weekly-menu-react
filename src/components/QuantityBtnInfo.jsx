@@ -3,7 +3,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
 import { ListItemSecondaryAction } from "@material-ui/core";
 import PlaylistAddCheck from "@material-ui/icons/PlaylistAddCheck";
-import { greenColor } from "styles/CommonStyles2";
+import { greenColor } from "styles/CommonStyles";
 import { useDispatch } from "react-redux";
 import { flagPickedShotProd } from "app-redux/actions/ListFilterAction";
 

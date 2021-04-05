@@ -1,15 +1,15 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import RecipePage from "recipe/recipe-form/RecipePage";
-import RecipeListPage from "recipe/recipe-list/RecipeListPage";
-import CartPage from "shopping-list/CartPage";
-import InventoryPage from "inventory/InventoryPage";
+import RecipePage from "recipe/components/RecipePage";
+import RecipeListPage from "recipe/components/RecipeListPage";
+import CartPage from "shopping-list/components/CartPage";
+import InventoryPage from "inventory/components/InventoryPage";
 import { LOCATION } from "common/AppConstant";
-import CartHistoryPage from "shopping-list/CartHistoryPage";
+import CartHistoryPage from "shopping-list/components/CartHistoryPage";
 import Dashboard from "dashboard/Dashboard";
-import PickUpProducts from "shopping-list/PickUpProducts";
-import Presentation from "../shopping-list/Presentation";
-import CartCreateBtn from "../shopping-list/CartCreateBtn";
+import PickUpProducts from "shopping-list/components/PickUpProducts";
+import Presentation from "shopping-list/components/Presentation";
+import CartCreateBtn from "shopping-list/components/CartCreateBtn";
 
 export default function () {
   return (

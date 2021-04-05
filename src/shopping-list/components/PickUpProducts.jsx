@@ -9,7 +9,7 @@ import { setDisplayList } from "app-redux/actions/ListFilterAction";
 import SearchName from "components/SearchName";
 import Done from "@material-ui/icons/Done";
 import { withStyles, Fab } from "@material-ui/core";
-import CommonStyles from "../styles/CommonStyles";
+import CommonStyles from "styles/CommonWrapper";
 import { LOCATION } from "common/AppConstant";
 import { Link } from "react-router-dom";
 

@@ -6,7 +6,7 @@ import AppBar from "@material-ui/core/AppBar";
 import MenuIconComponent from "./MenuIconComponent";
 import { Toolbar, Typography, withStyles } from "@material-ui/core";
 import { useSelector } from "react-redux";
-import CommonStyles from "styles/CommonStyles";
+import CommonWrapper from "styles/CommonWrapper";
 
 function AppWeekBar() {
   const page = useSelector((state) => state.pageData);
@@ -24,4 +24,4 @@ function AppWeekBar() {
   );
 }
 
-export default withStyles(CommonStyles)(AppWeekBar);
+export default withStyles(CommonWrapper)(AppWeekBar);
