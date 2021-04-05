@@ -236,6 +236,8 @@ export function normalizeRecipeShopHistory({
   return { recipes: { byId } };
 }
 
+// private 
+
 function getTimeLabel() {
   const now = new Date();
   return now

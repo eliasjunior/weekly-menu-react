@@ -7,7 +7,7 @@ import {
   CardActionArea,
   CardActions,
 } from "@material-ui/core";
-import ShoppingCreateBtns from "./ShoppingCreateBtns";
+import CartCreateBtn from "./CartCreateBtn";
 const IMG_SRC = "/recipe/checklist.jpg";
 export default function Presentation() {
   return (
@@ -29,7 +29,7 @@ export default function Presentation() {
         </Typography>
       </CardContent>
       <CardActions>
-        <ShoppingCreateBtns></ShoppingCreateBtns>
+        <CartCreateBtn></CartCreateBtn>
       </CardActions>
     </Card>
   );

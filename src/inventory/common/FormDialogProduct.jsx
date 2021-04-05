@@ -13,9 +13,9 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
 
-import FormChildAction from "../common/FormChildAction";
+import FormChildAction from "../../common/FormChildAction";
 import { requiredParameter } from "common/Util";
-import { UNIT_TYPE, WEIGHT_TYPE } from "./product/Constant";
+import { UNIT_TYPE, WEIGHT_TYPE } from "../product/Constant";
 
 function FormDialogProduct({
   onDisplay = requiredParameter("onDisplay"),

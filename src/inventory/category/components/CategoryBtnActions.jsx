@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button } from "@material-ui/core";
-import FormDialog from "inventory/FormDialog";
-import FormDialogProduct from "inventory/FormDialogProduct";
+import FormDialog from "components/FormDialog";
+import FormDialogProduct from "inventory/common/FormDialogProduct";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import { useDispatch } from "react-redux";
 import { updateCategoryAsync } from "app-redux/actions/InventoryActions";

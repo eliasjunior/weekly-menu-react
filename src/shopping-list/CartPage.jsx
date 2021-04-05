@@ -1,6 +1,6 @@
 import React from "react";
 import CloneDeep from "lodash.clonedeep";
-import ShoppingCreateBtns from "./ShoppingCreateBtns";
+import CartCreateBtn from "./CartCreateBtn";
 import CommonErrorBoundary from "../error-handlers/CommonErrorBoundary";
 import {useDispatch, useSelector} from "react-redux";
 import {setPageLocation, setPageTitle} from "app-redux/actions/PageAction";
@@ -44,19 +44,26 @@ export default function CartPage() {
     dispatch(formShoppingAction());
     dispatch(setPageTitle(title));
 
-    const getCardDisplay = () => listDisplay.length !== 0 ? "" :
-        <Presentation imgDisplay={"/recipe/checklist.jpg"} mainText={CART_TEXT}
-                      title="New Shopping List">
-            <ShoppingCreateBtns></ShoppingCreateBtns>
-        </Presentation>;
+    const getCardDisplay = () =>
+      listDisplay.length !== 0 ? (
+        ""
+      ) : (
+        <Presentation
+          imgDisplay={"/recipe/checklist.jpg"}
+          mainText={CART_TEXT}
+          title="New Shopping List"
+        >
+          <CartCreateBtn></CartCreateBtn>
+        </Presentation>
+      );
 
     return (
-        <CommonErrorBoundary>
-            {getCardDisplay()}
-            <TopBtns list={listDisplay} pageHeader={title}></TopBtns>
-            <ShoppingCreateBtns></ShoppingCreateBtns>
-            <CategoryList></CategoryList>
-            <TickedShopList></TickedShopList>
-        </CommonErrorBoundary>
+      <CommonErrorBoundary>
+        {getCardDisplay()}
+        <TopBtns list={listDisplay} pageHeader={title}></TopBtns>
+        <CartCreateBtn></CartCreateBtn>
+        <CategoryList></CategoryList>
+        <TickedShopList></TickedShopList>
+      </CommonErrorBoundary>
     );
 }

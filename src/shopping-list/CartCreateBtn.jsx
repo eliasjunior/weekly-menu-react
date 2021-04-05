@@ -13,7 +13,7 @@ import {
 } from "app-redux/actions/ShoppingHistoryAction";
 import { buildShopListPayload } from "./presenter";
 
-function ShoppingCreateBtns({ classes }) {
+function CartCreateBtn({ classes }) {
   const dispatch = useDispatch();
   const shoppingList = useSelector((state) => state.cart);
 
@@ -24,11 +24,11 @@ function ShoppingCreateBtns({ classes }) {
   const saveCart = async () => {
     const payload = buildShopListPayload(shoppingList);
     if (!payload.id) {
-        dispatch(createShoppingListAsync(payload));
+      dispatch(createShoppingListAsync(payload));
     } else {
-        dispatch(updateShoppingListAsync(payload));
+      dispatch(updateShoppingListAsync(payload));
     }
-  }
+  };
   return (
     <div className={combinedClasses}>
       <Fab color="primary">
@@ -41,14 +41,11 @@ function ShoppingCreateBtns({ classes }) {
           <Shop />
         </Link>
       </Fab>
-      <Fab
-        color="secondary"
-        onClick={saveCart}
-      >
+      <Fab color="secondary" onClick={saveCart}>
         <SaveIcon />
       </Fab>
     </div>
   );
 }
 
-export default withStyles(CommonStyles)(ShoppingCreateBtns);
+export default withStyles(CommonStyles)(CartCreateBtn);

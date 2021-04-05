@@ -10,7 +10,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import DeleteIcon from "@material-ui/icons/Delete";
 import IconButton from "@material-ui/core/IconButton";
 import { successMessage } from "app-redux/actions/AlertHandlerAction";
-import FormDialogProduct from "inventory/FormDialogProduct";
+import FormDialogProduct from "inventory/common/FormDialogProduct";
 import { isProdFormValid } from "inventory/product/FormValidation";
 import {
   BTN_SHOPPING_SELECTION,

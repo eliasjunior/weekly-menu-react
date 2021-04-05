@@ -9,7 +9,7 @@ import CartHistoryPage from "shopping-list/CartHistoryPage";
 import Dashboard from "dashboard/Dashboard";
 import PickUpProducts from "shopping-list/PickUpProducts";
 import Presentation from "../shopping-list/Presentation";
-import ShoppingCreateBtns from "../shopping-list/ShoppingCreateBtns";
+import CartCreateBtn from "../shopping-list/CartCreateBtn";
 
 export default function () {
   return (
@@ -32,8 +32,14 @@ export default function () {
       <Route
         exact
         path={LOCATION.leftOver.path}
-        render={() =>  <Presentation imgDisplay={"/under-construction.png"} mainText={"Not built just yet!"}
-        ><ShoppingCreateBtns></ShoppingCreateBtns></Presentation>}
+        render={() => (
+          <Presentation
+            imgDisplay={"/under-construction.png"}
+            mainText={"Not built just yet!"}
+          >
+            <CartCreateBtn></CartCreateBtn>
+          </Presentation>
+        )}
       ></Route>
       <Route
         path={LOCATION.shoppingHistory.path}

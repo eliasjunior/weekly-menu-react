@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Fab } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import AddIcon from "@material-ui/icons/Add";
@@ -12,6 +12,7 @@ import { fillRecipesProducts } from "../RecipeHelper";
 import { setPageTitle, setPageLocation } from "app-redux/actions/PageAction";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import cloneDeep from "lodash.clonedeep";
+import { fetchRecipesAsync } from "app-redux/actions/RecipeCrudActions";
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -30,13 +31,18 @@ function RecipeListPage({ history }) {
   const recipes = useSelector((state) => state.recipes, shallowEqual);
   const products = useSelector((state) => state.products, shallowEqual);
   const recipesWithProducts = fillRecipesProducts(cloneDeep(recipes), products);
-  const dispatch = useDispatch();
   const classes = useStyles();
+  const dispatch = useDispatch();
+  async function asyncFetch() {
+    dispatch(fetchRecipesAsync());
+  }
+  useEffect(() => {
+    asyncFetch();
+  }, [dispatch]);
 
   const { newRecipe, newShoppingList } = LOCATION;
 
   //Initial sets to the children
-
   dispatch(setDisplayList(recipesWithProducts));
   dispatch(setPageLocation(parentComponent.RECIPE_LIST_PAGE));
   dispatch(setPageTitle("Recipes"));

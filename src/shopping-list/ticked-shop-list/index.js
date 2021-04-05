@@ -1,6 +1,6 @@
 import cloneDeep from "lodash.clonedeep";
 
-import TicketFactory from "./TickedHelper";
-const { filterByPicked } = TicketFactory({ getDeepCopy: cloneDeep });
+import helper from "./TickedHelper";
+const { filterByPicked } = helper({ getDeepCopy: cloneDeep });
 
 export const buildPickedList = filterByPicked;
