@@ -8,7 +8,7 @@ import RecipeListComponent from "./RecipeListComponent";
 import { LOCATION, parentComponent } from "common/AppConstant";
 import { formEditAction } from "app-redux/actions/ProductFormAction";
 import { setDisplayList } from "app-redux/actions/ListFilterAction";
-import { fillRecipesProducts } from "../RecipeHelper";
+import { fillRecipesProducts } from "recipe/helpers/RecipeHelper";
 import { setPageTitle, setPageLocation } from "app-redux/actions/PageAction";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import cloneDeep from "lodash.clonedeep";

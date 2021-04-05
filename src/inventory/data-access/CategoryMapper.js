@@ -1,4 +1,5 @@
 import { requiredParameter } from "common/Util";
+import { sanitizeCategory } from "inventory/helpers/InventoryHelper";
 
 export function categoryListMapper(list) {
   return list.map((cat) => categoryMapper(cat));
@@ -17,18 +18,9 @@ export function categoryMapper({
   };
 }
 
-//TODO review here, update not sending catProds that does not exist
 export function categoryConverter(category, isNew = false) {
   const { name = requiredParameter("name category"), catProds, id } = category;
-
-  if (!isNew) {
-    if (!id) {
-      requiredParameter("id category");
-    }
-    if (!catProds) {
-      requiredParameter("catProds");
-    }
-  }
+  sanitizeCategory({ category, isNew });
   return {
     id,
     name,

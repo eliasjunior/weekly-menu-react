@@ -36,7 +36,7 @@ export function buildProdDetailsFromSelectedProds({
     // the rule is if the product has a recipe this value is in prodDetail table otherwise is in prod table
     let quantity = quantityMap[id];
     if (!quantity) {
-      logService("Attemp to read quantity failed");
+      logService("Attempt to read quantity failed");
     }
 
     prev.push({

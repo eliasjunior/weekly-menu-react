@@ -5,7 +5,7 @@ import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { formSelectionAction } from "app-redux/actions/ProductFormAction";
 import { setDisplayList } from "app-redux/actions/ListFilterAction";
 import CommonErrorBoundary from "error-handlers/CommonErrorBoundary";
-import { fillRecipesProducts } from "../RecipeHelper";
+import { fillRecipesProducts } from "../helpers/RecipeHelper";
 import { loadProductsToCategory } from "inventory/helpers/InventoryHelper";
 import RecipeForm from "./RecipeForm";
 import { setPageLocation } from "app-redux/actions/PageAction";

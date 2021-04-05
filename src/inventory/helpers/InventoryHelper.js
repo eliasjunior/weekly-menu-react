@@ -1,4 +1,4 @@
-import { requiredParameter } from "common/Util";
+import { requiredParameter, isEmpty } from "common/Util";
 
 export function loadProductsToCategory(categories, products) {
   if (!products.byId) {
@@ -55,8 +55,30 @@ export function getQdyDefault(quantityType) {
   const WEIGTH_DEFAULT = 100;
   return quantityType === "UNIT" ? UNIT_DEFAULT : WEIGTH_DEFAULT;
 }
+export function sanitizeCategory({ category, isThrow = true, isNew = false }) {
+  const { id, name, catProds } = category;
 
-//TODO change to similar recipe sanitize
+  if (!isNew) {
+    if( isEmpty(id)) {
+      if (isThrow) {
+        requiredParameter(`id ${name} is required`);
+      } else {
+        console.warn(`${name} is required`);
+      }
+    }
+     
+    if (!catProds) {
+      if (isThrow) {
+        requiredParameter("catProds");
+      } else {
+        console.warn(`catProds is required`);
+      }
+      
+    }
+  }
+}
+
+//Private
 function validateProd(prodId, products) {
   const product = { ...products.byId[prodId] };
   if (!product) {

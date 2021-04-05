@@ -1,5 +1,5 @@
 import { requiredParameter, isEmpty } from "common/Util";
-import { sanitizeRecipe } from "recipe/RecipeHelper";
+import { sanitizeRecipe } from "recipe/helpers/RecipeHelper";
 
 export function recipeListMapper(list) {
   // normalize

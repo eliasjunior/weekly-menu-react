@@ -3,7 +3,7 @@ import {
   FETCH_RECIPES,
   RECIPE_UPDATE,
 } from "app-redux/actions/RecipeCrudActions";
-import { sanitizeRecipe } from "recipe/RecipeHelper";
+import { sanitizeRecipe } from "recipe/helpers/RecipeHelper";
 
 const initialState = {};
 
