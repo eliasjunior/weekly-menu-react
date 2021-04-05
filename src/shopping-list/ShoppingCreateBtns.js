@@ -1,7 +1,7 @@
 import React from "react";
 import { LOCATION } from "common/AppConstant";
 import { Link } from "react-router-dom";
-import CommmonStyles from "../styles/CommonStyles";
+import CommonStyles from "../styles/CommonStyles";
 import { withStyles, Fab } from "@material-ui/core";
 import IncludeIcon from "@material-ui/icons/Receipt";
 import SaveIcon from "@material-ui/icons/Save";
@@ -51,4 +51,4 @@ function ShoppingCreateBtns({ classes }) {
   );
 }
 
-export default withStyles(CommmonStyles)(ShoppingCreateBtns);
+export default withStyles(CommonStyles)(ShoppingCreateBtns);

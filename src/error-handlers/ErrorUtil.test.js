@@ -23,8 +23,10 @@ describe("ErrorUtil", () => {
     });
     it("It should give me a clear error message when response half correct", () => {
         const expectedMessage = {
-            message: "Some error occur but app could not read the message from the server", type: MESSAGE_TYPE_ERROR
-        }
+          message:
+            "An error just occurred but the app could not read the message from the server",
+          type: MESSAGE_TYPE_ERROR,
+        };
         expect(ErrorMapper({status: 500, statusText: ""})).toEqual(expectedMessage);
 
         const expectedMessage2 = {
